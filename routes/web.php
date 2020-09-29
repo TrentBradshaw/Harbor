@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use Illuminate\Database\Connection;
+use App\Http\Controllers\StatementsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +16,26 @@ use Illuminate\Database\Connection;
 */
 
 //Route::get('/', [HomeController::class, 'index']);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//DON'T FORGET TO ADD TAGS TO GO WITH YOUR STATEMENTS. HASHTAGS AND REGULAR TAGS.
+
+
+
+
+
 
 
 Route::get('/', function () {
@@ -34,10 +55,21 @@ Route::get('/', function () {
     return view('welcome');
     
 });
-
-Route::get('/users/{id}', function($id){
-    return $id;
+/*
+Route::get('/{user_id}/{statement_id}', function($statement_id){
+    return view('statements.show')->with('statement_id', $statement_id);
 });
+*/
+Route::get('/{username}/{id}', [App\Http\Controllers\StatementsController::class, 'show'])->name('show');
+
+//Route::get('user/{id}/customEdit', 'UserController@customEdit');
+
+/*
+Route::get('/{user_id}/{statement_id}', function($statement_id){
+    StatementsController->show($statement_id);
+});
+*/
+Route::resource('statements', StatementsController::class);
 
 Auth::routes();
 

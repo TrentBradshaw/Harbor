@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Statement extends Model
 {
-    use HasFactory;
+    //use HasFactory;
+
+    protected $table = "statements";
+    public $primaryKey = "statement_id";
+    
 }
