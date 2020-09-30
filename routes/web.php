@@ -71,11 +71,9 @@ Route::get('/{user_id}/{statement_id}', function($statement_id){
 */
 Route::resource('statements', StatementsController::class);
 
-Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 //Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
