@@ -6,57 +6,6 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
- #app{
-    
-    background-color: 343a40;
-    height: 100%;
-}
-
-#navbar-profile{
-    float: left;
-}
-.column {
-    float: left;
-    width: 33.33%;
-  }
-  .right-column {
-
-    width: 33.33%;
-    float: right;
-  }
-  
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 :root {
   --blue: #3490dc;
