@@ -35,10 +35,8 @@
                                     <h1>Column 1</h1>
                                     <p>The Content div should always span the available Container space.</p>
                                 </div>
-                                <div class="Column C2">
-                                    <h1>Column 2</h1>
-                                    <p>If the content exceed the Content available space, it will scroll.</p>
-                                    <p><a target="_blank" href="http://jsfiddle.net/avrahamcool/kPK5F/">Here's a demo of this scenario</a></p>
+                                <div class="Column C2" data="{{$data}}" id="example">
+                                     
                                 </div>
                                 <div class="Column C3">
                                     <h1>Column 3</h1>
@@ -50,5 +48,6 @@
                 </div>
             </div>
         </div>
+        <script src="{{ asset('js/infinitescrollreacttest.js') }}"></script>
     </body>
 </html>

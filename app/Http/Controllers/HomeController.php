@@ -29,7 +29,11 @@ class HomeController extends Controller
         return view('welcome');
     }
     public function home(){
-        $statements = Statement::orderBy('body', 'desc')->take(1)->get();
-        return view('home');
+        $data2 = [
+            'john', 'doe'
+          ];
+          
+        //$data = Statement::orderBy('body', 'desc')->take(1)->get();
+        return view('home')->with('data', json_encode($data2));
     }
 }

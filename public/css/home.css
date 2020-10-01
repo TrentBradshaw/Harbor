@@ -78,14 +78,17 @@ body > .Container
 }
 .C1
 {
+    width: 33%;
     background-color: #90adc1;
 }
 .C2
 {
+    width: 33%;
     background-color: #b6ff00;
 }
 .C3
 {
+    width: 33%;
     background-color: #723131;
 }
 .Footer
