@@ -9,13 +9,13 @@ export default class Example extends Component {
     }
     render(){
         return (
-            <div className="container">
-                <div className="row justify-content-center">
-                    <div className="col-md-8">
-                        <div className="card">
+            <div id='StatementContainer' className="container" style={{backgroundColor: "lightblue"}}>
+                <div className="row justify-content-center" style={{backgroundColor: "lightblue"}}>
+                    <div className="col-md-8" style={{backgroundColor: "lightblue"}}>
+                        <div className="card" style={{backgroundColor: "lightblue"}}>
                             <div className="card-header">Example Component</div>
     
-                            <div className="card-body">I'm an example component!</div>
+                            <div className="card-body">REEEEEE I'm an example component!</div>
                         </div>
                     </div>
                 </div>
@@ -23,7 +23,7 @@ export default class Example extends Component {
         );
     }
 }
-if (document.getElementById('example')) {
-    var data = document.getElementById('example').getAttribute('data');
+if (document.getElementById('myexample')) {
+    var data = document.getElementById('myexample').getAttribute('data');
     ReactDOM.render(<Example data={data} />, document.getElementById('example'));
  }

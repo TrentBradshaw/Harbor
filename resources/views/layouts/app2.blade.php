@@ -32,10 +32,11 @@
                         <div class="Wrapper Content">
                             <div class="Table">
                                 <div class="Column C1">
+                                    <div id='profile'></div>
                                     <h1>Column 1</h1>
                                     <p>The Content div should always span the available Container space.</p>
                                 </div>
-                                <div class="Column C2" data="{{$data}}" id="example">
+                            <div class="Column C2" data="{{$data}}" id="example">
                                      
                                 </div>
                                 <div class="Column C3">
