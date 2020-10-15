@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Statement;
 use App\Models\User;
+use App\Models\Following;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -43,13 +44,41 @@ class HomeController extends Controller
             $statements_count =  $user[0]['statements_count'];
             $topics_count =  $user[0]['topics_count'];
 
+
+            
+
+            //OPTIMIZE THESE ALGORITHMS
             
             //$user_id = $user->
             if($followed_count = 0){
 
             }
-            $statement = Statement::orderBy('body', 'desc')->take(1)->get()->toArray();
-            print_r($statement);
+            //following = all of the followers of user
+            $following = Following::where('user_id', Auth::user()->id)->get()->toArray();
+            $statements_id_array = [];
+            //for each follower push their id into an array
+            foreach ($following as $value)
+            {
+                array_push($statements_id_array, $value['follower_id']);
+                print_r($value['follower_id']);
+            }
+            $statements_array =[];
+           // $statement;
+            foreach ($statements_id_array as $value2)
+            {
+                print_r($value2);
+                
+                //print_r($statement[0]);
+                array_push($statements_array, Statement::where('user_id', $value2)->get()->toArray());
+                
+            }  
+            foreach ($statements_array as $key => $value) {
+                print_r($value);
+            }
+            
+            //$statement = Statement::orderBy('body', 'desc')->take(1)->get()->toArray();
+           //print_r($statements_array);
+            //print_r($statement);
             //return view('home')->with('data', json_encode($data))->with('statement', json_encode($statement));
             $data = array();
             $data['userInfo']  =  array(
@@ -64,12 +93,12 @@ class HomeController extends Controller
                     "topics_count" => $topics_count,
             );
             $data['feedInfo'] = array(
-
+                //PUMP THE DATA INTO HERE WITH A FOR LOOP!
             );
                 
                 
                 
-                
+                //USE TWITTER'S METHOD OF STORING FOLLOWERS
                 // make all of this the statements object
 
             
