@@ -71,6 +71,7 @@ body > .Container
 .Header, .Footer
 {
     padding: 5px 0;
+    height: 20px;
 }
 .Header
 {
@@ -97,4 +98,7 @@ body > .Container
 }
 #StatementContainer{
     background-color: black;
+}
+h2 {
+    margin-top: -0.20%;  
 }

@@ -32,7 +32,7 @@ class HomeController extends Controller
     }
     public function home(){
         if (Auth::check()) {
-            // $user = Auth::id(); 
+            //$user = Auth::id(); 
             //$user = User::where('id', Auth::id());
             $user = User::where('id', Auth::user()->id)->get()->toArray();
             $username = $user[0]['username'];
@@ -43,22 +43,42 @@ class HomeController extends Controller
             $statements_count =  $user[0]['statements_count'];
             $topics_count =  $user[0]['topics_count'];
 
-            $data = [
-                //"user" = User::where('id', Auth::user()->id)->get()->toArray();
-                "username" => $username,
-                "pfp_url" => $pfp_url,
-                "description" =>  $description,
-                "followers_count" => $followers_count,
-                "followed_count" => $followed_count,
-                "statements_count" => $statements_count,
-                "topics_count" => $topics_count,
-        
-            ];
-            print_r($user[0]);
-            //$user_id = $user->
             
-            //$statement = ['pickle', 'rick'];//Statement::orderBy('body', 'desc')->take(1)->get();
+            //$user_id = $user->
+            if($followed_count = 0){
+
+            }
+            $statement = Statement::orderBy('body', 'desc')->take(1)->get()->toArray();
+            print_r($statement);
             //return view('home')->with('data', json_encode($data))->with('statement', json_encode($statement));
+            $data = array();
+            $data['userInfo']  =  array(
+                    //make all of this the profile info object
+                    //"user" = User::where('id', Auth::user()->id)->get()->toArray();
+                    "username" => $username,
+                    "pfp_url" => $pfp_url,
+                    "description" =>  $description,
+                    "followers_count" => $followers_count,
+                    "followed_count" => $followed_count,
+                    "statements_count" => $statements_count,
+                    "topics_count" => $topics_count,
+            );
+            $data['feedInfo'] = array(
+
+            );
+                
+                
+                
+                
+                // make all of this the statements object
+
+            
+
+                //LOOK UP ALL ACCOUNTS FOLLOWING USER ACCOUNT
+                //GO GRAB ALL OF THE STATEMENTS FROM THE ACCOUNTS
+                //SORT THEM IN CHRONOLOGICAL ORDER
+                //MAKE A STATEMENT COMPONENT FOR EACH ONE
+                //APPEND THEM TO THE STATEMENT
             return view('home')->with('data', json_encode($data)); //json_encode($data)
         }
         else{

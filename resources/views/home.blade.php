@@ -23,9 +23,7 @@
     <body>
         <div class="Container" id = "dataHolder" data="{{$data}}">
             <div class="Header">
-                <h1>Header</h1>
-                <p>if The Header height is not fixed, It will span excatly his needed space.</p>
-                <p>The Padding/Margin between the header and the content and around the layout is optional</p>
+                <h2>Header</h2>
             </div>
             <div class="HeightTaker">
                 <div class="Wrapper Container Inverse">

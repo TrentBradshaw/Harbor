@@ -66023,8 +66023,15 @@ var Profile = /*#__PURE__*/function (_Component) {
         console.log('data ' + this.props.data);
       }
       var data = JSON.parse(this.props.data);
+      console.log(data);
       {
-        console.log('data ' + data[Object.keys(data)[0]]);
+        console.log(data[Object.keys(data)]);
+      }
+      {
+        console.log(data[Object.keys(data)[0]]);
+      }
+      {
+        console.log('data2 ' + data[Object.keys(data)[0]]);
       }
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         id: "StatementContainer",
@@ -66032,10 +66039,10 @@ var Profile = /*#__PURE__*/function (_Component) {
         style: {
           backgroundColor: "lightblue"
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Username: ", data[Object.keys(data)[0]]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-        src: data[Object.keys(data)[1]],
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Username: ", data[Object.keys(data)[0]].username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        src: data[Object.keys(data)[0]].pfp_url,
         width: 200
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Description: ", data[Object.keys(data)[2]]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Followers: ", data[Object.keys(data)[3]]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Following: ", data[Object.keys(data)[4]], " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Statements: ", data[Object.keys(data)[5]]), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Topics: ", data[Object.keys(data)[6]], " "));
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Description: ", data[Object.keys(data)[0]].description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Followers: ", data[Object.keys(data)[0]].followers_count), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Following: ", data[Object.keys(data)[0]].followed_count, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Statements: ", data[Object.keys(data)[0]].statements_count), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Topics: ", data[Object.keys(data)[0]].topics_count, " "));
     }
   }]);
 

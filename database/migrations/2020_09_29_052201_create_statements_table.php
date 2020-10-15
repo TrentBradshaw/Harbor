@@ -1,5 +1,23 @@
 <?php
 
+
+
+
+
+
+
+//make api
+
+
+
+
+
+
+
+
+
+
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,7 +39,6 @@ class CreateStatementsTable extends Migration
             $table->timestamps();
             $table->string('user_id');
             $table->string('username');
-            $table->string('name');
             $table->string('pfp_url');
             
         });

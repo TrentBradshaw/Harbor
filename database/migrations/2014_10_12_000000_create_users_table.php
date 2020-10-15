@@ -21,7 +21,6 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->string('username');
-            $table->string('name');
             $table->string('pfp_url');
             $table->string('description');
             $table->string('followers_count');
