@@ -21,7 +21,7 @@
         <link href="{{ asset('css/home.css') }}" rel="stylesheet">
     </head>
     <body>
-        <div class="Container" id = "dataHolder" data="{{$data}}">
+    <div class="Container" id = "dataHolder" data="{{$data}}" user="{{$user}}">
             <div class="Header">
                 <h2>Header</h2>
             </div>

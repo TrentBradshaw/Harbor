@@ -66021,28 +66021,42 @@ var Profile = /*#__PURE__*/function (_Component) {
   _createClass(Profile, [{
     key: "render",
     value: function render() {
-      {
-        console.log('data ' + this.props.data);
-      }
-      var data = JSON.parse(this.props.data);
-      console.log(data);
-      {
-        console.log(data[Object.keys(data)]);
-      }
-      {
-        console.log(data[Object.keys(data)[0]]);
-      }
-      {
-        console.log('data2 ' + data[Object.keys(data)[0]]);
-      } //ree
+      console.log('user' + this.props.user); // {console.log('data ' + this.props.data)}
+      //  var data = JSON.parse(this.props.data);
+      // console.log(data);
+      //// {console.log(data[Object.keys(data)])}
+      // {console.log(data[Object.keys(data)[0]])}
+      //  {console.log('data2 ' +  data[Object.keys(data)[0]])}
+      //{data[Object.keys(data)[0]].username}
+      //ree
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", {
         id: "StatementContainer",
         className: "container",
         style: {
           backgroundColor: "lightblue"
         }
-      });
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        href: "/Home"
+      }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        href: "/Explore"
+      }, "Explore"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        href: "/Notifications"
+      }, "Notifications"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        href: '/' + data[Object.keys(data)[0]].username
+      }, "Profile"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        href: "/Settings"
+      }, "Settings"))
+      /*
+        <h1>Username: {data[Object.keys(data)[0]].username}</h1>
+        <img src={data[Object.keys(data)[0]].pfp_url} width={200}/> 
+        <h1>Description: {data[Object.keys(data)[0]].description}</h1>
+        <h1>Followers: {data[Object.keys(data)[0]].followers_count}</h1>
+        <h1>Following: {data[Object.keys(data)[0]].followed_count} </h1>
+        <h1>Statements: {data[Object.keys(data)[0]].statements_count}</h1>
+        <h1>Topics: {data[Object.keys(data)[0]].topics_count} </h1>
+        */
+      ;
     }
   }]);
 
@@ -66053,7 +66067,9 @@ var Profile = /*#__PURE__*/function (_Component) {
 
 if (document.getElementById('profile')) {
   var data = document.getElementById('dataHolder').getAttribute('data');
+  var currentUser = document.getElementById('dataHolder').getAttribute('user');
   react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Profile, {
+    user: currentUser,
     data: data
   }), document.getElementById('profile'));
 }

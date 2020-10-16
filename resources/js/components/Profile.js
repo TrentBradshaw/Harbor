@@ -24,18 +24,26 @@ export default class Profile extends Component {
   */
  
   render(){
-    {console.log('data ' + this.props.data)}
-    var data = JSON.parse(this.props.data);
-    console.log(data);
-    {console.log(data[Object.keys(data)])}
-    {console.log(data[Object.keys(data)[0]])}
-    {console.log('data2 ' +  data[Object.keys(data)[0]])}
+      console.log('user' + this.props.user);
+   // {console.log('data ' + this.props.data)}
+  //  var data = JSON.parse(this.props.data);
+   // console.log(data);
+   //// {console.log(data[Object.keys(data)])}
+   // {console.log(data[Object.keys(data)[0]])}
+  //  {console.log('data2 ' +  data[Object.keys(data)[0]])}
+    //{data[Object.keys(data)[0]].username}
     //ree
     
     return (
        
-        <div id='StatementContainer' className="container" style={{backgroundColor: "lightblue"}}>
-        {/*
+        <nav id='StatementContainer' className="container" style={{backgroundColor: "lightblue"}}>
+           <a href='/Home'>Home</a>
+           <a href='/Explore'>Explore</a>
+           <a href='/Notifications'>Notifications</a>
+           <a href={'/' + data[Object.keys(data)[0]].username}>Profile</a>
+           <a href='/Settings'>Settings</a>
+        </nav>
+        /*
           <h1>Username: {data[Object.keys(data)[0]].username}</h1>
           <img src={data[Object.keys(data)[0]].pfp_url} width={200}/> 
           <h1>Description: {data[Object.keys(data)[0]].description}</h1>
@@ -43,13 +51,14 @@ export default class Profile extends Component {
           <h1>Following: {data[Object.keys(data)[0]].followed_count} </h1>
           <h1>Statements: {data[Object.keys(data)[0]].statements_count}</h1>
           <h1>Topics: {data[Object.keys(data)[0]].topics_count} </h1>
-          */}
-        </div>
+          */
+        
     );
 }
 }  
 
 if (document.getElementById('profile')) {
    var data = document.getElementById('dataHolder').getAttribute('data');
-   ReactDOM.render(<Profile data={data}/>, document.getElementById('profile'));
+   var currentUser = document.getElementById('dataHolder').getAttribute('user')
+   ReactDOM.render(<Profile user={currentUser} data={data}/>, document.getElementById('profile'));
 }
