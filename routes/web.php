@@ -74,8 +74,9 @@ Route::resource('statements', StatementsController::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 //Route::get('/', [HomeController::class, 'index'])->name('home');
+Auth::routes();
 Route::get('/{username}', [App\Http\Controllers\ShowUserController::class, 'ShowUser'])->name('showUser');
 Route::get('/{username}/{id}', [App\Http\Controllers\StatementsController::class, 'show'])->name('show');
-Auth::routes();
+
 
 //Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

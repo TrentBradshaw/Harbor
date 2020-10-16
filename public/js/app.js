@@ -66041,10 +66041,7 @@ var Profile = /*#__PURE__*/function (_Component) {
         style: {
           backgroundColor: "lightblue"
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Username: ", data[Object.keys(data)[0]].username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-        src: data[Object.keys(data)[0]].pfp_url,
-        width: 200
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Description: ", data[Object.keys(data)[0]].description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Followers: ", data[Object.keys(data)[0]].followers_count), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Following: ", data[Object.keys(data)[0]].followed_count, " "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Statements: ", data[Object.keys(data)[0]].statements_count), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Topics: ", data[Object.keys(data)[0]].topics_count, " "));
+      });
     }
   }]);
 

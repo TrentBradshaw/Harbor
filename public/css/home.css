@@ -102,3 +102,11 @@ body > .Container
 h2 {
     margin-top: -0.20%;  
 }
+img#header{
+    width: 100%;
+    height: 300px;
+}
+img#pfp{
+    height: 100px;
+    width: 100px;
+}

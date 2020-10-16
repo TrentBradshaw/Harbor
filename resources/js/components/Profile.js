@@ -34,6 +34,7 @@ export default class Profile extends Component {
     return (
        
         <div id='StatementContainer' className="container" style={{backgroundColor: "lightblue"}}>
+        {/*
           <h1>Username: {data[Object.keys(data)[0]].username}</h1>
           <img src={data[Object.keys(data)[0]].pfp_url} width={200}/> 
           <h1>Description: {data[Object.keys(data)[0]].description}</h1>
@@ -41,6 +42,7 @@ export default class Profile extends Component {
           <h1>Following: {data[Object.keys(data)[0]].followed_count} </h1>
           <h1>Statements: {data[Object.keys(data)[0]].statements_count}</h1>
           <h1>Topics: {data[Object.keys(data)[0]].topics_count} </h1>
+          */}
         </div>
     );
 }
