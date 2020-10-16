@@ -72,9 +72,7 @@ class HomeController extends Controller
                 array_push($statements_array, Statement::where('user_id', $value2)->get()->toArray());
                 
             }  
-            foreach ($statements_array as $key => $value) {
-                print_r($value);
-            }
+            
             
             //$statement = Statement::orderBy('body', 'desc')->take(1)->get()->toArray();
            //print_r($statements_array);
@@ -95,6 +93,11 @@ class HomeController extends Controller
             $data['feedInfo'] = array(
                 //PUMP THE DATA INTO HERE WITH A FOR LOOP!
             );
+            
+            foreach ($statements_array as $key => $value) {
+                array_push($data['feedInfo'], $value);
+            }
+            
                 
                 
                 

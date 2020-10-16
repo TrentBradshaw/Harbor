@@ -65797,6 +65797,8 @@ __webpack_require__(/*! ./components/MyExample */ "./resources/js/components/MyE
 
 __webpack_require__(/*! ./components/Profile */ "./resources/js/components/Profile.js");
 
+__webpack_require__(/*! ./components/Statement */ "./resources/js/components/Statement.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -66056,6 +66058,122 @@ if (document.getElementById('profile')) {
   react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Profile, {
     data: data
   }), document.getElementById('profile'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/Statement.js":
+/*!**********************************************!*\
+  !*** ./resources/js/components/Statement.js ***!
+  \**********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var Statement = /*#__PURE__*/function (_Component) {
+  _inherits(Statement, _Component);
+
+  var _super = _createSuper(Statement);
+
+  function Statement(props) {
+    var _this;
+
+    _classCallCheck(this, Statement);
+
+    _this = _super.call(this, props);
+    console.log('fedw');
+    return _this;
+  }
+
+  _createClass(Statement, [{
+    key: "render",
+    value: function render() {
+      console.log(this.props.value[0].body);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.value[0].body));
+    }
+  }]);
+
+  return Statement;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+var StatementContainer = /*#__PURE__*/function (_Component2) {
+  _inherits(StatementContainer, _Component2);
+
+  var _super2 = _createSuper(StatementContainer);
+
+  function StatementContainer(props) {
+    var _this2;
+
+    _classCallCheck(this, StatementContainer);
+
+    _this2 = _super2.call(this, props);
+    console.log('fedt');
+    return _this2;
+  }
+
+  _createClass(StatementContainer, [{
+    key: "render",
+    value: function render() {
+      var data = JSON.parse(this.props.data);
+      var arr = data[Object.keys(data)[1]];
+      console.log(arr);
+      console.log('daab');
+      var elements = [];
+
+      for (var i = 0; i < arr.length; i++) {
+        // push the component to elements!
+        elements.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Statement, {
+          value: arr[i]
+        }));
+        console.log('arr' + i + " : " + JSON.stringify(arr[i]));
+      }
+      /* the for loop above is essentially the same as
+      elements = arr.map( item => <Card value={ item } /> );
+      The result is an array of four Card components. */
+
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, elements);
+    }
+  }]);
+
+  return StatementContainer;
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+
+if (document.getElementById('statement')) {
+  var data = document.getElementById('dataHolder').getAttribute('data');
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(StatementContainer, {
+    data: data
+  }), document.getElementById('statement'));
 }
 
 /***/ }),

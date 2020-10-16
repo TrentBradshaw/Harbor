@@ -15,3 +15,4 @@ require('./bootstrap');
 //require('./components/Example');
 require('./components/MyExample')
 require('./components/Profile')
+require('./components/Statement')

@@ -1,29 +1,52 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-export default class Example extends Component {
+class Statement extends Component {   
     constructor(props){
         super(props);
 
-        console.log(props);
+        console.log('fedw');
     }
-    render(){
+    render() {
+        console.log(this.props.value[0].body);
         return (
-            <div id='StatementContainer' className="container" style={{backgroundColor: "lightblue"}}>
-                <div className="row justify-content-center" style={{backgroundColor: "lightblue"}}>
-                    <div className="col-md-8" style={{backgroundColor: "lightblue"}}>
-                        <div className="card" style={{backgroundColor: "lightblue"}}>
-                            <div className="card-header">Example Component</div>
-    
-                            <div className="card-body">REEEEEE I'm an example component!</div>
-                        </div>
-                    </div>
-                </div>
+            <div> 
+            <p>{ this.props.value[0].body }</p>
             </div>
         );
     }
 }
-if (document.getElementById('myexample')) {
-    var data = document.getElementById('myexample').getAttribute('data');
-    ReactDOM.render(<Example data={data} />, document.getElementById('example'));
+class StatementContainer extends Component {
+    constructor(props){
+        super(props);
+
+        console.log('fedt');
+    }
+    render(){
+        var data = JSON.parse(this.props.data);
+        var arr = data[Object.keys(data)[1]];
+        console.log(arr);
+        console.log('daab');
+        
+            var elements=[];
+            for(var i=0;i<arr.length;i++){
+                 // push the component to elements!
+                elements.push(<Statement value={ arr[i] } />);
+                console.log('arr' + i + " : " + JSON.stringify(arr[i]))
+            }
+            /* the for loop above is essentially the same as
+            elements = arr.map( item => <Card value={ item } /> );
+            The result is an array of four Card components. */
+        
+            
+            return (
+                <div> 
+                {elements}
+                </div>
+        );
+    }
+}
+if (document.getElementById('statement')) {
+    var data = document.getElementById('dataHolder').getAttribute('data');
+    ReactDOM.render(<StatementContainer data={data} />, document.getElementById('statement'));
  }

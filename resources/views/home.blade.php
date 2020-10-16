@@ -35,7 +35,7 @@
                                     <h1>Column 1</h1>
                                     <p>The Content div should always span the available Container space.</p>
                                 </div>
-                                <div class="Column C2" id="myexample" >
+                                <div class="Column C2" id="statement" >
                                      
                                 </div>
                                 <div class="Column C3">
