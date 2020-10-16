@@ -30,6 +30,7 @@ export default class Profile extends Component {
     {console.log(data[Object.keys(data)])}
     {console.log(data[Object.keys(data)[0]])}
     {console.log('data2 ' +  data[Object.keys(data)[0]])}
+    //ree
     
     return (
        

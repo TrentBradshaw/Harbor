@@ -66034,7 +66034,8 @@ var Profile = /*#__PURE__*/function (_Component) {
       }
       {
         console.log('data2 ' + data[Object.keys(data)[0]]);
-      }
+      } //ree
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         id: "StatementContainer",
         className: "container",
