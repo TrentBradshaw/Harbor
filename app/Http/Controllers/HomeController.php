@@ -60,13 +60,13 @@ class HomeController extends Controller
             foreach ($following as $value)
             {
                 array_push($statements_id_array, $value['follower_id']);
-                print_r($value['follower_id']);
+               
             }
             $statements_array =[];
            // $statement;
             foreach ($statements_id_array as $value2)
             {
-                print_r($value2);
+               
                 
                 //print_r($statement[0]);
                 array_push($statements_array, Statement::where('user_id', $value2)->get()->toArray());

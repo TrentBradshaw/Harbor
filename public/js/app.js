@@ -66119,7 +66119,13 @@ var Statement = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       console.log(this.props.value[0].body);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.value[0].body));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, {
+        key: this.props.value[0].statement_id
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          backgroundColor: "blue"
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.value[0].body)));
     }
   }]);
 
@@ -66153,14 +66159,13 @@ var StatementContainer = /*#__PURE__*/function (_Component2) {
       for (var i = 0; i < arr.length; i++) {
         // push the component to elements!
         elements.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Statement, {
-          value: arr[i]
+          value: arr[i],
+          key: JSON.stringify(arr[i][0].statement_id)
         }));
         console.log('arr' + i + " : " + JSON.stringify(arr[i]));
+        console.log('id and key' + i + " : " + JSON.stringify(arr[i]).statement_id);
+        console.log('iddd and key' + i + " : " + JSON.stringify(arr[i].statement_id));
       }
-      /* the for loop above is essentially the same as
-      elements = arr.map( item => <Card value={ item } /> );
-      The result is an array of four Card components. */
-
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, elements);
     }

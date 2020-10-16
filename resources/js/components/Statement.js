@@ -10,9 +10,11 @@ class Statement extends Component {
     render() {
         console.log(this.props.value[0].body);
         return (
-            <div> 
-            <p>{ this.props.value[0].body }</p>
-            </div>
+            <React.Fragment key={this.props.value[0].statement_id} >
+                <div style={{  backgroundColor: "blue"}}> 
+                    <p>{ this.props.value[0].body }</p>
+                </div>
+            </React.Fragment>
         );
     }
 }
@@ -31,14 +33,13 @@ class StatementContainer extends Component {
             var elements=[];
             for(var i=0;i<arr.length;i++){
                  // push the component to elements!
-                elements.push(<Statement value={ arr[i] } />);
+                elements.push(<Statement value={ arr[i] } key = {JSON.stringify(arr[i][0].statement_id)}/>);
                 console.log('arr' + i + " : " + JSON.stringify(arr[i]))
+                console.log('id and key' + i + " : " + JSON.stringify(arr[i]).statement_id)
+                console.log('iddd and key' + i + " : " + JSON.stringify(arr[i].statement_id))
+                
+                
             }
-            /* the for loop above is essentially the same as
-            elements = arr.map( item => <Card value={ item } /> );
-            The result is an array of four Card components. */
-        
-            
             return (
                 <div> 
                 {elements}
