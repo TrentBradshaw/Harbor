@@ -34,27 +34,27 @@ export default class Profile extends Component {
     //{data[Object.keys(data)[0]].username}
     //ree
     
-    return (
-       
-        <nav id='StatementContainer' className="container" style={{backgroundColor: "lightblue"}}>
-           <a href='/Home'>Home</a>
-           <a href='/Explore'>Explore</a>
-           <a href='/Notifications'>Notifications</a>
-           <a href={'/' + data[Object.keys(data)[0]].username}>Profile</a>
-           <a href='/Settings'>Settings</a>
-        </nav>
-        /*
-          <h1>Username: {data[Object.keys(data)[0]].username}</h1>
-          <img src={data[Object.keys(data)[0]].pfp_url} width={200}/> 
-          <h1>Description: {data[Object.keys(data)[0]].description}</h1>
-          <h1>Followers: {data[Object.keys(data)[0]].followers_count}</h1>
-          <h1>Following: {data[Object.keys(data)[0]].followed_count} </h1>
-          <h1>Statements: {data[Object.keys(data)[0]].statements_count}</h1>
-          <h1>Topics: {data[Object.keys(data)[0]].topics_count} </h1>
-          */
+        return (
         
-    );
-}
+            <nav id='StatementContainer' className="container" className="vertical-menu" style={{backgroundColor: "lightblue"}}>
+            <a href='/Home'>Home</a>
+            <a href='/Explore'>Explore</a>
+            <a href='/Notifications'>Notifications</a>
+            <a href={'/' + currentUser}>Profile</a>
+            <a href='/Settings'>Settings</a>
+            </nav>
+            /*
+            <h1>Username: {data[Object.keys(data)[0]].username}</h1>
+            <img src={data[Object.keys(data)[0]].pfp_url} width={200}/> 
+            <h1>Description: {data[Object.keys(data)[0]].description}</h1>
+            <h1>Followers: {data[Object.keys(data)[0]].followers_count}</h1>
+            <h1>Following: {data[Object.keys(data)[0]].followed_count} </h1>
+            <h1>Statements: {data[Object.keys(data)[0]].statements_count}</h1>
+            <h1>Topics: {data[Object.keys(data)[0]].topics_count} </h1>
+            */
+            
+        );
+    }   
 }  
 
 if (document.getElementById('profile')) {

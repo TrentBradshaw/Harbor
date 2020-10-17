@@ -41,20 +41,23 @@ use App\Http\Controllers\ShowUserController;
 
 Route::get('/', function () {
 
-    // Test database connection
-    try {
-        DB::connection()->getPdo();
-        echo "Connected successfully to: " . DB::connection()->getDatabaseName();
-        $results = DB::table('users')->get();
-        echo $results;
+    if (Auth::check()) {
+        // Test database connection
+        return redirect('/home');
+    } else{
+        try {
+            DB::connection()->getPdo();
+            echo "Connected successfully to: " . DB::connection()->getDatabaseName();
+            $results = DB::table('users')->get();
+            echo $results;
+                
             
-        
-    } catch (\Exception $e) {
-        die("Could not connect to the database. Please check your configuration. error:" . $e );
-    }
+        } catch (\Exception $e) {
+            die("Could not connect to the database. Please check your configuration. error:" . $e );
+        }
 
-    return view('welcome');
-    
+        return view('welcome');
+    }
 });
 /*
 Route::get('/{user_id}/{statement_id}', function($statement_id){

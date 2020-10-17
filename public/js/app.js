@@ -65964,6 +65964,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -66021,6 +66023,8 @@ var Profile = /*#__PURE__*/function (_Component) {
   _createClass(Profile, [{
     key: "render",
     value: function render() {
+      var _React$createElement;
+
       console.log('user' + this.props.user); // {console.log('data ' + this.props.data)}
       //  var data = JSON.parse(this.props.data);
       // console.log(data);
@@ -66030,32 +66034,31 @@ var Profile = /*#__PURE__*/function (_Component) {
       //{data[Object.keys(data)[0]].username}
       //ree
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", (_React$createElement = {
         id: "StatementContainer",
-        className: "container",
-        style: {
-          backgroundColor: "lightblue"
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+        className: "container"
+      }, _defineProperty(_React$createElement, "className", "vertical-menu"), _defineProperty(_React$createElement, "style", {
+        backgroundColor: "lightblue"
+      }), _React$createElement), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
         href: "/Home"
       }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
         href: "/Explore"
       }, "Explore"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
         href: "/Notifications"
       }, "Notifications"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
-        href: '/' + data[Object.keys(data)[0]].username
+        href: '/' + currentUser
       }, "Profile"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
         href: "/Settings"
       }, "Settings"))
       /*
-        <h1>Username: {data[Object.keys(data)[0]].username}</h1>
-        <img src={data[Object.keys(data)[0]].pfp_url} width={200}/> 
-        <h1>Description: {data[Object.keys(data)[0]].description}</h1>
-        <h1>Followers: {data[Object.keys(data)[0]].followers_count}</h1>
-        <h1>Following: {data[Object.keys(data)[0]].followed_count} </h1>
-        <h1>Statements: {data[Object.keys(data)[0]].statements_count}</h1>
-        <h1>Topics: {data[Object.keys(data)[0]].topics_count} </h1>
-        */
+      <h1>Username: {data[Object.keys(data)[0]].username}</h1>
+      <img src={data[Object.keys(data)[0]].pfp_url} width={200}/> 
+      <h1>Description: {data[Object.keys(data)[0]].description}</h1>
+      <h1>Followers: {data[Object.keys(data)[0]].followers_count}</h1>
+      <h1>Following: {data[Object.keys(data)[0]].followed_count} </h1>
+      <h1>Statements: {data[Object.keys(data)[0]].statements_count}</h1>
+      <h1>Topics: {data[Object.keys(data)[0]].topics_count} </h1>
+      */
       ;
     }
   }]);

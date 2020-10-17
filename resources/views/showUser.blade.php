@@ -21,7 +21,7 @@
         <link href="{{ asset('css/home.css') }}" rel="stylesheet">
     </head>
     <body>
-    <div class="Container" id = "dataHolder" data="{{$data}}" user="{{$user}}">
+        <div class="Container" id = "dataHolder" data="{{$data}}" user="{{$user}}">
             <div class="Header">
                 <h2>Header</h2>
             </div>
@@ -35,34 +35,7 @@
                                     <h1>Column 1</h1>
                                     <p>The Content div should always span the available Container space.</p>
                                 </div>
-                                <div class="Column C2" >
-                                     <div>
-                                         <div>
-                                             <h1>turtle chan</h1>
-                                             <p>this many contributions</p>
-                                         </div>
-                                         <div>
-                                             <img src="8IYSjofV_400x400.jpg" alt="" id="header">
-                                         </div>
-                                         <div>
-                                             <img src="8IYSjofV_400x400.jpg" alt="" id="pfp">
-                                         </div>
-                                         <div>
-                                             <button>follow</button>
-                                         </div>
-                                         <div>
-                                             <p>bio</p>
-                                         </div>
-                                         <div>
-                                             <p>when joined</p>
-                                         </div>
-                                         <div>
-                                             <p>
-                                                 0 Following 0 Followers
-                                             </p>
-                                         </div>
-                                     </div>
-                                </div>
+                                
                                 <div  id="statement">
 
                                 </div>
@@ -79,5 +52,3 @@
         <script src="{{ asset('js/app.js') }}" ></script>
     </body>
 </html>
-
-

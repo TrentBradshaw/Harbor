@@ -9,13 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class ShowUserController extends Controller
 {
-    
     public function ShowUser($username){
         if (Auth::check()) {
 
             
             $pageOwner = User::where('username', $username)->get()->toArray();
-            print_r($pageOwner);
+           // print_r($pageOwner);
             $username = $pageOwner[0]['username'];
             $pfp_url = $pageOwner[0]['pfp_url'];
             $description =  $pageOwner[0]['description'];
@@ -45,9 +44,9 @@ class ShowUserController extends Controller
           //  }  
             
             $currentUser = User::where('id', Auth::user()->id)->get()->toArray();
-            print_r($currentUser[0]['username']);
+            //print_r($currentUser[0]['username']);
             $currentUserUsername = $currentUser[0]['username'];
-            print_r($currentUserUsername);
+           // print_r($currentUserUsername);
             return view('showUser',[
                 'data'=> json_encode($data),
                 'user'=> $currentUserUsername,
