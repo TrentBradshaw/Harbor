@@ -22,8 +22,8 @@
     </head>
     <body>
         <div class="Container" id = "dataHolder" data="{{$data}}" user="{{$user}}">
-            <div class="Header">
-                <h2>Header</h2>
+            <div class="Header" id="Header">
+                
             </div>
             <div class="HeightTaker">
                 <div class="Wrapper Container Inverse">
@@ -36,8 +36,10 @@
                                     <p>The Content div should always span the available Container space.</p>
                                 </div>
                                 
-                                <div  id="statement">
+                                <div  id="Column C2">
+                                    <div id='UserPageContainer'>
 
+                                    </div>
                                 </div>
                                 <div class="Column C3">
                                     <h1>Column 3</h1>

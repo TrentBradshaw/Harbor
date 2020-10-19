@@ -37,11 +37,11 @@ export default class Profile extends Component {
         return (
         
             <nav id='StatementContainer' className="container" className="vertical-menu" style={{backgroundColor: "lightblue"}}>
-            <a href='/Home'>Home</a>
-            <a href='/Explore'>Explore</a>
-            <a href='/Notifications'>Notifications</a>
-            <a href={'/' + currentUser}>Profile</a>
-            <a href='/Settings'>Settings</a>
+            <a className = "NavItem" href='/Home'>Home</a>
+            <a className = "NavItem" href='/Explore'>Explore</a>
+            <a className = "NavItem" href='/Notifications'>Notifications</a>
+            <a className = "NavItem" href={'/' + currentUser}>Profile</a>
+            <a className = "NavItem" href='/Settings'>Settings</a>
             </nav>
             /*
             <h1>Username: {data[Object.keys(data)[0]].username}</h1>
@@ -57,8 +57,8 @@ export default class Profile extends Component {
     }   
 }  
 
-if (document.getElementById('profile')) {
+if (document.getElementById('Header')) {
    var data = document.getElementById('dataHolder').getAttribute('data');
    var currentUser = document.getElementById('dataHolder').getAttribute('user')
-  // ReactDOM.render(<Profile user={currentUser} data={data}/>, document.getElementById('profile'));
+   ReactDOM.render(<Profile user={currentUser} data={data}/>, document.getElementById('Header'));
 }

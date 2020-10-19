@@ -71,7 +71,9 @@ body > .Container
 .Header, .Footer
 {
     padding: 5px 0;
-    height: 20px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
 }
 .Header
 {
@@ -79,17 +81,18 @@ body > .Container
 }
 .C1
 {
-    width: 33%;
+    width: 15%;
+    padding-left: 50px;
     background-color: #90adc1;
 }
 .C2
 {
-    width: 33%;
+    width: 40%;
     background-color: #b6ff00;
 }
 .C3
 {
-    width: 33%;
+    width: 15%;
     background-color: #723131;
 }
 .Footer
@@ -110,14 +113,11 @@ img#pfp{
     height: 100px;
     width: 100px;
 }
-.vertical-menu {
-    width: 200px; /* Set a width if you like */
-  }
   
   .vertical-menu a {
     background-color: #eee; /* Grey background color */
     color: black; /* Black text color */
-    display: block; /* Make the links appear below each other */
+    display: inline-flex; /* Make the links appear below each other */
     padding: 12px; /* Add some padding */
     text-decoration: none; /* Remove underline from links */
   }
@@ -129,4 +129,7 @@ img#pfp{
   .vertical-menu a.active {
     background-color: #4CAF50; /* Add a green color to the "active/current" link */
     color: white;
+  }
+  .NavItem{
+      display: inline-flex;
   }

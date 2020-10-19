@@ -8,42 +8,50 @@ export default class Profile extends Component {
       console.log(props);
       var data = JSON.parse(this.props.data);
       console.log(data);
+      //const userInfo = Object.entries(data['userInfo'])
+      console.log(data['userInfo'].username);
+      console.log( 'username ' + data[Object.keys(data)[1]].username)
     }
  
     render(){
+        var data=JSON.parse(this.props.data)
+        var userInfo = data['userInfo']
+        
+        console.log(userInfo)
         return (
             <div>
                 <div>
                     <div>
                         <div>
                             <div role="button">Back</div>
-                            <span>{data[Object.keys(data)[0]].username}</span>
-                            <p>this many contributions</p>
+                            <span>{userInfo.username}</span>
+                            <p>{parseInt(userInfo.statements_count) + parseInt(userInfo.topics_count)} contributions</p>
                         </div>
                         <div>
-                            <img src="8IYSjofV_400x400.jpg" alt="" id="header"></img>
+                            <img src={userInfo.pfp_url} alt="" id="header"></img>
                         </div>
                         <div>
-                            <img src="8IYSjofV_400x400.jpg" alt="" id="pfp"></img>
+                            <img src={userInfo.pfp_url} alt="" id="pfp"></img>
                         </div>
                         <div>
                             <button>follow</button>
                         </div>
                         <div>
-                            <p>bio</p>
+                            <p>bio: {userInfo.description}</p>
                         </div>
                         <div>
                             <p>when joined</p>
                         </div>
                         <div>
                             <p>
-                                0 Following 0 Followers
+                                {userInfo.followed_count} Following {userInfo.followers_count} Followers
                             </p>
                         </div>
                     </div>
                 </div>
+                {/* 
                 <div>
-                    <h1>Username: {data[Object.keys(data)[0]].username}</h1>
+                    <h1>Username: {data[Object.keys(data)[1]].username}</h1>
                     <img src={data[Object.keys(data)[0]].pfp_url} width={200}/> 
                     <h1>Description: {data[Object.keys(data)[0]].description}</h1>
                     <h1>Followers: {data[Object.keys(data)[0]].followers_count}</h1>
@@ -51,13 +59,16 @@ export default class Profile extends Component {
                     <h1>Statements: {data[Object.keys(data)[0]].statements_count}</h1>
                     <h1>Topics: {data[Object.keys(data)[0]].topics_count} </h1>
                 </div>
+
+                */}
+                
             </div>
         );
     }   
 }  
 
-if (document.getElementById('profile')) {
+if (document.getElementById('UserPageContainer')) {
    var data = document.getElementById('dataHolder').getAttribute('data');
    var currentUser = document.getElementById('dataHolder').getAttribute('user')
-   ReactDOM.render(<Profile user={currentUser} data={data}/>, document.getElementById('profile'));
+   ReactDOM.render(<Profile user={currentUser} data={data}/>, document.getElementById('UserPageContainer'));
 }

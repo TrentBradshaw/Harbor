@@ -16,3 +16,5 @@ require('./bootstrap');
 require('./components/MyExample')
 require('./components/Profile')
 require('./components/Statement')
+require('./components/UserPage')
+require('./components/Header')
