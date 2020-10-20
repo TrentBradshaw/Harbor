@@ -16,7 +16,7 @@
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+        <link src='https://unpkg.com/@material-ui/core@4.11.0/umd/material-ui.development.js'>
         <!-- Styles -->
         <link href="{{ asset('css/home.css') }}" rel="stylesheet">
     </head>

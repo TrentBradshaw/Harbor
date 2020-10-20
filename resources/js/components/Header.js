@@ -1,6 +1,8 @@
 import { toArray } from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import SearchIcon from '@material-ui/icons/Search';
+
 
 export default class Profile extends Component {
   constructor(props){
@@ -35,14 +37,22 @@ export default class Profile extends Component {
     //ree
     
         return (
-        
-            <nav id='StatementContainer' className="container" className="vertical-menu" style={{backgroundColor: "lightblue"}}>
-            <a className = "NavItem" href='/Home'>Home</a>
-            <a className = "NavItem" href='/Explore'>Explore</a>
-            <a className = "NavItem" href='/Notifications'>Notifications</a>
-            <a className = "NavItem" href={'/' + currentUser}>Profile</a>
-            <a className = "NavItem" href='/Settings'>Settings</a>
-            </nav>
+            <div style={{display: "inline-flex"}}>
+                <h1>ROLLER</h1>
+                <div className="header__search">
+                    <input type='text' className='header__searchInput'></input>
+                    <SearchIcon className="header__searchIcon" />
+                </div>
+                
+                <nav id='StatementContainer' className="container" className="vertical-menu" style={{backgroundColor: "lightblue"}}>
+                    <a className = "NavItem" href='/Home'>Home</a>
+                    <a className = "NavItem" href='/Explore'>Explore</a>
+                    <a className = "NavItem" href='/Notifications'>Notifications</a>
+                    <a className = "NavItem" href={'/' + currentUser}>Profile</a>
+                    <a className = "NavItem" href='/Settings'>Settings</a>
+                </nav>
+            </div>
+            
             /*
             <h1>Username: {data[Object.keys(data)[0]].username}</h1>
             <img src={data[Object.keys(data)[0]].pfp_url} width={200}/> 

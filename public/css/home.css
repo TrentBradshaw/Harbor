@@ -133,3 +133,24 @@ img#pfp{
   .NavItem{
       display: inline-flex;
   }
+
+  .header__logo{
+      widows: 100px;
+      margin-left: 20px;
+      margin-right: 20px;
+      flex: 1;
+  }
+  .header__search{
+      display: flex;
+  }
+  .header__searchInput{
+      height: 12px;
+      padding: 10px;
+      border: none;
+      width: 100%;
+  }
+  .header__searchIcon {
+      padding: 5px;
+      height: 22px !important;
+      background-color: #cd9042
+  }
