@@ -23,6 +23,24 @@ class ShowUserController extends Controller
             $statements_count =  $pageOwner[0]['statements_count'];
             $topics_count =  $pageOwner[0]['topics_count'];
 
+            //$UserToGrabStatementsFor = User::where('username', $username)->get()->toArray();
+            //$statements_id_array = [];
+            //for each follower push their id into an array
+            //foreach ($following as $value)
+           // {
+               // array_push($statements_id_array, $value['follower_id']);
+               
+          //  }
+            $statements_array =[];
+           // $statement;
+           // print_r($UserToGrabStatementsFor);
+            //MAKE THIS USER ID
+
+
+            array_push($statements_array, Statement::where('username', $username)->get()->toArray());
+            print_r(($statements_array[0])[0]);
+            
+
             $data = array();
             $data['userInfo']  =  array(
                     //make all of this the profile info object
@@ -39,9 +57,9 @@ class ShowUserController extends Controller
                 //PUMP THE DATA INTO HERE WITH A FOR LOOP!
             );
             
-            //foreach ($statements_array as $key => $value) {
-             //   array_push($data['feedInfo'], $value);
-          //  }  
+            foreach ($statements_array as $key => $value) {
+                array_push($data['feedInfo'], $value);
+            }  
             
             $currentUser = User::where('id', Auth::user()->id)->get()->toArray();
             //print_r($currentUser[0]['username']);

@@ -34,6 +34,9 @@
                                     <div id='UserPageContainer'>
 
                                     </div>
+                                    <div id='content'>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>

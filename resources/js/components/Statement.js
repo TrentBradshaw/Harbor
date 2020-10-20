@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+
+//Feed a statement array into the Statement class as props
 class Statement extends Component {   
     constructor(props){
         super(props);
-
-        console.log('fedw');
     }
     render() {
-        console.log(this.props.value[0].body);
+        console.log(this.props.value.body);
         return (
-            <React.Fragment key={this.props.value[0].statement_id} >
-                <div style={{  backgroundColor: "blue"}}> 
-                    <p>{ this.props.value[0].body }</p>
+            <React.Fragment key={this.props.value.statement_id} >
+                <div style={{  backgroundColor: "blue", borderColor: 'rgb(56, 68, 77)', border: '1px solid'}}> 
+                    {/* Fill in the rest of the statement values, username, profile picture, etc */}
+                    <p>{ this.props.value.body }</p>
                 </div>
             </React.Fragment>
         );
@@ -48,4 +49,6 @@ class StatementContainer extends Component {
 if (document.getElementById('statement')) {
     var data = document.getElementById('dataHolder').getAttribute('data');
     ReactDOM.render(<StatementContainer data={data} />, document.getElementById('statement'));
- }
+}
+
+export default Statement;

@@ -76225,6 +76225,8 @@ __webpack_require__(/*! ./components/UserPage */ "./resources/js/components/User
 
 __webpack_require__(/*! ./components/Header */ "./resources/js/components/Header.js");
 
+__webpack_require__(/*! ./components/UserPageContentLoad */ "./resources/js/components/UserPageContentLoad.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -76658,7 +76660,7 @@ if (document.getElementById('profile')) {
 /*!**********************************************!*\
   !*** ./resources/js/components/Statement.js ***!
   \**********************************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -76690,7 +76692,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
-
+ //Feed a statement array into the Statement class as props
 
 var Statement = /*#__PURE__*/function (_Component) {
   _inherits(Statement, _Component);
@@ -76698,26 +76700,24 @@ var Statement = /*#__PURE__*/function (_Component) {
   var _super = _createSuper(Statement);
 
   function Statement(props) {
-    var _this;
-
     _classCallCheck(this, Statement);
 
-    _this = _super.call(this, props);
-    console.log('fedw');
-    return _this;
+    return _super.call(this, props);
   }
 
   _createClass(Statement, [{
     key: "render",
     value: function render() {
-      console.log(this.props.value[0].body);
+      console.log(this.props.value.body);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, {
-        key: this.props.value[0].statement_id
+        key: this.props.value.statement_id
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         style: {
-          backgroundColor: "blue"
+          backgroundColor: "blue",
+          borderColor: 'rgb(56, 68, 77)',
+          border: '1px solid'
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.value[0].body)));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.value.body)));
     }
   }]);
 
@@ -76730,13 +76730,13 @@ var StatementContainer = /*#__PURE__*/function (_Component2) {
   var _super2 = _createSuper(StatementContainer);
 
   function StatementContainer(props) {
-    var _this2;
+    var _this;
 
     _classCallCheck(this, StatementContainer);
 
-    _this2 = _super2.call(this, props);
+    _this = _super2.call(this, props);
     console.log('fedt');
-    return _this2;
+    return _this;
   }
 
   _createClass(StatementContainer, [{
@@ -76772,6 +76772,8 @@ if (document.getElementById('statement')) {
     data: data
   }), document.getElementById('statement'));
 }
+
+/* harmony default export */ __webpack_exports__["default"] = (Statement);
 
 /***/ }),
 
@@ -76817,7 +76819,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
+ //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
 
 var Profile = /*#__PURE__*/function (_Component) {
   _inherits(Profile, _Component);
@@ -76875,6 +76877,108 @@ if (document.getElementById('UserPageContainer')) {
     user: currentUser,
     data: data
   }), document.getElementById('UserPageContainer'));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/UserPageContentLoad.js":
+/*!********************************************************!*\
+  !*** ./resources/js/components/UserPageContentLoad.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return UserPageContentLoad; });
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Statement__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Statement */ "./resources/js/components/Statement.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+ //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
+
+var UserPageContentLoad = /*#__PURE__*/function (_Component) {
+  _inherits(UserPageContentLoad, _Component);
+
+  var _super = _createSuper(UserPageContentLoad);
+
+  function UserPageContentLoad(props) {
+    var _this;
+
+    _classCallCheck(this, UserPageContentLoad);
+
+    _this = _super.call(this, props);
+    console.log(props);
+    return _this;
+  }
+
+  _createClass(UserPageContentLoad, [{
+    key: "render",
+    value: function render() {
+      //CLEAN THIS UP SO WE DON'T HAVE TO USE INDEXING WITH THE ARRAY BEYOND SPECIFIYING THE SUB-ARRAY
+      var data = JSON.parse(this.props.data);
+      var tempData = data['feedInfo'][0];
+      console.log('data from UserPageContentLoad');
+      console.log(data);
+      console.log('tempdata from UserPageContentLoad');
+      console.log(tempData); //for each statement in the tempData array(rename to statements array), push a statement object into it with the data for the current statement
+
+      var elements = []; //use an alternative method in the future like .map or maybe reactCloneElement 
+
+      for (var i = 0; i < tempData.length; i++) {
+        // push the component to elements array
+        console.log(tempData[i]);
+        elements.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Statement__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          value: tempData[i],
+          key: JSON.stringify(tempData[i].statement_id)
+        }));
+      } //return all of the elements
+
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, elements);
+    }
+  }]);
+
+  return UserPageContentLoad;
+}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
+
+
+
+if (document.getElementById('content')) {
+  var data = document.getElementById('dataHolder').getAttribute('data');
+  var currentUser = document.getElementById('dataHolder').getAttribute('user');
+  react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(UserPageContentLoad, {
+    user: currentUser,
+    data: data
+  }), document.getElementById('content'));
 }
 
 /***/ }),
