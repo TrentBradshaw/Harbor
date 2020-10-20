@@ -88,7 +88,10 @@ body > .Container
 .C2
 {
     width: 40%;
-    background-color: #b6ff00;
+    padding-right: 30%;
+    padding-left: 30%;
+    background: #dae0e6;
+    height: 100%;
 }
 .C3
 {
@@ -136,12 +139,14 @@ img#pfp{
 
   .header__logo{
       widows: 100px;
+      object-fit: contain;
       margin-left: 20px;
       margin-right: 20px;
       flex: 1;
   }
   .header__search{
       display: flex;
+      flex: 1;
   }
   .header__searchInput{
       height: 12px;
@@ -153,4 +158,9 @@ img#pfp{
       padding: 5px;
       height: 22px !important;
       background-color: #cd9042
+  }
+  #UserPageContainer {
+    background: white;
+    border-color: rgb(56, 68, 77);
+    border: 1px solid;
   }

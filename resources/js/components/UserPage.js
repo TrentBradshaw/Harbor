@@ -1,6 +1,7 @@
 import { divide, toArray } from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import Statement from './Statement';
 
 export default class Profile extends Component {
   constructor(props){
@@ -22,7 +23,7 @@ export default class Profile extends Component {
             <div>
                 <div>
                     <div>
-                        <div>
+                        <div style={{background: 'ghostwhite'}}>
                             <div role="button">Back</div>
                             <span>{userInfo.username}</span>
                             <p>{parseInt(userInfo.statements_count) + parseInt(userInfo.topics_count)} contributions</p>

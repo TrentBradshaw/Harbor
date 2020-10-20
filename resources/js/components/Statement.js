@@ -37,8 +37,6 @@ class StatementContainer extends Component {
                 console.log('arr' + i + " : " + JSON.stringify(arr[i]))
                 console.log('id and key' + i + " : " + JSON.stringify(arr[i]).statement_id)
                 console.log('iddd and key' + i + " : " + JSON.stringify(arr[i].statement_id))
-                
-                
             }
             return (
                 <div> 

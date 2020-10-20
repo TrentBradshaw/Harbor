@@ -37,8 +37,11 @@ export default class Profile extends Component {
     //ree
     
         return (
-            <div style={{display: "inline-flex"}}>
-                <h1>ROLLER</h1>
+            <div style={{display: "inline-flex", width: '100%'}}>
+                <div>
+                    <h1>ROLLER</h1>
+                </div>
+                
                 <div className="header__search">
                     <input type='text' className='header__searchInput'></input>
                     <SearchIcon className="header__searchIcon" />
