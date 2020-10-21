@@ -21,12 +21,12 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->string('username');
-            $table->string('pfp_url');
-            $table->string('description');
-            $table->string('followers_count');
-            $table->string('followed_count');
-            $table->string('statements_count');
-            $table->string('topics_count');
+            $table->string('pfp_url')->default('8IYSjofV_400x400.jpg');
+            $table->string('description')->default('');
+            $table->integer('followers_count')->default(0);
+            $table->integer('followed_count')->default(0);
+            $table->integer('statements_count')->default(0);
+            $table->integer('docks_count')->default(0);
         });
     }
 

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Statement from './Statement';
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
-export default class Profile extends Component {
+export default class UserPage extends Component {
   constructor(props){
       super(props);
       console.log(props);
@@ -11,7 +11,7 @@ export default class Profile extends Component {
       console.log(data);
       //const userInfo = Object.entries(data['userInfo'])
       console.log(data['userInfo'].username);
-      console.log( 'username ' + data[Object.keys(data)[1]].username)
+      //console.log( 'username ' + data[Object.keys(data)[1]].username)
     }
  
     render(){
@@ -29,10 +29,10 @@ export default class Profile extends Component {
                             <p>{parseInt(userInfo.statements_count) + parseInt(userInfo.topics_count)} contributions</p>
                         </div>
                         <div>
-                            <img src={userInfo.pfp_url} alt="" id="header"></img>
+                            <img src={userInfo.pfp_url} alt="" id="header" class="ImageLayedOver"></img>
                         </div>
                         <div>
-                            <img src={userInfo.pfp_url} alt="" id="pfp"></img>
+                            <img src={userInfo.pfp_url} alt="" id="pfp" className="overlayedImage"></img>
                         </div>
                         <div>
                             <button>follow</button>
@@ -71,5 +71,5 @@ export default class Profile extends Component {
 if (document.getElementById('UserPageContainer')) {
    var data = document.getElementById('dataHolder').getAttribute('data');
    var currentUser = document.getElementById('dataHolder').getAttribute('user')
-   ReactDOM.render(<Profile user={currentUser} data={data}/>, document.getElementById('UserPageContainer'));
+   ReactDOM.render(<UserPage user={currentUser} data={data}/>, document.getElementById('UserPageContainer'));
 }

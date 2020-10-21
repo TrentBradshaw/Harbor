@@ -164,3 +164,15 @@ img#pfp{
     border-color: rgb(56, 68, 77);
     border: 1px solid;
   }
+  .ImageLayedOver
+  {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  .LayoverImage
+  {
+    position: absolute;
+    top: 60px;
+    left: 80px;
+  }

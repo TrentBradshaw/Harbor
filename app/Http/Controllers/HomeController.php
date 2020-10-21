@@ -42,7 +42,7 @@ class HomeController extends Controller
             $followers_count = $user[0]['followers_count'];
             $followed_count =  $user[0]['followed_count'];
             $statements_count =  $user[0]['statements_count'];
-            $topics_count =  $user[0]['topics_count'];
+            $topics_count =  $user[0]['docks_count'];
 
 
             

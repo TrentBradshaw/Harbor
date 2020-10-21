@@ -2,9 +2,10 @@ import { toArray } from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import SearchIcon from '@material-ui/icons/Search';
+import AddIcon from '@material-ui/icons/Add';
 
 
-export default class Profile extends Component {
+export default class Header extends Component {
   constructor(props){
       super(props);
       console.log(props);
@@ -46,7 +47,9 @@ export default class Profile extends Component {
                     <input type='text' className='header__searchInput'></input>
                     <SearchIcon className="header__searchIcon" />
                 </div>
-                
+                <div>
+                    <AddIcon className="header__searchIcon" />
+                </div>
                 <nav id='StatementContainer' className="container" className="vertical-menu" style={{backgroundColor: "lightblue"}}>
                     <a className = "NavItem" href='/Home'>Home</a>
                     <a className = "NavItem" href='/Explore'>Explore</a>
@@ -73,5 +76,5 @@ export default class Profile extends Component {
 if (document.getElementById('Header')) {
    var data = document.getElementById('dataHolder').getAttribute('data');
    var currentUser = document.getElementById('dataHolder').getAttribute('user')
-   ReactDOM.render(<Profile user={currentUser} data={data}/>, document.getElementById('Header'));
+   ReactDOM.render(<Header user={currentUser} data={data}/>, document.getElementById('Header'));
 }

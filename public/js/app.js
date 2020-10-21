@@ -2245,6 +2245,35 @@ function capitalize(string) {
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/icons/Add.js":
+/*!************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Add.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
+  d: "M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+}), 'Add');
+
+exports.default = _default;
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/icons/Search.js":
 /*!***************************************************!*\
   !*** ./node_modules/@material-ui/icons/Search.js ***!
@@ -76283,7 +76312,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Profile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Header; });
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
@@ -76292,6 +76321,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _material_ui_icons_Search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/icons/Search */ "./node_modules/@material-ui/icons/Search.js");
 /* harmony import */ var _material_ui_icons_Search__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Search__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/icons/Add */ "./node_modules/@material-ui/icons/Add.js");
+/* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_4__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -76321,15 +76352,16 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var Profile = /*#__PURE__*/function (_Component) {
-  _inherits(Profile, _Component);
 
-  var _super = _createSuper(Profile);
+var Header = /*#__PURE__*/function (_Component) {
+  _inherits(Header, _Component);
 
-  function Profile(props) {
+  var _super = _createSuper(Header);
+
+  function Header(props) {
     var _this;
 
-    _classCallCheck(this, Profile);
+    _classCallCheck(this, Header);
 
     _this = _super.call(this, props);
     console.log(props);
@@ -76351,7 +76383,7 @@ var Profile = /*#__PURE__*/function (_Component) {
   */
 
 
-  _createClass(Profile, [{
+  _createClass(Header, [{
     key: "render",
     value: function render() {
       var _React$createElement;
@@ -76376,6 +76408,8 @@ var Profile = /*#__PURE__*/function (_Component) {
         type: "text",
         className: "header__searchInput"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_Search__WEBPACK_IMPORTED_MODULE_3___default.a, {
+        className: "header__searchIcon"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_4___default.a, {
         className: "header__searchIcon"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", (_React$createElement = {
         id: "StatementContainer",
@@ -76411,7 +76445,7 @@ var Profile = /*#__PURE__*/function (_Component) {
     }
   }]);
 
-  return Profile;
+  return Header;
 }(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
 
 
@@ -76419,7 +76453,7 @@ var Profile = /*#__PURE__*/function (_Component) {
 if (document.getElementById('Header')) {
   var data = document.getElementById('dataHolder').getAttribute('data');
   var currentUser = document.getElementById('dataHolder').getAttribute('user');
-  react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Profile, {
+  react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Header, {
     user: currentUser,
     data: data
   }), document.getElementById('Header'));
@@ -76786,7 +76820,7 @@ if (document.getElementById('statement')) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Profile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return UserPage; });
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
@@ -76821,27 +76855,27 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
  //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
 
-var Profile = /*#__PURE__*/function (_Component) {
-  _inherits(Profile, _Component);
+var UserPage = /*#__PURE__*/function (_Component) {
+  _inherits(UserPage, _Component);
 
-  var _super = _createSuper(Profile);
+  var _super = _createSuper(UserPage);
 
-  function Profile(props) {
+  function UserPage(props) {
     var _this;
 
-    _classCallCheck(this, Profile);
+    _classCallCheck(this, UserPage);
 
     _this = _super.call(this, props);
     console.log(props);
     var data = JSON.parse(_this.props.data);
     console.log(data); //const userInfo = Object.entries(data['userInfo'])
 
-    console.log(data['userInfo'].username);
-    console.log('username ' + data[Object.keys(data)[1]].username);
+    console.log(data['userInfo'].username); //console.log( 'username ' + data[Object.keys(data)[1]].username)
+
     return _this;
   }
 
-  _createClass(Profile, [{
+  _createClass(UserPage, [{
     key: "render",
     value: function render() {
       var data = JSON.parse(this.props.data);
@@ -76856,16 +76890,18 @@ var Profile = /*#__PURE__*/function (_Component) {
       }, "Back"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, userInfo.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, parseInt(userInfo.statements_count) + parseInt(userInfo.topics_count), " contributions")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
         src: userInfo.pfp_url,
         alt: "",
-        id: "header"
+        id: "header",
+        "class": "ImageLayedOver"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
         src: userInfo.pfp_url,
         alt: "",
-        id: "pfp"
+        id: "pfp",
+        className: "overlayedImage"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", null, "follow")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "bio: ", userInfo.description)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "when joined")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, userInfo.followed_count, " Following ", userInfo.followers_count, " Followers")))));
     }
   }]);
 
-  return Profile;
+  return UserPage;
 }(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
 
 
@@ -76873,7 +76909,7 @@ var Profile = /*#__PURE__*/function (_Component) {
 if (document.getElementById('UserPageContainer')) {
   var data = document.getElementById('dataHolder').getAttribute('data');
   var currentUser = document.getElementById('dataHolder').getAttribute('user');
-  react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Profile, {
+  react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(UserPage, {
     user: currentUser,
     data: data
   }), document.getElementById('UserPageContainer'));
@@ -76945,25 +76981,30 @@ var UserPageContentLoad = /*#__PURE__*/function (_Component) {
     value: function render() {
       //CLEAN THIS UP SO WE DON'T HAVE TO USE INDEXING WITH THE ARRAY BEYOND SPECIFIYING THE SUB-ARRAY
       var data = JSON.parse(this.props.data);
-      var tempData = data['feedInfo'][0];
-      console.log('data from UserPageContentLoad');
-      console.log(data);
-      console.log('tempdata from UserPageContentLoad');
-      console.log(tempData); //for each statement in the tempData array(rename to statements array), push a statement object into it with the data for the current statement
 
-      var elements = []; //use an alternative method in the future like .map or maybe reactCloneElement 
+      if (data['feedInfo']) {
+        var tempData = data['feedInfo'][0];
+        console.log('data from UserPageContentLoad');
+        console.log(data);
+        console.log('tempdata from UserPageContentLoad');
+        console.log(tempData); //for each statement in the tempData array(rename to statements array), push a statement object into it with the data for the current statement
 
-      for (var i = 0; i < tempData.length; i++) {
-        // push the component to elements array
-        console.log(tempData[i]);
-        elements.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Statement__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          value: tempData[i],
-          key: JSON.stringify(tempData[i].statement_id)
-        }));
-      } //return all of the elements
+        var elements = []; //use an alternative method in the future like .map or maybe reactCloneElement 
+
+        for (var i = 0; i < tempData.length; i++) {
+          // push the component to elements array
+          console.log(tempData[i]);
+          elements.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Statement__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            value: tempData[i],
+            key: JSON.stringify(tempData[i].statement_id)
+          }));
+        } //return all of the elements
 
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, elements);
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, elements);
+      } else {
+        return null;
+      }
     }
   }]);
 

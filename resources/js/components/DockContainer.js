@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import Statement from './Statement';
 
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
-export default class UserPageContentLoad extends Component {
+export default class DockContainer extends Component {
   constructor(props){
       super(props);
       console.log(props);
@@ -48,5 +48,5 @@ export default class UserPageContentLoad extends Component {
 if (document.getElementById('content')) {
    var data = document.getElementById('dataHolder').getAttribute('data');
    var currentUser = document.getElementById('dataHolder').getAttribute('user')
-   ReactDOM.render(<UserPageContentLoad user={currentUser} data={data}/>, document.getElementById('content'));
+   ReactDOM.render(<DockContainer user={currentUser} data={data}/>, document.getElementById('content')); //figure out what this data will be
 }
