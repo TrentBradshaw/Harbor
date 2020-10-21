@@ -33,6 +33,22 @@ class HomeController extends Controller
     }
     public function home(){
         if (Auth::check()) {
+
+            $currentUser = User::where('id', Auth::user()->id)->get()->toArray();
+            //print_r($currentUser[0]['username']);
+            $currentUserUsername = $currentUser[0]['username'];
+            $data = array();
+            $data['userInfo']  =  array(
+                    //make all of this the profile info object
+                    //"user" = User::where('id', Auth::user()->id)->get()->toArray();
+                    "username" => '',//$//username,
+                    "pfp_url" => 'ded', // later add blacked out pfp
+                    "description" =>  'This user does not exist, please try again',
+                    "followers_count" => 0,
+                    "followed_count" => 0,
+                    "statements_count" => 0,
+                    "topics_count" => 0,
+            );
             //$user = Auth::id(); 
             //$user = User::where('id', Auth::id());
             $user = User::where('id', Auth::user()->id)->get()->toArray();

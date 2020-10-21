@@ -48,7 +48,7 @@ export default class Header extends Component {
                     <SearchIcon className="header__searchIcon" />
                 </div>
                 <div>
-                    <AddIcon className="header__searchIcon" />
+                    <AddIcon className="header__searchIcon" onClick={() => { redirect('/create') }}/>
                 </div>
                 <nav id='StatementContainer' className="container" className="vertical-menu" style={{backgroundColor: "lightblue"}}>
                     <a className = "NavItem" href='/Home'>Home</a>

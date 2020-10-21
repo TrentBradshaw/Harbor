@@ -16,25 +16,25 @@
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-        <link src='https://unpkg.com/@material-ui/core@4.11.0/umd/material-ui.development.js'>
+
         <!-- Styles -->
         <link href="{{ asset('css/home.css') }}" rel="stylesheet">
     </head>
     <body>
         <div class="Container" id = "dataHolder" data="{{$data}}">
-            <div class="Header" id="Header">
-                
+            <div class="Header">
+                <h2>Header</h2>
             </div>
             <div class="HeightTaker">
                 <div class="Wrapper Container Inverse">
                     <div class="HeightTaker">
                         <div class="Wrapper Content">
                             <div class="Table">
-                                <div  id="Column C2" class="C2">
-                                    <div id='UsersFeed'>
-
-                                    </div>
+                                
+                                <div className="Column C2" >
+                                     
                                 </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -44,3 +44,5 @@
         <script src="{{ asset('js/app.js') }}" ></script>
     </body>
 </html>
+
+

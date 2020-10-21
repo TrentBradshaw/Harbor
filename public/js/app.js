@@ -76410,7 +76410,10 @@ var Header = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_Search__WEBPACK_IMPORTED_MODULE_3___default.a, {
         className: "header__searchIcon"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_4___default.a, {
-        className: "header__searchIcon"
+        className: "header__searchIcon",
+        onClick: function onClick() {
+          redirect('/create');
+        }
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", (_React$createElement = {
         id: "StatementContainer",
         className: "container"
@@ -76891,7 +76894,7 @@ var UserPage = /*#__PURE__*/function (_Component) {
         src: userInfo.pfp_url,
         alt: "",
         id: "header",
-        "class": "ImageLayedOver"
+        className: "ImageLayedOver"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
         src: userInfo.pfp_url,
         alt: "",

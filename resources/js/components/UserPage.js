@@ -29,7 +29,7 @@ export default class UserPage extends Component {
                             <p>{parseInt(userInfo.statements_count) + parseInt(userInfo.topics_count)} contributions</p>
                         </div>
                         <div>
-                            <img src={userInfo.pfp_url} alt="" id="header" class="ImageLayedOver"></img>
+                            <img src={userInfo.pfp_url} alt="" id="header" className="ImageLayedOver"></img>
                         </div>
                         <div>
                             <img src={userInfo.pfp_url} alt="" id="pfp" className="overlayedImage"></img>
