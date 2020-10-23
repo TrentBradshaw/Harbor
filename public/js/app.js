@@ -76254,7 +76254,7 @@ __webpack_require__(/*! ./components/UserPage */ "./resources/js/components/User
 
 __webpack_require__(/*! ./components/Header */ "./resources/js/components/Header.js");
 
-__webpack_require__(/*! ./components/UserPageContentLoad */ "./resources/js/components/UserPageContentLoad.js");
+__webpack_require__(/*! ./components/UserPageFeed */ "./resources/js/components/UserPageFeed.js");
 
 /***/ }),
 
@@ -76365,8 +76365,6 @@ var Header = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
     console.log(props);
-    var data = JSON.parse(_this.props.data);
-    console.log(data);
     return _this;
   } //props should come in as
 
@@ -76409,11 +76407,12 @@ var Header = /*#__PURE__*/function (_Component) {
         className: "header__searchInput"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_Search__WEBPACK_IMPORTED_MODULE_3___default.a, {
         className: "header__searchIcon"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_4___default.a, {
-        className: "header__searchIcon",
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         onClick: function onClick() {
-          redirect('/create');
+          window.location.href = 'http://127.0.0.1:8000/submit';
         }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_4___default.a, {
+        className: "header__searchIcon"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", (_React$createElement = {
         id: "StatementContainer",
         className: "container"
@@ -76869,11 +76868,10 @@ var UserPage = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, UserPage);
 
     _this = _super.call(this, props);
-    console.log(props);
-    var data = JSON.parse(_this.props.data);
+    var data = JSON.parse(_this.props.pageOwnerInfo);
     console.log(data); //const userInfo = Object.entries(data['userInfo'])
-
-    console.log(data['userInfo'].username); //console.log( 'username ' + data[Object.keys(data)[1]].username)
+    //console.log(data['userInfo'].username);
+    //console.log( 'username ' + data[Object.keys(data)[1]].username)
 
     return _this;
   }
@@ -76881,26 +76879,28 @@ var UserPage = /*#__PURE__*/function (_Component) {
   _createClass(UserPage, [{
     key: "render",
     value: function render() {
-      var data = JSON.parse(this.props.data);
-      var userInfo = data['userInfo'];
-      console.log(userInfo);
+      // var data=JSON.parse(this.props.userInfo)
+      // var userInfo = data['userInfo']
+      var pageOwnerInfo = JSON.parse(this.props.pageOwnerInfo);
+      console.log(); //console.log(userInfo)
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         style: {
           background: 'ghostwhite'
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         role: "button"
-      }, "Back"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, userInfo.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, parseInt(userInfo.statements_count) + parseInt(userInfo.topics_count), " contributions")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-        src: userInfo.pfp_url,
+      }, "Back"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, pageOwnerInfo.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, parseInt(pageOwnerInfo.statements_count) + parseInt(pageOwnerInfo.topics_count), " contributions")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        src: pageOwnerInfo.pfp_url,
         alt: "",
         id: "header",
         className: "ImageLayedOver"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
-        src: userInfo.pfp_url,
+        src: pageOwnerInfo.pfp_url,
         alt: "",
         id: "pfp",
         className: "overlayedImage"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", null, "follow")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "bio: ", userInfo.description)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "when joined")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, userInfo.followed_count, " Following ", userInfo.followers_count, " Followers")))));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", null, "follow")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "bio: ", pageOwnerInfo.description)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "when joined")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, pageOwnerInfo.followed_count, " Following ", pageOwnerInfo.followers_count, " Followers")))));
     }
   }]);
 
@@ -76910,26 +76910,26 @@ var UserPage = /*#__PURE__*/function (_Component) {
 
 
 if (document.getElementById('UserPageContainer')) {
-  var data = document.getElementById('dataHolder').getAttribute('data');
+  var pageOwnerInfo = document.getElementById('dataHolder').getAttribute('pageOwnerInfo');
   var currentUser = document.getElementById('dataHolder').getAttribute('user');
   react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(UserPage, {
-    user: currentUser,
-    data: data
+    currentUser: currentUser,
+    pageOwnerInfo: pageOwnerInfo
   }), document.getElementById('UserPageContainer'));
 }
 
 /***/ }),
 
-/***/ "./resources/js/components/UserPageContentLoad.js":
-/*!********************************************************!*\
-  !*** ./resources/js/components/UserPageContentLoad.js ***!
-  \********************************************************/
+/***/ "./resources/js/components/UserPageFeed.js":
+/*!*************************************************!*\
+  !*** ./resources/js/components/UserPageFeed.js ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return UserPageContentLoad; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return UserPageFeed; });
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
@@ -76964,29 +76964,25 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
  //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
 
-var UserPageContentLoad = /*#__PURE__*/function (_Component) {
-  _inherits(UserPageContentLoad, _Component);
+var UserPageFeed = /*#__PURE__*/function (_Component) {
+  _inherits(UserPageFeed, _Component);
 
-  var _super = _createSuper(UserPageContentLoad);
+  var _super = _createSuper(UserPageFeed);
 
-  function UserPageContentLoad(props) {
-    var _this;
+  function UserPageFeed(props) {
+    _classCallCheck(this, UserPageFeed);
 
-    _classCallCheck(this, UserPageContentLoad);
-
-    _this = _super.call(this, props);
-    console.log(props);
-    return _this;
+    return _super.call(this, props);
   }
 
-  _createClass(UserPageContentLoad, [{
+  _createClass(UserPageFeed, [{
     key: "render",
     value: function render() {
       //CLEAN THIS UP SO WE DON'T HAVE TO USE INDEXING WITH THE ARRAY BEYOND SPECIFIYING THE SUB-ARRAY
-      var data = JSON.parse(this.props.data);
+      var data = JSON.parse(this.props.feedInfo);
 
-      if (data['feedInfo']) {
-        var tempData = data['feedInfo'][0];
+      if (feedInfo) {
+        var tempData = feedinfo[0];
         console.log('data from UserPageContentLoad');
         console.log(data);
         console.log('tempdata from UserPageContentLoad');
@@ -77001,27 +76997,31 @@ var UserPageContentLoad = /*#__PURE__*/function (_Component) {
             value: tempData[i],
             key: JSON.stringify(tempData[i].statement_id)
           }));
+        }
+
+        if (tempData) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, elements);
+        } else {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "No Content to show currently. Try following some people!"));
         } //return all of the elements
 
-
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, elements);
       } else {
         return null;
       }
     }
   }]);
 
-  return UserPageContentLoad;
+  return UserPageFeed;
 }(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
 
 
 
 if (document.getElementById('content')) {
-  var data = document.getElementById('dataHolder').getAttribute('data');
+  var feedInfo = document.getElementById('dataHolder').getAttribute('feedInfo');
   var currentUser = document.getElementById('dataHolder').getAttribute('user');
-  react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(UserPageContentLoad, {
+  react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(UserPageFeed, {
     user: currentUser,
-    data: data
+    feedInfo: feedInfo
   }), document.getElementById('content'));
 }
 

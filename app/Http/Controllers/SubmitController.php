@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class CreatePostController extends Controller
+class SubmitController extends Controller
 {
     
-    public function SubmitPost(){
-        return view('CreatePost',[
+    public function Submit(){
+
+        $data = [];
+        $currentUserUsername = 'pickles';
+        
+        return view('Submit',[
             'data'=> json_encode($data),
             'user'=> $currentUserUsername,
         ]);
-    }
-   
+    } 
 }

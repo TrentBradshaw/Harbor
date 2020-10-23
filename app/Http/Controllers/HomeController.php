@@ -19,118 +19,48 @@ class HomeController extends Controller
     {
         //Reinstate this when you have a better method of checking auth at home page.
         //Use a remember me function and if they have some session or cookies then run auth
-        //$this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * 
-     */
-    public function index()
-    {
-        return view('welcome');
-    }
     public function home(){
         if (Auth::check()) {
-
-            $currentUser = User::where('id', Auth::user()->id)->get()->toArray();
-            //print_r($currentUser[0]['username']);
-            $currentUserUsername = $currentUser[0]['username'];
-            $data = array();
-            $data['userInfo']  =  array(
-                    //make all of this the profile info object
-                    //"user" = User::where('id', Auth::user()->id)->get()->toArray();
-                    "username" => '',//$//username,
-                    "pfp_url" => 'ded', // later add blacked out pfp
-                    "description" =>  'This user does not exist, please try again',
-                    "followers_count" => 0,
-                    "followed_count" => 0,
-                    "statements_count" => 0,
-                    "topics_count" => 0,
-            );
-            //$user = Auth::id(); 
-            //$user = User::where('id', Auth::id());
             $user = User::where('id', Auth::user()->id)->get()->toArray();
-            $username = $user[0]['username'];
-            $pfp_url = $user[0]['pfp_url'];
-            $description =  $user[0]['description'];
-            $followers_count = $user[0]['followers_count'];
-            $followed_count =  $user[0]['followed_count'];
-            $statements_count =  $user[0]['statements_count'];
-            $topics_count =  $user[0]['docks_count'];
 
+            $userInfo  =  array(
+                //"user" = User::where('id', Auth::user()->id)->get()->toArray();
+                "username" => $user[0]['username'],
+                "pfp_url" => $user[0]['pfp_url'],
+                "description" =>   $user[0]['description'],
+                "followers_count" => $user[0]['followers_count'],
+                "followed_count" => $user[0]['followed_count'],
+                "statements_count" =>  $user[0]['statements_count'],
+                "topics_count" => $user[0]['docks_count'],
+            );
 
-            
-
-            //OPTIMIZE THESE ALGORITHMS
-            
-            //$user_id = $user->
-            if($followed_count = 0){
-
-            }
-            //following = all of the followers of user
-            $following = Following::where('user_id', Auth::user()->id)->get()->toArray();
-            $statements_id_array = [];
-            //for each follower push their id into an array
-            foreach ($following as $value)
-            {
-                array_push($statements_id_array, $value['follower_id']);
-               
-            }
             $statements_array =[];
-           // $statement;
-            foreach ($statements_id_array as $value2)
-            {
-               
-                
-                //print_r($statement[0]);
-                array_push($statements_array, Statement::where('user_id', $value2)->get()->toArray());
-                
-            }  
+            array_push($statements_array, Statement::where('user_id', Auth::user()->id)->get()->toArray());
+            print_r(($statements_array[0]));
+            $feedInfo = [];
             
-            
-            //$statement = Statement::orderBy('body', 'desc')->take(1)->get()->toArray();
-           //print_r($statements_array);
-            //print_r($statement);
-            //return view('home')->with('data', json_encode($data))->with('statement', json_encode($statement));
-            $data = array();
-            $data['userInfo']  =  array(
-                    //make all of this the profile info object
-                    //"user" = User::where('id', Auth::user()->id)->get()->toArray();
-                    "username" => $username,
-                    "pfp_url" => $pfp_url,
-                    "description" =>  $description,
-                    "followers_count" => $followers_count,
-                    "followed_count" => $followed_count,
-                    "statements_count" => $statements_count,
-                    "topics_count" => $topics_count,
-            );
-            $data['feedInfo'] = array(
-                //PUMP THE DATA INTO HERE WITH A FOR LOOP!
-            );
             
             foreach ($statements_array as $key => $value) {
-                array_push($data['feedInfo'], $value);
+                array_push($feedInfo, $value);
             }
-            
-                
-                
-                
+            print_r($feedInfo);
                 //USE TWITTER'S METHOD OF STORING FOLLOWERS
                 // make all of this the statements object
-
-            
-
                 //LOOK UP ALL ACCOUNTS FOLLOWING USER ACCOUNT
                 //GO GRAB ALL OF THE STATEMENTS FROM THE ACCOUNTS
                 //SORT THEM IN CHRONOLOGICAL ORDER
                 //MAKE A STATEMENT COMPONENT FOR EACH ONE
                 //APPEND THEM TO THE STATEMENT
-            return view('home')->with('data', json_encode($data)); //json_encode($data)
+            return view('home')->with('userInfo', json_encode($userInfo))->with('feedInfo', json_encode($feedInfo)); //json_encode($data)
         }
         else{
             return view('welcome');
         }
+    }
+    public function index()
+    {
+        return view('welcome');
     }
 }

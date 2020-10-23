@@ -6,46 +6,46 @@ import Statement from './Statement';
 export default class UserPage extends Component {
   constructor(props){
       super(props);
-      console.log(props);
-      var data = JSON.parse(this.props.data);
+      var data = JSON.parse(this.props.pageOwnerInfo);
       console.log(data);
       //const userInfo = Object.entries(data['userInfo'])
-      console.log(data['userInfo'].username);
+      //console.log(data['userInfo'].username);
       //console.log( 'username ' + data[Object.keys(data)[1]].username)
     }
  
     render(){
-        var data=JSON.parse(this.props.data)
-        var userInfo = data['userInfo']
-        
-        console.log(userInfo)
+       // var data=JSON.parse(this.props.userInfo)
+       // var userInfo = data['userInfo']
+       var pageOwnerInfo = JSON.parse(this.props.pageOwnerInfo)
+       console.log()
+        //console.log(userInfo)
         return (
             <div>
                 <div>
                     <div>
                         <div style={{background: 'ghostwhite'}}>
                             <div role="button">Back</div>
-                            <span>{userInfo.username}</span>
-                            <p>{parseInt(userInfo.statements_count) + parseInt(userInfo.topics_count)} contributions</p>
+                            <span>{pageOwnerInfo.username}</span>
+                            <p>{parseInt(pageOwnerInfo.statements_count) + parseInt(pageOwnerInfo.topics_count)} contributions</p>
                         </div>
                         <div>
-                            <img src={userInfo.pfp_url} alt="" id="header" className="ImageLayedOver"></img>
+                            <img src={pageOwnerInfo.pfp_url} alt="" id="header" className="ImageLayedOver"></img>
                         </div>
                         <div>
-                            <img src={userInfo.pfp_url} alt="" id="pfp" className="overlayedImage"></img>
+                            <img src={pageOwnerInfo.pfp_url} alt="" id="pfp" className="overlayedImage"></img>
                         </div>
                         <div>
                             <button>follow</button>
                         </div>
                         <div>
-                            <p>bio: {userInfo.description}</p>
+                            <p>bio: {pageOwnerInfo.description}</p>
                         </div>
                         <div>
                             <p>when joined</p>
                         </div>
                         <div>
                             <p>
-                                {userInfo.followed_count} Following {userInfo.followers_count} Followers
+                                {pageOwnerInfo.followed_count} Following {pageOwnerInfo.followers_count} Followers
                             </p>
                         </div>
                     </div>
@@ -69,7 +69,7 @@ export default class UserPage extends Component {
 }  
 
 if (document.getElementById('UserPageContainer')) {
-   var data = document.getElementById('dataHolder').getAttribute('data');
+   var pageOwnerInfo = document.getElementById('dataHolder').getAttribute('pageOwnerInfo');
    var currentUser = document.getElementById('dataHolder').getAttribute('user')
-   ReactDOM.render(<UserPage user={currentUser} data={data}/>, document.getElementById('UserPageContainer'));
+   ReactDOM.render(<UserPage currentUser={currentUser} pageOwnerInfo={pageOwnerInfo} />, document.getElementById('UserPageContainer'));
 }

@@ -4,18 +4,16 @@ import ReactDOM from 'react-dom';
 import Statement from './Statement';
 
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
-export default class UserPageContentLoad extends Component {
-  constructor(props){
-      super(props);
-      console.log(props);
-    }
+export default class UserPageFeed extends Component {
+    
+    constructor(props){ super(props);}
  
     render(){
 
         //CLEAN THIS UP SO WE DON'T HAVE TO USE INDEXING WITH THE ARRAY BEYOND SPECIFIYING THE SUB-ARRAY
-        var data = JSON.parse(this.props.data);
-        if(data['feedInfo']){
-            const tempData = data['feedInfo'][0]
+        var data = JSON.parse(this.props.feedInfo);
+        if(feedInfo){
+            const tempData = feedinfo[0]
             console.log('data from UserPageContentLoad')
             console.log(data)
             console.log('tempdata from UserPageContentLoad')
@@ -33,12 +31,22 @@ export default class UserPageContentLoad extends Component {
                 console.log(tempData[i])
                 elements.push(<Statement value={ tempData[i] } key = {JSON.stringify(tempData[i].statement_id)}/>);
             }
+            if(tempData){
+                return (
+                    <div> 
+                    {elements}
+                    </div>
+            );
+            }
+            else{
+                return(
+                    <div>
+                        <h1>No Content to show currently. Try following some people!</h1>
+                    </div>
+                );
+            }
             //return all of the elements
-            return (
-                <div> 
-                {elements}
-                </div>
-        );
+            
     }else{
         return null;
     }
@@ -46,7 +54,7 @@ export default class UserPageContentLoad extends Component {
 }  
 
 if (document.getElementById('content')) {
-   var data = document.getElementById('dataHolder').getAttribute('data');
+   var feedInfo = document.getElementById('dataHolder').getAttribute('feedInfo');
    var currentUser = document.getElementById('dataHolder').getAttribute('user')
-   ReactDOM.render(<UserPageContentLoad user={currentUser} data={data}/>, document.getElementById('content'));
+   ReactDOM.render(<UserPageFeed user={currentUser} feedInfo={feedInfo}/>, document.getElementById('content'));
 }

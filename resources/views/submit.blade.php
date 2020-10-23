@@ -16,33 +16,40 @@
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+        <link src='https://unpkg.com/@material-ui/core@4.11.0/umd/material-ui.development.js'>
         <!-- Styles -->
         <link href="{{ asset('css/home.css') }}" rel="stylesheet">
     </head>
     <body>
         <div class="Container" id = "dataHolder" data="{{$data}}">
-            <div class="Header">
-                <h2>Header</h2>
+            <div class="Header" id="Header">
+                    
             </div>
-            <div class="HeightTaker">
-                <div class="Wrapper Container Inverse">
-                    <div class="HeightTaker">
-                        <div class="Wrapper Content">
-                            <div class="Table">
-                                
-                                <div className="Column C2" >
-                                     
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+            <form action="submit" id="submit-form">
+                <div>
+                    <h1>Type of Post:</h1>
                 </div>
-            </div>
+                <div id="submitCategory">
+                    <div>
+                        <input type="button" value="Status">
+                    </div>
+                    
+                    <Div>
+                        <input type="button" value="Dock Topic">
+
+                    </Div>
+
+                    <div>
+                        <input type="text" placeholder="Title" id="title">
+                    </div>
+                    <div>
+                        <input type="text" name="body" placeholder='Text(optional)' id="body">
+                    </div>
+                    
+                </div>
+            </form>
         </div>
+
         <script src="{{ asset('js/app.js') }}" ></script>
     </body>
 </html>
-
-

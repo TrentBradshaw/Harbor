@@ -9,8 +9,6 @@ export default class Header extends Component {
   constructor(props){
       super(props);
       console.log(props);
-      var data = JSON.parse(this.props.data);
-      console.log(data);
     }
   //props should come in as
 
@@ -47,8 +45,8 @@ export default class Header extends Component {
                     <input type='text' className='header__searchInput'></input>
                     <SearchIcon className="header__searchIcon" />
                 </div>
-                <div>
-                    <AddIcon className="header__searchIcon" onClick={() => { redirect('/create') }}/>
+                <div onClick={() => { window.location.href = 'http://127.0.0.1:8000/submit' }}>
+                    <AddIcon className="header__searchIcon" />
                 </div>
                 <nav id='StatementContainer' className="container" className="vertical-menu" style={{backgroundColor: "lightblue"}}>
                     <a className = "NavItem" href='/Home'>Home</a>

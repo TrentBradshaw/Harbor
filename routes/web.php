@@ -6,6 +6,7 @@ use Illuminate\Database\Connection;
 use App\Http\Controllers\StatementsController;
 use App\Http\Controllers\ShowUserController;
 use App\Http\Controllers\ShowDockController;
+use App\Http\Controllers\SubmitController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -75,7 +76,7 @@ Route::get('/{user_id}/{statement_id}', function($statement_id){
 });
 */
 Route::resource('statements', StatementsController::class);
-Route::get('/submit}', [App\Http\Controllers\SubmitController::class, 'Submit'])->name('Submit');
+Route::get('/submit', [App\Http\Controllers\SubmitController::class, 'Submit'])->name('Submit');
 Route::get('/dock/{dockName}', [App\Http\Controllers\ShowDockController::class, 'ShowDock'])->name('ShowDock');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 //Route::get('/', [HomeController::class, 'index'])->name('home');
