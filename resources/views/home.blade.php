@@ -21,7 +21,7 @@
         <link href="{{ asset('css/home.css') }}" rel="stylesheet">
     </head>
     <body>
-    <div class="Container" id = "dataHolder" userInfo="{{$userInfo}}"data="{{$data ?? ''}}">
+    <div class="Container" id = "dataHolder" feedInfo="{{$feedInfo}}"data="{{$data ?? ''}}" pageOwnerInfo="{{$pageOwnerInfo}}" >
             <div class="Header" id="Header">
                 
             </div>

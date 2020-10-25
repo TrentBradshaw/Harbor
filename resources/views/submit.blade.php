@@ -25,6 +25,9 @@
             <div class="Header" id="Header">
                     
             </div>
+            <div id='CreatePostHolder'>
+
+            </div>
             <form action="submit" id="submit-form">
                 <div>
                     <h1>Type of Post:</h1>

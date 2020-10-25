@@ -7,17 +7,19 @@ import Statement from './Statement';
 export default class UserPageFeed extends Component {
     
     constructor(props){ super(props);}
- 
+    
     render(){
-
+        //console.log('props' + JSON.stringify(this.props.feedInfo));
+        
         //CLEAN THIS UP SO WE DON'T HAVE TO USE INDEXING WITH THE ARRAY BEYOND SPECIFIYING THE SUB-ARRAY
         var data = JSON.parse(this.props.feedInfo);
-        if(feedInfo){
-            const tempData = feedinfo[0]
+        
+        if(data){
+            const tempData = data[0]
             console.log('data from UserPageContentLoad')
             console.log(data)
             console.log('tempdata from UserPageContentLoad')
-            console.log(tempData)
+            console.log('tempdata' + tempData)
         
         
 
@@ -26,10 +28,10 @@ export default class UserPageFeed extends Component {
             var elements=[];
 
             //use an alternative method in the future like .map or maybe reactCloneElement 
-            for(var i=0;i<tempData.length;i++){
+            for(var i=0;i<data.length;i++){
                  // push the component to elements array
-                console.log(tempData[i])
-                elements.push(<Statement value={ tempData[i] } key = {JSON.stringify(tempData[i].statement_id)}/>);
+                console.log('tempdata loop' + JSON.stringify(data[i]))
+                elements.push(<Statement value={ data[i] } key = {JSON.stringify(data[i].statement_id)}/>);
             }
             if(tempData){
                 return (

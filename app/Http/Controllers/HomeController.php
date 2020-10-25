@@ -25,7 +25,7 @@ class HomeController extends Controller
         if (Auth::check()) {
             $user = User::where('id', Auth::user()->id)->get()->toArray();
 
-            $userInfo  =  array(
+            $pageOwnerInfo  =  array(
                 //"user" = User::where('id', Auth::user()->id)->get()->toArray();
                 "username" => $user[0]['username'],
                 "pfp_url" => $user[0]['pfp_url'],
@@ -38,14 +38,14 @@ class HomeController extends Controller
 
             $statements_array =[];
             array_push($statements_array, Statement::where('user_id', Auth::user()->id)->get()->toArray());
-            print_r(($statements_array[0]));
+           // print_r(($statements_array[0]));
             $feedInfo = [];
             
             
             foreach ($statements_array as $key => $value) {
                 array_push($feedInfo, $value);
             }
-            print_r($feedInfo);
+            //print_r($feedInfo);
                 //USE TWITTER'S METHOD OF STORING FOLLOWERS
                 // make all of this the statements object
                 //LOOK UP ALL ACCOUNTS FOLLOWING USER ACCOUNT
@@ -53,7 +53,7 @@ class HomeController extends Controller
                 //SORT THEM IN CHRONOLOGICAL ORDER
                 //MAKE A STATEMENT COMPONENT FOR EACH ONE
                 //APPEND THEM TO THE STATEMENT
-            return view('home')->with('userInfo', json_encode($userInfo))->with('feedInfo', json_encode($feedInfo)); //json_encode($data)
+            return view('home')->with('pageOwnerInfo', json_encode($pageOwnerInfo))->with('feedInfo', json_encode($feedInfo)); //json_encode($data)
         }
         else{
             return view('welcome');

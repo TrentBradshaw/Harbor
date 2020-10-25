@@ -12,9 +12,7 @@ class ShowUserController extends Controller
     public function ShowUser($username){
         if (Auth::check()) {
             if(User::where('username', $username)->get()->toArray()){
-            print_r(User::where('username', $username)->get()->toArray());
                 $pageOwner = User::where('username', $username)->get()->toArray();
-                print_r($pageOwner);
                 $username = $pageOwner[0]['username'];
                 $pfp_url = $pageOwner[0]['pfp_url'];
                 $description =  $pageOwner[0]['description'];
@@ -29,7 +27,7 @@ class ShowUserController extends Controller
     
     
                 array_push($statements_array, Statement::where('username', $username)->get()->toArray());
-            
+                //print_r($statements_array);
                 $pageOwnerInfo  =  array(
                         //make all of this the profile info object
                         //"user" = User::where('id', Auth::user()->id)->get()->toArray();
@@ -41,12 +39,12 @@ class ShowUserController extends Controller
                         "statements_count" => $statements_count,
                         "docks_count" => $docks_count,
                 );
-                $data['feedInfo'] = array(
+                $feedInfo = array(
                     //PUMP THE DATA INTO HERE WITH A FOR LOOP!
                 );
                 
                 foreach ($statements_array as $key => $value) {
-                    array_push($data['feedInfo'], $value);
+                    array_push($feedInfo, $value);
                 }  
                 
                 $currentUser = User::where('id', Auth::user()->id)->get()->toArray();
@@ -56,6 +54,7 @@ class ShowUserController extends Controller
                 return view('showUser',[
                     'pageOwnerInfo'=> json_encode($pageOwnerInfo),
                     'user'=> $currentUserUsername,
+                    'feedInfo'=> json_encode($feedInfo[0]),
                 ]);
             }
             else{
