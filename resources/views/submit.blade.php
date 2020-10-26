@@ -29,25 +29,7 @@
 
             </div>
             <form action="submit" id="submit-form">
-                <div>
-                    <h1>Type of Post:</h1>
-                </div>
                 <div id="submitCategory">
-                    <div>
-                        <input type="button" value="Status">
-                    </div>
-                    
-                    <Div>
-                        <input type="button" value="Dock Topic">
-
-                    </Div>
-
-                    <div>
-                        <input type="text" placeholder="Title" id="title">
-                    </div>
-                    <div>
-                        <input type="text" name="body" placeholder='Text(optional)' id="body">
-                    </div>
                     
                 </div>
             </form>

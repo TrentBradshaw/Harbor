@@ -16,8 +16,17 @@ class PostForm extends Component {
     render() {
         return (
             <div>
-                <input type="text" placeholder={this.props.highlighted}></input>
+                <div>
+                    <input type="text" placeholder={this.props.highlighted}></input>
+                </div>
+                <div>
+                    <input type="text" placeholder="Title" id="title"></input>
+                </div>
+                <div>
+                    <input type="text" name="body" placeholder='Text(optional)' id="body"></input>
+                </div>
             </div>
+            
             
 
         )

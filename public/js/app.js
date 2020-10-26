@@ -78021,7 +78021,7 @@ var CreatePost = /*#__PURE__*/function (_Component) {
 
         _this.forceUpdateHandler();
       } else if (type == "media") {
-        _this.state.highlighted = "text";
+        _this.state.highlighted = "media";
 
         _this.forceUpdateHandler();
       } else {
@@ -78034,7 +78034,7 @@ var CreatePost = /*#__PURE__*/function (_Component) {
     });
 
     _this.state = {
-      highlighted: 'post'
+      highlighted: 'text'
     };
     return _this;
   }
@@ -78047,13 +78047,81 @@ var CreatePost = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PostSpecificationButtons__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        changePostType: this.changePostType,
-        forceUpdateHandler: this.forceUpdateHandler
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PostForm__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        highlighted: this.state.highlighted
-      })));
+      var _this2 = this;
+
+      var text = this.state.highlighted == 'text';
+      var media = this.state.highlighted == 'media';
+      var link = this.state.highlighted == 'link';
+      console.log(text);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "reee"), function () {
+        if (text) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PostSpecificationButtons__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            changePostType: _this2.changePostType,
+            forceUpdateHandler: _this2.forceUpdateHandler
+          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+            action: "submit",
+            id: "submit-form"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PostForm__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            highlighted: _this2.state.highlighted
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "TEXT"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            type: "submit"
+          }, "SUBMIT"))));
+        } else if (media) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PostSpecificationButtons__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            changePostType: _this2.changePostType,
+            forceUpdateHandler: _this2.forceUpdateHandler
+          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+            action: "submit",
+            id: "submit-form"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PostForm__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            highlighted: _this2.state.highlighted
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "MEDIA"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            type: "submit"
+          }, "SUBMIT"))));
+        } else if (link) {
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PostSpecificationButtons__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            changePostType: _this2.changePostType,
+            forceUpdateHandler: _this2.forceUpdateHandler
+          })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+            action: "submit",
+            id: "submit-form"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PostForm__WEBPACK_IMPORTED_MODULE_3__["default"], {
+            highlighted: _this2.state.highlighted
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "LINK"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+            type: "submit"
+          }, "SUBMIT"))));
+        }
+      }());
     }
+    /*
+    {if (this.state.highlighted == "text"){
+        return(
+            <div>
+            
+            <div >
+                <div>
+                    <PostSpecificationButtons changePostType = {this.changePostType} forceUpdateHandler={this.forceUpdateHandler}></PostSpecificationButtons>
+                </div>
+                <form action="submit" id="submit-form">
+                    <PostForm highlighted ={this.state.highlighted}></PostForm>
+                    <button type="submit">SUBMIT</button>
+                </form>
+            </div>
+        </div>
+        );
+        
+    }else if (type == "media"){
+        this.state.highlighted = "text"
+        this.forceUpdateHandler();
+    }
+    else{
+        this.state.highlighted = "link"
+          this.forceUpdateHandler();
+    }
+    
+    }
+    */
+
   }]);
 
   return CreatePost;
@@ -78385,10 +78453,19 @@ var PostForm = /*#__PURE__*/function (_Component) {
   _createClass(PostForm, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         placeholder: this.props.highlighted
-      }));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        placeholder: "Title",
+        id: "title"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "text",
+        name: "body",
+        placeholder: "Text(optional)",
+        id: "body"
+      })));
     }
   }]);
 
