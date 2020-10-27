@@ -9,7 +9,14 @@ class CreatePost extends Component {
         super(props);
 
         this.state = {
-            highlighted: 'text'
+            highlighted: 'text',
+            title:'',
+            body:'',
+            flairs:'',
+            spoiler:'',
+            nsfw:'',
+            creator:'',
+            timeCreated:''
         }
     }
     forceUpdateHandler(){
@@ -51,7 +58,7 @@ class CreatePost extends Component {
                                     forceUpdateHandler={this.forceUpdateHandler}></PostSpecificationButtons>
                                 </div>
                                 <form action="submit" id="submit-form">
-                                    <PostForm highlighted ={this.state.highlighted}></PostForm>
+                                    <PostForm body={this.state.body}></PostForm>
                                     <div>TEXT</div>
                                     <button type="submit">SUBMIT</button>
                                 </form>

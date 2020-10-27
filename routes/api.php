@@ -20,3 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware('auth:api')->get('/submit', function (Request $request) {
     return $request->user();
 });
+
+Route::apiResource('/user', 'App\Http\Controllers\ShowUserController');
+Route::apiResource('/dock', 'App\Http\Controllers\ShowDockController');
+//Route::get('/user/{username}', [App\Http\Controllers\ShowUserController::class, 'show']);

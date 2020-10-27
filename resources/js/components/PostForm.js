@@ -9,7 +9,14 @@ class PostForm extends Component {
         super(props);
 
         this.state = {
-            highlighted: 'post'
+            highlighted: 'text',
+            title:'',
+            body:'',
+            flairs:'',
+            spoiler:'',
+            nsfw:'',
+            creator:'',
+            timeCreated:''
         }
     }
     
@@ -20,10 +27,13 @@ class PostForm extends Component {
                     <input type="text" placeholder={this.props.highlighted}></input>
                 </div>
                 <div>
-                    <input type="text" placeholder="Title" id="title"></input>
+                    
+                    <input type="text" placeholder="Title" id="title" onChange={(item)=>{this.state.title = item.target.value}}></input>
+                                    
+                    
                 </div>
                 <div>
-                    <input type="text" name="body" placeholder='Text(optional)' id="body"></input>
+                    <input type="text" name="body" placeholder='Text(optional)' id="body" onChange={(item)=>{this.state.body = item.target.value}}></input>
                 </div>
             </div>
             

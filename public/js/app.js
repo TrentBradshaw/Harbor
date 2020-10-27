@@ -78034,7 +78034,14 @@ var CreatePost = /*#__PURE__*/function (_Component) {
     });
 
     _this.state = {
-      highlighted: 'text'
+      highlighted: 'text',
+      title: '',
+      body: '',
+      flairs: '',
+      spoiler: '',
+      nsfw: '',
+      creator: '',
+      timeCreated: ''
     };
     return _this;
   }
@@ -78062,7 +78069,7 @@ var CreatePost = /*#__PURE__*/function (_Component) {
             action: "submit",
             id: "submit-form"
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PostForm__WEBPACK_IMPORTED_MODULE_3__["default"], {
-            highlighted: _this2.state.highlighted
+            body: _this2.state.body
           }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "TEXT"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
             type: "submit"
           }, "SUBMIT"))));
@@ -78445,7 +78452,14 @@ var PostForm = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      highlighted: 'post'
+      highlighted: 'text',
+      title: '',
+      body: '',
+      flairs: '',
+      spoiler: '',
+      nsfw: '',
+      creator: '',
+      timeCreated: ''
     };
     return _this;
   }
@@ -78453,18 +78467,26 @@ var PostForm = /*#__PURE__*/function (_Component) {
   _createClass(PostForm, [{
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         placeholder: this.props.highlighted
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         placeholder: "Title",
-        id: "title"
+        id: "title",
+        onChange: function onChange(item) {
+          _this2.state.title = item.target.value;
+        }
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         name: "body",
         placeholder: "Text(optional)",
-        id: "body"
+        id: "body",
+        onChange: function onChange(item) {
+          _this2.state.body = item.target.value;
+        }
       })));
     }
   }]);

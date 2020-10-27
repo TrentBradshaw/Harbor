@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\UserResourceCollection;
 use App\Models\Statement;
 use App\Models\Following;
 use Illuminate\Support\Facades\Auth;
@@ -81,5 +83,17 @@ class ShowUserController extends Controller
             }     
         }
         
+    }
+    public function Show($username): UserResource{
+        return new UserResource(User::where('username', $username)->get()->toArray());
+    }
+    public function Index(): UserResourceCollection{
+        return new UserResourceCollection(User::paginate());
+    }
+    public function Store(){
+        $request->validate([
+
+        ]);
+        return new PersonResource($person);
     }
 }
