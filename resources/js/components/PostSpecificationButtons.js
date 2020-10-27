@@ -19,9 +19,9 @@ class PostSpecificationButtons extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.onTextbuttonClicked}>Text</button>
-                <button onClick={this.onMediabuttonClicked}>Media</button>
-                <button onClick={this.onLinkbuttonClicked}>Link</button>
+                <button type="button" onClick={this.onTextbuttonClicked}>Text</button>
+                <button type="button" onClick={this.onMediabuttonClicked}>Media</button>
+                <button type="button" onClick={this.onLinkbuttonClicked}>Link</button>
             </div>
         )
     }

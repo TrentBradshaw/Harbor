@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import PostSpecificationButtons from './PostSpecificationButtons'
 import PostForm from './PostForm'
+import PostContentField from './PostContentField'
 
 class CreatePost extends Component {
     constructor(props){
@@ -19,6 +20,7 @@ class CreatePost extends Component {
             timeCreated:''
         }
     }
+
     forceUpdateHandler(){
         this.forceUpdate();
     };
@@ -31,13 +33,15 @@ class CreatePost extends Component {
             this.forceUpdateHandler();
         }
         else{
-            this.state.highlighted = "link"
-              this.forceUpdateHandler();
+           this.state.highlighted ="link"
+           this.forceUpdateHandler();
         }
         console.log(this.state.highlighted)
     }
     
-    
+    submit(){
+        console.log(this.state)
+    }
     render() {
         const text = this.state.highlighted == 'text';
         const media = this.state.highlighted == 'media';
@@ -46,61 +50,37 @@ class CreatePost extends Component {
     
         return (
             
-            <div>
-            <h1>reee</h1>
-                {(() => {
-                if (text) {
-                    return (
-                        <div>
-                            <div >
-                                <div>
-                                    <PostSpecificationButtons changePostType = {this.changePostType} 
-                                    forceUpdateHandler={this.forceUpdateHandler}></PostSpecificationButtons>
-                                </div>
-                                <form action="submit" id="submit-form">
-                                    <PostForm body={this.state.body}></PostForm>
-                                    <div>TEXT</div>
-                                    <button type="submit">SUBMIT</button>
-                                </form>
-                            </div>
-                        </div>
+            <form type='submit'>
+                <div>
+                    <h1>Create a Post</h1>
+                </div>
+                <div>
+                    <input type='text' placeholder='Choose a destination for this post'></input>
+                </div>
+                <div>
+                    <button type="button" onClick={ () => {this.changePostType('text')}}>Text</button>
+                    <button type="button" onClick={ () => {this.changePostType('media')}}>Media</button>
+                    <button type="button" onClick={ () => {this.changePostType('link')}}>Link</button>
+                </div>
+                    <PostContentField highlighted = {this.state.highlighted}></PostContentField>
+                <div>
+                    <div>
+                    <button>Spoiler</button>
+                    <button>NSFW</button>
                     
-                    )
-                } else if (media) {
-                    return (
-                        <div>
-                            <div >
-                                <div>
-                                    <PostSpecificationButtons changePostType = {this.changePostType} 
-                                    forceUpdateHandler={this.forceUpdateHandler}></PostSpecificationButtons>
-                                </div>
-                                <form action="submit" id="submit-form">
-                                    <PostForm highlighted ={this.state.highlighted}></PostForm>
-                                    <div>MEDIA</div>
-                                    <button type="submit">SUBMIT</button>
-                                </form>
-                            </div>
-                        </div>
-                    )
-                } else if (link) {
-                    return (
-                        <div>
-                            <div >
-                                <div>
-                                    <PostSpecificationButtons changePostType = {this.changePostType} 
-                                    forceUpdateHandler={this.forceUpdateHandler}></PostSpecificationButtons>
-                                </div>
-                                <form action="submit" id="submit-form">
-                                    <PostForm highlighted ={this.state.highlighted}></PostForm>
-                                    <div>LINK</div>
-                                    <button type="submit">SUBMIT</button>
-                                </form>
-                            </div>
-                        </div>
-                    )
-                }
-                })()}
-            </div>
+
+                    </div>
+                    <div>
+                        <button type="button" onClick={()=>{this.submit()}}>SUBMIT</button>
+                    </div>
+
+                </div>
+               
+                
+                
+
+                
+            </form>
             
         )
     }
@@ -115,7 +95,7 @@ class CreatePost extends Component {
                     </div>
                     <form action="submit" id="submit-form">
                         <PostForm highlighted ={this.state.highlighted}></PostForm>
-                        <button type="submit">SUBMIT</button>
+                        
                     </form>
                 </div>
             </div>
