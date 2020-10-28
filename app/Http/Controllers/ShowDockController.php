@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Statement;
+use App\Models\Dock;
 use App\Models\User;
 use App\Models\Following;
 use Illuminate\Support\Facades\Auth;
@@ -120,7 +120,19 @@ class ShowDockController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dock = new Dock();
+        $dock->title = request('title');
+        
+        //return redirect('home/dashboard');
+        //if (Request::isMethod('post')){
+            //later on make sure this submits to the DB and then take the new post ID and redirect there.
+            
+        //}
+        //$name = $request->input('name');
+        //print_r($name);
+        //return response($name);
+        //return redirect()->route('login');
+        
     }
 
     /**

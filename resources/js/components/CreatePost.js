@@ -41,6 +41,18 @@ class CreatePost extends Component {
     
     submit(){
         console.log(this.state)
+        fetch('http://127.0.0.1:8000/api/dock', {
+           method: 'post',
+            body:JSON.stringify(
+                this.state
+            ),
+            headers:{
+                'Accept':'application/json',
+                'Content-Type':'application/json',
+            }
+        }).then((response) => {
+            console.log(response);
+        });
     }
     render() {
         const text = this.state.highlighted == 'text';
@@ -50,12 +62,14 @@ class CreatePost extends Component {
     
         return (
             
-            <form type='submit'>
+            <form action="/api/dock" method="POST">
+                @csrf
                 <div>
                     <h1>Create a Post</h1>
                 </div>
                 <div>
                     <input type='text' placeholder='Choose a destination for this post'></input>
+                    <input type='text' placeholder='title' name='title'></input>
                 </div>
                 <div>
                     <button type="button" onClick={ () => {this.changePostType('text')}}>Text</button>
@@ -71,7 +85,7 @@ class CreatePost extends Component {
 
                     </div>
                     <div>
-                        <button type="button" onClick={()=>{this.submit()}}>SUBMIT</button>
+                        <button type="button" >SUBMIT</button>
                     </div>
 
                 </div>
