@@ -77972,9 +77972,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _PostSpecificationButtons__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PostSpecificationButtons */ "./resources/js/components/PostSpecificationButtons.js");
-/* harmony import */ var _PostForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PostForm */ "./resources/js/components/PostForm.js");
-/* harmony import */ var _PostContentField__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PostContentField */ "./resources/js/components/PostContentField.js");
+/* harmony import */ var _PostContentField__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PostContentField */ "./resources/js/components/PostContentField.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -77998,8 +77996,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
 
 
 
@@ -78036,14 +78032,26 @@ var CreatePost = /*#__PURE__*/function (_Component) {
     });
 
     _this.state = {
-      highlighted: 'text',
-      title: '',
-      body: '',
-      flairs: '',
-      spoiler: '',
-      nsfw: '',
-      creator: '',
-      timeCreated: ''
+      mainInfo: {
+        highlighted: 'text',
+        title: '',
+        tags: '',
+        spoiler: '',
+        nsfw: '',
+        creator: '',
+        timeCreated: ''
+      },
+      type: {
+        text: {
+          body: ''
+        },
+        media: {
+          media_url: ''
+        },
+        link: {
+          url: ''
+        }
+      }
     };
     return _this;
   }
@@ -78054,39 +78062,23 @@ var CreatePost = /*#__PURE__*/function (_Component) {
       this.forceUpdate();
     }
   }, {
-    key: "submit",
-    value: function submit() {
-      console.log(this.state);
-      fetch('http://127.0.0.1:8000/api/dock', {
-        method: 'post',
-        body: JSON.stringify(this.state),
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      }).then(function (response) {
-        console.log(response);
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      var text = this.state.highlighted == 'text';
-      var media = this.state.highlighted == 'media';
-      var link = this.state.highlighted == 'link';
-      console.log(text);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         action: "/api/dock",
         method: "POST"
-      }, "@csrf", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Create a Post")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Create a Post")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         placeholder: "Choose a destination for this post"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         placeholder: "title",
-        name: "title"
+        name: "title",
+        onChange: function onChange(e) {
+          _this2.state.mainInfo.title = e.target.value;
+        }
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         onClick: function onClick() {
@@ -78102,41 +78094,77 @@ var CreatePost = /*#__PURE__*/function (_Component) {
         onClick: function onClick() {
           _this2.changePostType('link');
         }
-      }, "Link")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PostContentField__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }, "Link")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PostContentField__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        changeContent: this.changeContent,
         highlighted: this.state.highlighted
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Spoiler"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "NSFW")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button"
+        type: "button",
+        onClick: function onClick() {
+          _this2.submit();
+        }
       }, "SUBMIT"))));
     }
-    /*
-    {if (this.state.highlighted == "text"){
-        return(
-            <div>
-            
-            <div >
-                <div>
-                    <PostSpecificationButtons changePostType = {this.changePostType} forceUpdateHandler={this.forceUpdateHandler}></PostSpecificationButtons>
-                </div>
-                <form action="submit" id="submit-form">
-                    <PostForm highlighted ={this.state.highlighted}></PostForm>
-                    
-                </form>
-            </div>
-        </div>
-        );
-        
-    }else if (type == "media"){
-        this.state.highlighted = "text"
-        this.forceUpdateHandler();
+  }, {
+    key: "changeContent",
+    value: function changeContent(type) {
+      if (type == 'text') {
+        console.log('text');
+      } else if (type == 'media') {
+        console.log('media');
+      } else if (type = 'link') {
+        console.log('link');
+      }
     }
-    else{
-        this.state.highlighted = "link"
-          this.forceUpdateHandler();
-    }
-    
-    }
-    */
+  }, {
+    key: "submit",
+    value: function submit() {
+      var postSpecificInfo;
 
+      switch (this.state.mainInfo.highlighted) {
+        case 'text':
+          postSpecificInfo = this.state.type.text.body;
+          break;
+
+        case 'media':
+          postSpecificInfo = this.state.type.media.media_url;
+          break;
+
+        case 'link':
+          postSpecificInfo = this.state.type.link.url;
+
+        default:
+          break;
+      }
+
+      console.log(this.state);
+      fetch('http://127.0.0.1:8000/api/dock', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'post',
+        mode: "same-origin",
+        credentials: "same-origin",
+        body: JSON.stringify({
+          highlighted: this.state.mainInfo.highlighted,
+          title: this.state.mainInfo.title,
+          tags: this.state.mainInfo.tags,
+          spoiler: this.state.mainInfo.spoiler,
+          nsfw: this.state.mainInfo.nsfw,
+          creator: this.state.mainInfo.creator,
+          timeCreated: this.state.mainInfo.timeCreated,
+          body: this.state.type.text.body,
+          media_url: this.state.type.media.media_url,
+          url: this.state.type.link.url
+        }) //JSON.stringify({
+        //  obj : this.state;
+        //mainInfo: this.state.mainInfo, 
+        //specialInfo: postSpecificInfo
+        //})
+
+      }).then(function (response) {
+        console.log(response.body);
+      });
+    }
   }]);
 
   return CreatePost;
@@ -78471,15 +78499,18 @@ var PostContentField = /*#__PURE__*/function (_Component) {
         if (_this2.props.highlighted == 'text') {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "text",
+            name: "postBody",
             placeholder: "Text(optional)"
           }));
         } else if (_this2.props.highlighted == 'media') {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-            type: "file"
+            type: "file",
+            name: "postFile"
           }));
         } else if (_this2.props.highlighted == 'link') {
           return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
             type: "text",
+            name: "postURL",
             placeholder: "URL"
           }));
         }

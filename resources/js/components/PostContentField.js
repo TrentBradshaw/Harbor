@@ -14,7 +14,7 @@ export default class PostContentField extends Component {
                 if (this.props.highlighted == 'text') {
                     return (
                         <div>
-                        <input type="text" placeholder='Text(optional)'></input>
+                        <input type="text" name="postBody"placeholder='Text(optional)'></input>
                            
                         </div>
                     
@@ -22,13 +22,13 @@ export default class PostContentField extends Component {
                 } else if (this.props.highlighted == 'media') {
                     return (
                         <div>
-                            <input type="file"></input>
+                            <input type="file" name="postFile"></input>
                         </div>
                     )
                 } else if (this.props.highlighted == 'link') {
                     return (
                         <div>
-                        <input type="text" placeholder='URL'></input>
+                        <input type="text" name="postURL" placeholder='URL'></input>
                         </div>
                     )
                 }

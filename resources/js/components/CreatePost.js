@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
-
-import PostSpecificationButtons from './PostSpecificationButtons'
-import PostForm from './PostForm'
 import PostContentField from './PostContentField'
 
 class CreatePost extends Component {
@@ -10,14 +7,27 @@ class CreatePost extends Component {
         super(props);
 
         this.state = {
-            highlighted: 'text',
-            title:'',
-            body:'',
-            flairs:'',
-            spoiler:'',
-            nsfw:'',
-            creator:'',
-            timeCreated:''
+            mainInfo: {
+                highlighted: 'text',
+                title:'',
+                tags:'',
+                spoiler:'',
+                nsfw:'',
+                creator:'',
+                timeCreated:'',
+            },
+            
+            type: {
+                text:{
+                   body:'',
+                },
+                media:{
+                    media_url:'',
+                },
+                link:{
+                    url:'',
+                }
+            },
         }
     }
 
@@ -39,93 +49,90 @@ class CreatePost extends Component {
         console.log(this.state.highlighted)
     }
     
-    submit(){
-        console.log(this.state)
-        fetch('http://127.0.0.1:8000/api/dock', {
-           method: 'post',
-            body:JSON.stringify(
-                this.state
-            ),
-            headers:{
-                'Accept':'application/json',
-                'Content-Type':'application/json',
-            }
-        }).then((response) => {
-            console.log(response);
-        });
-    }
     render() {
-        const text = this.state.highlighted == 'text';
-        const media = this.state.highlighted == 'media';
-        const link = this.state.highlighted == 'link';
-        console.log(text)
-    
         return (
-            
             <form action="/api/dock" method="POST">
-                @csrf
                 <div>
                     <h1>Create a Post</h1>
                 </div>
                 <div>
                     <input type='text' placeholder='Choose a destination for this post'></input>
-                    <input type='text' placeholder='title' name='title'></input>
+                    <input type='text' placeholder='title' name='title' onChange = { (e) => {this.state.mainInfo.title = e.target.value}}></input>
                 </div>
                 <div>
                     <button type="button" onClick={ () => {this.changePostType('text')}}>Text</button>
                     <button type="button" onClick={ () => {this.changePostType('media')}}>Media</button>
                     <button type="button" onClick={ () => {this.changePostType('link')}}>Link</button>
                 </div>
-                    <PostContentField highlighted = {this.state.highlighted}></PostContentField>
+                    <PostContentField  changeContent={this.changeContent} highlighted = {this.state.highlighted}></PostContentField>
                 <div>
                     <div>
                     <button>Spoiler</button>
                     <button>NSFW</button>
-                    
-
-                    </div>
-                    <div>
-                        <button type="button" >SUBMIT</button>
-                    </div>
-
                 </div>
-               
-                
-                
-
-                
+                    <div>
+                        <button type="button" onClick={()=>{this.submit()}}>SUBMIT</button>
+                    </div>
+                </div>
             </form>
-            
         )
     }
-        /*
-        {if (this.state.highlighted == "text"){
-            return(
-                <div>
-                
-                <div >
-                    <div>
-                        <PostSpecificationButtons changePostType = {this.changePostType} forceUpdateHandler={this.forceUpdateHandler}></PostSpecificationButtons>
-                    </div>
-                    <form action="submit" id="submit-form">
-                        <PostForm highlighted ={this.state.highlighted}></PostForm>
-                        
-                    </form>
-                </div>
-            </div>
-            );
-            
-        }else if (type == "media"){
-            this.state.highlighted = "text"
-            this.forceUpdateHandler();
+
+    changeContent(type){
+        if (type =='text'){
+            console.log('text');
+        } else if (type =='media'){
+            console.log('media')
+        } else if (type='link'){
+            console.log('link')
         }
-        else{
-            this.state.highlighted = "link"
-              this.forceUpdateHandler();
-        }
-        
+
     }
-    */
+    submit(){
+        var postSpecificInfo;
+        switch (this.state.mainInfo.highlighted) {
+            case 'text':
+                postSpecificInfo = this.state.type.text.body;
+                break;
+            case 'media':
+                postSpecificInfo = this.state.type.media.media_url;
+                break;
+            case 'link':
+                postSpecificInfo = this.state.type.link.url;
+        
+            default:
+                break;
+        }
+        console.log(this.state)
+        fetch('http://127.0.0.1:8000/api/dock', {
+            headers:{
+                'Content-Type':'application/json',
+            },
+            method: 'post',
+            mode: "same-origin",
+            credentials: "same-origin",
+            body: JSON.stringify({
+                    highlighted: this.state.mainInfo.highlighted,
+                    title: this.state.mainInfo.title,
+                    tags: this.state.mainInfo.tags,
+                    spoiler: this.state.mainInfo.spoiler,
+                    nsfw: this.state.mainInfo.nsfw,
+                    creator: this.state.mainInfo.creator,
+                    timeCreated: this.state.mainInfo.timeCreated,
+                    body: this.state.type.text.body,
+                    media_url: this.state.type.media.media_url,
+                    url: this.state.type.link.url
+            })
+            //JSON.stringify({
+              //  obj : this.state;
+                //mainInfo: this.state.mainInfo, 
+                //specialInfo: postSpecificInfo
+            //})
+            
+        }).then((response) => {
+            console.log(response.body);
+        });
+    }
 }
 if (document.getElementById('CreatePostHolder')) {
    

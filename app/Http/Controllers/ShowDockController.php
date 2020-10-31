@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Dock;
+use App\Models\MediaDock;
+use App\Models\TextDock;
+use App\Models\UrlDock;
 use App\Models\User;
 use App\Models\Following;
 use Illuminate\Support\Facades\Auth;
@@ -120,10 +122,39 @@ class ShowDockController extends Controller
      */
     public function store(Request $request)
     {
-        $dock = new Dock();
-        $dock->title = request('title');
+        $json = json_decode(file_get_contents('php://input'));
+        print(json_encode($json));
         
-        //return redirect('home/dashboard');
+        $highlighted = $json['highlighted'];
+        $title = $json['title'];
+        $tags = $json['tags'];
+        $spoiler = $json['spoiler'];
+        $nsfw =  $json['nsfw'];
+        $creator = $json['creator'];
+        $timeCreated = $json['timeCreated'];
+        $body =  $json['body'];
+        $media_url = $json['media_url'];
+        $url =  $json['url'];
+
+        switch ($highlighted) {
+            case 'text':
+                $textDock = new TextDock();
+                break;
+            case 'text':
+                $textDock = new TextDock();
+                break;
+            case 'text':
+                $textDock = new TextDock();
+                    break;
+            
+            default:
+                # code...
+                break;
+        }
+        return response(json_encode($json));
+       // $data = json_decode($request->getContents(),true);
+       // error_log(gettype($data));
+
         //if (Request::isMethod('post')){
             //later on make sure this submits to the DB and then take the new post ID and redirect there.
             
@@ -132,6 +163,39 @@ class ShowDockController extends Controller
         //print_r($name);
         //return response($name);
         //return redirect()->route('login');
+        //$contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+        /*
+        if ($contentType === "application/json") {
+            //Receive the RAW post data.
+            $content = trim(file_get_contents("php://input"));
+            error_log(gettype($content));
+            $decoded = json_decode($content, true); 
+            error_log($decoded);
+            //If json_decode failed, the JSON is invalid.
+            if(! is_array($decoded)) {
+                
+
+            } else {
+                // Send error back to user.
+            }
+        }
+        */
+        //$dock = new Dock();
+        //$dock->title = request('title');
+       // $content = $request->getContent();
+        //error_log(gettype($content));
+        //$content = json_decode($content);
+       // error_log(gettype($content));
+      //  error_log(var_dump($content));
+      //  $content = json_encode($content);
+        //error_log(gettype($content));
+        //$mainInfo = $content.mainInfo;
+       // $specialInfo = $content[1];
+        //error_log($mainInfo);
+        
+
+        //return redirect('home/dashboard');
+        
         
     }
 
