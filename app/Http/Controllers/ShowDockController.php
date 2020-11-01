@@ -136,15 +136,41 @@ class ShowDockController extends Controller
         $media_url = $json['media_url'];
         $url =  $json['url'];
 
+        
         switch ($highlighted) {
             case 'text':
                 $textDock = new TextDock();
+                $textDock->title = $title;
+                $textDock->tags = $tags;
+                $textDock->spoiler = $spoiler;
+                $textDock->nsfw = $nsfw;
+                $textDock->creator = $creator;
+                $textDock->timeCreated = DateTime()->format('Y-m-d H:i:s');
+                $textDock->body = $body;
+                $textDock->save();
+
                 break;
-            case 'text':
-                $textDock = new TextDock();
+            case 'media':
+                $mediaDock = new MediaDock();
+                $mediaDock->title = $title;
+                $mediaDock->tags = $tags;
+                $mediaDock->spoiler = $spoiler;
+                $mediaDock->nsfw = $nsfw;
+                $mediaDock->creator = $creator;
+                $mediaDock->timeCreated = DateTime()->format('Y-m-d H:i:s');
+                $mediaDock->url = $media_url;
+                $mediaDock->save();
                 break;
-            case 'text':
-                $textDock = new TextDock();
+            case 'link':
+                $urlDock = new UrlDock();
+                $urlDock->title = $title;
+                $mediaDock->tags = $tags;
+                $mediaDock->spoiler = $spoiler;
+                $mediaDock->nsfw = $nsfw;
+                $mediaDock->creator = $creator;
+                $mediaDock->timeCreated = DateTime()->format('Y-m-d H:i:s');
+                $mediaDock->url = $media_url;
+                $urlDock->save();
                     break;
             
             default:
