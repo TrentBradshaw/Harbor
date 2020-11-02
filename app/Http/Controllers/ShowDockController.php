@@ -122,20 +122,20 @@ class ShowDockController extends Controller
      */
     public function store(Request $request)
     {
-        $json = json_decode(file_get_contents('php://input'));
-        print(json_encode($json));
+        $json = json_decode(file_get_contents('php://input'), true);
+        error_log(gettype($json));
         
-        $highlighted = $json['highlighted'];
-        $title = $json['title'];
-        $tags = $json['tags'];
-        $spoiler = $json['spoiler'];
-        $nsfw =  $json['nsfw'];
-        $creator = $json['creator'];
-        $timeCreated = $json['timeCreated'];
-        $body =  $json['body'];
-        $media_url = $json['media_url'];
-        $url =  $json['url'];
-
+        
+        $highlighted = $json["highlighted"];
+        $title = $json["title"];
+        $tags = $json["tags"];
+        $spoiler = $json["spoiler"];
+        $nsfw =  $json["nsfw"];
+        $creator = $json["creator"];
+        $timeCreated = $json["timeCreated"];
+        $body =  $json["body"];
+        $media_url = $json["media_url"];
+        $url =  $json["url"];
         
         switch ($highlighted) {
             case 'text':
@@ -145,9 +145,12 @@ class ShowDockController extends Controller
                 $textDock->spoiler = $spoiler;
                 $textDock->nsfw = $nsfw;
                 $textDock->creator = $creator;
-                $textDock->timeCreated = DateTime()->format('Y-m-d H:i:s');
+                $textDock->created_at = date('Y-m-d H:i:s');
+                $textDock->updated_at = date('Y-m-d H:i:s');
                 $textDock->body = $body;
+                error_log($textDock);
                 $textDock->save();
+                
 
                 break;
             case 'media':
@@ -177,7 +180,15 @@ class ShowDockController extends Controller
                 # code...
                 break;
         }
-        return response(json_encode($json));
+        return response()->json([
+            'redirect' => url('/home')
+        ]);
+        //return $this->goToHomeView();
+        //return redirect('login');
+        //return redirect()->route('home')->send();
+        //return redirect('http://127.0.0.1:8000/home');
+        //return response(json_encode($json));
+        
        // $data = json_decode($request->getContents(),true);
        // error_log(gettype($data));
 
@@ -224,7 +235,10 @@ class ShowDockController extends Controller
         
         
     }
-
+    public function goToHomeView()
+    {
+        return view('home');
+    }
     /**
      * Display the specified resource.
      *

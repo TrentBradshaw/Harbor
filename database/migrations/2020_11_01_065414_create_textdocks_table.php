@@ -16,6 +16,12 @@ class CreateTextdocksTable extends Migration
         Schema::create('textdocks', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('title');
+            $table->string('tags');
+            $table->string('spoiler');
+            $table->string('nsfw');
+            $table->string('creator');
+            $table->string('body');
         });
     }
 

@@ -11,8 +11,8 @@ class CreatePost extends Component {
                 highlighted: 'text',
                 title:'',
                 tags:'',
-                spoiler:'',
-                nsfw:'',
+                spoiler:false,
+                nsfw:false,
                 creator:'',
                 timeCreated:'',
             },
@@ -129,9 +129,8 @@ class CreatePost extends Component {
                 //specialInfo: postSpecificInfo
             //})
             
-        }).then((response) => {
-            console.log(response.body);
-        });
+        }).then(response => response.json())
+        .then(data => {window.location = data.redirect;})
     }
 }
 if (document.getElementById('CreatePostHolder')) {

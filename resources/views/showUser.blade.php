@@ -23,7 +23,7 @@
     <body>
         <div class="Container" id = "dataHolder" 
             data="{{$data ?? ''}}" 
-            user="{{$user}}" 
+            user="{{$user ?? ''}}" 
             pageOwnerInfo="{{$pageOwnerInfo}}"
             feedInfo="{{$feedInfo ?? ''}}">
             <div class="Header" id="Header">
