@@ -48,5 +48,5 @@ export default class DockContainer extends Component {
 if (document.getElementById('content')) {
    var data = document.getElementById('dataHolder').getAttribute('data');
    var currentUser = document.getElementById('dataHolder').getAttribute('user')
-   ReactDOM.render(<DockContainer user={currentUser} data={data}/>, document.getElementById('content')); //figure out what this data will be
+  // ReactDOM.render(<DockContainer user={currentUser} data={data}/>, document.getElementById('content')); //figure out what this data will be
 }

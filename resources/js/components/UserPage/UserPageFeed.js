@@ -12,7 +12,7 @@ export default class UserPageFeed extends Component {
         //console.log('props' + JSON.stringify(this.props.feedInfo));
         
         //CLEAN THIS UP SO WE DON'T HAVE TO USE INDEXING WITH THE ARRAY BEYOND SPECIFIYING THE SUB-ARRAY
-        var data = JSON.parse(this.props.feedInfo);
+        var data = false//JSON.parse(this.props.feedInfo);
         
         if(data){
             const tempData = data[0]

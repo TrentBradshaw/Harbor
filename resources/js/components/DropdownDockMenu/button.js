@@ -1,10 +1,10 @@
 import React from "react";
 
-const cls = "bg-indigo-700 text-white py-3 px-5 rounded";
+const cls = "edit this later";
 
 const Button = ({ onClick }) => (
   <button className={cls} onClick={onClick}>
-    Dropdown button
+    Add username
   </button>
 );
 

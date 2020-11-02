@@ -1,11 +1,9 @@
 import React from "react";
 
-const liCls =
-  "p-3 border text-gray-700 hover:text-white hover:bg-indigo-700 cursor-pointer";
-
+const liCls = "menuItem" // later on edit this class with styling
 const DropDownCard = ({ data = [], setOpen }) => (
-  <div className="shadow h-auto w-56 absolute">
-    <ul className="text-left">
+  <div>
+    <ul>
       {data.map((item, i) => (
         <li key={i} className={liCls} onClick={() => setOpen(false)}>
           {item}

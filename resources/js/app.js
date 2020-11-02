@@ -11,18 +11,32 @@ require('./bootstrap');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+require('./components/Constant/Header')
 
-//require('./components/Example');
-require('./components/MyExample')
-require('./components/Profile')
-require('./components/Statement')
-require('./components/UserPage')
-require('./components/Header')
-require('./components/UserPageFeed')
-require('./components/PostSpecificationButtons')
-require('./components/CreatePost')
-require('./components/PostForm')
-require('./components/DropDownMenu/button')
-require('./components/DropDownMenu/buttonDropDownCmp')
-require('./components/DropDownMenu/dropDownCard')
-require('./components/DropDownMenu/index')
+require('./components/DropdownDockMenu/button')
+require('./components/DropdownDockMenu/buttonDropDownCmp')
+require('./components/DropdownDockMenu/dropDownCard')
+require('./components/DropdownDockMenu/DropdownDockMenu')
+
+require('./components/DropdownProfileMenu/button')
+require('./components/DropdownProfileMenu/buttonDropDownCmp')
+require('./components/DropdownProfileMenu/dropDownCard')
+require('./components/DropdownProfileMenu/DropdownProfileMenu')
+
+require('./components/SubmitPage/PostSpecificationButtons')
+require('./components/SubmitPage/CreatePost')
+require('./components/SubmitPage/PostForm')
+require('./components/SubmitPage/PostContentField')
+
+
+require('./components/UserPage/Profile')
+require('./components/UserPage/DockContainer')
+require('./components/UserPage/UserPageFeed')
+require('./components/UserPage/Profile')
+require('./components/UserPage/Statement')
+require('./components/UserPage/UserPage')
+
+
+
+
+

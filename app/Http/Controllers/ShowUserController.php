@@ -55,6 +55,7 @@ class ShowUserController extends Controller
                // print_r($currentUserUsername);
                 return view('showUser',[
                     'pageOwnerInfo'=> json_encode($pageOwnerInfo),
+                    'userExists' => true,
                     'user'=> $currentUserUsername,
                     'feedInfo'=> json_encode($feedInfo[0]),
                 ]);
@@ -78,6 +79,7 @@ class ShowUserController extends Controller
                 return view('showUser',
                 [
                     'pageOwnerInfo'=> json_encode($pageOwnerInfo),
+                    'userExists' => false,
                     'currentUser'=> $currentUserUsername,
                 ]);
             }     

@@ -8,17 +8,11 @@ export default class UserPage extends Component {
       super(props);
       var data = JSON.parse(this.props.pageOwnerInfo);
       console.log(data);
-      //const userInfo = Object.entries(data['userInfo'])
-      //console.log(data['userInfo'].username);
-      //console.log( 'username ' + data[Object.keys(data)[1]].username)
     }
  
     render(){
-       // var data=JSON.parse(this.props.userInfo)
-       // var userInfo = data['userInfo']
        var pageOwnerInfo = JSON.parse(this.props.pageOwnerInfo)
-       console.log()
-        //console.log(userInfo)
+
         if (window.location.href == 'http://127.0.0.1:8000/home'){
             return (
                 <div>
@@ -50,19 +44,6 @@ export default class UserPage extends Component {
                             </div>
                         </div>
                     </div>
-                    {/* 
-                    <div>
-                        <h1>Username: {data[Object.keys(data)[1]].username}</h1>
-                        <img src={data[Object.keys(data)[0]].pfp_url} width={200}/> 
-                        <h1>Description: {data[Object.keys(data)[0]].description}</h1>
-                        <h1>Followers: {data[Object.keys(data)[0]].followers_count}</h1>
-                        <h1>Following: {data[Object.keys(data)[0]].followed_count} </h1>
-                        <h1>Statements: {data[Object.keys(data)[0]].statements_count}</h1>
-                        <h1>Topics: {data[Object.keys(data)[0]].topics_count} </h1>
-                    </div>
-    
-                    */}
-                    
                 </div>
             );
         }
@@ -99,29 +80,12 @@ export default class UserPage extends Component {
                             </div>
                         </div>
                     </div>
-                    {/* 
-                    <div>
-                        <h1>Username: {data[Object.keys(data)[1]].username}</h1>
-                        <img src={data[Object.keys(data)[0]].pfp_url} width={200}/> 
-                        <h1>Description: {data[Object.keys(data)[0]].description}</h1>
-                        <h1>Followers: {data[Object.keys(data)[0]].followers_count}</h1>
-                        <h1>Following: {data[Object.keys(data)[0]].followed_count} </h1>
-                        <h1>Statements: {data[Object.keys(data)[0]].statements_count}</h1>
-                        <h1>Topics: {data[Object.keys(data)[0]].topics_count} </h1>
-                    </div>
-    
-                    */}
-                    
                 </div>
             );
         }
         
     }   
-}  
-
-if (window.location.href == "http://127.0.0.1:8000/home") {
-//document.getElementById("backButton").hide();
-}
+} 
     
 if (document.getElementById('UserPageContainer')) {
    var pageOwnerInfo = document.getElementById('dataHolder').getAttribute('pageOwnerInfo');
