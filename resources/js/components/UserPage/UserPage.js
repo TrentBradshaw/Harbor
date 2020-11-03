@@ -2,93 +2,33 @@ import { divide, toArray } from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Statement from './Statement';
+import UserCard from './UserCard';
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
 export default class UserPage extends Component {
   constructor(props){
       super(props);
-      var data = JSON.parse(this.props.pageOwnerInfo);
-      console.log(data);
+      
+      //var data = JSON.parse(this.props.pageOwnerInfo);
+      //console.log('props' + props);
+      //console.log('pageOwnerInfo' + JSON.stringify(data));
     }
  
     render(){
        var pageOwnerInfo = JSON.parse(this.props.pageOwnerInfo)
+       console.log(pageOwnerInfo.statements_count)
+       console.log(pageOwnerInfo.docks_count)
+       console.log()
+       var contributions = (parseFloat(pageOwnerInfo.followers_count)  + parseFloat( pageOwnerInfo.followed_count) )
+       console.log( contributions)
 
-        if (window.location.href == 'http://127.0.0.1:8000/home'){
-            return (
-                <div>
-                    <div>
-                        <div>
-                            <div style={{background: 'ghostwhite'}}>
-                                <span>{pageOwnerInfo.username}</span>
-                                <p>{parseInt(pageOwnerInfo.statements_count) + parseInt(pageOwnerInfo.topics_count)} contributions</p>
-                            </div>
-                            <div>
-                                <img src={pageOwnerInfo.pfp_url} alt="" id="header" className="ImageLayedOver"></img>
-                            </div>
-                            <div>
-                                <img src={pageOwnerInfo.pfp_url} alt="" id="pfp" className="overlayedImage"></img>
-                            </div>
-                            <div>
-                                <button>follow</button>
-                            </div>
-                            <div>
-                                <p>bio: {pageOwnerInfo.description}</p>
-                            </div>
-                            <div>
-                                <p>when joined</p>
-                            </div>
-                            <div>
-                                <p>
-                                    {pageOwnerInfo.followed_count} Following {pageOwnerInfo.followers_count} Followers
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-        else {
-            return (
-                <div>
-                    <div>
-                        <div>
-                            <div style={{background: 'ghostwhite'}}>
-                                <div role="button" id="backButton">Back</div>
-                                
-                                <span>{pageOwnerInfo.username}</span>
-                                <p>{parseInt(pageOwnerInfo.statements_count) + parseInt(pageOwnerInfo.topics_count)} contributions</p>
-                            </div>
-                            <div>
-                                <img src={pageOwnerInfo.pfp_url} alt="" id="header" className="ImageLayedOver"></img>
-                            </div>
-                            <div>
-                                <img src={pageOwnerInfo.pfp_url} alt="" id="pfp" className="overlayedImage"></img>
-                            </div>
-                            <div>
-                                <button>follow</button>
-                            </div>
-                            <div>
-                                <p>bio: {pageOwnerInfo.description}</p>
-                            </div>
-                            <div>
-                                <p>when joined</p>
-                            </div>
-                            <div>
-                                <p>
-                                    {pageOwnerInfo.followed_count} Following {pageOwnerInfo.followers_count} Followers
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-        
+        return (
+            <UserCard currentUser={currentUser} pageOwnerInfo={pageOwnerInfo}></UserCard>
+        )
     }   
 } 
     
 if (document.getElementById('UserPageContainer')) {
    var pageOwnerInfo = document.getElementById('dataHolder').getAttribute('pageOwnerInfo');
-   var currentUser = document.getElementById('dataHolder').getAttribute('user')
+   var currentUser = document.getElementById('dataHolder').getAttribute('currentUser')
    ReactDOM.render(<UserPage currentUser={currentUser} pageOwnerInfo={pageOwnerInfo} />, document.getElementById('UserPageContainer'));
 }

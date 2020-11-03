@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
-import DropdownProfileMenu from '../DropdownProfileMenu/DropDownProfileMenu'
-import DropdownDockMenu from '../DropdownDockMenu/DropDownDockMenu'
+import ProfileDropDownMenu from '../DropdownProfileMenu/ProfileDropDownMenu'
+import DockDropDownMenu from '../DropdownDockMenu/DockDropDownMenu'
 
 
 export default class Header extends Component {
@@ -43,7 +43,7 @@ export default class Header extends Component {
                 <div>
                     <h1 onClick={() => { window.location.href = 'http://127.0.0.1:8000/home' }}>ROLLER</h1>
                 </div>
-                <DropdownDockMenu></DropdownDockMenu>
+                <DockDropDownMenu></DockDropDownMenu>
                 <div className="header__search">
                     <input type='text' className='header__searchInput'></input>
                     <SearchIcon className="header__searchIcon" />
@@ -51,7 +51,7 @@ export default class Header extends Component {
                 <div onClick={() => { window.location.href = 'http://127.0.0.1:8000/submit' }}>
                     <AddIcon className="header__searchIcon" />
                 </div>
-                <DropdownProfileMenu></DropdownProfileMenu>
+                <ProfileDropDownMenu></ProfileDropDownMenu>
             </div>
             
             /*
@@ -70,6 +70,6 @@ export default class Header extends Component {
 
 if (document.getElementById('Header')) {
    var data = document.getElementById('dataHolder').getAttribute('data');
-   var currentUser = document.getElementById('dataHolder').getAttribute('user')
+   var currentUser = document.getElementById('dataHolder').getAttribute('currentUser')
    ReactDOM.render(<Header user={currentUser} data={data}/>, document.getElementById('Header'));
 }

@@ -55,8 +55,19 @@ class ShowUserController extends Controller
                // print_r($currentUserUsername);
                 return view('showUser',[
                     'pageOwnerInfo'=> json_encode($pageOwnerInfo),
+                    //IF FOLLOWING ADD THIS AS DATA TO CHANGE THE FOLLOW BUTTON
+
+
+
+
+
+
+
+
+
+                    
                     'userExists' => true,
-                    'user'=> $currentUserUsername,
+                    'currentUser'=> $currentUserUsername,
                     'feedInfo'=> json_encode($feedInfo[0]),
                 ]);
             }

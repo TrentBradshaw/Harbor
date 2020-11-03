@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "./button";
-import DropDownCard from "./dropDownCard";
+import ProfileDropDownButton from "./ProfileDropDownButton";
+import ProfileDropDownCard from "./ProfileDropDownCard";
 const sampleData = [
     'Profile',
     'Settings',
@@ -9,7 +9,7 @@ const sampleData = [
 ]
 
 //new Array(7).fill("item name");
-const ButtonWithDropDownCmp = () => {
+const ProfileButtonWithDropDownCmp = () => {
   const [open, setOpen] = React.useState(false);
   const drop = React.useRef(null);
   function handleClick(e) {
@@ -34,10 +34,10 @@ const ButtonWithDropDownCmp = () => {
         display: "inline-block"
       }}
     >
-      <Button onClick={() => setOpen(open => !open)} />
-      {open && <DropDownCard data={sampleData} setOpen={setOpen} />}
+      <ProfileDropDownButton onClick={() => setOpen(open => !open)} />
+      {open && <ProfileDropDownCard data={sampleData} setOpen={setOpen} />}
     </div>
   );
 };
 
-export default ButtonWithDropDownCmp;
+export default ProfileButtonWithDropDownCmp;

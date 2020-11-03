@@ -1,7 +1,7 @@
 import React from "react";
 
 const liCls = "menuItem" // later on edit this class with styling
-const DropDownCard = ({ data = [], setOpen }) => (
+const DockDropDownCard = ({ data = [], setOpen }) => (
   <div>
     <ul>
       {data.map((item, i) => (
@@ -13,4 +13,4 @@ const DropDownCard = ({ data = [], setOpen }) => (
   </div>
 );
 
-export default DropDownCard;
+export default DockDropDownCard;

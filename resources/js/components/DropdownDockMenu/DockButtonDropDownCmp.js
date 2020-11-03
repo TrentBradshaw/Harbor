@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "./button";
-import DropDownCard from "./dropDownCard";
+import Button from "./DockDropDownButton";
+import DropDownCard from "./DockDropDownCard";
 const sampleData = [
     'Profile',
     'Settings',
@@ -9,7 +9,7 @@ const sampleData = [
 ]
 
 //new Array(7).fill("item name");
-const ButtonWithDropDownCmp = () => {
+const DockButtonWithDropDownCmp = () => {
   const [open, setOpen] = React.useState(false);
   const drop = React.useRef(null);
   function handleClick(e) {
@@ -40,4 +40,4 @@ const ButtonWithDropDownCmp = () => {
   );
 };
 
-export default ButtonWithDropDownCmp;
+export default DockButtonWithDropDownCmp;

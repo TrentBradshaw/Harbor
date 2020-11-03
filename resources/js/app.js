@@ -13,15 +13,15 @@ require('./bootstrap');
  */
 require('./components/Constant/Header')
 
-require('./components/DropdownDockMenu/button')
-require('./components/DropdownDockMenu/buttonDropDownCmp')
-require('./components/DropdownDockMenu/dropDownCard')
-require('./components/DropdownDockMenu/DropdownDockMenu')
+require('./components/DropdownDockMenu/DockButtonDropDownCmp')
+require('./components/DropdownDockMenu/DockDropDownButton')
+require('./components/DropdownDockMenu/DockDropDownCard')
+require('./components/DropdownDockMenu/DockDropDownMenu')
 
-require('./components/DropdownProfileMenu/button')
-require('./components/DropdownProfileMenu/buttonDropDownCmp')
-require('./components/DropdownProfileMenu/dropDownCard')
-require('./components/DropdownProfileMenu/DropdownProfileMenu')
+require('./components/DropdownProfileMenu/ProfileButtonDropDownCmp')
+require('./components/DropdownProfileMenu/ProfileDropDownButton')
+require('./components/DropdownProfileMenu/ProfileDropDownCard')
+require('./components/DropdownProfileMenu/ProfileDropDownMenu')
 
 require('./components/SubmitPage/PostSpecificationButtons')
 require('./components/SubmitPage/CreatePost')
@@ -35,6 +35,8 @@ require('./components/UserPage/UserPageFeed')
 require('./components/UserPage/Profile')
 require('./components/UserPage/Statement')
 require('./components/UserPage/UserPage')
+require('./components/UserPage/UserCard')
+require('./components/UserPage/FollowButton')
 
 
 

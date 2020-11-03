@@ -23,4 +23,5 @@ Route::middleware('auth:api')->get('/submit', function (Request $request) {
 
 Route::apiResource('/user', 'App\Http\Controllers\ShowUserController');
 Route::apiResource('/dock', 'App\Http\Controllers\ShowDockController');
+Route::apiResource('/followers','App\Http\Controllers\FollowerController');
 //Route::get('/user/{username}', [App\Http\Controllers\ShowUserController::class, 'show']);

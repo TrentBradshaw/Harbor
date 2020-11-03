@@ -77895,21 +77895,21 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./components/Constant/Header */ "./resources/js/components/Constant/Header.js");
 
-__webpack_require__(/*! ./components/DropdownDockMenu/button */ "./resources/js/components/DropdownDockMenu/button.js");
+__webpack_require__(/*! ./components/DropdownDockMenu/DockButtonDropDownCmp */ "./resources/js/components/DropdownDockMenu/DockButtonDropDownCmp.js");
 
-__webpack_require__(/*! ./components/DropdownDockMenu/buttonDropDownCmp */ "./resources/js/components/DropdownDockMenu/buttonDropDownCmp.js");
+__webpack_require__(/*! ./components/DropdownDockMenu/DockDropDownButton */ "./resources/js/components/DropdownDockMenu/DockDropDownButton.js");
 
-__webpack_require__(/*! ./components/DropdownDockMenu/dropDownCard */ "./resources/js/components/DropdownDockMenu/dropDownCard.js");
+__webpack_require__(/*! ./components/DropdownDockMenu/DockDropDownCard */ "./resources/js/components/DropdownDockMenu/DockDropDownCard.js");
 
-__webpack_require__(/*! ./components/DropdownDockMenu/DropdownDockMenu */ "./resources/js/components/DropdownDockMenu/DropdownDockMenu.js");
+__webpack_require__(/*! ./components/DropdownDockMenu/DockDropDownMenu */ "./resources/js/components/DropdownDockMenu/DockDropDownMenu.js");
 
-__webpack_require__(/*! ./components/DropdownProfileMenu/button */ "./resources/js/components/DropdownProfileMenu/button.js");
+__webpack_require__(/*! ./components/DropdownProfileMenu/ProfileButtonDropDownCmp */ "./resources/js/components/DropdownProfileMenu/ProfileButtonDropDownCmp.js");
 
-__webpack_require__(/*! ./components/DropdownProfileMenu/buttonDropDownCmp */ "./resources/js/components/DropdownProfileMenu/buttonDropDownCmp.js");
+__webpack_require__(/*! ./components/DropdownProfileMenu/ProfileDropDownButton */ "./resources/js/components/DropdownProfileMenu/ProfileDropDownButton.js");
 
-__webpack_require__(/*! ./components/DropdownProfileMenu/dropDownCard */ "./resources/js/components/DropdownProfileMenu/dropDownCard.js");
+__webpack_require__(/*! ./components/DropdownProfileMenu/ProfileDropDownCard */ "./resources/js/components/DropdownProfileMenu/ProfileDropDownCard.js");
 
-__webpack_require__(/*! ./components/DropdownProfileMenu/DropdownProfileMenu */ "./resources/js/components/DropdownProfileMenu/DropdownProfileMenu.js");
+__webpack_require__(/*! ./components/DropdownProfileMenu/ProfileDropDownMenu */ "./resources/js/components/DropdownProfileMenu/ProfileDropDownMenu.js");
 
 __webpack_require__(/*! ./components/SubmitPage/PostSpecificationButtons */ "./resources/js/components/SubmitPage/PostSpecificationButtons.js");
 
@@ -77930,6 +77930,10 @@ __webpack_require__(/*! ./components/UserPage/Profile */ "./resources/js/compone
 __webpack_require__(/*! ./components/UserPage/Statement */ "./resources/js/components/UserPage/Statement.js");
 
 __webpack_require__(/*! ./components/UserPage/UserPage */ "./resources/js/components/UserPage/UserPage.js");
+
+__webpack_require__(/*! ./components/UserPage/UserCard */ "./resources/js/components/UserPage/UserCard.js");
+
+__webpack_require__(/*! ./components/UserPage/FollowButton */ "./resources/js/components/UserPage/FollowButton.js");
 
 /***/ }),
 
@@ -77998,8 +78002,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_icons_Search__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Search__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/icons/Add */ "./node_modules/@material-ui/icons/Add.js");
 /* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _DropdownProfileMenu_DropDownProfileMenu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DropdownProfileMenu/DropDownProfileMenu */ "./resources/js/components/DropdownProfileMenu/DropDownProfileMenu.js");
-/* harmony import */ var _DropdownDockMenu_DropDownDockMenu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DropdownDockMenu/DropDownDockMenu */ "./resources/js/components/DropdownDockMenu/DropDownDockMenu.js");
+/* harmony import */ var _DropdownProfileMenu_ProfileDropDownMenu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DropdownProfileMenu/ProfileDropDownMenu */ "./resources/js/components/DropdownProfileMenu/ProfileDropDownMenu.js");
+/* harmony import */ var _DropdownDockMenu_DockDropDownMenu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DropdownDockMenu/DockDropDownMenu */ "./resources/js/components/DropdownDockMenu/DockDropDownMenu.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -78079,7 +78083,7 @@ var Header = /*#__PURE__*/function (_Component) {
         onClick: function onClick() {
           window.location.href = 'http://127.0.0.1:8000/home';
         }
-      }, "ROLLER")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_DropdownDockMenu_DropDownDockMenu__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "ROLLER")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_DropdownDockMenu_DockDropDownMenu__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "header__search"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         type: "text",
@@ -78092,7 +78096,7 @@ var Header = /*#__PURE__*/function (_Component) {
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_4___default.a, {
         className: "header__searchIcon"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_DropdownProfileMenu_DropDownProfileMenu__WEBPACK_IMPORTED_MODULE_5__["default"], null))
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_DropdownProfileMenu_ProfileDropDownMenu__WEBPACK_IMPORTED_MODULE_5__["default"], null))
       /*
       <h1>Username: {data[Object.keys(data)[0]].username}</h1>
       <img src={data[Object.keys(data)[0]].pfp_url} width={200}/> 
@@ -78113,7 +78117,7 @@ var Header = /*#__PURE__*/function (_Component) {
 
 if (document.getElementById('Header')) {
   var data = document.getElementById('dataHolder').getAttribute('data');
-  var currentUser = document.getElementById('dataHolder').getAttribute('user');
+  var currentUser = document.getElementById('dataHolder').getAttribute('currentUser');
   react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Header, {
     user: currentUser,
     data: data
@@ -78122,10 +78126,10 @@ if (document.getElementById('Header')) {
 
 /***/ }),
 
-/***/ "./resources/js/components/DropdownDockMenu/DropDownDockMenu.js":
-/*!**********************************************************************!*\
-  !*** ./resources/js/components/DropdownDockMenu/DropDownDockMenu.js ***!
-  \**********************************************************************/
+/***/ "./resources/js/components/DropdownDockMenu/DockButtonDropDownCmp.js":
+/*!***************************************************************************!*\
+  !*** ./resources/js/components/DropdownDockMenu/DockButtonDropDownCmp.js ***!
+  \***************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -78133,86 +78137,8 @@ if (document.getElementById('Header')) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _buttonDropDownCmp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./buttonDropDownCmp */ "./resources/js/components/DropdownDockMenu/buttonDropDownCmp.js");
-
-
-
-
-function DropdownMenu() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_buttonDropDownCmp__WEBPACK_IMPORTED_MODULE_2__["default"], null);
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (DropdownMenu);
-
-/***/ }),
-
-/***/ "./resources/js/components/DropdownDockMenu/DropdownDockMenu.js":
-/*!**********************************************************************!*\
-  !*** ./resources/js/components/DropdownDockMenu/DropdownDockMenu.js ***!
-  \**********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _buttonDropDownCmp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./buttonDropDownCmp */ "./resources/js/components/DropdownDockMenu/buttonDropDownCmp.js");
-
-
-
-
-function DropdownMenu() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_buttonDropDownCmp__WEBPACK_IMPORTED_MODULE_2__["default"], null);
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (DropdownMenu);
-
-/***/ }),
-
-/***/ "./resources/js/components/DropdownDockMenu/button.js":
-/*!************************************************************!*\
-  !*** ./resources/js/components/DropdownDockMenu/button.js ***!
-  \************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-var cls = "edit this later";
-
-var Button = function Button(_ref) {
-  var onClick = _ref.onClick;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: cls,
-    onClick: onClick
-  }, "Add username");
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Button);
-
-/***/ }),
-
-/***/ "./resources/js/components/DropdownDockMenu/buttonDropDownCmp.js":
-/*!***********************************************************************!*\
-  !*** ./resources/js/components/DropdownDockMenu/buttonDropDownCmp.js ***!
-  \***********************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./button */ "./resources/js/components/DropdownDockMenu/button.js");
-/* harmony import */ var _dropDownCard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dropDownCard */ "./resources/js/components/DropdownDockMenu/dropDownCard.js");
+/* harmony import */ var _DockDropDownButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DockDropDownButton */ "./resources/js/components/DropdownDockMenu/DockDropDownButton.js");
+/* harmony import */ var _DockDropDownCard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DockDropDownCard */ "./resources/js/components/DropdownDockMenu/DockDropDownCard.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -78230,7 +78156,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var sampleData = ['Profile', 'Settings', 'Log Out', 'Night Mode']; //new Array(7).fill("item name");
 
-var ButtonWithDropDownCmp = function ButtonWithDropDownCmp() {
+var DockButtonWithDropDownCmp = function DockButtonWithDropDownCmp() {
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(false),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       open = _React$useState2[0],
@@ -78259,26 +78185,52 @@ var ButtonWithDropDownCmp = function ButtonWithDropDownCmp() {
       width: "auto",
       display: "inline-block"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DockDropDownButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
     onClick: function onClick() {
       return setOpen(function (open) {
         return !open;
       });
     }
-  }), open && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_dropDownCard__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), open && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DockDropDownCard__WEBPACK_IMPORTED_MODULE_2__["default"], {
     data: sampleData,
     setOpen: setOpen
   }));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (ButtonWithDropDownCmp);
+/* harmony default export */ __webpack_exports__["default"] = (DockButtonWithDropDownCmp);
 
 /***/ }),
 
-/***/ "./resources/js/components/DropdownDockMenu/dropDownCard.js":
-/*!******************************************************************!*\
-  !*** ./resources/js/components/DropdownDockMenu/dropDownCard.js ***!
-  \******************************************************************/
+/***/ "./resources/js/components/DropdownDockMenu/DockDropDownButton.js":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/DropdownDockMenu/DockDropDownButton.js ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var cls = "edit this later";
+
+var DockDropDownButton = function DockDropDownButton(_ref) {
+  var onClick = _ref.onClick;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: cls,
+    onClick: onClick
+  }, "Add username");
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (DockDropDownButton);
+
+/***/ }),
+
+/***/ "./resources/js/components/DropdownDockMenu/DockDropDownCard.js":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/DropdownDockMenu/DockDropDownCard.js ***!
+  \**********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -78289,7 +78241,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var liCls = "menuItem"; // later on edit this class with styling
 
-var DropDownCard = function DropDownCard(_ref) {
+var DockDropDownCard = function DockDropDownCard(_ref) {
   var _ref$data = _ref.data,
       data = _ref$data === void 0 ? [] : _ref$data,
       setOpen = _ref.setOpen;
@@ -78304,14 +78256,14 @@ var DropDownCard = function DropDownCard(_ref) {
   })));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (DropDownCard);
+/* harmony default export */ __webpack_exports__["default"] = (DockDropDownCard);
 
 /***/ }),
 
-/***/ "./resources/js/components/DropdownProfileMenu/DropDownProfileMenu.js":
-/*!****************************************************************************!*\
-  !*** ./resources/js/components/DropdownProfileMenu/DropDownProfileMenu.js ***!
-  \****************************************************************************/
+/***/ "./resources/js/components/DropdownDockMenu/DockDropDownMenu.js":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/DropdownDockMenu/DockDropDownMenu.js ***!
+  \**********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -78321,23 +78273,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _buttonDropDownCmp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./buttonDropDownCmp */ "./resources/js/components/DropdownProfileMenu/buttonDropDownCmp.js");
+/* harmony import */ var _DockButtonDropDownCmp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DockButtonDropDownCmp */ "./resources/js/components/DropdownDockMenu/DockButtonDropDownCmp.js");
 
 
 
 
-function DropdownMenu() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_buttonDropDownCmp__WEBPACK_IMPORTED_MODULE_2__["default"], null);
+function DockDropdownMenu() {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DockButtonDropDownCmp__WEBPACK_IMPORTED_MODULE_2__["default"], null);
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (DropdownMenu);
+/* harmony default export */ __webpack_exports__["default"] = (DockDropdownMenu);
 
 /***/ }),
 
-/***/ "./resources/js/components/DropdownProfileMenu/DropdownProfileMenu.js":
-/*!****************************************************************************!*\
-  !*** ./resources/js/components/DropdownProfileMenu/DropdownProfileMenu.js ***!
-  \****************************************************************************/
+/***/ "./resources/js/components/DropdownProfileMenu/ProfileButtonDropDownCmp.js":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/DropdownProfileMenu/ProfileButtonDropDownCmp.js ***!
+  \*********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -78345,60 +78297,8 @@ function DropdownMenu() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _buttonDropDownCmp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./buttonDropDownCmp */ "./resources/js/components/DropdownProfileMenu/buttonDropDownCmp.js");
-
-
-
-
-function DropdownMenu() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_buttonDropDownCmp__WEBPACK_IMPORTED_MODULE_2__["default"], null);
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (DropdownMenu);
-
-/***/ }),
-
-/***/ "./resources/js/components/DropdownProfileMenu/button.js":
-/*!***************************************************************!*\
-  !*** ./resources/js/components/DropdownProfileMenu/button.js ***!
-  \***************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-var cls = "edit this later";
-
-var Button = function Button(_ref) {
-  var onClick = _ref.onClick;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: cls,
-    onClick: onClick
-  }, "Add username");
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Button);
-
-/***/ }),
-
-/***/ "./resources/js/components/DropdownProfileMenu/buttonDropDownCmp.js":
-/*!**************************************************************************!*\
-  !*** ./resources/js/components/DropdownProfileMenu/buttonDropDownCmp.js ***!
-  \**************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./button */ "./resources/js/components/DropdownProfileMenu/button.js");
-/* harmony import */ var _dropDownCard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dropDownCard */ "./resources/js/components/DropdownProfileMenu/dropDownCard.js");
+/* harmony import */ var _ProfileDropDownButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProfileDropDownButton */ "./resources/js/components/DropdownProfileMenu/ProfileDropDownButton.js");
+/* harmony import */ var _ProfileDropDownCard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProfileDropDownCard */ "./resources/js/components/DropdownProfileMenu/ProfileDropDownCard.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -78416,7 +78316,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var sampleData = ['Profile', 'Settings', 'Log Out', 'Night Mode']; //new Array(7).fill("item name");
 
-var ButtonWithDropDownCmp = function ButtonWithDropDownCmp() {
+var ProfileButtonWithDropDownCmp = function ProfileButtonWithDropDownCmp() {
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(false),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       open = _React$useState2[0],
@@ -78445,26 +78345,52 @@ var ButtonWithDropDownCmp = function ButtonWithDropDownCmp() {
       width: "auto",
       display: "inline-block"
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_button__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProfileDropDownButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
     onClick: function onClick() {
       return setOpen(function (open) {
         return !open;
       });
     }
-  }), open && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_dropDownCard__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }), open && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProfileDropDownCard__WEBPACK_IMPORTED_MODULE_2__["default"], {
     data: sampleData,
     setOpen: setOpen
   }));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (ButtonWithDropDownCmp);
+/* harmony default export */ __webpack_exports__["default"] = (ProfileButtonWithDropDownCmp);
 
 /***/ }),
 
-/***/ "./resources/js/components/DropdownProfileMenu/dropDownCard.js":
-/*!*********************************************************************!*\
-  !*** ./resources/js/components/DropdownProfileMenu/dropDownCard.js ***!
-  \*********************************************************************/
+/***/ "./resources/js/components/DropdownProfileMenu/ProfileDropDownButton.js":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/DropdownProfileMenu/ProfileDropDownButton.js ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+var cls = "edit this later";
+
+var ProfileDropDownButton = function ProfileDropDownButton(_ref) {
+  var onClick = _ref.onClick;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    className: cls,
+    onClick: onClick
+  }, document.getElementById('dataHolder').getAttribute('currentUser'));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ProfileDropDownButton);
+
+/***/ }),
+
+/***/ "./resources/js/components/DropdownProfileMenu/ProfileDropDownCard.js":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/DropdownProfileMenu/ProfileDropDownCard.js ***!
+  \****************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -78475,7 +78401,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var liCls = "menuItem"; // later on edit this class with styling
 
-var DropDownCard = function DropDownCard(_ref) {
+var ProfileDropDownCard = function ProfileDropDownCard(_ref) {
   var _ref$data = _ref.data,
       data = _ref$data === void 0 ? [] : _ref$data,
       setOpen = _ref.setOpen;
@@ -78490,7 +78416,33 @@ var DropDownCard = function DropDownCard(_ref) {
   })));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (DropDownCard);
+/* harmony default export */ __webpack_exports__["default"] = (ProfileDropDownCard);
+
+/***/ }),
+
+/***/ "./resources/js/components/DropdownProfileMenu/ProfileDropDownMenu.js":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/DropdownProfileMenu/ProfileDropDownMenu.js ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _ProfileButtonDropDownCmp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProfileButtonDropDownCmp */ "./resources/js/components/DropdownProfileMenu/ProfileButtonDropDownCmp.js");
+
+
+
+
+function DropdownMenu(props) {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProfileButtonDropDownCmp__WEBPACK_IMPORTED_MODULE_2__["default"], null);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (DropdownMenu);
 
 /***/ }),
 
@@ -79100,6 +79052,107 @@ if (document.getElementById('content')) {
 
 /***/ }),
 
+/***/ "./resources/js/components/UserPage/FollowButton.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/UserPage/FollowButton.js ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Statement__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Statement */ "./resources/js/components/UserPage/Statement.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var FollowButton = /*#__PURE__*/function (_Component) {
+  _inherits(FollowButton, _Component);
+
+  var _super = _createSuper(FollowButton);
+
+  function FollowButton(props) {
+    _classCallCheck(this, FollowButton);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(FollowButton, [{
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+        onClick: function onClick() {
+          _this.submit();
+        }
+      }, "follow");
+    }
+  }, {
+    key: "submit",
+    value: function submit() {
+      console.log(this.state);
+      fetch('http://127.0.0.1:8000/api/followers', {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'post',
+        mode: "same-origin",
+        credentials: "same-origin",
+        body: JSON.stringify({
+          following: this.props.currentUser,
+          followee: this.props.followee
+        }) //JSON.stringify({
+        //  obj : this.state;
+        //mainInfo: this.state.mainInfo, 
+        //specialInfo: postSpecificInfo
+        //})
+
+      }).then(function (response) {
+        console.log(response);
+        response.json().then(function (data) {
+          console.log(data);
+        });
+      });
+    }
+  }]);
+
+  return FollowButton;
+}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (FollowButton);
+
+/***/ }),
+
 /***/ "./resources/js/components/UserPage/Profile.js":
 /*!*****************************************************!*\
   !*** ./resources/js/components/UserPage/Profile.js ***!
@@ -79350,16 +79403,15 @@ if (document.getElementById('statement')) {
 
 /***/ }),
 
-/***/ "./resources/js/components/UserPage/UserPage.js":
+/***/ "./resources/js/components/UserPage/UserCard.js":
 /*!******************************************************!*\
-  !*** ./resources/js/components/UserPage/UserPage.js ***!
+  !*** ./resources/js/components/UserPage/UserCard.js ***!
   \******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return UserPage; });
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
@@ -79367,6 +79419,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Statement__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Statement */ "./resources/js/components/UserPage/Statement.js");
+/* harmony import */ var _FollowButton__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FollowButton */ "./resources/js/components/UserPage/FollowButton.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -79392,35 +79445,45 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
  //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
 
-var UserPage = /*#__PURE__*/function (_Component) {
-  _inherits(UserPage, _Component);
+var UserCard = /*#__PURE__*/function (_Component) {
+  _inherits(UserCard, _Component);
 
-  var _super = _createSuper(UserPage);
+  var _super = _createSuper(UserCard);
 
-  function UserPage(props) {
+  function UserCard(props) {
     var _this;
 
-    _classCallCheck(this, UserPage);
+    _classCallCheck(this, UserCard);
 
-    _this = _super.call(this, props);
-    var data = JSON.parse(_this.props.pageOwnerInfo);
-    console.log(data);
+    _this = _super.call(this, props); //var data = JSON.parse(this.props.pageOwnerInfo);
+
+    console.log('props from usercard' + JSON.stringify(props)); //console.log('pageOwnerInfo' + JSON.stringify(data));
+
     return _this;
   }
 
-  _createClass(UserPage, [{
+  _createClass(UserCard, [{
     key: "render",
     value: function render() {
-      var pageOwnerInfo = JSON.parse(this.props.pageOwnerInfo);
+      var pageOwnerInfo = JSON.stringify(this.props.pageOwnerInfo);
+      console.log(pageOwnerInfo.statements_count);
+      console.log(pageOwnerInfo.docks_count);
+
+      if (document.getElementById('UserPageContainer')) {
+        var pageOwnerInfo = this.props.pageOwnerInfo;
+        var currentUser = this.props.currentUser;
+        console.log('PAGE OWNER INFO:::' + JSON.stringify(pageOwnerInfo)); //var currentUser = this.props.currentUser;
+      }
 
       if (window.location.href == 'http://127.0.0.1:8000/home') {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           style: {
             background: 'ghostwhite'
           }
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, pageOwnerInfo.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, parseInt(pageOwnerInfo.statements_count) + parseInt(pageOwnerInfo.topics_count), " contributions")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, pageOwnerInfo.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, pageOwnerInfo.docks_count + pageOwnerInfo.statements_count, " contributions")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
           src: pageOwnerInfo.pfp_url,
           alt: "",
           id: "header",
@@ -79430,7 +79493,7 @@ var UserPage = /*#__PURE__*/function (_Component) {
           alt: "",
           id: "pfp",
           className: "overlayedImage"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", null, "follow")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "bio: ", pageOwnerInfo.description)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "when joined")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, pageOwnerInfo.followed_count, " Following ", pageOwnerInfo.followers_count, " Followers")))));
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "bio: ", pageOwnerInfo.description)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "when joined")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, pageOwnerInfo.followed_count, " Following ", pageOwnerInfo.followers_count, " Followers")))));
       } else {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           style: {
@@ -79439,7 +79502,7 @@ var UserPage = /*#__PURE__*/function (_Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           role: "button",
           id: "backButton"
-        }, "Back"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, pageOwnerInfo.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, parseInt(pageOwnerInfo.statements_count) + parseInt(pageOwnerInfo.topics_count), " contributions")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        }, "Back"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, pageOwnerInfo.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, pageOwnerInfo.docks_count + pageOwnerInfo.statements_count, " contributions")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
           src: pageOwnerInfo.pfp_url,
           alt: "",
           id: "header",
@@ -79449,8 +79512,93 @@ var UserPage = /*#__PURE__*/function (_Component) {
           alt: "",
           id: "pfp",
           className: "overlayedImage"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", null, "follow")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "bio: ", pageOwnerInfo.description)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "when joined")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, pageOwnerInfo.followed_count, " Following ", pageOwnerInfo.followers_count, " Followers")))));
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_FollowButton__WEBPACK_IMPORTED_MODULE_4__["default"], {
+          currentUser: currentUser,
+          followee: pageOwnerInfo.username
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "bio: ", pageOwnerInfo.description)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "when joined")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, pageOwnerInfo.followed_count, " Following ", pageOwnerInfo.followers_count, " Followers")))));
       }
+    }
+  }]);
+
+  return UserCard;
+}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (UserCard);
+
+/***/ }),
+
+/***/ "./resources/js/components/UserPage/UserPage.js":
+/*!******************************************************!*\
+  !*** ./resources/js/components/UserPage/UserPage.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return UserPage; });
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Statement__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Statement */ "./resources/js/components/UserPage/Statement.js");
+/* harmony import */ var _UserCard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./UserCard */ "./resources/js/components/UserPage/UserCard.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+ //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
+
+var UserPage = /*#__PURE__*/function (_Component) {
+  _inherits(UserPage, _Component);
+
+  var _super = _createSuper(UserPage);
+
+  function UserPage(props) {
+    _classCallCheck(this, UserPage);
+
+    return _super.call(this, props); //var data = JSON.parse(this.props.pageOwnerInfo);
+    //console.log('props' + props);
+    //console.log('pageOwnerInfo' + JSON.stringify(data));
+  }
+
+  _createClass(UserPage, [{
+    key: "render",
+    value: function render() {
+      var pageOwnerInfo = JSON.parse(this.props.pageOwnerInfo);
+      console.log(pageOwnerInfo.statements_count);
+      console.log(pageOwnerInfo.docks_count);
+      console.log();
+      var contributions = parseFloat(pageOwnerInfo.followers_count) + parseFloat(pageOwnerInfo.followed_count);
+      console.log(contributions);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_UserCard__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        currentUser: currentUser,
+        pageOwnerInfo: pageOwnerInfo
+      });
     }
   }]);
 
@@ -79461,7 +79609,7 @@ var UserPage = /*#__PURE__*/function (_Component) {
 
 if (document.getElementById('UserPageContainer')) {
   var pageOwnerInfo = document.getElementById('dataHolder').getAttribute('pageOwnerInfo');
-  var currentUser = document.getElementById('dataHolder').getAttribute('user');
+  var currentUser = document.getElementById('dataHolder').getAttribute('currentUser');
   react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(UserPage, {
     currentUser: currentUser,
     pageOwnerInfo: pageOwnerInfo

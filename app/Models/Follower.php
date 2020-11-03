@@ -5,10 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Following extends Model
+class Follower extends Model
 {
     //use HasFactory;
+    protected $table = "followers";
+    protected $primaryKey = "id";
+    protected $fillable = [
+        'id'
+    ];
 
-    protected $table = "following";
-    public $primaryKey = "user_id";
+
+    
 }

@@ -53,7 +53,13 @@ class HomeController extends Controller
                 //SORT THEM IN CHRONOLOGICAL ORDER
                 //MAKE A STATEMENT COMPONENT FOR EACH ONE
                 //APPEND THEM TO THE STATEMENT
-            return view('home')->with('pageOwnerInfo', json_encode($pageOwnerInfo))->with('feedInfo', json_encode($feedInfo)); //json_encode($data)
+            //return view('home')->with('pageOwnerInfo', json_encode($pageOwnerInfo))->with('feedInfo', json_encode($feedInfo)); //json_encode($data)
+            return view('home',
+            [
+                'pageOwnerInfo'=> json_encode($pageOwnerInfo),
+                'feedInfo', json_encode($feedInfo),
+                'currentUser'=> $user[0]['username'],
+            ]);
         }
         else{
             return view('welcome');

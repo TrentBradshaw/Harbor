@@ -2,10 +2,10 @@ import React from "react";
 
 const cls = "edit this later";
 
-const Button = ({ onClick }) => (
+const DockDropDownButton = ({ onClick }) => (
   <button className={cls} onClick={onClick}>
     Add username
   </button>
 );
 
-export default Button;
+export default DockDropDownButton;

@@ -24,6 +24,7 @@
         <div class="Container" id = "dataHolder" 
             data="{{$data ?? ''}}" 
             user="{{$user ?? ''}}" 
+            currentUser = "{{$currentUser ?? ''}}"
             pageOwnerInfo="{{$pageOwnerInfo}}"
             feedInfo="{{$feedInfo ?? ''}}">
             <div class="Header" id="Header">
