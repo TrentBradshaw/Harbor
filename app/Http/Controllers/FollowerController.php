@@ -37,24 +37,19 @@ class FollowerController extends Controller
      */
     public function store(Request $request)
     {
-        $json = json_decode(file_get_contents('php://input'), true);
-        
-        error_log(json_encode($json));
+        $json = json_decode(file_get_contents('php://input'), true); //grab request
+    
+        //grab follower and followee(target)
         $follower = $json['following'];
         $followee = $json['followee'];
-        error_log($follower);
 
         $follower_id = (User::where('username', $follower)->get()->toArray())[0]['id'];  //grab the object, enter it and grab the id
         $followee_id = (User::where('username', $followee)->get()->toArray())[0]['id'];
-        error_log($follower_id);
-        error_log($followee_id);
-    
-       
+        
+        //bring in the Follower model
         $following = new Follower();
         $following->follower_id = $follower_id;
         $following->followee_id = $followee_id;
-        //$following->created_at = now();
-       // $following->updated_at = now();
         $following->save();
 
        return response()->json([
@@ -104,8 +99,23 @@ class FollowerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($usernameToUnfollow)
     {
-        //
+
+        $json = json_decode(file_get_contents('php://input'), true); //grab request
+    
+        //grab follower and followee(target)
+        $follower = $json['following'];
+        $followee = $json['followee'];
+
+        $follower_id = (User::where('username', $follower)->get()->toArray())[0]['id'];  //grab the object, enter it and grab the id
+        $followee_id = (User::where('username', $followee)->get()->toArray())[0]['id'];
+        
+        Follower::where('follower_id', $follower_id)->where('followee_id', $followee_id)->delete();
+    
+
+       return response()->json([
+            'redirect' => url('/home')
+        ]);
     }
 }

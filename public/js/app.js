@@ -79061,13 +79061,8 @@ if (document.getElementById('content')) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Statement__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Statement */ "./resources/js/components/UserPage/Statement.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -79090,10 +79085,10 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-
-
-
+ //make this more secure by handling the following/follow more nuanced
+//switch to hooks down the road
 
 var FollowButton = /*#__PURE__*/function (_Component) {
   _inherits(FollowButton, _Component);
@@ -79101,53 +79096,122 @@ var FollowButton = /*#__PURE__*/function (_Component) {
   var _super = _createSuper(FollowButton);
 
   function FollowButton(props) {
+    var _this;
+
     _classCallCheck(this, FollowButton);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      isFollowingText: '',
+      isFollowing: '',
+      stateSet: false
+    });
+
+    return _this;
   }
 
   _createClass(FollowButton, [{
+    key: "figureOutIfFollowingOrNot",
+    value: function figureOutIfFollowingOrNot() {
+      if (this.state.isFollowingText == '') {
+        this.setState({
+          stateSet: false
+        });
+      } else {
+        this.setState({
+          stateSet: true
+        });
+      }
+
+      if (!this.state.stateSet) {
+        //if state isn't set then set it 
+        var isFollowing = document.getElementById('dataHolder').getAttribute('isFollowing');
+        var isFollowingText = '';
+
+        if (isFollowing == '1') {
+          isFollowingText = 'Following';
+        } else {
+          isFollowingText = 'Follow';
+        }
+
+        this.setState({
+          isFollowingText: isFollowingText
+        });
+      }
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.figureOutIfFollowingOrNot();
+    } //establish state with both fields empty.
+
+  }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: function onClick() {
-          _this.submit();
+          _this2.submit();
         }
-      }, "follow");
+      }, this.state.isFollowingText);
     }
   }, {
     key: "submit",
     value: function submit() {
-      console.log(this.state);
-      fetch('http://127.0.0.1:8000/api/followers', {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        method: 'post',
-        mode: "same-origin",
-        credentials: "same-origin",
-        body: JSON.stringify({
-          following: this.props.currentUser,
-          followee: this.props.followee
-        }) //JSON.stringify({
-        //  obj : this.state;
-        //mainInfo: this.state.mainInfo, 
-        //specialInfo: postSpecificInfo
-        //})
+      var _this3 = this;
 
-      }).then(function (response) {
-        console.log(response);
-        response.json().then(function (data) {
-          console.log(data);
+      if (this.state.isFollowingText == 'Follow') {
+        this.setState({
+          isFollowingText: 'Following'
         });
-      });
+        fetch('http://127.0.0.1:8000/api/followers', {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'post',
+          mode: "same-origin",
+          credentials: "same-origin",
+          body: JSON.stringify({
+            following: this.props.currentUser,
+            followee: this.props.followee
+          })
+        }).then(function (response) {
+          console.log(response);
+          response.json().then(function (data) {
+            _this3.forceUpdate();
+
+            console.log(data);
+          });
+        });
+      } else if (this.state.isFollowingText == 'Following') {
+        this.setState({
+          isFollowingText: 'Follow'
+        });
+        fetch('http://127.0.0.1:8000/api/followers/' + this.props.followee, {
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          method: 'delete',
+          mode: "same-origin",
+          credentials: "same-origin",
+          body: JSON.stringify({
+            following: this.props.currentUser,
+            followee: this.props.followee
+          })
+        }).then(function (response) {
+          console.log(response);
+          response.json().then(function (data) {
+            console.log(data);
+          });
+        });
+      }
     }
   }]);
 
   return FollowButton;
-}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
+}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (FollowButton);
 

@@ -24,6 +24,7 @@
         <div class="Container" id = "dataHolder" 
             data="{{$data ?? ''}}" 
             user="{{$user ?? ''}}" 
+            isFollowing="{{$isFollowing}}"
             currentUser = "{{$currentUser ?? ''}}"
             pageOwnerInfo="{{$pageOwnerInfo}}"
             feedInfo="{{$feedInfo ?? ''}}">

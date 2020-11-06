@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserResourceCollection;
 use App\Models\Statement;
-use App\Models\Following;
+use App\Models\Follower ;
 use Illuminate\Support\Facades\Auth;
 
 class ShowUserController extends Controller
@@ -15,6 +15,12 @@ class ShowUserController extends Controller
         if (Auth::check()) {
             if(User::where('username', $username)->get()->toArray()){
                 $pageOwner = User::where('username', $username)->get()->toArray();
+                $currentUser = User::where('id', Auth::user()->id)->get()->toArray();
+
+                $isFollowing = Follower::where('follower_id', $currentUser[0]['id'])->where('followee_id', $pageOwner[0]['id']);
+            
+                error_log($currentUser[0]['id']);
+                error_log($pageOwner[0]['id']);
                 $username = $pageOwner[0]['username'];
                 $pfp_url = $pageOwner[0]['pfp_url'];
                 $description =  $pageOwner[0]['description'];
@@ -48,25 +54,27 @@ class ShowUserController extends Controller
                 foreach ($statements_array as $key => $value) {
                     array_push($feedInfo, $value);
                 }  
+                function CheckIfFollowing(array $currentUser, array $pageOwner){
+                    $isFollowing = (Follower::where('follower_id', $currentUser[0]['id'])->where('followee_id', $pageOwner[0]['id'])->exists());
+                    error_log($isFollowing);
+                    return $isFollowing;
+                    if($isFollowing === null){
+                        return 'false';
+                    }else if ($isFollowing != null){
+                        return 'true';
+                    }
+                   // return ($isFollowing != null);
+                    
+                }
                 
-                $currentUser = User::where('id', Auth::user()->id)->get()->toArray();
                 //print_r($currentUser[0]['username']);
                 $currentUserUsername = $currentUser[0]['username'];
                // print_r($currentUserUsername);
                 return view('showUser',[
                     'pageOwnerInfo'=> json_encode($pageOwnerInfo),
                     //IF FOLLOWING ADD THIS AS DATA TO CHANGE THE FOLLOW BUTTON
-
-
-
-
-
-
-
-
-
-                    
-                    'userExists' => true,
+                    'isFollowing' => strval(CheckIfFollowing($currentUser, $pageOwner)),
+                    'userExists' => 'true',
                     'currentUser'=> $currentUserUsername,
                     'feedInfo'=> json_encode($feedInfo[0]),
                 ]);
