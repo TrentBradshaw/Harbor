@@ -1,8 +1,10 @@
-*
-{
+*{
+    outline: 1px solid red;
+    outline-offset: -1px;
     margin: 0;
     padding: 0;
 }
+
 html, body, .Container
 {
     height: 100%;
@@ -72,14 +74,18 @@ body > .Container
 .Header, .Footer
 {
     padding: 5px 0;
-    height: 50px;
-    display: flex;
-    flex-direction: row;
+    height: 32px;
+    /* display: flex; */
+    /* flex-direction: row; */
+    z-index: 100;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: white;
+    width: 99%;
 }
-.Header
-{
-    background-color: #bf5b5b;
-}
+
 .C1
 {
     width: 15%;
@@ -160,6 +166,7 @@ img#pfp{
       height: 22px !important;
       background-color: #cd9042
   }
+  
   #UserPageContainer {
     background: white;
     border-color: rgb(56, 68, 77);

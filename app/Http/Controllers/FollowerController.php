@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Follower;
+use App\Models\FollowCount;
 use App\Models\User;
 
 class FollowerController extends Controller
@@ -51,6 +52,9 @@ class FollowerController extends Controller
         $following->follower_id = $follower_id;
         $following->followee_id = $followee_id;
         $following->save();
+
+
+       
 
        return response()->json([
             'redirect' => url('/home')

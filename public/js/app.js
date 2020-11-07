@@ -2274,6 +2274,35 @@ exports.default = _default;
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/icons/Explore.js":
+/*!****************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Explore.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
+  d: "M12 10.9c-.61 0-1.1.49-1.1 1.1s.49 1.1 1.1 1.1c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm2.19 12.19L6 18l3.81-8.19L18 6l-3.81 8.19z"
+}), 'Explore');
+
+exports.default = _default;
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/icons/Search.js":
 /*!***************************************************!*\
   !*** ./node_modules/@material-ui/icons/Search.js ***!
@@ -78002,9 +78031,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_icons_Search__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Search__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/icons/Add */ "./node_modules/@material-ui/icons/Add.js");
 /* harmony import */ var _material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _DropdownProfileMenu_ProfileDropDownMenu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DropdownProfileMenu/ProfileDropDownMenu */ "./resources/js/components/DropdownProfileMenu/ProfileDropDownMenu.js");
-/* harmony import */ var _DropdownDockMenu_DockDropDownMenu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DropdownDockMenu/DockDropDownMenu */ "./resources/js/components/DropdownDockMenu/DockDropDownMenu.js");
+/* harmony import */ var _material_ui_icons_Explore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/icons/Explore */ "./node_modules/@material-ui/icons/Explore.js");
+/* harmony import */ var _material_ui_icons_Explore__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Explore__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _DropdownProfileMenu_ProfileDropDownMenu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DropdownProfileMenu/ProfileDropDownMenu */ "./resources/js/components/DropdownProfileMenu/ProfileDropDownMenu.js");
+/* harmony import */ var _DropdownDockMenu_DockDropDownMenu__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../DropdownDockMenu/DockDropDownMenu */ "./resources/js/components/DropdownDockMenu/DockDropDownMenu.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -78034,79 +78067,62 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Header = /*#__PURE__*/function (_Component) {
   _inherits(Header, _Component);
 
   var _super = _createSuper(Header);
 
   function Header(props) {
-    var _this;
-
     _classCallCheck(this, Header);
 
-    _this = _super.call(this, props);
-    console.log(props);
-    return _this;
-  } //props should come in as
-
-  /*
-    {
-        "username":"Test",
-        "pfp_url":null,
-        "description":null,
-        "followers_count":0,
-        "followed_count":0,
-        "statements_count":0,
-        "topics_count":"0"
-    }
-  */
-
+    return _super.call(this, props);
+  }
 
   _createClass(Header, [{
     key: "render",
     value: function render() {
-      console.log('user' + this.props.user); // {console.log('data ' + this.props.data)}
-      //  var data = JSON.parse(this.props.data);
-      // console.log(data);
-      //// {console.log(data[Object.keys(data)])}
-      // {console.log(data[Object.keys(data)[0]])}
-      //  {console.log('data2 ' +  data[Object.keys(data)[0]])}
-      //{data[Object.keys(data)[0]].username}
-      //ree
-
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         style: {
+          flex: '1 0 auto',
+          padding: '1px 0px',
           display: "inline-flex",
-          width: '100%'
+          width: '100%',
+          height: '100%'
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        style: _defineProperty({
+          flex: '1'
+        }, "flex", '1 0 auto')
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", {
         onClick: function onClick() {
           window.location.href = 'http://127.0.0.1:8000/home';
         }
-      }, "ROLLER")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_DropdownDockMenu_DockDropDownMenu__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "header__search"
+      }, "ROLLER")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_DropdownDockMenu_DockDropDownMenu__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        className: "header__search",
+        style: {
+          flex: '5'
+        }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         type: "text",
         className: "header__searchInput"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_Search__WEBPACK_IMPORTED_MODULE_3___default.a, {
         className: "header__searchIcon"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+        style: _defineProperty({
+          justifyContent: 'center',
+          display: 'flex',
+          flex: '1'
+        }, "flex", '1 0 auto')
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         onClick: function onClick() {
           window.location.href = 'http://127.0.0.1:8000/submit';
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_4___default.a, {
         className: "header__searchIcon"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_DropdownProfileMenu_ProfileDropDownMenu__WEBPACK_IMPORTED_MODULE_5__["default"], null))
-      /*
-      <h1>Username: {data[Object.keys(data)[0]].username}</h1>
-      <img src={data[Object.keys(data)[0]].pfp_url} width={200}/> 
-      <h1>Description: {data[Object.keys(data)[0]].description}</h1>
-      <h1>Followers: {data[Object.keys(data)[0]].followers_count}</h1>
-      <h1>Following: {data[Object.keys(data)[0]].followed_count} </h1>
-      <h1>Statements: {data[Object.keys(data)[0]].statements_count}</h1>
-      <h1>Topics: {data[Object.keys(data)[0]].topics_count} </h1>
-      */
-      ;
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_Explore__WEBPACK_IMPORTED_MODULE_5___default.a, {
+        className: "header__searchIcon"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_DropdownProfileMenu_ProfileDropDownMenu__WEBPACK_IMPORTED_MODULE_6__["default"], null));
     }
   }]);
 
@@ -78139,6 +78155,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _DockDropDownButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DockDropDownButton */ "./resources/js/components/DropdownDockMenu/DockDropDownButton.js");
 /* harmony import */ var _DockDropDownCard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DockDropDownCard */ "./resources/js/components/DropdownDockMenu/DockDropDownCard.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -78157,6 +78175,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var sampleData = ['Profile', 'Settings', 'Log Out', 'Night Mode']; //new Array(7).fill("item name");
 
 var DockButtonWithDropDownCmp = function DockButtonWithDropDownCmp() {
+  var _ref;
+
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(false),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       open = _React$useState2[0],
@@ -78179,12 +78199,9 @@ var DockButtonWithDropDownCmp = function DockButtonWithDropDownCmp() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown",
     ref: drop,
-    style: {
-      position: "relative",
-      margin: "16px",
-      width: "auto",
-      display: "inline-block"
-    }
+    style: (_ref = {
+      flex: '1'
+    }, _defineProperty(_ref, "flex", '1 0 auto'), _defineProperty(_ref, "position", "relative"), _defineProperty(_ref, "width", "auto"), _defineProperty(_ref, "display", "inline-block"), _ref)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_DockDropDownButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
     onClick: function onClick() {
       return setOpen(function (open) {
@@ -78218,6 +78235,10 @@ var cls = "edit this later";
 var DockDropDownButton = function DockDropDownButton(_ref) {
   var onClick = _ref.onClick;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    style: {
+      height: '100%',
+      width: '100%'
+    },
     className: cls,
     onClick: onClick
   }, "Add username");
@@ -78299,6 +78320,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _ProfileDropDownButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ProfileDropDownButton */ "./resources/js/components/DropdownProfileMenu/ProfileDropDownButton.js");
 /* harmony import */ var _ProfileDropDownCard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProfileDropDownCard */ "./resources/js/components/DropdownProfileMenu/ProfileDropDownCard.js");
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -78317,6 +78340,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var sampleData = ['Profile', 'Settings', 'Log Out', 'Night Mode']; //new Array(7).fill("item name");
 
 var ProfileButtonWithDropDownCmp = function ProfileButtonWithDropDownCmp() {
+  var _ref;
+
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default.a.useState(false),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       open = _React$useState2[0],
@@ -78339,12 +78364,9 @@ var ProfileButtonWithDropDownCmp = function ProfileButtonWithDropDownCmp() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "dropdown",
     ref: drop,
-    style: {
-      position: "relative",
-      margin: "16px",
-      width: "auto",
-      display: "inline-block"
-    }
+    style: (_ref = {
+      flex: '1 0 auto'
+    }, _defineProperty(_ref, "flex", '1'), _defineProperty(_ref, "position", "relative"), _defineProperty(_ref, "width", "auto"), _defineProperty(_ref, "display", "inline-block"), _ref)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProfileDropDownButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
     onClick: function onClick() {
       return setOpen(function (open) {
@@ -78378,6 +78400,10 @@ var cls = "edit this later";
 var ProfileDropDownButton = function ProfileDropDownButton(_ref) {
   var onClick = _ref.onClick;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    style: {
+      height: '100%',
+      width: '100%'
+    },
     className: cls,
     onClick: onClick
   }, document.getElementById('dataHolder').getAttribute('currentUser'));
@@ -79535,19 +79561,23 @@ var UserCard = /*#__PURE__*/function (_Component) {
       var pageOwnerInfo = JSON.stringify(this.props.pageOwnerInfo);
       console.log(pageOwnerInfo.statements_count);
       console.log(pageOwnerInfo.docks_count);
+      var pageOwnerInfo = this.props.pageOwnerInfo;
+      var currentUser = this.props.currentUser;
+      console.log('PAGE OWNER INFO:::' + JSON.stringify(pageOwnerInfo)); //var currentUser = this.props.currentUser;
 
-      if (document.getElementById('UserPageContainer')) {
-        var pageOwnerInfo = this.props.pageOwnerInfo;
-        var currentUser = this.props.currentUser;
-        console.log('PAGE OWNER INFO:::' + JSON.stringify(pageOwnerInfo)); //var currentUser = this.props.currentUser;
-      }
+      if (document.getElementById('UserPageContainer')) {}
 
       if (window.location.href == 'http://127.0.0.1:8000/home') {
+        console.log(_typeof(pageOwnerInfo.docks_count));
+        console.log(_typeof(pageOwnerInfo.statements_count));
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
           style: {
             background: 'ghostwhite'
           }
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, pageOwnerInfo.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, pageOwnerInfo.docks_count + pageOwnerInfo.statements_count, " contributions")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+          role: "button",
+          id: "backButton"
+        }, "Back"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", null, pageOwnerInfo.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, pageOwnerInfo.docks_count + pageOwnerInfo.statements_count, " contributions")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
           src: pageOwnerInfo.pfp_url,
           alt: "",
           id: "header",

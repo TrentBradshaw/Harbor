@@ -28,8 +28,10 @@ const DockButtonWithDropDownCmp = () => {
       className="dropdown"
       ref={drop}
       style={{
+        flex: '1',
+        flex: '1 0 auto',
         position: "relative",
-        margin: "16px",
+        //margin: "16px",
         width: "auto",
         display: "inline-block"
       }}

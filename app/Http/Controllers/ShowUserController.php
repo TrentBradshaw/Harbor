@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 
 class ShowUserController extends Controller
 {
+
+    // FIX ALL OF THIS WORDING SO FOLLOWED IS JUST FOLLOWING 
     public function ShowUser($username){
         if (Auth::check()) {
             if(User::where('username', $username)->get()->toArray()){
@@ -18,14 +20,17 @@ class ShowUserController extends Controller
                 $currentUser = User::where('id', Auth::user()->id)->get()->toArray();
 
                 $isFollowing = Follower::where('follower_id', $currentUser[0]['id'])->where('followee_id', $pageOwner[0]['id']);
+
+                $followed_count_fromDB = count (Follower::where('follower_id', $pageOwner[0]['id'])->get()->toArray());
+                $follower_count_fromDB = count (Follower::where('followee_id', $pageOwner[0]['id'])->get()->toArray());
             
                 error_log($currentUser[0]['id']);
                 error_log($pageOwner[0]['id']);
                 $username = $pageOwner[0]['username'];
                 $pfp_url = $pageOwner[0]['pfp_url'];
                 $description =  $pageOwner[0]['description'];
-                $followers_count = $pageOwner[0]['followers_count'];
-                $followed_count =  $pageOwner[0]['followed_count'];
+                $followers_count = $follower_count_fromDB;//$pageOwner[0]['followers_count'];
+                $followed_count =  $followed_count_fromDB;//$pageOwner[0]['followed_count'];
                 $statements_count =  $pageOwner[0]['statements_count'];
                 $docks_count =  $pageOwner[0]['docks_count'];
                 

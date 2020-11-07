@@ -16,18 +16,23 @@ class UserCard extends Component {
        var pageOwnerInfo = JSON.stringify(this.props.pageOwnerInfo)
        console.log(pageOwnerInfo.statements_count)
        console.log(pageOwnerInfo.docks_count)
-       if (document.getElementById('UserPageContainer')) {
-        var pageOwnerInfo = this.props.pageOwnerInfo;
+       var pageOwnerInfo = this.props.pageOwnerInfo;
         var currentUser = this.props.currentUser;
         console.log('PAGE OWNER INFO:::' + JSON.stringify(pageOwnerInfo))
         //var currentUser = this.props.currentUser;
+       if (document.getElementById('UserPageContainer')) {
+        
        }
         if (window.location.href == 'http://127.0.0.1:8000/home'){
+            console.log(typeof pageOwnerInfo.docks_count)
+            console.log(typeof pageOwnerInfo.statements_count)
             return (
                 <div>
                     <div>
                         <div>
                             <div style={{background: 'ghostwhite'}}>
+                                <div role="button" id="backButton">Back</div>
+                                
                                 <span>{pageOwnerInfo.username}</span>
                                 <p>{pageOwnerInfo.docks_count + pageOwnerInfo.statements_count} contributions</p>
                             </div>

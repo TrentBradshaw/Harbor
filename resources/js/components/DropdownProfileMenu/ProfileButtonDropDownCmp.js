@@ -28,8 +28,10 @@ const ProfileButtonWithDropDownCmp = () => {
       className="dropdown"
       ref={drop}
       style={{
+        flex: '1 0 auto',
+        flex: '1',
         position: "relative",
-        margin: "16px",
+        //margin: "16px",
         width: "auto",
         display: "inline-block"
       }}

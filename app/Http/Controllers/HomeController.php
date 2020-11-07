@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Statement;
 use App\Models\User;
-use App\Models\Following;
+use App\Models\Follower;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -24,16 +24,19 @@ class HomeController extends Controller
     public function home(){
         if (Auth::check()) {
             $user = User::where('id', Auth::user()->id)->get()->toArray();
+            //switch this to many to many later
+            $followed_count = count (Follower::where('follower_id', Auth::user()->id)->get()->toArray());
+            $follower_count = count (Follower::where('followee_id', Auth::user()->id)->get()->toArray());
 
             $pageOwnerInfo  =  array(
                 //"user" = User::where('id', Auth::user()->id)->get()->toArray();
                 "username" => $user[0]['username'],
                 "pfp_url" => $user[0]['pfp_url'],
                 "description" =>   $user[0]['description'],
-                "followers_count" => $user[0]['followers_count'],
-                "followed_count" => $user[0]['followed_count'],
+                "followers_count" => $follower_count, //$user[0]['followers_count'],
+                "followed_count" => $followed_count, // $user[0]['followed_count'],
                 "statements_count" =>  $user[0]['statements_count'],
-                "topics_count" => $user[0]['docks_count'],
+                "docks_count" => $user[0]['docks_count'],
             );
 
             $statements_array =[];
