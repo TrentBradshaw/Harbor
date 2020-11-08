@@ -24,8 +24,6 @@ class ShowUserController extends Controller
                 $followed_count_fromDB = count (Follower::where('follower_id', $pageOwner[0]['id'])->get()->toArray());
                 $follower_count_fromDB = count (Follower::where('followee_id', $pageOwner[0]['id'])->get()->toArray());
             
-                error_log($currentUser[0]['id']);
-                error_log($pageOwner[0]['id']);
                 $username = $pageOwner[0]['username'];
                 $pfp_url = $pageOwner[0]['pfp_url'];
                 $description =  $pageOwner[0]['description'];
@@ -105,6 +103,7 @@ class ShowUserController extends Controller
                     'pageOwnerInfo'=> json_encode($pageOwnerInfo),
                     'userExists' => false,
                     'currentUser'=> $currentUserUsername,
+                    
                 ]);
             }     
         }

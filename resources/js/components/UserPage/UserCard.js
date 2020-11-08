@@ -3,13 +3,14 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Statement from './Statement';
 import FollowButton from './FollowButton';
+import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
+import { SpaTwoTone } from '@material-ui/icons';
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
 class UserCard extends Component {
   constructor(props){
       super(props);
-      //var data = JSON.parse(this.props.pageOwnerInfo);
       console.log('props from usercard' + JSON.stringify(props));
-      //console.log('pageOwnerInfo' + JSON.stringify(data));
+
     }
  
     render(){
@@ -31,7 +32,7 @@ class UserCard extends Component {
                     <div>
                         <div>
                             <div style={{background: 'ghostwhite'}}>
-                                <div role="button" id="backButton">Back</div>
+                               
                                 
                                 <span>{pageOwnerInfo.username}</span>
                                 <p>{pageOwnerInfo.docks_count + pageOwnerInfo.statements_count} contributions</p>
@@ -66,11 +67,17 @@ class UserCard extends Component {
                 <div>
                     <div>
                         <div>
-                            <div style={{background: 'ghostwhite'}}>
-                                <div role="button" id="backButton">Back</div>
+                            <div style={{background: 'ghostwhite', display: 'flex'}}>
+                                <div id = 'backButtonHolder' style={{flex: '1'}}>
+                                    <KeyboardBackspaceIcon style={{height: '100%'}} role="button" id="backButton" />
+                                    
+                                </div>
+                                <div style={{flex: '8', alignItems: 'stretch', display: 'flex', flexDirection: 'column'}}>
+                                    <span style= {{textAlign: 'left'}}>{pageOwnerInfo.username}</span>
+                                    <span style= {{textAlign: 'left'}}>{pageOwnerInfo.docks_count + pageOwnerInfo.statements_count} contributions</span>
+                                </div>
                                 
-                                <span>{pageOwnerInfo.username}</span>
-                                <p>{pageOwnerInfo.docks_count + pageOwnerInfo.statements_count} contributions</p>
+                                
                             </div>
                             <div>
                                 <img src={pageOwnerInfo.pfp_url} alt="" id="header" className="ImageLayedOver"></img>

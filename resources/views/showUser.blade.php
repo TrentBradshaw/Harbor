@@ -28,26 +28,10 @@
             currentUser = "{{$currentUser ?? ''}}"
             pageOwnerInfo="{{$pageOwnerInfo}}"
             feedInfo="{{$feedInfo ?? ''}}">
-            <div class="Header" id="Header">
-                
-            </div>
-            <div class="HeightTaker">
-                <div class="Wrapper Container Inverse">
-                    <div class="HeightTaker">
-                        <div class="Wrapper Content">
-                            <div class="Table">
-                                <div  id="Column C2" class="C2">
-                                    <div id='UserPageContainer'>
-
-                                    </div>
-                                    <div id='content'>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="Header" id="Header"></div>
+            <div  id="Column C2" class="C2">
+                <div id='UserPageContainer'></div>
+                <div id='content'></div>
             </div>
         </div>
         <script src="{{ asset('js/app.js') }}" ></script>

@@ -10,23 +10,7 @@ html, body, .Container
     height: 100%;
     background-color: #dae0e6;
 }
-    .Container:before
-    {
-        content: '';
-        height: 100%;
-        float: left;
-    }
-.HeightTaker
-{
-    position: relative;
-    z-index: 1;
-}
-    .HeightTaker:after
-    {
-        content: '';
-        clear: both;
-        display: block;
-    }
+
 .Wrapper
 {
     position: absolute;
@@ -73,7 +57,7 @@ body > .Container
 
 .Header, .Footer
 {
-    padding: 5px 0;
+    
     height: 32px;
     /* display: flex; */
     /* flex-direction: row; */
@@ -83,7 +67,7 @@ body > .Container
     right: 0;
     top: 0;
     background-color: white;
-    width: 99%;
+    width: 100%;
 }
 
 .C1
@@ -94,6 +78,7 @@ body > .Container
 }
 .C2
 {
+    margin-top: 32px;
     width: 40%;
     margin-left: 30%;
     margin-right: 30%;

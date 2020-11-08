@@ -21,32 +21,15 @@
         <link href="{{ asset('css/home.css') }}" rel="stylesheet">
     </head>
     <body>
-    <div class="Container" id = "dataHolder" 
-    feedInfo="{{$feedInfo ?? ''}}"
-    data="{{$data ?? ''}}" 
-    pageOwnerInfo="{{$pageOwnerInfo}}"
-    currentUser = "{{$currentUser}}"
-    >
-            <div class="Header" id="Header">
-                
-            </div>
-            <div class="HeightTaker">
-                <div class="Wrapper Container Inverse">
-                    <div class="HeightTaker">
-                        <div class="Wrapper Content">
-                            <div class="Table">
-                                <div  id="Column C2" class="C2">
-                                    <div id='UserPageContainer'>
-
-                                    </div>
-                                    <div id='content'>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="Container" id = "dataHolder" 
+        feedInfo="{{$feedInfo ?? ''}}"
+        data="{{$data ?? ''}}" 
+        pageOwnerInfo="{{$pageOwnerInfo}}"
+        currentUser = "{{$currentUser}}">
+            <div class="Header" id="Header"></div>
+            <div  id="Column C2" class="C2">
+                <div id='UserPageContainer'></div>
+                <div id='content'></div>
             </div>
         </div>
         
