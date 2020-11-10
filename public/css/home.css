@@ -327,4 +327,9 @@ img#pfp{
     text-decoration: none;
     color: #555;
   }
-  
+  #CreateDockFormHolder{
+      
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+  }

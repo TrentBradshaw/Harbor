@@ -2,10 +2,7 @@ import React from "react";
 import Button from "./DockDropDownButton";
 import DropDownCard from "./DockDropDownCard";
 const sampleData = [
-    'Profile',
-    'Settings',
-    'Log Out',
-    'Night Mode',
+    'test'
 ]
 
 //new Array(7).fill("item name");
@@ -17,6 +14,7 @@ const DockButtonWithDropDownCmp = () => {
       setOpen(false);
     }
   }
+  
   React.useEffect(() => {
     document.addEventListener("click", handleClick);
     return () => {
@@ -36,7 +34,7 @@ const DockButtonWithDropDownCmp = () => {
         display: "inline-block"
       }}
     >
-      <Button onClick={() => setOpen(open => !open)} />
+      <Button onClick={() =>  setOpen(open => !open)} />
       {open && <DropDownCard data={sampleData} setOpen={setOpen} />}
     </div>
   );

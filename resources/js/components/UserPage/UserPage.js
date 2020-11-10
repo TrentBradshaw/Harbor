@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Statement from './Statement';
 import UserCard from './UserCard';
+import UserPageFeed from './UserPageFeed';
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
 export default class UserPage extends Component {
   constructor(props){
@@ -22,7 +23,11 @@ export default class UserPage extends Component {
        console.log( contributions)
 
         return (
-            <UserCard currentUser={currentUser} pageOwnerInfo={pageOwnerInfo}></UserCard>
+            <div>
+                <UserCard currentUser={currentUser} pageOwnerInfo={pageOwnerInfo}></UserCard>
+                <UserPageFeed pageOwnerUsername={pageOwnerInfo.username}></UserPageFeed>
+            </div>
+            
         )
     }   
 } 

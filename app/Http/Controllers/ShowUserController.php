@@ -5,7 +5,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserResourceCollection;
-use App\Models\Statement;
+use App\Models\Status;
 use App\Models\Follower ;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,7 +37,7 @@ class ShowUserController extends Controller
                 $statements_array =[];
     
     
-                array_push($statements_array, Statement::where('username', $username)->get()->toArray());
+                array_push($statements_array, Status::where('username', $username)->get()->toArray());
                 //print_r($statements_array);
                 $pageOwnerInfo  =  array(
                         //make all of this the profile info object

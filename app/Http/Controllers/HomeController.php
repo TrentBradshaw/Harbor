@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Statement;
+use App\Models\Status;
 use App\Models\User;
 use App\Models\Follower;
 use Illuminate\Support\Facades\Auth;

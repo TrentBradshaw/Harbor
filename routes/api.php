@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FeedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +16,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
+
     return $request->user();
 });
 Route::middleware('auth:api')->get('/submit', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('/user', 'App\Http\Controllers\ShowUserController');
-Route::apiResource('/dock', 'App\Http\Controllers\ShowDockController');
+Route::get('api/user/me', 'App\Http\Controllers\GetCurrentUserController');
+Route::apiResource('/dock', 'App\Http\Controllers\DockController');
+Route::apiResource('/status', 'App\Http\Controllers\StatusController');
 Route::apiResource('/followers','App\Http\Controllers\FollowerController');
-//Route::get('/user/{username}', [App\Http\Controllers\ShowUserController::class, 'show']);
+//Route::get('/feed/{username}', 'App\Http\Controllers\FeedController');
+
