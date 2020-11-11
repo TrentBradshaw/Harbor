@@ -22,24 +22,7 @@ use App\Http\Controllers\DockController;
 //Route::get('/', [HomeController::class, 'index']);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 //DON'T FORGET TO ADD TAGS TO GO WITH YOUR STATEMENTS. HASHTAGS AND REGULAR TAGS.
-
-
-
-
-
 
 
 Route::get('/', function () {
@@ -53,8 +36,6 @@ Route::get('/', function () {
             echo "Connected successfully to: " . DB::connection()->getDatabaseName();
             $results = DB::table('users')->get();
             echo $results;
-                
-            
         } catch (\Exception $e) {
             die("Could not connect to the database. Please check your configuration. error:" . $e );
         }
@@ -81,6 +62,7 @@ Route::get('/submit', [App\Http\Controllers\SubmitController::class, 'Submit'])-
 Route::get('/dock/create', [App\Http\Controllers\DockController::class, 'SubmitForm'])->name('SubmitForm');
 Route::get('/dock/{dock}', [App\Http\Controllers\ShowDockController::class, 'ShowDock'])->name('ShowDock');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Auth::routes();
 Route::get('/{username}', [App\Http\Controllers\ShowUserController::class, 'ShowUser'])->name('showUser');
 Route::get('/{username}/{id}', [App\Http\Controllers\StatusController::class, 'show'])->name('show');

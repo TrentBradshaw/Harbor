@@ -16,13 +16,17 @@ use App\Http\Controllers\FeedController;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-
     return $request->user();
 });
 Route::middleware('auth:api')->get('/submit', function (Request $request) {
     return $request->user();
 });
-
+Route::post('users', 'UserController@register');
+Route::post('login', 'App\Http\Controllers\API\UserController@login');
+Route::post('/api/register', 'App\Http\Controllers\API\UserController@register');
+Route::group(['middleware' => 'auth:api'], function(){
+    Route::post('details', 'App\Http\Controllers\API\UserController@details');
+});
 Route::get('api/user/me', 'App\Http\Controllers\GetCurrentUserController');
 Route::apiResource('/dock', 'App\Http\Controllers\DockController');
 Route::apiResource('/status', 'App\Http\Controllers\StatusController');

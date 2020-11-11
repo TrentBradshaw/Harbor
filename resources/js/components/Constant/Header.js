@@ -31,6 +31,7 @@ export default class Header extends Component {
                     <div>
                         <ExploreIcon className="header__searchIcon" />
                     </div>
+                    <button onClick={() => { window.location.href = 'http://127.0.0.1:8000/logout' }}>Logout</button>
                 </div>
                 <ProfileDropDownMenu></ProfileDropDownMenu>
             </div>   

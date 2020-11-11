@@ -40,7 +40,7 @@ class HomeController extends Controller
             );
 
             $statements_array =[];
-            array_push($statements_array, Statement::where('user_id', Auth::user()->id)->get()->toArray());
+            array_push($statements_array, Status::where('user_id', Auth::user()->id)->get()->toArray());
            // print_r(($statements_array[0]));
             $feedInfo = [];
             
