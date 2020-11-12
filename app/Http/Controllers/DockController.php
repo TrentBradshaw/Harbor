@@ -2,11 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\UserResourceCollection;
+use App\Models\Status;
+use App\Models\Follower;
+use Illuminate\Support\Facades\Auth;
+
 
 class DockController extends Controller
 {
-    
+    public function __construct()
+    {
+        //Reinstate this when you have a better method of checking auth at home page.
+        //Use a remember me function and if they have some session or cookies then run auth
+    }
      /**
      * Display a listing of the resource.
      *
@@ -38,7 +49,8 @@ class DockController extends Controller
 
         $json = json_decode(file_get_contents('php://input'), true); //grab request
         return response()->json([
-            'DockControllerReached' => url('/home')
+            'DockControllerReached' => '/home',
+            'meme' => Auth::user(),
         ]);
     }
 
