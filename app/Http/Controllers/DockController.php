@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class DockController extends Controller
@@ -38,7 +38,8 @@ class DockController extends Controller
 
         $json = json_decode(file_get_contents('php://input'), true); //grab request
         return response()->json([
-            'DockControllerReached' => url('/home')
+            'DockControllerReached' => url('/home'),
+            'userid' => Auth::user(),
         ]);
     }
 

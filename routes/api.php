@@ -15,6 +15,17 @@ use App\Http\Controllers\FeedController;
 |
 */
 
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'auth'
+
+], function ($router) {
+    Route::post('login', 'App\Http\Controllers\AuthController@login');
+    Route::post('register', 'App\Http\Controllers\AuthController@register');
+    Route::post('logout', 'App\Http\Controllers\AuthController@logout');
+    Route::post('refresh', 'App\Http\Controllers\AuthController@refresh');
+    Route::get('user-profile', 'App\Http\Controllers\AuthController@userProfile');
+});
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -22,8 +33,9 @@ Route::middleware('auth:api')->get('/submit', function (Request $request) {
     return $request->user();
 });
 Route::post('users', 'UserController@register');
-Route::post('login', 'App\Http\Controllers\API\UserController@login');
-Route::post('/api/register', 'App\Http\Controllers\API\UserController@register');
+Route::post('/api/login', 'App\Http\Controllers\Auth\APIUserAuthController@login');
+Route::post('/register',  'App\Http\Controllers\Auth\APIUserAuthController@register');
+Route::post('/api/logout', 'App\Http\Controllers\Auth\APIUserAuthController@logout');
 Route::group(['middleware' => 'auth:api'], function(){
     Route::post('details', 'App\Http\Controllers\API\UserController@details');
 });
