@@ -59,6 +59,7 @@ Route::get('/{user_id}/{statement_id}', function($statement_id){
 */
 Route::get('/status', [App\Http\Controllers\StatusController::class, "ShowStatus"])->name('ShowStatus');
 Route::get('/submit', [App\Http\Controllers\SubmitController::class, 'Submit'])->name('Submit');
+Route::post('/dock/submit', [App\Http\Controllers\DockController::class, 'Store']);
 Route::get('/dock/create', [App\Http\Controllers\DockController::class, 'SubmitForm'])->name('SubmitForm');
 Route::get('/dock/{dock}', [App\Http\Controllers\ShowDockController::class, 'ShowDock'])->name('ShowDock');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');

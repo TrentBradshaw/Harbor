@@ -13,11 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class DockController extends Controller
 {
-    public function __construct()
-    {
-        //Reinstate this when you have a better method of checking auth at home page.
-        //Use a remember me function and if they have some session or cookies then run auth
-    }
+
      /**
      * Display a listing of the resource.
      *

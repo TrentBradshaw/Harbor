@@ -22,10 +22,12 @@ export default class DockSubmitForm extends Component {
     this.setState({description: event.target.value})
     }
     handleClick(event){
+        let token = document.getElementById('csrf-token').getAttribute('content')
         console.log('pickles');
         event.preventDefault();
-        fetch('http://127.0.0.1:8000/api/dock', {
+        fetch('http://127.0.0.1:8000/dock/submit', {
         headers:{
+            'X-CSRF-TOKEN': token,
             'Content-Type':'application/json',
         },
         method: 'post',
