@@ -19,7 +19,7 @@ export default class DockSubmitForm extends Component {
        this.setState({name: event.target.value})
    }
    handleDescriptionChange(event){ 
-    this.setState({description: event.target.value})
+        this.setState({description: event.target.value})
     }
     handleClick(event){
         let token = document.getElementById('csrf-token').getAttribute('content')
@@ -34,13 +34,17 @@ export default class DockSubmitForm extends Component {
         mode: "same-origin",
         credentials: "same-origin",
         body: JSON.stringify({
-                dockName: this.state.name,
-                dockDescription: this.props.description,
+                dockTitle: this.state.name,
+                dockDescription: this.state.description,
         })
         }).then((response) => {
             console.log(response);
             response.json().then((data) => {
                 console.log(data);
+                console.log(data['dock_added'])
+                if (data['dock_added']){
+                    window.location.href = 'http://127.0.0.1:8000/dock/' + data['dock_url_title'];
+                }
             });
 
             

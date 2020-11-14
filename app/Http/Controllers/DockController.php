@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserResourceCollection;
 use App\Models\Status;
+use App\Models\Dock;
 use App\Models\Follower;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,10 +45,19 @@ class DockController extends Controller
     {
 
         $json = json_decode(file_get_contents('php://input'), true); //grab request
-        return response()->json([
-            'DockControllerReached' => '/home',
-            'meme' => Auth::user(),
-        ]);
+        error_log(json_encode($json));
+        $title = $json['dockTitle'];
+        $dock = new Dock();
+        $dock->creator_id = Auth::user()->id;
+        $dock->title = $json['dockTitle'];
+        $dock->description = $json['dockDescription'];
+        if ($dock->save()){
+            return response()->json([
+                'dock_added' => true,
+                'dock_url_title' => $title,
+            ]);
+
+        }
     }
 
     /**
@@ -103,5 +113,8 @@ class DockController extends Controller
        
         
     ]);
+   }
+   public function GetDockPosts(){
+       //getdockposts
    }
 }

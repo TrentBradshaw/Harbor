@@ -15,19 +15,9 @@ class CreateDocksTable extends Migration
     {
         Schema::create('docks', function (Blueprint $table) {
             $table->id();
-            $table->integer('community_id')->length(50);
             $table->integer('creator_id')->length(25);
             $table->string('title')->length(200);
-            $table->string('content')->length(2000);
-            $table->string('link')->length(2000);
-            $table->integer('votes');
-            $table->string('media_url')->length(2000);
-            $table->string('type')->length(15);
             $table->string('description');
-            $table->string('mods');
-            $table->string('tags');
-            $table->boolean('spoiler')->default(0);
-            $table->boolean('nsfw')->default(0);
             $table->timestamps();
             /*
             CREATE TABLE reddit_post

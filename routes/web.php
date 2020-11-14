@@ -57,10 +57,11 @@ Route::get('/{user_id}/{statement_id}', function($statement_id){
     StatementsController->show($statement_id);
 });
 */
+Route::post('/userdetails', 'App\Http\Controllers\GetCurrentUserController');
 Route::get('/status', [App\Http\Controllers\StatusController::class, "ShowStatus"])->name('ShowStatus');
 Route::get('/submit', [App\Http\Controllers\SubmitController::class, 'Submit'])->name('Submit');
 Route::post('/dock/submit', [App\Http\Controllers\DockController::class, 'Store']);
-Route::get('/dock/create', [App\Http\Controllers\DockController::class, 'SubmitForm'])->name('SubmitForm');
+//Route::get('/GetDockPosts', [App\Http\Controllers\DockController::class, 'GetDockPosts'])->name('GetDockPosts');
 Route::get('/dock/{dock}', [App\Http\Controllers\ShowDockController::class, 'ShowDock'])->name('ShowDock');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
@@ -68,5 +69,8 @@ Auth::routes();
 Route::get('/{username}', [App\Http\Controllers\ShowUserController::class, 'ShowUser'])->name('showUser');
 Route::get('/{username}/{id}', [App\Http\Controllers\StatusController::class, 'show'])->name('show');
 
+Route::get('/dock/create', [App\Http\Controllers\DockController::class, 'SubmitForm'])->name('SubmitForm');
+
+Route::get('/api/dock/{dock}', [App\Http\Controllers\DockController::class, 'GetDockPosts'])->name('GetDockPosts');
 
 //Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

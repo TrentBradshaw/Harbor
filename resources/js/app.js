@@ -39,3 +39,5 @@ require('./components/UserPage/UserCard')
 require('./components/UserPage/FollowButton')
 require('./components/Constant/DropDownMenu')
 require('./components/DockSubmitForm')
+
+require('./components/DockPage/DocksContainer')

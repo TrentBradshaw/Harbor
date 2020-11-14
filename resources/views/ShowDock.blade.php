@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- CSRF Token -->
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta id="csrf-token" name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Roller') }}</title>
 
@@ -22,27 +22,8 @@
     </head>
     <body>
         <div class="Container" id = "dataHolder" data="{{$data}}">
-            <div class="Header" id="Header">
-                
-            </div>
-            <div class="HeightTaker">
-                <div class="Wrapper Container Inverse">
-                    <div class="HeightTaker">
-                        <div class="Wrapper Content">
-                            <div class="Table">
-                                <div  id="Column C2" class="C2">
-                                    <div id='DockContainer'>
-
-                                    </div>
-                                    <div id='content'>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="Header" id="Header"></div>
+            <div id='DocksContainer'><h1>DOCKLAND</h1></div></div>
         </div>
         <script src="{{ asset('js/app.js') }}" ></script>
     </body>
