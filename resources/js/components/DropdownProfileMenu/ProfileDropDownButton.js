@@ -22,10 +22,10 @@ function PopulateUserDropDownCard(){
 }
 const ProfileDropDownButton = ({ onClick }) => (
   <button style={{    height: '100%' ,width: '100%'}} className={cls} onClick={onClick}>
-    {PopulateUserDropDownCard()}
+    {PopulateUserDropDownCard()}  
   </button>
 );
 
-
+/* fix this later by turning this into a class, making a variable that calls PopulatUserDropDownCard and then assign the button text to the variable
 /* {{document.getElementById('dataHolder').getAttribute('currentUser')}} */
 export default ProfileDropDownButton;

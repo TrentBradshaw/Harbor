@@ -1,6 +1,7 @@
 *{
-    outline: 1px solid red;
-    outline-offset: -1px;
+    background-color: rgb(255 255 255);
+    border-radius: 4px;
+    border: 1px solid rgb(204 204 204);
     margin: 0;
     padding: 0;
 }
@@ -332,4 +333,7 @@ img#pfp{
     width: 50%;
     margin-left: 25%;
     margin-right: 25%;
+  }
+  #DocksContainer{
+    height: 100%;
   }

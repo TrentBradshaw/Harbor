@@ -10,7 +10,7 @@ function CombinedFunctions(item){
 const DockDropDownCard = ({ data = [], setOpen }) => (
   <div>
     <ul>
-        <li onClick ={()=> window.location.href = "/dock/create"}>Create Dock</li>
+        <li onClick ={()=> window.location.href = "/submit/dock"}>Create Dock</li>
       {data.map((item, i) => (
         <li key={i} className={liCls} onClick={() => CombinedFunctions(item)}>
           {item}

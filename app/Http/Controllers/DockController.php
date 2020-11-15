@@ -115,6 +115,8 @@ class DockController extends Controller
     ]);
    }
    public function GetDockPosts(){
-       //getdockposts
+    return response()->json([
+        'GetDockPosts' => 'HELLO',
+    ]);
    }
 }

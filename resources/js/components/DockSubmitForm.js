@@ -25,7 +25,7 @@ export default class DockSubmitForm extends Component {
         let token = document.getElementById('csrf-token').getAttribute('content')
         console.log('pickles');
         event.preventDefault();
-        fetch('http://127.0.0.1:8000/dock/submit', {
+        fetch('http://127.0.0.1:8000/api/dock/submit', {
         headers:{
             'X-CSRF-TOKEN': token,
             'Content-Type':'application/json',
