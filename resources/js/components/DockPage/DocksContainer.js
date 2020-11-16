@@ -9,6 +9,7 @@ export default class DockSubmitForm extends Component {
           name: '',
           description: ''
       }
+      this.HandleClick = this.HandleClick.bind(this);
    }
  
    componentDidMount(){
@@ -32,6 +33,11 @@ export default class DockSubmitForm extends Component {
         });
     })
    }
+   HandleClick(){
+    window.location.href = window.location.href + '/submit'
+
+       
+   }
   
     render(){
         
@@ -50,15 +56,26 @@ export default class DockSubmitForm extends Component {
                                 <button>JOIN</button>
 
                             </div>
-                            <h3 id="dockPath">dock/Clowns
-
-                            </h3>
-                            
-
-
+                            <h3 id="dockPath">dock/Clowns</h3>
                         </div>
                     </div>
-                    <div style= {{backgroundColor: 'blue', Height: '100%', width: '300px', height: '100%'}} id="sidebarInfo"></div>
+                    <div style= {{backgroundColor: 'blue', Height: '100%', width: '300px', height: '100%'}} id="sidebarInfo">
+                        <h2>About this Dock</h2>
+                        <div>
+                            <p>Description about this dock</p>
+                            <div>
+                                <p>100</p>
+                                <p>Members</p>
+                            </div>
+                            <p>Created mmm/dd/yyyy</p>
+                            <button onClick={(e) => this.HandleClick(e)}>Create Post</button>
+                        </div>
+                        <div>
+                        <h2>Moderators</h2>
+                            <p>ClownCreator</p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
             

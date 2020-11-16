@@ -66,6 +66,7 @@ Route::get('/submit/post', [App\Http\Controllers\SubmitController::class, 'Submi
 //Route::get('/GetDockPosts', [App\Http\Controllers\DockController::class, 'GetDockPosts'])->name('GetDockPosts');
 
 Route::get('/dock/{dock}', [App\Http\Controllers\ShowDockController::class, 'ShowDock'])->name('ShowDock');
+Route::get('/dock/{dock}/submit', [App\Http\Controllers\PostController::class, 'PostForm'])->name('PostForm');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Auth::routes();
@@ -75,5 +76,7 @@ Route::get('/{username}/{id}', [App\Http\Controllers\StatusController::class, 's
 
 Route::post('/api/dock/submit', [App\Http\Controllers\DockController::class, 'Store']);
 Route::get('/api/dock/{dock}', [App\Http\Controllers\DockController::class, 'GetDockPosts'])->name('GetDockPosts');
+Route::post('/api/post/submit', [App\Http\Controllers\PostController::class, 'Store']);
+Route::post('/api/post/{post}', [App\Http\Controllers\PostController::class, 'ShowPost']);
 
 //Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
