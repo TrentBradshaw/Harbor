@@ -337,3 +337,6 @@ img#pfp{
   #DocksContainer{
     height: 100%;
   }
+  #PostFormHolder{
+    margin-top: 50px;
+  }

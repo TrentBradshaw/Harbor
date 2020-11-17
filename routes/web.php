@@ -75,8 +75,9 @@ Route::get('/{username}/{id}', [App\Http\Controllers\StatusController::class, 's
 
 
 Route::post('/api/dock/submit', [App\Http\Controllers\DockController::class, 'Store']);
+Route::get('api/docks/{querystring}', [App\Http\Controllers\DockController::class, 'GetDocks'])->name('GetDocks');
 Route::get('/api/dock/{dock}', [App\Http\Controllers\DockController::class, 'GetDockPosts'])->name('GetDockPosts');
 Route::post('/api/post/submit', [App\Http\Controllers\PostController::class, 'Store']);
-Route::post('/api/post/{post}', [App\Http\Controllers\PostController::class, 'ShowPost']);
+Route::get('/api/post/{post}', [App\Http\Controllers\PostController::class, 'ShowPost']);
 
 //Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -114,6 +114,13 @@ class DockController extends Controller
         
     ]);
    }
+   public function GetDocks($querystring){
+    return response()->json([
+        'QueryString' => $querystring,
+    ]);
+    
+
+   }
    public function GetDockPosts(){
     return response()->json([
         'GetDockPosts' => 'HELLO',

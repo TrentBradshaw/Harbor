@@ -41,4 +41,7 @@ require('./components/Constant/DropDownMenu')
 require('./components/DockSubmitForm')
 
 require('./components/DockPage/DocksContainer')
-require('./components/PostSubmitForm')
+require('./components/SubmitPage/PostSubmitForm')
+
+require('./components/AutoComplete/AutoCompleteDockLookup')
+require('./components/AutoComplete/Autocomplete')
