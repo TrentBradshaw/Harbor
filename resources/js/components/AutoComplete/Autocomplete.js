@@ -12,50 +12,80 @@ export class Autocomplete extends Component {
   };
   state = {
     activeOption: 0,
-    filteredOptions: [],
+    options: [],
     showOptions: false,
     userInput: ''
   };
-
+  redirectIfDockChange(){
+        let dockInput = document.getElementById('dockInput')
+        let dockPosttitle = document.getElementById('dockPostTitle')
+}
   onChange = (e) => {
-    console.log('onChanges');
-    this.props.stateHandler(e.currentTarget.value);
-    this.props.populateAutoCompleteList(e.currentTarget.value);
-
-    console.log(this.props.options[0])
-    let  options = this.props.options[0];
-    const userInput = e.currentTarget.value;
-    console.log(options)
-
-    const filteredOptions = options.filter(
-      (optionName) =>
-        optionName.toLowerCase().indexOf(userInput.toLowerCase()) > -1
-    );
-
-    this.setState({
-      activeOption: 0,
-      filteredOptions,
-      showOptions: true,
-      userInput: e.currentTarget.value
-    });
+    this.setState({ userInput: e.currentTarget.value,})
+    console.log(e.currentTarget.value.length)
+    
+    if (e.currentTarget.value.length == 0){
+        this.setState({options: []})
+        this.setState({showOptions: false})
+    }
+    else{
+        this.populateAutoCompleteList(e.currentTarget.value);
+    }
   };
+
+  populateAutoCompleteList(searchValue){
+    
+    let token = document.getElementById('csrf-token').getAttribute('content')
+    console.log('pickles');
+    
+    var url = new URL('http://127.0.0.1:8000/api/docks')
+    var param = {query: searchValue}
+
+    url.search = new URLSearchParams(param).toString();
+    
+    fetch(url, {
+    headers:{
+        'X-CSRF-TOKEN': token,
+        'Content-Type':'application/json',
+        "Access-Control-Allow-Origin" : "*", 
+        "Access-Control-Allow-Credentials" : true 
+    },
+    method: 'get',
+    mode: "cors",
+    credentials: "same-origin",
+    }).then((response) => {
+        console.log("response" + response);
+        console.log("response Data" + response.data)
+        response.json().then((data) => {
+            if (data.newArray != 'null'){
+            console.log(data.newArray)
+            this.setState({options:data.newArray})
+            this.setState({showOptions: true})
+
+            }else {
+                this.setState({options: [], showOptions: false})
+                
+            }
+            
+        });
+    })
+}
 
   onClick = (e) => {
     this.setState({
       activeOption: 0,
-      filteredOptions: [],
       showOptions: false,
       userInput: e.currentTarget.innerText
     });
   };
   onKeyDown = (e) => {
-    const { activeOption, filteredOptions } = this.state;
+    const { activeOption, options } = this.state;
 
     if (e.keyCode === 13) {
       this.setState({
         activeOption: 0,
         showOptions: false,
-        userInput: filteredOptions[activeOption]
+        userInput: options[activeOption]
       });
     } else if (e.keyCode === 38) {
       if (activeOption === 0) {
@@ -63,7 +93,7 @@ export class Autocomplete extends Component {
       }
       this.setState({ activeOption: activeOption - 1 });
     } else if (e.keyCode === 40) {
-      if (activeOption === filteredOptions.length - 1) {
+      if (activeOption === options.length - 1) {
         console.log(activeOption);
         return;
       }
@@ -77,14 +107,14 @@ export class Autocomplete extends Component {
       onClick,
       onKeyDown,
 
-      state: { activeOption, filteredOptions, showOptions, userInput }
+      state: { activeOption, options, showOptions, userInput }
     } = this;
     let optionList;
-    if (showOptions && userInput) {
-      if (filteredOptions.length) {
+    if (showOptions) {
+      if (options.length) {
         optionList = (
           <ul className="options">
-            {filteredOptions.map((optionName, index) => {
+            {options.map((optionName, index) => {
               let className;
               if (index === activeOption) {
                 className = 'option-active';
@@ -100,7 +130,7 @@ export class Autocomplete extends Component {
       } else {
         optionList = (
           <div className="no-options">
-            <em>No Option!</em>
+            <em>No Docks found!</em>
           </div>
         );
       }
@@ -109,13 +139,13 @@ export class Autocomplete extends Component {
       <React.Fragment>
         <div className="search">
           <input
+            id="dockInput"
             type="text"
             className="search-box"
             onChange={onChange}
             onKeyDown={onKeyDown}
             value={userInput}
           />
-          <input type="submit" value="" className="search-btn" />
         </div>
         {optionList}
       </React.Fragment>

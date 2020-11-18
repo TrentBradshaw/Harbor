@@ -66,18 +66,18 @@ Route::get('/submit/post', [App\Http\Controllers\SubmitController::class, 'Submi
 //Route::get('/GetDockPosts', [App\Http\Controllers\DockController::class, 'GetDockPosts'])->name('GetDockPosts');
 
 Route::get('/dock/{dock}', [App\Http\Controllers\ShowDockController::class, 'ShowDock'])->name('ShowDock');
-Route::get('/dock/{dock}/submit', [App\Http\Controllers\PostController::class, 'PostForm'])->name('PostForm');
+Route::get('/post/submit', [App\Http\Controllers\PostController::class, 'PostForm'])->name('PostForm');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Auth::routes();
 Route::get('/{username}', [App\Http\Controllers\ShowUserController::class, 'ShowUser'])->name('showUser');
-Route::get('/{username}/{id}', [App\Http\Controllers\StatusController::class, 'show'])->name('show');
+//Route::get('/{username}/{id}', [App\Http\Controllers\StatusController::class, 'show'])->name('show');
 
 
-Route::post('/api/dock/submit', [App\Http\Controllers\DockController::class, 'Store']);
-Route::get('api/docks/{querystring}', [App\Http\Controllers\DockController::class, 'GetDocks'])->name('GetDocks');
+Route::post('/api/docks/submit', [App\Http\Controllers\DockController::class, 'Store']);
+Route::get('api/docks', [App\Http\Controllers\DockController::class, 'GetDocks'])->name('GetDocks');
 Route::get('/api/dock/{dock}', [App\Http\Controllers\DockController::class, 'GetDockPosts'])->name('GetDockPosts');
-Route::post('/api/post/submit', [App\Http\Controllers\PostController::class, 'Store']);
+Route::post('/api/posts/submit', [App\Http\Controllers\PostController::class, 'Store']);
 Route::get('/api/post/{post}', [App\Http\Controllers\PostController::class, 'ShowPost']);
 
 //Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

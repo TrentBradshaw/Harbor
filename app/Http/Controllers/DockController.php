@@ -114,10 +114,36 @@ class DockController extends Controller
         
     ]);
    }
-   public function GetDocks($querystring){
-    return response()->json([
-        'QueryString' => $querystring,
-    ]);
+   public function GetDocks(){
+       $dock = new Dock();
+
+       
+       $query = request('query');
+       $queryList = Dock::where('title', 'LIKE', '%' . $query . '%')->get()->toArray();
+       if ($queryList != null){
+        $queryArray = array();
+       
+        for ($i=0; $i < count($queryList); $i++) { 
+            $currentTitle =  $queryList[$i]['title'];
+            array_push($queryArray, $currentTitle);
+        }
+        if (count($queryList) < 1){
+            $queryArray = 'null';
+        }
+ 
+        if  ($queryList){
+             return response()->json([
+                 'newArray' => $queryArray,
+             ]);
+        }
+       }
+       else{
+        return response()->json([
+            'newArray' => [],
+        ]);
+       }
+       
+    
     
 
    }

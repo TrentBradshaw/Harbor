@@ -29,6 +29,7 @@ class PostSubmitForm extends Component {
         }
     }
 
+    
     changePostType = (type) => {
         if (type == "text"){ 
             this.setState({
@@ -65,7 +66,7 @@ class PostSubmitForm extends Component {
                 <div>
                     <AutoCompleteDockLookup type='text' placeholder='Choose a destination for this post'></AutoCompleteDockLookup>
                    
-                    <input type='text' placeholder='title' name='title' onChange = { (e) => {this.state.mainInfo.title = e.target.value}}></input>
+                    <input id = "dockPostTitle" type='text' placeholder='title' name='title' onChange = { (e) => {this.state.mainInfo.title = e.target.value}}></input>
                 </div>
                 <div>
                     <button type="button" onClick={ () => {this.changePostType('text')}}>Text</button>
@@ -108,7 +109,22 @@ class PostSubmitForm extends Component {
                 break;
         }
         console.log(this.state)
-        fetch('http://127.0.0.1:8000/api/post/submit', {
+        let token = document.getElementById('csrf-token').getAttribute('content')
+        console.log('pickles');
+        fetch('http://127.0.0.1:8000/userdetails', {
+        headers:{
+            'X-CSRF-TOKEN': token,
+            'Content-Type':'application/json',
+        },
+        method: 'post',
+        mode: "same-origin",
+        credentials: "same-origin",
+        }).then((response) => {
+            response.json().then((data) => {
+                console.log(data['username']);
+                
+
+                fetch('http://127.0.0.1:8000/api/post/submit', {
             headers:{
                 'Content-Type':'application/json',
             },
@@ -116,16 +132,20 @@ class PostSubmitForm extends Component {
             mode: "same-origin",
             credentials: "same-origin",
             body: JSON.stringify({
+                    community: document.getElementById("dockInput").value,
                     highlighted: this.state.mainInfo.highlighted,
                     title: this.state.mainInfo.title,
-                    creator: this.state.mainInfo.creator,
+                    creatorID: this.state.mainInfo.creator,
                     timeCreated: this.state.mainInfo.timeCreated,
                     body: this.state.type.text.body,
                     media_url: this.state.type.media.media_url,
                     url: this.state.type.link.url
             })
         }).then(response => response.json())
-        .then(data => {window.location = data.redirect;})
+        .then(data => {/*window.location = data.redirect;*/ console.log(data)})
+            });
+        })
+        
     }
 }
 if (document.getElementById('PostFormHolder')) {

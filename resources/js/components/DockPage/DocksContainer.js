@@ -34,7 +34,7 @@ export default class DockSubmitForm extends Component {
     })
    }
    HandleClick(){
-    window.location.href = window.location.href + '/submit'
+    window.location.href = '/post/submit'
 
        
    }
