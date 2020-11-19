@@ -17,7 +17,8 @@ class GetCurrentUserController extends Controller
         if (Auth::check()) {
             $user = User::where('id', Auth::user()->id)->get()->toArray();
             return response()->json([
-                'username' => $user[0]['username']
+                'username' => $user[0]['username'],
+                'id' => Auth::user()->id
             ]);
             
             

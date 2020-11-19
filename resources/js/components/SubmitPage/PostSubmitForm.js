@@ -8,72 +8,54 @@ class PostSubmitForm extends Component {
         super(props);
 
         this.state = {
-            mainInfo: {
                 highlighted: 'text',
                 title:'',
                 creator:'',
                 timeCreated:'',
-            },
+                body:'',
+                media_url:'',
+                url:'',
             
-            type: {
-                text:{
-                   body:'',
-                },
-                media:{
-                    media_url:'',
-                },
-                link:{
-                    url:'',
-                }
-            },
         }
+        this.updateContentText = this.updateContentText.bind(this)
+    }
+    updateContentText(content, value) {
+        if (content == 'text'){
+            this.setState({body: value})   
+        }
+        else if (content == 'media'){
+            this.setState({media_url: value})
+        }
+        else if (content == 'link'){
+            this.setState({url: value})
+        }
+
     }
 
-    
     changePostType = (type) => {
         if (type == "text"){ 
-            this.setState({
-                mainInfo: {
-                    ...this.state.mainInfo,
-                    highlighted: 'text'
-                }
-            })
-        }else if (type == "media"){
-            this.setState({
-                mainInfo: {
-                    ...this.state.mainInfo,
-                    highlighted: 'media'
-                }
-            })
+            this.setState({ highlighted: 'text', media_url: '', url: ''})
         }
-        else{ 
-            this.setState({
-                mainInfo: {
-                    ...this.state.mainInfo,
-                    highlighted: 'link'
-                }
-            })
+        else if (type == "media"){
+            this.setState({ highlighted: 'media', body: '', url: ''})
         }
-        console.log(this.state.mainInfo.highlighted)
+        else{this.setState({highlighted: 'link', body: '', media_url: ''})}
     }
     
     render() {
         return (
             <form action="/api/post/submit" method="POST" style={{width: "700px", marginLeft: '30%'}}>
-                <div>
-                    <h1>Create a Post</h1>
-                </div>
+                <h1>Create a Post</h1>
                 <div>
                     <AutoCompleteDockLookup type='text' placeholder='Choose a destination for this post'></AutoCompleteDockLookup>
-                   
-                    <input id = "dockPostTitle" type='text' placeholder='title' name='title' onChange = { (e) => {this.state.mainInfo.title = e.target.value}}></input>
+                    <input id = "dockPostTitle" type='text' placeholder='title' name='title' onChange = { (e) => {this.state.title = e.target.value}}></input>
                 </div>
                 <div>
                     <button type="button" onClick={ () => {this.changePostType('text')}}>Text</button>
                     <button type="button" onClick={ () => {this.changePostType('media')}}>Media</button>
                     <button type="button" onClick={ () => {this.changePostType('link')}}>Link</button>
                 </div>
-                    <PostContentField  changeContent={this.changeContent} highlighted = {this.state.mainInfo.highlighted}></PostContentField>
+                    <PostContentField updateContentText = {this.updateContentText} changeContent={this.changeContent} highlighted = {this.state.highlighted}></PostContentField>
                 <div>
                     <div>
                         <button type="button" onClick={()=>{this.submit()}}>SUBMIT</button>
@@ -83,28 +65,17 @@ class PostSubmitForm extends Component {
         )
     }
 
-    changeContent(type){
-        if (type =='text'){
-            console.log('text');
-        } else if (type =='media'){
-            console.log('media')
-        } else if (type='link'){
-            console.log('link')
-        }
-
-    }
     submit(){
         var postSpecificInfo;
-        switch (this.state.mainInfo.highlighted) {
+        switch (this.state.highlighted) {
             case 'text':
-                postSpecificInfo = this.state.type.text.body;
+                postSpecificInfo = this.state.body;
                 break;
             case 'media':
-                postSpecificInfo = this.state.type.media.media_url;
+                postSpecificInfo = this.state.media_url;
                 break;
             case 'link':
-                postSpecificInfo = this.state.type.link.url;
-        
+                postSpecificInfo = this.state.url;
             default:
                 break;
         }
@@ -112,39 +83,37 @@ class PostSubmitForm extends Component {
         let token = document.getElementById('csrf-token').getAttribute('content')
         console.log('pickles');
         fetch('http://127.0.0.1:8000/userdetails', {
-        headers:{
-            'X-CSRF-TOKEN': token,
-            'Content-Type':'application/json',
-        },
-        method: 'post',
-        mode: "same-origin",
-        credentials: "same-origin",
-        }).then((response) => {
-            response.json().then((data) => {
-                console.log(data['username']);
-                
-
-                fetch('http://127.0.0.1:8000/api/post/submit', {
             headers:{
+                'X-CSRF-TOKEN': token,
                 'Content-Type':'application/json',
             },
             method: 'post',
             mode: "same-origin",
             credentials: "same-origin",
-            body: JSON.stringify({
-                    community: document.getElementById("dockInput").value,
-                    highlighted: this.state.mainInfo.highlighted,
-                    title: this.state.mainInfo.title,
-                    creatorID: this.state.mainInfo.creator,
-                    timeCreated: this.state.mainInfo.timeCreated,
-                    body: this.state.type.text.body,
-                    media_url: this.state.type.media.media_url,
-                    url: this.state.type.link.url
-            })
-        }).then(response => response.json())
-        .then(data => {/*window.location = data.redirect;*/ console.log(data)})
-            });
-        })
+            }).then((response) => {
+                response.json().then((data) => {
+                    console.log(data['username']);
+                    fetch('http://127.0.0.1:8000/api/posts/submit', {
+                        headers:{
+                            'X-CSRF-TOKEN': token,
+                            'Content-Type':'application/json',
+                        },
+                        method: 'post',
+                        mode: "same-origin",
+                        credentials: "same-origin",
+                        body: JSON.stringify({
+                                community: document.getElementById("dockInput").value,
+                                type: this.state.highlighted,
+                                title: this.state.title,
+                                creatorID: data['id'],
+                                text: this.state.body,
+                                media_url: this.state.media_url,
+                                url: this.state.url
+                        })
+                    }).then(response => response.json())
+                    .then(data => {/*window.location = data.redirect;*/ console.log(data)})
+                        });
+                    })
         
     }
 }

@@ -14,21 +14,19 @@ export default class PostContentField extends Component {
                 if (this.props.highlighted == 'text') {
                     return (
                         <div>
-                        <input type="text" name="postBody"placeholder='Text(optional)'></input>
-                           
+                            <input id = 'postTextField' type="text" onChange = { (e) => this.props.updateContentText('text', e.currentTarget.value)} name="postBody"placeholder='Text(optional)'></input>
                         </div>
-                    
                     )
                 } else if (this.props.highlighted == 'media') {
                     return (
                         <div>
-                            <input type="file" name="postFile"></input>
+                            <input id = 'postFileField' type="file" onChange = { (e) => this.props.updateContentText('media', e.currentTarget.value)} name="postFile"></input>
                         </div>
                     )
                 } else if (this.props.highlighted == 'link') {
                     return (
                         <div>
-                        <input type="text" name="postURL" placeholder='URL'></input>
+                        <input id = 'postLinkField' type="text" onChange = { (e) => this.props.updateContentText('link', e.currentTarget.value)} name="postURL" placeholder='URL'></input>
                         </div>
                     )
                 }
