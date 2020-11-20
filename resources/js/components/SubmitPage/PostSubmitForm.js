@@ -111,7 +111,7 @@ class PostSubmitForm extends Component {
                                 url: this.state.url
                         })
                     }).then(response => response.json())
-                    .then(data => {/*window.location = data.redirect;*/ console.log(data)})
+                    .then(data => {window.location.replace(data['url'])})
                         });
                     })
         

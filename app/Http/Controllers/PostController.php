@@ -30,23 +30,33 @@ class PostController extends Controller
         $post->media_url = $json['media_url'];
         $post->votes = 0;
         $saved = $post->save();
-        /*
-        if($json['type'] == "text"){
-
-        }
-
-        }else if ($json['type'] == "link"){
-
-        }else if($json['type'] == "media"){
-
-        }
-
-        */
+        $post->refresh();
         if ($saved){
-            return response()->json([
-                'post saved' => true,
-            ]);
+            $postGrabbed = Post::
+            where('community_id', $community_id)
+            ->where('title', $json['title'])
+            ->where('creator_id', Auth::user()->id)
+            ->get();
+            
+            if ($postGrabbed){
+                $dock = Dock::where('id', $postGrabbed->first()->community_id)->get();
+            
 
+                $postTitle = $postGrabbed->first()->title;
+                $dockName = $dock->first()->title;
+                $postID = $postGrabbed->first()->id;
+    
+                $url = '/' . 'dock/' . $dockName . '/' . $postID . '/' . $postTitle;
+                
+                    return response()->json([
+                        //so i need
+                        //127.0.0.1/dock/dockname/postID/posttitle
+                        'url' =>$url,
+                    ]);
+    
+            }
+
+           
         }
         else{
             return $json;
@@ -58,4 +68,27 @@ class PostController extends Controller
         $json = json_decode(file_get_contents('php://input'), true); //grab request
         return $json;
     */}
+    public function ShowPost($community, $id, $title){
+        return view('ShowPost',
+                [
+                    'postID'=> $id,
+                    
+                ]);
+        return view ('ShowPost');
+    }
+    public function GetPost(){
+
+        $id = request('query');
+        $postInfo = Post::where('id', $id)->get()->first();
+        /*
+        $username = $postInfo[0]['username'];
+        $pfp_url = $postInfo[0]['pfp_url'];
+        $description =  $postInfo[0]['description'];
+        */
+        return response()->json([
+            'newArray' => $postInfo,
+        ]);
+        
+
+    }
 }

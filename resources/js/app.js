@@ -45,3 +45,5 @@ require('./components/SubmitPage/PostSubmitForm')
 
 require('./components/AutoComplete/AutoCompleteDockLookup')
 require('./components/AutoComplete/Autocomplete')
+
+require('./components/Posts/Post')
