@@ -29,7 +29,8 @@
     },
     "dependencies": {
         "@material-ui/icons": "^4.9.1",
-        "fetch": "^1.1.0"
+        "fetch": "^1.1.0",
+        "moment": "^2.29.1"
     },
     "babel": {
         "presets": [

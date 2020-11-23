@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use App\Models\Status;
 use App\Models\Dock;
 use App\Models\Post;
@@ -11,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    protected $dates = ['name_field'];
     public function PostForm(){
         return view ('PostSubmitForm');
     }
@@ -80,15 +83,26 @@ class PostController extends Controller
 
         $id = request('query');
         $postInfo = Post::where('id', $id)->get()->first();
-        /*
-        $username = $postInfo[0]['username'];
-        $pfp_url = $postInfo[0]['pfp_url'];
-        $description =  $postInfo[0]['description'];
-        */
-        return response()->json([
-            'newArray' => $postInfo,
-        ]);
-        
+        $community = Dock::where('id', $postInfo['community_id'])->get()->first();
+        $user = User::where('id', $postInfo['creator_id'])->get()->first();
+        $communityTitle = $community['title'];
 
+        $postInfo["communityTitle"] = $community['title'];
+        $postInfo["creatorUsername"] = $user['username'];
+        $date = date('Y-m-d h:i:s', strtotime($postInfo['created_at']));
+        //$postInfo['created_at'] =    
+       // $created_at = new Carbon($value)->toDateTimeString();
+        //$postInfo->created_at = new Carbon($postInfo->created_at)->toDateTimeString();
+        //$postInfo->created_at->format('Y-m-d H-m-s');
+        $dateAltered = Carbon::parse($postInfo->created_at);
+        $postInfo['created_at'] ->format('d/m/Y h:i:s');
+        $postInfo['formattedStamp'] = $dateAltered->format('M/d/Y h:i');
+       
+
+        
+        return response()->json([
+            'postInfo' => $postInfo,
+        ]);
     }
+    
 }

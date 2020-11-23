@@ -79,7 +79,7 @@ Route::get('/{username}', [App\Http\Controllers\ShowUserController::class, 'Show
 //Route::get('/{username}/{id}', [App\Http\Controllers\StatusController::class, 'show'])->name('show');
 
 
-Route::post('api/post/{id}', [App\Http\Controllers\PostController::class, 'GetPost'])->name('GetPost');
+Route::get('api/post', [App\Http\Controllers\PostController::class, 'GetPost'])->name('GetPost');
 Route::post('/api/docks/submit', [App\Http\Controllers\DockController::class, 'Store']);
 Route::get('api/docks', [App\Http\Controllers\DockController::class, 'GetDocks'])->name('GetDocks');
 Route::get('/api/dock/{dock}', [App\Http\Controllers\DockController::class, 'GetDockPosts'])->name('GetDockPosts');
