@@ -63,7 +63,7 @@ import Moment from '../Utility/Moment';
                             <img></img>
                             <h4>{ "d/" + state.communityTitle}</h4>
                             <p>{"Posted by u/" + state.creatorUsername}</p>
-                            <Moment></Moment>
+                            <Moment timePosted = {state.formattedStamp}></Moment>
                         </div>
                         
                     </div>

@@ -3,13 +3,18 @@ import ReactDOM from 'react-dom';
 import React, { useState, useEffect } from 'react';
 import moment, { months } from 'moment';
 
-    function Moment(){
+    const Moment = (props) => {
 
         //fix this absolute travesty
         var now = moment() //.format('MM/DD/YYYY H:M');
-        var then = moment("Nov/02/1928 12:44:08") //.format('MM/DD/YYYY H:M');
+        var then = moment(props.timePosted)
+        console.log(props.formattedTimestamp)
+        console.log(props)
+        console.log(props.timePosted)
+        //moment("Nov/02/1928 12:44:08") //.format('MM/DD/YYYY H:M');
 
         var totalSec = now.diff(then);
+        console.log(totalSec)
         var yearsDiff = Math.floor(now.diff(then, 'years', true));
         var monthsDiff = Math.floor(now.diff(then, 'months', true));
         var weeksDiff = Math.floor(now.diff(then, 'weeks', true));
