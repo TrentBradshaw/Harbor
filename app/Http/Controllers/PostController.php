@@ -28,10 +28,11 @@ class PostController extends Controller
         $base64img = str_replace('data:image/jpeg;base64,', '', $json['file']);
 
         $client = new Client();
-
+        $imgurKey = env('IMGUR_API_KEY');
         $response = $client->request('POST', 'https://api.imgur.com/3/image', [
             'headers' => [
-                'authorization' => 'Client-ID ' . 'c78aa8ec43c1b04',
+                'authorization' => 'Client-ID ' . $imgurKey ,
+                                                                     
                 'content-type' => 'application/x-www-form-urlencoded',
             ],
             'form_params' => [
@@ -39,27 +40,7 @@ class PostController extends Controller
             ],
         ]);
     return response()->json(json_decode(($response->getBody()->getContents())));
-    /*    
-    $res = $client->request('POST', 'https://api.imgur.com/3/upload', 
-        [
-            'headers' => [
-                'Authorization' =>  'c78aa8ec43c1b04' //ENV('IMGUR_API_KEY')
-            ]
-        ],
-        [   
-            'image' =>  'https://i.redd.it/u32uiq7kv3d31.jpg' //$json['file'],
-        ]);
 
-        return response()->json([
-        
-            'res' =>$res
-        ]);
-        
-
-    */
-        //$file = $json['file'];
-
-       // $response = cloudinary()->upload($file)->getRealPath()->getSecurePath();
         $community = Dock::where('title', $json['community'])->get()->toArray();
         $community_id = $community->first()->id;
 
