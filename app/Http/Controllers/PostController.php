@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use DateTime;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 use Carbon\Carbon;
 use App\Models\Status;
 use App\Models\Dock;
@@ -19,10 +22,46 @@ class PostController extends Controller
     }
     public function Store(){
         $json = json_decode(file_get_contents('php://input'), true); //grab request
+        
         $post = new Post();
 
+        $base64img = str_replace('data:image/jpeg;base64,', '', $json['file']);
+
+        $client = new Client();
+
+        $response = $client->request('POST', 'https://api.imgur.com/3/image', [
+            'headers' => [
+                'authorization' => 'Client-ID ' . 'c78aa8ec43c1b04',
+                'content-type' => 'application/x-www-form-urlencoded',
+            ],
+            'form_params' => [
+                'image' => $base64img
+            ],
+        ]);
+    return response()->json(json_decode(($response->getBody()->getContents())));
+    /*    
+    $res = $client->request('POST', 'https://api.imgur.com/3/upload', 
+        [
+            'headers' => [
+                'Authorization' =>  'c78aa8ec43c1b04' //ENV('IMGUR_API_KEY')
+            ]
+        ],
+        [   
+            'image' =>  'https://i.redd.it/u32uiq7kv3d31.jpg' //$json['file'],
+        ]);
+
+        return response()->json([
+        
+            'res' =>$res
+        ]);
+        
+
+    */
+        //$file = $json['file'];
+
+       // $response = cloudinary()->upload($file)->getRealPath()->getSecurePath();
         $community = Dock::where('title', $json['community'])->get()->toArray();
-        $community_id = $community[0]['id'];
+        $community_id = $community->first()->id;
 
         $post->community_id = $community_id;
         $post->creator_id = Auth::user()->id;
@@ -32,8 +71,17 @@ class PostController extends Controller
         $post->link = $json['url'];
         $post->media_url = $json['media_url'];
         $post->votes = 0;
+
+
+
+
+
+        
+        
         $saved = $post->save();
         $post->refresh();
+
+        
         if ($saved){
             $postGrabbed = Post::
             where('community_id', $community_id)
@@ -55,8 +103,8 @@ class PostController extends Controller
                         //so i need
                         //127.0.0.1/dock/dockname/postID/posttitle
                         'url' =>$url,
+                        'res' =>$response
                     ]);
-    
             }
 
            

@@ -57,13 +57,37 @@ import Moment from '../Utility/Moment';
         
             console.log(state.type + " " + state.communityTitle)
             return (
-                <div className="App">
+                <div className="App"
+                style={{
+                    width :'800px',
+                    marginRight: '20%',
+                    marginLeft: '20%',
+
+                }}
+                >
                     <div id="PostHeader">
-                        <div id="SubInfoHolder">
+                        <div id="SubInfoHolder"
+                        style={{
+                            display: 'flex'
+                        }}>
                             <img></img>
                             <h4>{ "d/" + state.communityTitle}</h4>
                             <p>{"Posted by u/" + state.creatorUsername}</p>
                             <Moment timePosted = {state.formattedStamp}></Moment>
+                        </div>
+                        <div>
+                            <p
+                            style ={{
+                                minHeight: '100px',
+                                display: "inline-block",
+                                width: '100%'
+                            }}
+                            >{state.text}</p>
+                        </div>
+                        <div>
+                            <p>x commments</p>
+                            <p>Like</p>
+                            <p>Dislike</p>
                         </div>
                         
                     </div>
@@ -76,7 +100,7 @@ import Moment from '../Utility/Moment';
                         YEEEEEEEEEEEEEEEEEEEEEET
                     </h1>
                 </div>
-                );
+            );
         }
         else /*type == link */ {
             return (
@@ -85,38 +109,11 @@ import Moment from '../Utility/Moment';
                         YEEEEEEEEEEEEEEEEEEEEEET
                     </h1>
                 </div>
-                );
+            );
         }
         
     }
-    function timeSinceLastPost(date2){
     
-        const format = "YYYY-MM-DD HH:mm:ss"
-        var date1 = moment(new Date()).format(format);
-    
-        let years = date1.diff(date2, 'year');
-        date2.add(years, 'years');
-    
-        let months = date1.diff(date2, 'months');
-        date2.add(months, 'months');
-    
-        let days = date1.diff(date2, 'days');
-        date2.add(days, 'days');
-    
-        let hours = date1.diff(date2, 'hours');
-        date2.add(hours, 'hours');
-    
-        let minutes = date1.diff(date2, 'minutes');
-        date2.add(minutes, 'minutes');
-    
-        let seconds = date1.diff(date2, 'seconds');
-    
-        console.log(years + ' years ' + months + ' months ' + days + ' days ' + hours + ' hours ' + minutes + ' minutes ' + seconds + ' seconds'); 
-    
-        return { years, months, days, hours, minutes, seconds};
-        
-    }
-
 if (document.getElementById('PostContainer')) {
     var postID = document.getElementById('dataHolder').getAttribute('postID');
     

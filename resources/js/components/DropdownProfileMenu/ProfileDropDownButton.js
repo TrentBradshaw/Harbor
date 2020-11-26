@@ -5,7 +5,7 @@ const cls = "edit this later";
 function PopulateUserDropDownCard(){
     let token = document.getElementById('csrf-token').getAttribute('content')
         console.log('pickles');
-        fetch('http://127.0.0.1:8000/userdetails', {
+        fetch('/userdetails', {
         headers:{
             'X-CSRF-TOKEN': token,
             'Content-Type':'application/json',
@@ -14,9 +14,10 @@ function PopulateUserDropDownCard(){
         mode: "same-origin",
         credentials: "same-origin",
         }).then((response) => {
+            console.log(response)
             response.json().then((data) => {
-                console.log(data['username']);
-                return data['username'];
+                console.log(data);
+                //return data['username'];
             });
         })
 }

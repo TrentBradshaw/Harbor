@@ -13,76 +13,65 @@ class PostSubmitForm extends Component {
                 creator:'',
                 timeCreated:'',
                 body:'',
-                media_url:'',
+                file:'',
                 url:'',
-            
         }
-        this.updateContentText = this.updateContentText.bind(this)
+        this.changePostType = this.changePostType.bind(this)
+        this.updateContentValue = this.updateContentValue.bind(this)
+        this.updateImage = this.updateImage.bind(this)
     }
-    updateContentText(content, value) {
-        if (content == 'text'){
-            this.setState({body: value})   
-        }
-        else if (content == 'media'){
-            this.setState({media_url: value})
-        }
-        else if (content == 'link'){
-            this.setState({url: value})
-        }
-
-    }
-
-    changePostType = (type) => {
-        if (type == "text"){ 
-            this.setState({ highlighted: 'text', media_url: '', url: ''})
-        }
-        else if (type == "media"){
-            this.setState({ highlighted: 'media', body: '', url: ''})
-        }
-        else{this.setState({highlighted: 'link', body: '', media_url: ''})}
-    }
-    
     render() {
         return (
             <form action="/api/post/submit" method="POST" style={{width: "700px", marginLeft: '30%'}}>
                 <h1>Create a Post</h1>
                 <div>
                     <AutoCompleteDockLookup type='text' placeholder='Choose a destination for this post'></AutoCompleteDockLookup>
-                    <input id = "dockPostTitle" type='text' placeholder='title' name='title' onChange = { (e) => {this.state.title = e.target.value}}></input>
+                    <input id = "dockPostTitle" type='text' placeholder='title' name='title' onChange = { (e) => {this.setState({title: e.target.value})}}></input>
                 </div>
                 <div>
                     <button type="button" onClick={ () => {this.changePostType('text')}}>Text</button>
                     <button type="button" onClick={ () => {this.changePostType('media')}}>Media</button>
                     <button type="button" onClick={ () => {this.changePostType('link')}}>Link</button>
                 </div>
-                    <PostContentField updateContentText = {this.updateContentText} changeContent={this.changeContent} highlighted = {this.state.highlighted}></PostContentField>
+                    <PostContentField updateImage = {this.updateImage} updateContentValue = {this.updateContentValue} highlighted = {this.state.highlighted}></PostContentField>
                 <div>
-                    <div>
                         <button type="button" onClick={()=>{this.submit()}}>SUBMIT</button>
-                    </div>
                 </div>
             </form>
         )
     }
+    changePostType = (type) => {
+        if (type == "text")
+            this.setState({ highlighted: 'text', media_url: '', url: ''})
+        else if (type == "media")
+            this.setState({ highlighted: 'media', body: '', url: ''})
+        else if (type == "link")
+            this.setState({highlighted: 'link', body: '', media_url: ''})
+    }
 
-    submit(){
-        var postSpecificInfo;
-        switch (this.state.highlighted) {
-            case 'text':
-                postSpecificInfo = this.state.body;
-                break;
-            case 'media':
-                postSpecificInfo = this.state.media_url;
-                break;
-            case 'link':
-                postSpecificInfo = this.state.url;
-            default:
-                break;
+    updateContentValue(content, value) {
+        if (content == 'text'){
+            this.setState({body: value})   
         }
-        console.log(this.state)
-        let token = document.getElementById('csrf-token').getAttribute('content')
-        console.log('pickles');
-        fetch('http://127.0.0.1:8000/userdetails', {
+        else if (content == 'media'){
+            this.setState({file: value})
+        }
+        else if (content == 'link'){
+            this.setState({url: value})
+        }
+    }
+    updateImage(file){
+        this.setState({file: file})
+    }
+
+    submit(){ /*
+        form = new FormData();
+        form.append(this.state)
+
+        */
+
+       let token = document.getElementById('csrf-token').getAttribute('content')
+        fetch('/userdetails', {
             headers:{
                 'X-CSRF-TOKEN': token,
                 'Content-Type':'application/json',
@@ -93,7 +82,7 @@ class PostSubmitForm extends Component {
             }).then((response) => {
                 response.json().then((data) => {
                     console.log(data['username']);
-                    fetch('http://127.0.0.1:8000/api/posts/submit', {
+                    fetch('/api/posts/submit', {
                         headers:{
                             'X-CSRF-TOKEN': token,
                             'Content-Type':'application/json',
@@ -107,14 +96,18 @@ class PostSubmitForm extends Component {
                                 title: this.state.title,
                                 creatorID: data['id'],
                                 text: this.state.body,
-                                media_url: this.state.media_url,
-                                url: this.state.url
+                                file: this.state.file,
+                                url: this.state.url,
+                                imageFile: document.getElementById('postFileField').files[0]
                         })
-                    }).then(response => response.json())
-                    .then(data => {window.location.replace(data['url'])})
+                    }).then(response => response.json()).then(data => console.log(data))
+                    /*
+                    .then(
+                        data => {window.location.replace(data['url'])
+                    })*/
                         });
+                        
                     })
-        
     }
 }
 if (document.getElementById('PostFormHolder')) {

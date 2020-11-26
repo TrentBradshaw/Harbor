@@ -60,6 +60,12 @@ Route::get('/{user_id}/{statement_id}', function($statement_id){
 
 //FIX THIS ABOSLUTE MESS OF UNORGANIZED ROUTING 
 
+Route::get('/upload', [App\Http\Controllers\FileUploadController::class, 'showUploadForm'])->name('showUploadForm');
+        
+
+Route::post('/upload', [App\Http\Controllers\FileUploadController::class, 'storeUploads'])->name('storeUploads');
+
+
 
 Route::post('/userdetails', 'App\Http\Controllers\GetCurrentUserController');
 Route::get('/status', [App\Http\Controllers\StatusController::class, "ShowStatus"])->name('ShowStatus');

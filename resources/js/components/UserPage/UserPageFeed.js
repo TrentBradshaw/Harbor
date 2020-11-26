@@ -10,7 +10,7 @@ export default class UserPageFeed extends Component {
     //pass page owner in
     render(){
         console.log(this.props.pageOwnerUsername)
-        fetch('http://127.0.0.1:8000/api/feed/' + this.props.pageOwnerUsername, {
+        fetch('/api/feed/' + this.props.pageOwnerUsername, {
             headers:{
                 'Content-Type':'application/json',
             },

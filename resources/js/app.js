@@ -24,8 +24,6 @@ require('./components/DropdownProfileMenu/ProfileDropDownCard')
 require('./components/DropdownProfileMenu/ProfileDropDownMenu')
 
 require('./components/SubmitPage/PostSpecificationButtons')
-require('./components/SubmitPage/CreatePost')
-require('./components/SubmitPage/PostForm')
 require('./components/SubmitPage/PostContentField')
 
 

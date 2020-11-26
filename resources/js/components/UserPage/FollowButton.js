@@ -44,7 +44,7 @@ class FollowButton extends Component {
        
         if (this.state.isFollowingText == 'Follow'){
             this.setState({ isFollowingText: 'Following' });
-            fetch('http://127.0.0.1:8000/api/followers', {
+            fetch('/api/followers', {
             headers:{
                 'Content-Type':'application/json',
             },
@@ -65,7 +65,7 @@ class FollowButton extends Component {
             })
         } else if (this.state.isFollowingText == 'Following'){
             this.setState({ isFollowingText: 'Follow' });
-            fetch('http://127.0.0.1:8000/api/followers/'  + this.props.followee, {
+            fetch('/api/followers/'  + this.props.followee, {
             headers:{
                 'Content-Type':'application/json',
             },

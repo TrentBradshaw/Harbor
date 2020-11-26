@@ -38,7 +38,7 @@ export class Autocomplete extends Component {
     let token = document.getElementById('csrf-token').getAttribute('content')
     console.log('pickles');
     
-    var url = new URL('http://127.0.0.1:8000/api/docks')
+    var url = new URL('http://localhost:80/api/docks')
     var param = {query: searchValue}
 
     url.search = new URLSearchParams(param).toString();

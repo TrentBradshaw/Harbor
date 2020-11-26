@@ -17,7 +17,7 @@ export default class Header extends Component {
         return (
             <div style={{  flex: '1 0 auto' , padding: '1px 0px', display: "inline-flex", width: '100%', height: '100%'}}>
                 <div style={{flex: '1', flex: '1 0 auto'}}>
-                    <h1 onClick={() => { window.location.href = 'http://127.0.0.1:8000/home' }}>ROLLER</h1>
+                    <h1 onClick={() => { window.location.href = '/home' }}>ROLLER</h1>
                 </div>
                 <DockDropDownMenu></DockDropDownMenu>
                 <div className="header__search" style={{flex: '5'}}>
@@ -25,13 +25,13 @@ export default class Header extends Component {
                     <SearchIcon className="header__searchIcon" />
                 </div>
                 <div style={{ justifyContent: 'center', display: 'flex', flex: '1', flex: '1 0 auto'}}>
-                    <div onClick={() => { window.location.href = 'http://127.0.0.1:8000/submit' }}>
+                    <div onClick={() => { window.location.href = '/submit' }}>
                         <AddIcon className="header__searchIcon" />
                     </div>
                     <div>
                         <ExploreIcon className="header__searchIcon" />
                     </div>
-                    <button onClick={() => { window.location.href = 'http://127.0.0.1:8000/logout' }}>Logout</button>
+                    <button onClick={() => { window.location.href = '/logout' }}>Logout</button>
                 </div>
                 <ProfileDropDownMenu></ProfileDropDownMenu>
             </div>   
