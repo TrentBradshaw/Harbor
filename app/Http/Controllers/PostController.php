@@ -14,6 +14,9 @@ use App\Models\Dock;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
+use App\Includes\GetUrlMetaData;
+
+
 class PostController extends Controller
 {
     protected $dates = ['name_field'];
@@ -24,8 +27,8 @@ class PostController extends Controller
         $json = json_decode(file_get_contents('php://input'), true); //grab request
         
         $post = new Post();
-
-        $base64img = str_replace('data:image/jpeg;base64,', '', $json['file']);
+        if ($json['file']){
+            $base64img = str_replace('data:image/jpeg;base64,', '', $json['file']);
 
         $client = new Client();
         $imgurKey = env('IMGUR_API_KEY');
@@ -39,10 +42,15 @@ class PostController extends Controller
                 'image' => $base64img
             ],
         ]);
-    return response()->json(json_decode(($response->getBody()->getContents())));
 
-        $community = Dock::where('title', $json['community'])->get()->toArray();
-        $community_id = $community->first()->id;
+        $image = json_decode($response->getBody(), true);
+        $data = $image['data']['link'];
+        $post->media_url = $data;
+        }
+        
+
+        $community = Dock::where('title', $json['community'])->get()->first();
+        $community_id = $community->id;
 
         $post->community_id = $community_id;
         $post->creator_id = Auth::user()->id;
@@ -50,15 +58,7 @@ class PostController extends Controller
         $post->type = $json['type'];
         $post->text = $json['text'];
         $post->link = $json['url'];
-        $post->media_url = $json['media_url'];
         $post->votes = 0;
-
-
-
-
-
-        
-        
         $saved = $post->save();
         $post->refresh();
 
@@ -128,6 +128,13 @@ class PostController extends Controller
         $postInfo['formattedStamp'] = $dateAltered->format('M/d/Y h:i');
        
 
+        if ($postInfo['type'] == "link"){
+            //include(app_path() . '\Includes\GetUrlMetaData.php');
+            $UrlMetaDataGetter = new GetUrlMetaData();
+            
+            $test = $UrlMetaDataGetter->getCurrentUrlMetaData($postInfo['link']);  //Replace  with your URL here
+            $postInfo['grabbedData'] = $test;
+        }
         
         return response()->json([
             'postInfo' => $postInfo,

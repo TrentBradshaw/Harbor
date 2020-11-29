@@ -70,6 +70,7 @@ class PostSubmitForm extends Component {
 
         */
 
+        //FIX PNG UPLOADING ERROR?
        let token = document.getElementById('csrf-token').getAttribute('content')
         fetch('/userdetails', {
             headers:{
@@ -98,13 +99,15 @@ class PostSubmitForm extends Component {
                                 text: this.state.body,
                                 file: this.state.file,
                                 url: this.state.url,
-                                imageFile: document.getElementById('postFileField').files[0]
+                                imageFile: document.getElementById('postFileField').files[0],
+                                ree: 'pickles'
                         })
-                    }).then(response => response.json()).then(data => console.log(data))
-                    /*
+                    }).then(response => response.json(
+                        console.log(response)
+                    ))
                     .then(
                         data => {window.location.replace(data['url'])
-                    })*/
+                    })
                         });
                         
                     })

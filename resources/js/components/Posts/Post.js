@@ -25,7 +25,7 @@ import Moment from '../Utility/Moment';
         const fetchData = () => {
             let token = document.getElementById('csrf-token').getAttribute('content')
 
-            var url = new URL('http://127.0.0.1:8000/api/post')
+            var url = new URL('http://localhost:80/api/post')
             let param = {query: postID}
 
             url.search = new URLSearchParams(param).toString();
@@ -53,6 +53,8 @@ import Moment from '../Utility/Moment';
             return <div className="App">Loading...</div>
         }
         console.log(state.type)
+        console.log('stateimageandtitlefound ' + state.grabbedData.imageAndTitleFound)
+
         if (state.type === "text"){
         
             console.log(state.type + " " + state.communityTitle)
@@ -95,19 +97,78 @@ import Moment from '../Utility/Moment';
                 );
         } else if (state.type === "media"){
             return (
-                <div className="App">
-                    <h1>
-                        YEEEEEEEEEEEEEEEEEEEEEET
-                    </h1>
+                <div className="App"
+                style={{
+                    width :'800px',
+                    marginRight: '20%',
+                    marginLeft: '20%',
+
+                }}
+                >
+                    <div id="PostHeader">
+                        <div id="SubInfoHolder"
+                        style={{
+                            display: 'flex'
+                        }}>
+                            <img></img>
+                            <h4>{ "d/" + state.communityTitle}</h4>
+                            <p>{"Posted by u/" + state.creatorUsername}</p>
+                            <Moment timePosted = {state.formattedStamp}></Moment>
+                        </div>
+                        <div>
+                            <img src= {state.media_url}></img>
+                        </div>
+                        <div>
+                            <p>x commments</p>
+                            <p>Like</p>
+                            <p>Dislike</p>
+                        </div>
+                        
+                    </div>
                 </div>
             );
         }
         else /*type == link */ {
             return (
-                <div className="App">
-                    <h1>
-                        YEEEEEEEEEEEEEEEEEEEEEET
-                    </h1>
+                <div className="App"
+                style={{
+                    width :'800px',
+                    marginRight: '20%',
+                    marginLeft: '20%',
+
+                }}
+                >
+                    <div id="PostHeader">
+                        <div id="SubInfoHolder"
+                        style={{
+                            display: 'flex'
+                        }}>
+                            
+                            {state.grabbedData.imageAndTitleFound ? (
+                                <div>
+
+                                <h1>{state.grabbedData.title}</h1>
+                                <img src= {state.grabbedData.img}></img>
+                                </div>
+
+                            ) : (
+                                <div>
+                                <h1>metadata not found</h1>
+                                </div>
+                            )}
+                            <Moment timePosted = {state.formattedStamp}></Moment>
+                        </div>
+                        <div>
+                    
+                            <article></article>
+                        </div>
+                        <div>
+                            <p>x commments</p>
+                            <p>Like</p>
+                            <p>Dislike</p>
+                        </div>
+                        
+                    </div>
                 </div>
             );
         }
