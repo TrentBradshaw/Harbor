@@ -28,53 +28,55 @@ import moment, { months } from 'moment';
         console.log(hoursDiff);
         console.log(minutesDiff)
 
-        var timeSince;
+        var submitString = 'submitted ';
+        var creator = props.creator;
+        var timeSince = '';
 
         if (yearsDiff >= 1){
             if(yearsDiff > 1 )
-                timeSince = yearsDiff + "years ago"
+                timeSince = submitString +  yearsDiff + "years ago by " + creator;
             else if (yearsDiff == 1)
-               timeSince = yearsDiff + "year ago"
+               timeSince = submitString +  yearsDiff + " year ago by " + creator;
             
-            return timeSince;
+            return startOfString + timeSince;
         }
         if(monthsDiff >=1){
             if(monthsDiff > 1 )
-                timeSince = monthsDiff + "months ago"
+                timeSince = submitString + monthsDiff + ' months ago by ' + creator;
             else if (monthsDiff == 1)
-               timeSince = monthsDiff + "month ago"
+               timeSince = submitString + monthsDiff + ' month ago by' + creator;
             
             return timeSince;
         }
         if(weeksDiff >=1){
             if(weeksDiff > 1 )
-                timeSince = weeksDiff + "weeks ago"
+                timeSince = submitString + weeksDiff + ' weeks ago by ' + creator;
             else if (weeksDiff == 1)
-               timeSince = weeksDiff + "week ago"
+               timeSince = submitString + weeksDiff + " week ago by " + creator;
             
             return timeSince;
         }
         if(daysDiff >=1){
             if(daysDiff > 1 )
-                timeSince = daysDiff + "days ago"
+                timeSince = submitString + daysDiff + " days ago by " + creator;
             else if (daysDiff == 1)
-               timeSince = daysDiff + "day ago"
+               timeSince = submiString + daysDiff + " day ago by " + creator;
             
             return timeSince;
         }
         if(hoursDiff >=1){
             if(hoursDiff > 1 )
-                timeSince = hoursDiff + "hours ago"
+                timeSince = submitString + hoursDiff + " hours ago by " + creator
             else if (hoursDiff == 1)
-               timeSince = hoursDiff + "hour ago"
+               timeSince = submitString + hoursDiff + " hour ago by " + creator
             
             return timeSince;
         }
         if(minutesDiff >=1){
             if(minutesDiff > 1 )
-                timeSince = minutesDiff + "minutes ago"
+                timeSince = submitString + minutesDiff + " minutes ago by " + creator
             else if (minutesDiff == 1)
-               timeSince = minutesDiff + "minute ago"
+               timeSince = submitString + minutesDiff + " minute ago by " + creator
             
             return timeSince;
         }
@@ -94,7 +96,7 @@ import moment, { months } from 'moment';
 
        // if minutes >= 1  and hours, days, years, and months == 0 string == x minutes
         return(
-            <p>yee</p>
+            <p></p>
         )
     }
 export default Moment ;

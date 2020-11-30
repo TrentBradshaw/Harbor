@@ -45,3 +45,6 @@ require('./components/AutoComplete/AutoCompleteDockLookup')
 require('./components/AutoComplete/Autocomplete')
 
 require('./components/Posts/Post')
+require('./components/Posts/LinkedPost')
+require('./components/Posts/TextPost')
+require('./components/Posts/MediaPost')

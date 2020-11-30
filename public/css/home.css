@@ -341,4 +341,5 @@ img#pfp{
     margin-top: 50px;
   } #PostContainer{
     margin-top: 50px;
+    min-height: 100%;
   }

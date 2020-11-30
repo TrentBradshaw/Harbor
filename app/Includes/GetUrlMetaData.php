@@ -8,13 +8,18 @@ class GetUrlMetaData {
 
         //we either get sailthru_value or twitter:value
         if (isset($tags['twitter:title']) && isset($tags['twitter:site']) && isset($tags['twitter:image'])){
+            
+            //if ( preg_replace("~\bMures\b~",$string) )
             $img = $tags['twitter:image'];
             $site = $tags['twitter:site'];
             $title = $tags['twitter:title'];
 
+            $cleanedTitle = str_replace("&#x27", "'", $title);
+            $cleanedTitle = str_replace(";", " ", $cleanedTitle);
+
             $parsedTags = array(
                 'img' => $img, 
-                'title' => $title,
+                'title' => $cleanedTitle,
                 'imageAndTitleFound' => true
             );
             return $parsedTags;

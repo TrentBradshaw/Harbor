@@ -1,8 +1,53 @@
 import ReactDOM from 'react-dom';
-
 import React, { useState, useEffect } from 'react';
-import moment from 'moment';
 import Moment from '../Utility/Moment';
+import LinkedPost from './LinkedPost';
+import TextPost from './TextPost';
+import MediaPost from './MediaPost';
+
+
+    const GetPostType = (type, state) => {
+        
+        if (type == "link"){
+            return(
+                <LinkedPost state = {state} ></LinkedPost>
+            )
+        }
+        /*
+        if (type === "text"){
+            return (
+                    <div id="PostHeader">
+                        <div id="SubInfoHolder" style={{display: 'flex'}}>
+                            <img></img>
+                            <h4>{ "d/" + state.communityTitle}</h4>
+                            <p>{"Posted by u/" + state.creatorUsername}</p>
+                            <Moment timePosted = {state.formattedStamp}></Moment>
+                        </div>
+                        <div>
+                            <p style ={{  minHeight: '100px',  display: "inline-block", width: '100%'}} >{state.text}</p>
+                        </div>
+                </div>
+            )
+        }
+        else if(type === "media"){
+            return (
+                    <div id="PostHeader">
+                        <div id="SubInfoHolder" style={{ display: 'flex' }}>
+                        <img></img>
+                            <h4>{ "d/" + state.communityTitle}</h4>
+                            <p>{"Posted by u/" + state.creatorUsername}</p>
+                        </div>
+                        <div>
+                            <img src= {state.media_url}></img>
+                        </div>
+                    </div>
+            );
+        }
+        */
+       console.log('yeeeee')
+       console.log('type ' + type)
+         
+    }
 
     function Post(){
         const [isLoading, setLoading] = useState(true);
@@ -16,7 +61,6 @@ import Moment from '../Utility/Moment';
             link: "",
             type: "",
             currentUTCTime: "",
-
         });
 
         useEffect(() => {
@@ -49,130 +93,43 @@ import Moment from '../Utility/Moment';
                 })
         }
 
-        if (isLoading) {
-            return <div className="App">Loading...</div>
-        }
-        console.log(state.type)
-        console.log('stateimageandtitlefound ' + state.grabbedData.imageAndTitleFound)
-
-        if (state.type === "text"){
+        if (isLoading) { return <div className="App">Loading...</div> }
         
-            console.log(state.type + " " + state.communityTitle)
-            return (
-                <div className="App"
-                style={{
-                    width :'800px',
-                    marginRight: '20%',
-                    marginLeft: '20%',
-
-                }}
-                >
-                    <div id="PostHeader">
-                        <div id="SubInfoHolder"
-                        style={{
-                            display: 'flex'
-                        }}>
-                            <img></img>
-                            <h4>{ "d/" + state.communityTitle}</h4>
-                            <p>{"Posted by u/" + state.creatorUsername}</p>
-                            <Moment timePosted = {state.formattedStamp}></Moment>
-                        </div>
+        return (
+            <div>
+                <div className="App" style={{ marginLeft: '2%', marginRight: '2%', minHeight: '100%', display: 'flex', justifyContent: 'space-between' }}>
+                    <div id="PostHeader" style={{ width: '70%'}}>
                         <div>
-                            <p
-                            style ={{
-                                minHeight: '100px',
-                                display: "inline-block",
-                                width: '100%'
-                            }}
-                            >{state.text}</p>
-                        </div>
+                            <div id="RealPostHeader" style= {{display: 'flex'}}>
+                                {GetPostType(state.type, state)}
+                            </div>    
+                        </div> 
                         <div>
-                            <p>x commments</p>
-                            <p>Like</p>
-                            <p>Dislike</p>
+                        <div>
+                            <div style={{ marginLeft: '2%', marginRight: '2%', minHeight: '100%'}}>
+                                <input type="text"></input>
+                                <button>Save</button>
+                            </div>
+                            <div>
+                                <h1>Comment Section loaded below</h1>
+                            </div>
                         </div>
-                        
                     </div>
-                </div>
-                );
-        } else if (state.type === "media"){
-            return (
-                <div className="App"
-                style={{
-                    width :'800px',
-                    marginRight: '20%',
-                    marginLeft: '20%',
-
-                }}
-                >
-                    <div id="PostHeader">
-                        <div id="SubInfoHolder"
-                        style={{
-                            display: 'flex'
-                        }}>
-                            <img></img>
-                            <h4>{ "d/" + state.communityTitle}</h4>
-                            <p>{"Posted by u/" + state.creatorUsername}</p>
-                            <Moment timePosted = {state.formattedStamp}></Moment>
-                        </div>
-                        <div>
-                            <img src= {state.media_url}></img>
-                        </div>
-                        <div>
-                            <p>x commments</p>
-                            <p>Like</p>
-                            <p>Dislike</p>
-                        </div>
-                        
                     </div>
-                </div>
-            );
-        }
-        else /*type == link */ {
-            return (
-                <div className="App"
-                style={{
-                    width :'800px',
-                    marginRight: '20%',
-                    marginLeft: '20%',
-
-                }}
-                >
-                    <div id="PostHeader">
-                        <div id="SubInfoHolder"
-                        style={{
-                            display: 'flex'
-                        }}>
-                            
-                            {state.grabbedData.imageAndTitleFound ? (
-                                <div>
-
-                                <h1>{state.grabbedData.title}</h1>
-                                <img src= {state.grabbedData.img}></img>
-                                </div>
-
-                            ) : (
-                                <div>
-                                <h1>metadata not found</h1>
-                                </div>
-                            )}
-                            <Moment timePosted = {state.formattedStamp}></Moment>
-                        </div>
+                    <div style={{ width: '20%', minHeight: '100%',}}>
                         <div>
+                            <h1>Sidebar</h1>
+                        </div>
+                </div>
                     
-                            <article></article>
-                        </div>
-                        <div>
-                            <p>x commments</p>
-                            <p>Like</p>
-                            <p>Dislike</p>
-                        </div>
-                        
-                    </div>
                 </div>
-            );
-        }
-        
+                
+                
+                
+                
+            </div>
+            
+        );
     }
     
 if (document.getElementById('PostContainer')) {
