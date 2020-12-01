@@ -1,9 +1,33 @@
 import ReactDOM from 'react-dom';
 import React, { useState, useEffect } from 'react';
-import Moment from '../Utility/Moment';
 import LinkedPost from './LinkedPost';
 import TextPost from './TextPost';
 import MediaPost from './MediaPost';
+import PostComments from '../Comments/PostComments'
+
+
+
+
+
+
+//// APPEND COMMENTINPUT ON COMMENTS IF THE REPLY BUTTON IS CLICKED AND MAKE SURE THE COMMENT ID IS ATTACHED TO THE COMMENT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     const GetPostType = (type, state) => {
@@ -13,37 +37,18 @@ import MediaPost from './MediaPost';
                 <LinkedPost state = {state} ></LinkedPost>
             )
         }
-        /*
+        
         if (type === "text"){
             return (
-                    <div id="PostHeader">
-                        <div id="SubInfoHolder" style={{display: 'flex'}}>
-                            <img></img>
-                            <h4>{ "d/" + state.communityTitle}</h4>
-                            <p>{"Posted by u/" + state.creatorUsername}</p>
-                            <Moment timePosted = {state.formattedStamp}></Moment>
-                        </div>
-                        <div>
-                            <p style ={{  minHeight: '100px',  display: "inline-block", width: '100%'}} >{state.text}</p>
-                        </div>
-                </div>
+                <TextPost state = {state}></TextPost>
             )
         }
         else if(type === "media"){
-            return (
-                    <div id="PostHeader">
-                        <div id="SubInfoHolder" style={{ display: 'flex' }}>
-                        <img></img>
-                            <h4>{ "d/" + state.communityTitle}</h4>
-                            <p>{"Posted by u/" + state.creatorUsername}</p>
-                        </div>
-                        <div>
-                            <img src= {state.media_url}></img>
-                        </div>
-                    </div>
-            );
+            return(
+                <MediaPost state = {state}></MediaPost>
+            )
         }
-        */
+            
        console.log('yeeeee')
        console.log('type ' + type)
          
@@ -106,12 +111,9 @@ import MediaPost from './MediaPost';
                         </div> 
                         <div>
                         <div>
-                            <div style={{ marginLeft: '2%', marginRight: '2%', minHeight: '100%'}}>
-                                <input type="text"></input>
-                                <button>Save</button>
-                            </div>
+                            
                             <div>
-                                <h1>Comment Section loaded below</h1>
+                                <PostComments parentPostId = {state.id}></PostComments>
                             </div>
                         </div>
                     </div>

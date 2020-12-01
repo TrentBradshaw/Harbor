@@ -48,3 +48,6 @@ require('./components/Posts/Post')
 require('./components/Posts/LinkedPost')
 require('./components/Posts/TextPost')
 require('./components/Posts/MediaPost')
+
+require('./components/Comments/PostComment')
+require('./components/Comments/PostComments')
