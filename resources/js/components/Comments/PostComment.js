@@ -5,18 +5,18 @@ import VotingSystem from '../Posts/VotingSystem';
 //don't forget to pass the votes into the voting system component
 
 function PostComment(props) {
-    console.log('dabbie')
+    let comment = props.comment
+    console.log(comment)
     return (
         <div>
             <VotingSystem></VotingSystem>
             <div>
                 <div>
-                    <h5> username</h5>
+                    <h5>{comment.username}</h5>
                     <p> x points</p>
-                    <Moment></Moment>
                 </div>
                 <div>
-                    <p>comment</p>
+                    <p>{comment.body}</p>
                 </div>
             </div>
         </div>

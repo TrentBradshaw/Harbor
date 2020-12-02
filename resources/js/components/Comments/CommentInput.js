@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 
 //don't forget to pass the votes into the voting system component
-function submit(props, text){
+function submit(props, text, appendNewComment){
+    var comment;
     console.log(props)
     //console.log(props2)
     // if (state.isReply){} handle REPLY COMMENTS HERE
@@ -36,15 +37,19 @@ function submit(props, text){
                         console.log(response)
                     ))
                     .then(
-                        data => { console.log(data)
-                    })
+                        data => { 
+                            console.log(data)
+                            appendNewComment(data)
+                            comment = data
+                            
+                            
+                        })
                         });
                         
                     })
-
                     //add a callback function that sends the new comment to the PostComments 
-    
 }
+
 
 function CommentInput(props) {
 
@@ -61,7 +66,7 @@ function CommentInput(props) {
         <div>
             <div style={{ marginLeft: '2%', marginRight: '2%', minHeight: '100%'}}>
                 <input onChange = { e => updateText(e.currentTarget.value)} type="text"></input>
-                <button onClick = { () => submit(state, currentText)}>Save</button>
+                <button onClick = { () => submit(state, currentText, props.appendNewComment)}>Save</button>
             </div>
         </div>
         
