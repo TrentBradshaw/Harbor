@@ -4,17 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PostComment;
+use App\Models\CommentEngagement;
 use App\Models\User;
+use Carbon\Carbon;
 
 class PostCommentsController extends Controller
 {
 
+    
     public function GetPostComments(){
         $id = request('query');
         $postComments = PostComment::where('parent_post_id', $id)->get()->toArray();
 
         for ($i=0; $i < count($postComments); $i++) {
             $user =  User::where('id', $postComments[$i]['creator_id'])->get()->toArray();
+            $dateAltered = Carbon::parse($postComments[$i]['created_at']);
+            //$postComments[$i]['created_at']->format('d/m/Y h:i:s');
+            $postComments[$i]['formattedStamp'] = $dateAltered->format('M/d/Y h:i');
             $postComments[$i]['username'] =  $user[0]['username'];
         }
 
