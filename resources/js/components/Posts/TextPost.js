@@ -7,7 +7,7 @@ function TextPost(props) {
     return (
         <div style={{width: '100%'}} >
             <div id = '1' style ={{ display: 'flex', width: '100%'}}>
-                <VotingSystem></VotingSystem>
+                <VotingSystem type={'post'}></VotingSystem>
                 <div id= '2' style ={{width: '100%'}}>
                     <h2 style = {{height: '45%'}}>{props.state.title}</h2>
                     <div style = {{display: 'flex', marginTop: '15px'}}>
@@ -18,7 +18,12 @@ function TextPost(props) {
                 </div>
             </div>                
             <div>
-                <p style ={{  minHeight: '100px',  display: "inline-block", width: '100%'}} >{props.state.text}</p>
+                <p style ={{  marginLeft: '10px',
+                              marginTop: '10px',
+                              alignContent: 'start',
+                              minHeight: '100px',  
+                              display: "inline-block", 
+                              width: '100%'}} >{props.state.text}</p>
             </div>
         </div>
     );

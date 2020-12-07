@@ -6,7 +6,7 @@ function MediaPost(props) {
     console.log('dabbie')
     return (
         <div id = '1' style ={{ display: 'flex', }}>
-            <VotingSystem></VotingSystem>
+            <VotingSystem type={'post'}></VotingSystem>
             <img></img>
             <h4>{ "d/" + props.state.communityTitle}</h4>
             <p>{"Posted by u/" + props.state.creatorUsername}</p>

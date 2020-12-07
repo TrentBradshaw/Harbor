@@ -34,10 +34,14 @@ class PostCommentsController extends Controller
     public function Store() {
 
         $json = json_decode(file_get_contents('php://input'), true); //grab request
+        
         $comment = new PostComment();
 
         $comment->creator_id = $json['creator_id'];
         $comment->body = $json['body'];
+        $comment->parent_post_id = $json['parentPostId'];
+        $comment->nest_level = $json['nestLevel'];
+        $comment->parent_comment_id = $json['parentCommentId'];
        // $comment->parent_comment_id = $json['parentCommentId'];
         //$comment->parent_post_id = $json['parentPostId'];
 

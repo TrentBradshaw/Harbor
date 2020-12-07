@@ -20,12 +20,40 @@ class PostComments extends Component {
     }
 
     
-    appendNewComment(commentObject){
-        let grabbedState = this.state.commentsArray
-        console.log("CommentObject" + commentObject);
-        this.setState({commentsArray: this.state.commentsArray.concat(commentObject)})
-       // let updatedState = grabbedState.push(commentObject)
-        //this.setState({commentsArray: updatedState})
+    appendNewComment(commentObject, isReply, parentCommentId){
+    
+        
+        //console.log('NCDb' + newCommentsDict)
+        console.log("comment object" + JSON.stringify(commentObject))
+        var newCommentsDict;
+        var commentsArray = this.state.commentsArray 
+        var index;
+        if (isReply){
+            console.log('parentCommentID' + parentCommentId)
+            console.log(JSON.stringify(commentsArray))
+            //let newArray = this.state.commentsArray.concat(commentObject)
+            for (let i = 0; i < commentsArray.length; i++) {
+                console.log(commentsArray[i]['id'] + 'cereee')
+                if(commentsArray[i]['id'] === parentCommentId){
+                    console.log('i FOUNDDDD' + i)
+                   index = i;
+                }
+            }
+            console.log('index ' + index)
+            var newArray =  commentsArray.splice(index++,0, commentObject)
+            console.log("new array " + newArray)
+            this.setState({commentsArray: newArray})
+            newCommentsDict = this.state.commentsDict;
+            newCommentsDict.splice(index, 0, <PostComment key = {commentObject['id']} comment = {commentObject}></PostComment>)
+        }else{
+            let newArray = this.state.commentsArray.concat(commentObject)
+            this.setState({commentsArray: newArray})
+            newCommentsDict = this.state.commentsDict;
+            newCommentsDict.unshift(<PostComment key = {commentObject['id']} comment = {commentObject}></PostComment>)
+        }
+        
+        //console.log('NCDa' + newCommentsDict)
+        this.setState({commentsDict: newCommentsDict})
     }
     
     componentDidMount () {
@@ -49,34 +77,29 @@ class PostComments extends Component {
             credentials: "same-origin",
             }).then((response) => {
                 response.json().then((data) => {
-                    console.log(JSON.stringify(data))
-                    console.log('commentsArray ' + data['comments'])
+                    console.log("Data ------------------------" + JSON.stringify(data))
                     this.setState({isLoading: false})
-                    this.setState({commentsArray: data});
-
-                    
-                    let commentsDict = this.state.commentsDict;
+                    this.setState({commentsArray: data['comments']});
+                    let commentsDictt = this.state.commentsDict;
                     let comments = data['comments']
                     console.log('commarrlength' + data.length)
                     for (let i = 0; i < comments.length; i++) {
-                        commentsDict.push( <PostComment key = {comments[i].id} comment= {comments[i]}></PostComment>)
+                        commentsDictt.push( <PostComment key = {comments[i].id} appendNewComment = {this.appendNewComment} comment= {comments[i]}></PostComment>)
                     }
-                    this.setState({commentsDict: commentsDict})
+                    this.setState({commentsDict: commentsDictt})
                 });
             })
-        
-
     }
-
+    
    
     render(){
         if (this.state.isLoading) { return <div className="App">Loading...</div> }
         let commentsDict = this.state.commentsDict;
         return (
             <div>
-                <CommentInput appendNewComment = {this.appendNewComment} parentPostId = {this.props.parentPostId}></CommentInput>
+                <CommentInput style = {{height: '120px'}} isReply = {false} appendNewComment = {this.appendNewComment} parentPostId = {this.props.parentPostId}></CommentInput>
                 <div id = "commentsholder">
-                    {commentsDict}
+                    {this.state.commentsDict}
                 </div>
             </div>
         );

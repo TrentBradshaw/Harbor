@@ -103,7 +103,7 @@ import PostComments from '../Comments/PostComments'
         return (
             <div>
                 <div className="App" style={{ marginLeft: '2%', marginRight: '2%', minHeight: '100%', display: 'flex', justifyContent: 'space-between' }}>
-                    <div id="PostHeader" style={{ width: '70%'}}>
+                    <div id="PostHeader" style={{ width: '70%', backgroundColor: 'white'}}>
                         <div>
                             <div id="RealPostHeader" style= {{display: 'flex'}}>
                                 {GetPostType(state.type, state)}
@@ -127,7 +127,7 @@ import PostComments from '../Comments/PostComments'
                 </div>
                 
                 
-                
+            
                 
             </div>
             
