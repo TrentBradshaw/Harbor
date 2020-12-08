@@ -110,9 +110,9 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
             return(
                 <div>
                     <div style= {{height: '100px'}}>
-                        <ArrowDropUpIcon style = {{color: this.state.upvoted ? "orange" : null }} onClick = {() => {this.vote(this.props.id, true, false)}} ></ArrowDropUpIcon>
+                        <ArrowDropUpIcon className="material-icons" fontSize="large" style = {{color: this.state.upvoted ? "orange" : null }} onClick = {() => {this.vote(this.props.id, true, false)}} ></ArrowDropUpIcon>
                         {this.props.type === 'post' && <p>number</p>}
-                        <ArrowDropDownIcon style = {{color: this.state.downvoted ? "blue" : null }} onClick = {() => {this.vote(this.props.id, false, true)}} ></ArrowDropDownIcon>
+                        <ArrowDropDownIcon className="material-icons" fontSize="large" style = {{color: this.state.downvoted ? "blue" : null }} onClick = {() => {this.vote(this.props.id, false, true)}} ></ArrowDropDownIcon>
                     </div>
                 </div>
                

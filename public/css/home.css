@@ -355,3 +355,52 @@ img#pfp{
   .commentHeaderText{
     margin: 0px 10px;
   }
+  .vl {
+    height: 100%;
+  }
+  .v2{
+    margin-left: 45px;
+
+  }
+  .indent0 {
+      margin-left: 3%;
+  }
+  .indent1{
+    margin-left: 6%;
+  }
+  .indent2{
+      margin-left: 9%;
+  }
+  .indent3{
+      margin-left: 12%;
+  }
+  .indent4{
+      margin-left: 15%;
+  }
+  .indent5{
+      margin-left: 18%;
+  }
+  .indent6{
+      margin-left: 21%;
+  }
+  .indent7{
+      margin-left: 24%;
+  }
+  .indent8{
+      margin-left: 27%;
+  }
+  .indent9{
+      margin-left: 30%;
+  }
+
+  .voteIcon, .MuiSvgIcon-root{
+      height: 1.25em;
+      width: 1.25em;
+  }
+  .meme{
+    
+        border-right: 2px solid green;
+        height: 100%;
+      
+  }
+  

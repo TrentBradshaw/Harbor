@@ -6,6 +6,8 @@ import CommentInput from './CommentInput';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import ReplyIcon from '@material-ui/icons/Reply';
 import ShareIcon from '@material-ui/icons/Share';
+import RemoveIcon from '@material-ui/icons/Remove';
+import AddIcon from '@material-ui/icons/Add';
 
 //don't forget to pass the votes into the voting system component
 
@@ -14,21 +16,105 @@ class PostComment extends Component {
         super(props)
         this.state = {
             nestLevel: this.props.nestLevel,
-            replyClicked: false
+            replyClicked: false,
+            additionalLines: [],
+            minimized: false
         }
+        this.toggleComment = this.toggleComment.bind(this);
     }
     ///when you create a comment via commentinput you check if you replied to one, if you did then you check the nested level and make it one more
 
     //when pulling from the database make sure to group posts into their own arrays with their relationship being comment and children
     
     //and then compile them into one array
+
+
+
+
+
+
+
+    ///MAKE SURE
+
+
+
+
+//delete comments next
+
+    //TO APPLY THE COMMENT PROPERTIES HERE SO THE INDENTATION HAPPENS NATURALLY
+
+
+    applyProperties(){
+
+    }
+    toggleComment(){
+        var commentId = this.props.comment.id
+        var id = document.querySelector(`[data="${commentId}"]`)
+        console.log(id)
+       // var str = "[parent=" + e.target.getAttribute(id) + "]"
+       // console.log(str)
+       var refs = document.querySelectorAll(`[parentId="${commentId}"]`)
+        if(this.state.minimized){
+            for (let index = 0; index < refs.length; index++) {
+                refs[index].style.display = 'flex';
+            }
+        }else{
+            for (let index = 0; index < refs.length; index++) {
+                refs[index].style.display = 'none';
+            }
+        }
+        
+        
+        this.setState({minimized: !this.state.minimized})
+        console.log(refs)
+    }
+    /*
+    componentDidMount(){
+        console.log('propsfrom cdm' + this.props)
+        var id;
+        var memeArray = []
+        var memes = (<div className="v2"> <div style={{width: '50%'}}></div> <div className = 'meme' style={{width: '50%'}}></div></div>)
+        for (let i = 0; i < this.props.comment.nest_level; i++) {
+            memeArray.push(memes)
+        }
+        this.setState({additionalLines: memeArray})
+        //make additional lines here
+
+    }
+    */
+//  every comment has a line, this line is indented to a consistent position regardless of the comment's indentation. If you clikc this button at and point then you can
+// grab the paren't id property on said comment, then hide the parent comment or transform it into the minimized version
+//and tthen create as many lines as you have indentations or something similar
+
+
     render(){
+        if(this.state.minimized){
+            return(
+                <div style= {{width: '100%'}}>
+                        <div style = {{display: 'flex'}}>
+                            <AddIcon onClick = {(e) => this.toggleComment()}></AddIcon>
+                            <p className = "commentHeaderText">{this.props.comment.username}</p>
+                            <p className = "commentHeaderText"> x points</p>
+                            <Moment className="commentHeaderText" creator = {this.props.comment.username} timePosted = {this.props.comment.formattedStamp} type ={'time'}></Moment>
+                            <p>x children</p>
+                        </div>
+                    </div>
+            )
+        }
         return (
-            <div>
-                <div data={[this.props.comment.id]} style = {{display: 'flex', borderRadius: '2px', border: '2px solid #dae0e6', marginLeft: '1%', marginRight: '10%', marginBottom: '20px', }}>
-                    <VotingSystem id = {this.props.comment.id} type= {'comment'} ></VotingSystem>
+            <div style={{display:'flex', borderRadius: '0.5px', borderTop: '2px solid #dae0e6'}}>
+            {this.state.additionalLines}
+                <div className = {'indent' + this.props.comment.nest_level} data={[this.props.comment.id]} parentId={this.props.comment.parent_comment_id} style = {{display: 'flex', flexGrow: this.props.comment.nest_level, marginRight: '5%',}}>
+                    
+                    <div style= {{display: 'flex', flexDirection: 'column', width: '3%',}}>
+                        <div style= {{height: '70%'}}>
+                            <VotingSystem  id = {this.props.comment.id} type= {'comment'} ></VotingSystem>
+                        </div>
+                    </div>
+                    
                     <div style= {{width: '100%'}}>
                         <div style = {{display: 'flex'}}>
+                            <RemoveIcon onClick = {(e) => this.toggleComment()}></RemoveIcon>
                             <p className = "commentHeaderText">{this.props.comment.username}</p>
                             <p className = "commentHeaderText"> x points</p>
                             <Moment className="commentHeaderText" creator = {this.props.comment.username} timePosted = {this.props.comment.formattedStamp} type ={'time'}></Moment>
@@ -49,7 +135,6 @@ class PostComment extends Component {
                 </div>
                 {this.state.replyClicked && <CommentInput isReply = {true} comment = {this.props.comment} appendNewComment = {this.props.appendNewComment} parentPostId = {this.props.comment.parent_post_id}></CommentInput>}
             </div>
-            
         );
     }
     
