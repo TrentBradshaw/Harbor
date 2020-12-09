@@ -90,6 +90,7 @@ Route::get('api/post', [App\Http\Controllers\PostController::class, 'GetPost'])-
 Route::put('api/comments/engagement', [App\Http\Controllers\ReeController::class, 'VoteOnComment']);
 Route::get('api/comments/engagement', [App\Http\Controllers\ReeController::class, 'GetVoteStatus']);
 Route::post('api/comments/submit', [App\Http\Controllers\PostCommentsController::class, 'Store']);
+Route::put('api/comments/delete', [App\Http\Controllers\PostCommentsController::class, 'Delete']);
 Route::get('api/comments', [App\Http\Controllers\PostCommentsController::class, 'GetPostComments']);
 Route::post('/api/docks/submit', [App\Http\Controllers\DockController::class, 'Store']);
 Route::get('api/docks', [App\Http\Controllers\DockController::class, 'GetDocks'])->name('GetDocks');

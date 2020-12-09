@@ -17,14 +17,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
         vote(id, upvoted, downvoted){
             //make this call once and pass the userID probably from a higher-order component
             let token = document.getElementById('csrf-token').getAttribute('content')
-            fetch('/userdetails', {
-                headers:{ 'X-CSRF-TOKEN': token, 'Content-Type':'application/json',},
-                method: 'post',
-                mode: "same-origin",
-                credentials: "same-origin",
-                }).then((response) => {
-                    response.json().then((data) => {
-                        console.log(data['username']);
+            
                         var url = new URL('http://localhost:80/api/comments/engagement')
          
                         fetch(url, {
@@ -33,7 +26,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
                             mode: "cors",
                             credentials: "same-origin",
                             body: JSON.stringify({
-                                userID : data['id'],
+                                userID : this.props.userId,
                                 targetID: id,
                                 upvoted: upvoted,
                                 downvoted: downvoted,
@@ -45,16 +38,6 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
                                     console.log('data' + data)
                                         this.setState({upvoted: data['upvoted']});
                                         this.setState({downvoted: data['downvoted']})
-                                }).then(
-                                    data => {
-                                        
-                                        //
-    
-    
-                                        //here we'll switch state and color of the arrow to reflect 
-                                    }
-                                    )
-                            })
                                 })
                             })
             
@@ -63,21 +46,10 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
         componentDidMount(){
             let token = document.getElementById('csrf-token').getAttribute('content')
             //change this to get
-            fetch('/userdetails', {
-                headers:{
-                    'X-CSRF-TOKEN': token,
-                    'Content-Type':'application/json',
-                },
-                method: 'post',
-                mode: "same-origin",
-                credentials: "same-origin",
-                }).then((response) => {
-                    response.json().then((data) => {
-                        console.log(data['username']);
-
+            
                         
             var url = new URL('http://localhost:80/api/comments/engagement')
-            let param = {userID: data['id'], postID: this.props.id}
+            let param = {userID: this.props.userId, postID: this.props.id}
             url.search = new URLSearchParams(param).toString();
             fetch(url, {
                 headers:{ 'X-CSRF-TOKEN': token, 'Content-Type':'application/json', "Access-Control-Allow-Origin" : "*", "Access-Control-Allow-Credentials" : true},
@@ -99,10 +71,6 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
                         )
                 
                     })
-                });
-                
-            })
-                
         }
 
         render(){

@@ -16,14 +16,7 @@ function submit(props, text, appendNewComment){
     console.log(nestLevel + ' outside of if')
     // if (state.isReply){} handle REPLY COMMENTS HERE
     let token = document.getElementById('csrf-token').getAttribute('content')
-        fetch('/userdetails', {
-            headers:{ 'X-CSRF-TOKEN': token, 'Content-Type':'application/json',},
-            method: 'post',
-            mode: "same-origin",
-            credentials: "same-origin",
-            }).then((response) => {
-                response.json().then((data) => {
-                    console.log(data['username']);
+       
                     fetch('/api/comments/submit', {
                         headers:{
                             'X-CSRF-TOKEN': token,
@@ -33,7 +26,7 @@ function submit(props, text, appendNewComment){
                         mode: "same-origin",
                         credentials: "same-origin",
                         body: JSON.stringify({
-                                creator_id: data['id'],
+                                creator_id: this.props.userId,
                                 parentPostId: props.parentPostId,
                                 parentCommentId: props.comment.id,
                                 body: text,
@@ -47,9 +40,9 @@ function submit(props, text, appendNewComment){
                             console.log('data from commentinput----------------------' + JSON.stringify(data))
                             appendNewComment(data['comment'], props.isReply, props.comment.id)
                         })
-                        });
                         
-                    })
+                        
+                    
 }
 
 

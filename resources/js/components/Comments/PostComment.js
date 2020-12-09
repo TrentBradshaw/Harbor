@@ -8,7 +8,7 @@ import ReplyIcon from '@material-ui/icons/Reply';
 import ShareIcon from '@material-ui/icons/Share';
 import RemoveIcon from '@material-ui/icons/Remove';
 import AddIcon from '@material-ui/icons/Add';
-
+import DeleteIcon from '@material-ui/icons/Delete';
 //don't forget to pass the votes into the voting system component
 
 class PostComment extends Component {
@@ -29,17 +29,9 @@ class PostComment extends Component {
     //and then compile them into one array
 
 
-
-
-
-
-
     ///MAKE SURE
 
-
-
-
-//delete comments next
+    //delete comments next
 
     //TO APPLY THE COMMENT PROPERTIES HERE SO THE INDENTATION HAPPENS NATURALLY
 
@@ -47,13 +39,14 @@ class PostComment extends Component {
     applyProperties(){
 
     }
+    
     toggleComment(){
         var commentId = this.props.comment.id
         var id = document.querySelector(`[data="${commentId}"]`)
         console.log(id)
        // var str = "[parent=" + e.target.getAttribute(id) + "]"
        // console.log(str)
-       var refs = document.querySelectorAll(`[parentId="${commentId}"]`)
+       var refs = document.querySelectorAll(`[parentid="${commentId}"]`)
         if(this.state.minimized){
             for (let index = 0; index < refs.length; index++) {
                 refs[index].style.display = 'flex';
@@ -63,7 +56,6 @@ class PostComment extends Component {
                 refs[index].style.display = 'none';
             }
         }
-        
         
         this.setState({minimized: !this.state.minimized})
         console.log(refs)
@@ -86,6 +78,20 @@ class PostComment extends Component {
 // grab the paren't id property on said comment, then hide the parent comment or transform it into the minimized version
 //and tthen create as many lines as you have indentations or something similar
 
+        //
+
+
+
+
+
+
+
+        //HERE WE'RE GOING TO RENDER THE DELETED COMMENT TEMPLATE IF THE COMMENT'S isDeleted BOOL FIELD === TRUE
+
+
+
+
+
 
     render(){
         if(this.state.minimized){
@@ -104,11 +110,11 @@ class PostComment extends Component {
         return (
             <div style={{display:'flex', borderRadius: '0.5px', borderTop: '2px solid #dae0e6'}}>
             {this.state.additionalLines}
-                <div className = {'indent' + this.props.comment.nest_level} data={[this.props.comment.id]} parentId={this.props.comment.parent_comment_id} style = {{display: 'flex', flexGrow: this.props.comment.nest_level, marginRight: '5%',}}>
+                <div className = {'indent' + this.props.comment.nest_level} data={[this.props.comment.id]} parentid={this.props.comment.parent_comment_id} style = {{display: 'flex', flexGrow: this.props.comment.nest_level, marginRight: '5%',}}>
                     
                     <div style= {{display: 'flex', flexDirection: 'column', width: '3%',}}>
                         <div style= {{height: '70%'}}>
-                            <VotingSystem  id = {this.props.comment.id} type= {'comment'} ></VotingSystem>
+                            <VotingSystem userId = {this.props.userId} id = {this.props.comment.id} type= {'comment'} ></VotingSystem>
                         </div>
                     </div>
                     
@@ -130,10 +136,11 @@ class PostComment extends Component {
                                 <QuestionAnswerIcon style={{fill: 'slategrey'}}></QuestionAnswerIcon>
                             </div>
                             <ShareIcon style= {{marginLeft: '20px', textAlign: 'start', fill: 'slategrey'}}></ShareIcon>
+                            {this.props.userId === this.props.comment.creator_id && <DeleteIcon onClick = {(e) =>this.props.deleteComment(this.props.comment.id)}></DeleteIcon>}
                         </div>
                     </div>
                 </div>
-                {this.state.replyClicked && <CommentInput isReply = {true} comment = {this.props.comment} appendNewComment = {this.props.appendNewComment} parentPostId = {this.props.comment.parent_post_id}></CommentInput>}
+                {this.state.replyClicked && <CommentInput isReply = {true} userId = {this.props.userId} comment = {this.props.comment} appendNewComment = {this.props.appendNewComment} parentPostId = {this.props.comment.parent_post_id}></CommentInput>}
             </div>
         );
     }
