@@ -5,53 +5,11 @@ import TextPost from './TextPost';
 import MediaPost from './MediaPost';
 import PostComments from '../Comments/PostComments'
 
-
-
-
-
-
-//// APPEND COMMENTINPUT ON COMMENTS IF THE REPLY BUTTON IS CLICKED AND MAKE SURE THE COMMENT ID IS ATTACHED TO THE COMMENT
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     const GetPostType = (type, state) => {
         
-        if (type == "link"){
-            return(
-                <LinkedPost state = {state} ></LinkedPost>
-            )
-        }
-        
-        if (type === "text"){
-            return (
-                <TextPost state = {state}></TextPost>
-            )
-        }
-        else if(type === "media"){
-            return(
-                <MediaPost state = {state}></MediaPost>
-            )
-        }
-            
-       console.log('yeeeee')
-       console.log('type ' + type)
-         
+        if (type == "link"){return(<LinkedPost state = {state} ></LinkedPost>)}
+        else if (type === "text"){return (<TextPost state = {state}></TextPost>)}
+        else if(type === "media"){return(<MediaPost state = {state}></MediaPost>)}
     }
 
     function Post(){
@@ -111,7 +69,6 @@ import PostComments from '../Comments/PostComments'
                         </div> 
                         <div>
                         <div>
-                            
                             <div>
                                 <PostComments parentPostId = {state.id}></PostComments>
                             </div>
@@ -126,11 +83,7 @@ import PostComments from '../Comments/PostComments'
                     
                 </div>
                 
-                
-            
-                
             </div>
-            
         );
     }
     
