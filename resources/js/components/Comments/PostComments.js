@@ -4,7 +4,7 @@ import CommentInput from './CommentInput';
 import PostComment from './PostComment'
 //don't forget to pass the votes into the voting system component
 
-const  PostComments = (props) => {
+const  PostComments = ({parentPostId}) => {
     
     const [isLoading, changeLoading] = useState(true);
     const [commentsArray, changeCommentsArray] = useState([]);
@@ -27,8 +27,8 @@ const  PostComments = (props) => {
                 changeUserId(data['id'])
                })
             })
-        var url = new URL('http://localhost:80/api/comments')
-        let param = {query: props.parentPostId}
+        let url = new URL('http://localhost:80/api/comments')
+        let param = {query: parentPostId}
 
         url.search = new URLSearchParams(param).toString();
         fetch(url, {
@@ -45,42 +45,38 @@ const  PostComments = (props) => {
             })
     }
     function appendNewComment(commentObject, isReply, parentCommentId){
-    
-        var tempCommentsArray = commentsArray; 
-        var index;
+        let tempCommentsArray = [...commentsArray]; 
+        let index;
+        let newArray;
         if (isReply){
-            console.log('parentCommentID' + parentCommentId)
-            console.log(JSON.stringify(tempCommentsArray))
-            //let newArray = this.state.commentsArray.concat(commentObject)
             for (let i = 0; i < tempCommentsArray.length; i++) {
-                console.log(tempCommentsArray[i]['id'] + 'cereee')
                 if(tempCommentsArray[i]['id'] === parentCommentId){
-                    console.log('i FOUNDDDD' + i)
-                   index = i;
+                    console.log('i: ' + i)
+                  index = i + 1;
+                  console.log('index: ' + index)
                 }
             }
-            //actually insert the new comment object in the right place
-
-
-
-
-
-
-            
-            console.log('index ' + index)
-            var newArray =  commentsArray.splice(index++,0, commentObject)
-            changeCommentsArray(newArray)
+            tempCommentsArray.splice(index,0, commentObject)
+            console.log(tempCommentsArray)
+            changeCommentsArray(tempCommentsArray)
         }else{
-            let newArray = commentsArray.concat(commentObject)
-            changeCommentsArray(newArray)
-            
+            tempCommentsArray.unshift(commentObject)
+            console.log(tempCommentsArray)
+            changeCommentsArray(tempCommentsArray)
         }
     }
 
     if (isLoading) { return <div className="App">Loading...</div> }
     return (
         <div>
-            <CommentInput userId={userId} style={{height: '120px'}} isReply={false} appendNewComment={props.appendNewComment} parentPostId={props.parentPostId}></CommentInput>
+            <CommentInput style={{height: '120px'}} 
+            isReply={false} 
+            userId={userId} 
+            parentComment={null}   
+            appendNewComment = {appendNewComment} 
+            parentPostId={parentPostId}>
+            hideInput={null}
+            </CommentInput>
             <div id = "commentsholder">
             {
                 commentsArray.map((element)=>(
@@ -110,11 +106,4 @@ const  PostComments = (props) => {
                 console.log('data from commentinput----------------------' + JSON.stringify(data))
             })
     }
-
-    
-    
-    
-        
-    
-    
 export default PostComments;

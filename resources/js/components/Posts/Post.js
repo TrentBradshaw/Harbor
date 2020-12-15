@@ -12,7 +12,7 @@ import PostComments from '../Comments/PostComments'
         else if(type === "media"){return(<MediaPost state = {state}></MediaPost>)}
     }
 
-    function Post(){
+    function Post(props){
         const [isLoading, setLoading] = useState(true);
         const [state, setNewState] = useState({
             communityTitle: '',
@@ -32,8 +32,8 @@ import PostComments from '../Comments/PostComments'
         const fetchData = () => {
             let token = document.getElementById('csrf-token').getAttribute('content')
 
-            var url = new URL('http://localhost:80/api/post')
-            let param = {query: postID}
+            let url = new URL('http://localhost:80/api/post')
+            let param = {query: props.postId}
 
             url.search = new URLSearchParams(param).toString();
             fetch(url, {
@@ -88,9 +88,6 @@ import PostComments from '../Comments/PostComments'
     }
     
 if (document.getElementById('PostContainer')) {
-    var postID = document.getElementById('dataHolder').getAttribute('postID');
-    
-    ReactDOM.render(<Post/>, document.getElementById('PostContainer'));
+    let postId = document.getElementById('dataHolder').getAttribute('postID');
+    ReactDOM.render(<Post postId = {postId} />, document.getElementById('PostContainer'));
 }
- 
-export default Post ;

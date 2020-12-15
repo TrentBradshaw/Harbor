@@ -34,8 +34,6 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
                             
                             }).then((response) => {
                                 response.json().then((data) => {
-                                    console.log(JSON.stringify(data))
-                                    console.log('data' + data)
                                         this.setState({upvoted: data['upvoted']});
                                         this.setState({downvoted: data['downvoted']})
                                 })
@@ -58,12 +56,12 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
                 credentials: "same-origin",
                 }).then((response) => {
                     response.json().then((data) => {
-                        console.log(JSON.stringify(data))
+                        
                         this.setState({upvoted: data['upvoted']});
                         this.setState({downvoted: data['downvoted']});
                     }).then(
                         data => {
-                            console.log(data)
+                            
                             
                             //
                             //here we'll switch state and color of the arrow to reflect 

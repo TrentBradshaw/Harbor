@@ -9,8 +9,8 @@ import moment, { months } from 'moment';
         var now = moment() //.format('MM/DD/YYYY H:M');
         var then = moment(props.timePosted)
         
-        console.log(props)
-        console.log(props.timePosted)
+        //console.log(props)
+       // console.log(props.timePosted)
         //moment("Nov/02/1928 12:44:08") //.format('MM/DD/YYYY H:M');
 
        // var totalSec = now.diff(then);
@@ -22,22 +22,23 @@ import moment, { months } from 'moment';
         var hoursDiff = Math.floor(now.diff(then, 'hours', true));
         var minutesDiff = Math.floor(now.diff(then, 'minutes', true));
 
+        /*
         console.log('years' + yearsDiff)
         console.log('months' + monthsDiff)
         console.log('weeks' + weeksDiff)
         console.log('days' + daysDiff)
         console.log('hours' + hoursDiff)
-        
+        */
 
         var submitString = 'submitted ';
         var creator = props.creator;
         var timeSince = '';
         var getTimeOnly = (props.type == 'time')
 
-        console.log('timesince' + timeSince)
+       // console.log('timesince' + timeSince)
 
         if (yearsDiff >= 1){
-            console.log('timesince' + timeSince)
+            //console.log('timesince' + timeSince)
             if(yearsDiff > 1 )
                 getTimeOnly ? timeSince = yearsDiff + " years ago" : timeSince = submitString +  yearsDiff + "years ago by " + creator;
             else if (yearsDiff == 1)
@@ -45,7 +46,7 @@ import moment, { months } from 'moment';
             return startOfString + timeSince;
         }
         if(monthsDiff >=1){
-            console.log('timesince' + timeSince)
+            //console.log('timesince' + timeSince)
             if(monthsDiff > 1 )
                 getTimeOnly ? timeSince = monthsDiff + " months ago" : timeSince = submitString + monthsDiff + ' months ago by ' + creator;
             else if (monthsDiff == 1)
@@ -53,7 +54,7 @@ import moment, { months } from 'moment';
             return timeSince;
         }
         if(weeksDiff >=1){
-            console.log('timesince' + timeSince)
+           //console.log('timesince' + timeSince)
             if(weeksDiff > 1 )
                 getTimeOnly ? timeSince = weeksDiff + " weeks ago" : timeSince = submitString + weeksDiff + ' weeks ago by ' + creator;
             else if (weeksDiff == 1)
