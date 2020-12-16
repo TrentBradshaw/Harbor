@@ -5,31 +5,18 @@ import Statement from './Statement';
 import UserCard from './UserCard';
 import UserPageFeed from './UserPageFeed';
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
-export default class UserPage extends Component {
-  constructor(props){
-      super(props);
-      
-      //var data = JSON.parse(this.props.pageOwnerInfo);
-      //console.log('props' + props);
-      //console.log('pageOwnerInfo' + JSON.stringify(data));
-    }
+function UserPage (props){
  
-    render(){
-       var pageOwnerInfo = JSON.parse(this.props.pageOwnerInfo)
+       var pageOwnerInfo = JSON.parse(props.pageOwnerInfo)
        console.log(pageOwnerInfo.statements_count)
        console.log(pageOwnerInfo.docks_count)
-       console.log()
-       var contributions = (parseFloat(pageOwnerInfo.followers_count)  + parseFloat( pageOwnerInfo.followed_count) )
-       console.log( contributions)
-
         return (
             <div>
                 <UserCard currentUser={currentUser} pageOwnerInfo={pageOwnerInfo}></UserCard>
-                <UserPageFeed pageOwnerUsername={pageOwnerInfo.username}></UserPageFeed>
+                <UserPageFeed pageOwnerId={pageOwnerInfo.id}></UserPageFeed>
             </div>
             
-        )
-    }   
+        ) 
 } 
     
 if (document.getElementById('UserPageContainer')) {

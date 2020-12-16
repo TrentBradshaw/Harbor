@@ -39,14 +39,24 @@ import DeleteIcon from '@material-ui/icons/Delete';
             }
             toggleMinimized(!minimized)
         }
-        
+
         useEffect(() => {
+            initialize();
+          }, []);
+
+        function initialize(){
             console.log(JSON.stringify(comment))
             
             console.log('reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
             console.log(comment.isDeleted + 'cmdel')
             updateDeleted(comment.isDeleted)
-        })
+        }
+
+        function handleDeleteComment(id){
+            updateDeleted(true)
+            deleteComment(id)
+
+        }
         //modularize all of this into bottom taskbar and header and the like
         if(deleted){
             return(
@@ -98,7 +108,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
                                 <QuestionAnswerIcon style={{fill: 'slategrey'}}></QuestionAnswerIcon>
                             </div>
                             <ShareIcon style= {{marginLeft: '20px', textAlign: 'start', fill: 'slategrey'}}></ShareIcon>
-                            {userId === comment.creator_id && <DeleteIcon onClick = {(e) => deleteComment(comment.id)}></DeleteIcon>}
+                            {userId === comment.creator_id && <DeleteIcon onClick = {(e) => handleDeleteComment(comment.id)}></DeleteIcon>}
                         </div>
                     </div>
                 </div>
@@ -118,13 +128,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
     ///when you create a comment via commentinput you check if you replied to one, if you did then you check the nested level and make it one more
     //when pulling from the database make sure to group posts into their own arrays with their relationship being comment and children
     //and then compile them into one array
-    
-   
-    
-    function deleteComment(id){
-        updateDeleted(true)
-        deleteComment(id)
-    }
-   
+
 
 export default PostComment;

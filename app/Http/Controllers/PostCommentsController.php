@@ -11,7 +11,6 @@ use Carbon\Carbon;
 
 class PostCommentsController extends Controller
 {
-
     public function Delete(){
         $json = json_decode(file_get_contents('php://input'), true); //grab request
 
@@ -30,7 +29,6 @@ class PostCommentsController extends Controller
             $comment->delete();
             response()->json(['success' => 'success'], 200);
         }
-        
     }
     public function GetPostComments(){
         $id = request('query');
@@ -43,7 +41,6 @@ class PostCommentsController extends Controller
             $postComments[$i]['formattedStamp'] = $dateAltered->format('M/d/Y h:i');
             //$postComments[$i]['username'] =  $user[0]['username'];
         }
-
 
         return response()->json([
             //so i need

@@ -11,6 +11,31 @@ use Illuminate\Support\Facades\Auth;
 
 class ShowUserController extends Controller
 {
+    //
+
+    //rework models so you have simplified functions in there that you can call from here
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     // FIX ALL OF THIS WORDING SO FOLLOWED IS JUST FOLLOWING 
     public function ShowUser($username){
@@ -20,17 +45,8 @@ class ShowUserController extends Controller
                 $currentUser = User::where('id', Auth::user()->id)->get()->toArray();
 
                 $isFollowing = Follower::where('follower_id', $currentUser[0]['id'])->where('followee_id', $pageOwner[0]['id']);
-
-                $followed_count_fromDB = count (Follower::where('follower_id', $pageOwner[0]['id'])->get()->toArray());
-                $follower_count_fromDB = count (Follower::where('followee_id', $pageOwner[0]['id'])->get()->toArray());
             
-                $username = $pageOwner[0]['username'];
-                $pfp_url = $pageOwner[0]['pfp_url'];
-                $description =  $pageOwner[0]['description'];
-                $followers_count = $follower_count_fromDB;//$pageOwner[0]['followers_count'];
-                $followed_count =  $followed_count_fromDB;//$pageOwner[0]['followed_count'];
-                $statements_count =  $pageOwner[0]['statements_count'];
-                $docks_count =  $pageOwner[0]['docks_count'];
+                $userId = $pageOwner[0]['id'];
                 
     
                 
@@ -39,17 +55,13 @@ class ShowUserController extends Controller
     
                 array_push($statements_array, Status::where('username', $username)->get()->toArray());
                 //print_r($statements_array);
+                /*
                 $pageOwnerInfo  =  array(
                         //make all of this the profile info object
                         //"user" = User::where('id', Auth::user()->id)->get()->toArray();
-                        "username" => $username,
-                        "pfp_url" => $pfp_url,
-                        "description" =>  $description,
-                        "followers_count" => $followers_count,
-                        "followed_count" => $followed_count,
-                        "statements_count" => $statements_count,
-                        "docks_count" => $docks_count,
+                         'userId' = $userId
                 );
+                */
                 $feedInfo = array(
                     //PUMP THE DATA INTO HERE WITH A FOR LOOP!
                 );
