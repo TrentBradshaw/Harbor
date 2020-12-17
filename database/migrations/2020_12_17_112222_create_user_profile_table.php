@@ -1,31 +1,11 @@
 <?php
 
-
-
-
-
-
-
-//make api
-
-
-
-
-
-
-
-
-
-
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStatementsTable extends Migration
+class CreateUserProfileTable extends Migration
 {
-
-    protected $primaryKey = 'statement_id';
     /**
      * Run the migrations.
      *
@@ -33,16 +13,15 @@ class CreateStatementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('statements', function (Blueprint $table) {
-            $table->string('statement_id');
-            $table->mediumText('body');
+        Schema::create('user_profile', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
-            $table->string('user_id');
+            $table->foreignId('user_id')->length(25);
             $table->string('username');
-            $table->string('pfp_url');
-            
+            $table->string('pfp_url')->default('8IYSjofV_400x400.jpg');
+            $table->string('header_url')->default('8IYSjofV_400x400.jpg');
+            $table->string('description')->default('');
         });
-        
     }
 
     /**
@@ -52,6 +31,6 @@ class CreateStatementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('statements');
+        Schema::dropIfExists('user_profile');
     }
 }

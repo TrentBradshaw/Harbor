@@ -16,6 +16,10 @@ class CreatePostCommentsTable extends Migration
         Schema::create('post_comments', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->foreignId('creator_id')->default(null);
+            $table->string('username')->default('');
+            $table->string('body')->length(2000);
+            $table->boolean('isDeleted')->default(false);
         });
     }
 

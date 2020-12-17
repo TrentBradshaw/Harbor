@@ -19,6 +19,10 @@ use App\Includes\GetUrlMetaData;
 
 class PostController extends Controller
 {
+
+    $comments = Post::find(1)->comments; //but find all
+
+    
     protected $dates = ['name_field'];
     public function PostForm(){
         return view ('PostSubmitForm');

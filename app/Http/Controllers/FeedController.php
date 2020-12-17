@@ -6,10 +6,18 @@ use Illuminate\Http\Request;
 use App\Models\Status;
 use App\Models\User;
 use App\Models\Dock;
+use App\Models\Post;
 use App\Models\Follower;
 
 class FeedController extends Controller
 {
+    public function index(){
+        $user_id - auth()->user()->id();
+        $user = User::find($user_id);
+        return response()->json([
+            'posts' => $user->posts
+        ]);
+    }
     public function __invoke($username) {
         $id = request('query');
 

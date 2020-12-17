@@ -21,7 +21,6 @@ class CreatePostsTable extends Migration
             $table->string('title')->length(200);
             $table->string('text')->length(2000);
             $table->string('link')->length(2000);
-            $table->integer('votes');
             $table->string('media_url')->length(2000);
             $table->string('type')->length(15);
         });

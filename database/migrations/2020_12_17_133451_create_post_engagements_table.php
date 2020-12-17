@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFollowcountTable extends Migration
+class CreatePostEngagementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateFollowcountTable extends Migration
      */
     public function up()
     {
-        Schema::create('followcount', function (Blueprint $table) {
+        Schema::create('post_engagements', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->foreignId('engager_id')->default(null);
+            $table->boolean('upvoted')->default(false);
+            $table->boolean('downvoted')->default(false);
+            $table->integer('post_id')->length(10)->default(null);
         });
     }
 
@@ -26,6 +30,6 @@ class CreateFollowcountTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('followcount');
+        Schema::dropIfExists('post_engagements');
     }
 }

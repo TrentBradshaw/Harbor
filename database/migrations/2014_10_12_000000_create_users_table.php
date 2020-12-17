@@ -20,13 +20,6 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->string('username');
-            $table->string('pfp_url')->default('8IYSjofV_400x400.jpg');
-            $table->string('description')->default('');
-            $table->integer('followers_count')->default(0);
-            $table->integer('followed_count')->default(0);
-            $table->integer('statements_count')->default(0);
-            $table->integer('docks_count')->default(0);
         });
     }
 

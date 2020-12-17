@@ -12,6 +12,11 @@ use Carbon\Carbon;
 class PostCommentsController extends Controller
 {
     public function Delete(){
+        // PostId can be acquired through 
+        
+
+        $post = PostComment::find(1)->post;
+
         $json = json_decode(file_get_contents('php://input'), true); //grab request
 
         // see if this comment has children comments. if it does, then just edit the content to be a deleted comment, remove all information except for the comment ID
