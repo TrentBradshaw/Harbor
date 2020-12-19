@@ -21,11 +21,7 @@
         <link href="{{ asset('css/home.css') }}" rel="stylesheet">
     </head>
     <body>
-        <div class="Container" id = "dataHolder" 
-        feedInfo="{{$feedInfo ?? ''}}"
-        data="{{$data ?? ''}}" 
-        pageOwnerInfo="{{$pageOwnerInfo}}"
-        currentUser = "{{$currentUser}}">
+    <div class="Container" id = "dataHolder" userId = "{{$userId}}" pageOwnerUsername = "{{$pageOwnerUsername}}">
             <div class="Header" id="Header"></div>
             <div  id="Column C2" class="C2">
                 <div id='UserPageContainer'></div>

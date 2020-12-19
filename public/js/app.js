@@ -103167,20 +103167,23 @@ __webpack_require__.r(__webpack_exports__);
  //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
 
 function UserCard(_ref) {
-  var currentUser = _ref.currentUser,
-      pageOwnerInfo = _ref.pageOwnerInfo;
+  var currentUserId = _ref.currentUserId,
+      profileOwnerInfo = _ref.profileOwnerInfo;
+  console.log(currentUserId);
+  console.log(profileOwnerInfo);
   var home = window.location.href === 'http://localhost/home';
+  var username = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       background: 'ghostwhite',
       display: 'flex'
     }
-  }, !home && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "backButtonHolder",
     style: {
       flex: '1'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_KeyboardBackspace__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  }, !home && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_KeyboardBackspace__WEBPACK_IMPORTED_MODULE_2___default.a, {
     style: {
       height: '100%'
     },
@@ -103197,20 +103200,20 @@ function UserCard(_ref) {
     style: {
       textAlign: 'left'
     }
-  }, pageOwnerInfo.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+  }, profileOwnerInfo.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     style: {
       textAlign: 'left'
     }
-  }, pageOwnerInfo.docks_count + pageOwnerInfo.statements_count, " contributions"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProfileImage__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, profileOwnerInfo.docks_count + profileOwnerInfo.statements_count, " contributions"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProfileImage__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: 'header',
-    url: pageOwnerInfo.header_img_url
+    url: profileOwnerInfo.header_img_url
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProfileImage__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: 'profilePicture',
-    url: pageOwnerInfo.pfp_url
+    url: profileOwnerInfo.pfp_url
   }), !home && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FollowButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
     currentUser: currentUser,
-    followee: pageOwnerInfo.username
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "bio: ", pageOwnerInfo.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "when joined"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " ", pageOwnerInfo.followed_count, " Following ", pageOwnerInfo.followers_count, " Followers ")));
+    followee: profileOwnerInfo.username
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "bio: ", profileOwnerInfo.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "when joined"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " ", profileOwnerInfo.followed_count, " Following ", profileOwnerInfo.followers_count, " Followers ")));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (UserCard);
@@ -103235,6 +103238,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Statement__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Statement */ "./resources/js/components/UserPage/Statement.js");
 /* harmony import */ var _UserCard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./UserCard */ "./resources/js/components/UserPage/UserCard.js");
 /* harmony import */ var _UserPageFeed__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./UserPageFeed */ "./resources/js/components/UserPage/UserPageFeed.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -103242,24 +103257,50 @@ __webpack_require__.r(__webpack_exports__);
 
  //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
 
-function UserPage(props) {
-  var pageOwnerInfo = JSON.parse(props.pageOwnerInfo);
-  console.log(pageOwnerInfo.statements_count);
-  console.log(pageOwnerInfo.docks_count);
+function UserPage(_ref) {
+  var userId = _ref.userId,
+      pageOwnerUsername = _ref.pageOwnerUsername;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      profileOwnerInfo = _useState2[0],
+      setProfileOwnerInfo = _useState2[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    var url = new URL('http://localhost:80/api/profile');
+    var param = {
+      query: pageOwnerUsername
+    };
+    url.search = new URLSearchParams(param).toString();
+    fetch(url, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'get',
+      mode: "same-origin",
+      credentials: "same-origin"
+    }).then(function (response) {
+      console.log('response ' + response);
+      response.json().then(function (data) {
+        console.log(data);
+        setProfileOwnerInfo(data['profileOwnerInfo']); //if array of activity, show, else don't and load other return statement
+      });
+    });
+  }, []); //return(<div>memes</div>)
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_UserCard__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    currentUser: currentUser,
-    pageOwnerInfo: pageOwnerInfo
+    currentUserId: userId,
+    profileOwnerInfo: profileOwnerInfo
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_UserPageFeed__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    pageOwnerId: pageOwnerInfo.id
+    currentUserId: userId,
+    profileOwnerInfo: profileOwnerInfo
   }));
 }
 
 if (document.getElementById('UserPageContainer')) {
-  var pageOwnerInfo = document.getElementById('dataHolder').getAttribute('pageOwnerInfo');
-  var currentUser = document.getElementById('dataHolder').getAttribute('currentUser');
   react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(UserPage, {
-    currentUser: currentUser,
-    pageOwnerInfo: pageOwnerInfo
+    userId: document.getElementById('dataHolder').getAttribute('userId'),
+    pageOwnerUsername: document.getElementById('dataHolder').getAttribute('pageOwnerUsername')
   }), document.getElementById('UserPageContainer'));
 }
 
@@ -103280,6 +103321,11 @@ __webpack_require__.r(__webpack_exports__);
 
 function UserPageFeed(_ref) {
   var pageOwnerId = _ref.pageOwnerId;
+  // boolcheck if it's home feed or user feed before fetching
+  //
+  //
+  //
+  //
   //pass page owner in
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     var url = new URL('http://localhost:80/api/feed');

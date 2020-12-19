@@ -16,27 +16,6 @@ class ShowUserController extends Controller
     //rework models so you have simplified functions in there that you can call from here
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // FIX ALL OF THIS WORDING SO FOLLOWED IS JUST FOLLOWING 
     public function ShowUser($username){
         if (Auth::check()) {

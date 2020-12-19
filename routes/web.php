@@ -85,6 +85,7 @@ Auth::routes();
 Route::get('/{username}', [App\Http\Controllers\ShowUserController::class, 'ShowUser'])->name('showUser');
 //Route::get('/{username}/{id}', [App\Http\Controllers\StatusController::class, 'show'])->name('show');
 
+route::get('/api/profile', 'App\Http\Controllers\ProfileController');
 Route::get('api/feed', [App\Http\Controllers\FeedController::class, 'GetPost'])->name('GetPost');
 Route::get('api/post', [App\Http\Controllers\PostController::class, 'GetPost'])->name('GetPost');
 Route::put('api/comments/engagement', [App\Http\Controllers\ReeController::class, 'VoteOnComment']);

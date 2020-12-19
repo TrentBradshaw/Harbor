@@ -13,7 +13,7 @@ class CreatePostEngagementsTable extends Migration
      */
     public function up()
     {
-        Schema::create('post_engagements', function (Blueprint $table) {
+         Schema::create('post_engagements', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->foreignId('engager_id')->default(null);

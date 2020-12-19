@@ -23,6 +23,7 @@ class HomeController extends Controller
 
     public function home(){
         if (Auth::check()) {
+            /*
             $user = User::where('id', Auth::user()->id)->get()->toArray();
             //switch this to many to many later
             $followed_count = count (Follower::where('follower_id', Auth::user()->id)->get()->toArray());
@@ -57,11 +58,11 @@ class HomeController extends Controller
                 //MAKE A STATEMENT COMPONENT FOR EACH ONE
                 //APPEND THEM TO THE STATEMENT
             //return view('home')->with('pageOwnerInfo', json_encode($pageOwnerInfo))->with('feedInfo', json_encode($feedInfo)); //json_encode($data)
+            */
+            $user = User::where('id', Auth::user()->id)->get();
             return view('home',
-            [
-                'pageOwnerInfo'=> json_encode($pageOwnerInfo),
-                'feedInfo', json_encode($feedInfo),
-                'currentUser'=> $user[0]['username'],
+            [   'pageOwnerUsername' => $user[0]['username'],
+                'userId' => Auth::id()
             ]);
         }
         else{

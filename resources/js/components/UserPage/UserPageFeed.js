@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 
 function UserPageFeed({pageOwnerId}) {
-    
+    // boolcheck if it's home feed or user feed before fetching
+//
+//
+//
+//
     //pass page owner in
     useEffect(() => {
         let url = new URL('http://localhost:80/api/feed')
