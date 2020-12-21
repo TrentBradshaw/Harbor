@@ -23,11 +23,11 @@ function UserCard({currentUserId, profileOwnerInfo}) {
                     </div>
                 </div>
                 <div>
-                    <ProfileImage type= {'header'} url={profileOwnerInfo.header_img_url} ></ProfileImage>
-                    <ProfileImage type={'profilePicture'} url = {profileOwnerInfo.pfp_url}></ProfileImage>
-                    { !home && < FollowButton currentUser={currentUser} followee={profileOwnerInfo.username}></FollowButton>}
+                    <ProfileImage type= {'header'} url={profileOwnerInfo.headerUrl} ></ProfileImage>
+                    <ProfileImage type={'profilePicture'} url = {profileOwnerInfo.pfpUrl}></ProfileImage>
+                    { !home && < FollowButton currentUser={currentUserId} followee={profileOwnerInfo.username}></FollowButton>}
                 </div>
-                <div>
+                <div style={{marginTop : '75px', textAlign: 'start' ,marginLeft: '50px'}}>
                     <p>bio: {profileOwnerInfo.description}</p>
                     <p>when joined</p>
                     <p> {profileOwnerInfo.followed_count} Following {profileOwnerInfo.followers_count} Followers </p>

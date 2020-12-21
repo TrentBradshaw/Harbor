@@ -3,10 +3,12 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import Statement from './Statement';
 import UserCard from './UserCard';
-import UserPageFeed from './UserPageFeed';
+import Feed from './Feed';
+import Loading from '../Utility/Loading';
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
 function UserPage ({userId, pageOwnerUsername}){
     const [profileOwnerInfo, setProfileOwnerInfo] = useState([]);
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         let url = new URL('http://localhost:80/api/profile')
         let param = {query: pageOwnerUsername}
@@ -25,19 +27,26 @@ function UserPage ({userId, pageOwnerUsername}){
             response.json().then((data) => {
                 console.log(data);
                 setProfileOwnerInfo(data['profileOwnerInfo']);
+                setLoading(false);
                 //if array of activity, show, else don't and load other return statement
             });
         });
             
       }, []);
         //return(<div>memes</div>)
-        return (
+        if (loading){
+            return(<Loading></Loading>)
+        }
+        else {
+            return (
             
-            <div>
-                <UserCard currentUserId = {userId} profileOwnerInfo={profileOwnerInfo}></UserCard>
-                <UserPageFeed currentUserId = {userId} profileOwnerInfo={profileOwnerInfo}></UserPageFeed>
-            </div>
-        ) 
+                <div>
+                    <UserCard currentUserId = {userId} profileOwnerInfo={profileOwnerInfo}></UserCard>
+                    <Feed currentUserId = {userId} profileOwnerId={profileOwnerInfo.id}></Feed>
+                </div>
+            ) 
+        }
+        
        
 } 
     

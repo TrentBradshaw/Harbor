@@ -24,7 +24,7 @@
     <div class="Container" id = "dataHolder" userId = "{{$userId}}" pageOwnerUsername = "{{$pageOwnerUsername}}">
             <div class="Header" id="Header"></div>
             <div  id="Column C2" class="C2">
-                <div id='UserPageContainer'></div>
+                <div id='HomeContainer'></div>
                 <div id='content'></div>
             </div>
         </div>

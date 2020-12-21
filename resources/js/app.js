@@ -29,7 +29,7 @@ require('./components/SubmitPage/PostContentField')
 
 require('./components/UserPage/Profile')
 require('./components/UserPage/DockContainer')
-require('./components/UserPage/UserPageFeed')
+require('./components/UserPage/Feed')
 require('./components/UserPage/Profile')
 require('./components/UserPage/Statement')
 require('./components/UserPage/UserPage')
@@ -51,3 +51,6 @@ require('./components/Posts/MediaPost')
 
 require('./components/Comments/PostComment')
 require('./components/Comments/PostComments')
+
+require('./components/Home/Home')
+require('./components/Home/HomeInput')

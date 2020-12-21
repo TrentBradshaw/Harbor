@@ -1,74 +1,55 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom';
 import PostContentField from './PostContentField' 
 import AutoCompleteDockLookup from '../AutoComplete/AutoCompleteDockLookup'
 
-class PostSubmitForm extends Component {
-    constructor(props){
-        super(props);
+function PostSubmitForm(props){
+    const [highlighted, setHighlighted] = useState('text');
+    const [title, setTitle] = useState('');
+    const [mediaUrl, setMediaUrl] = useState('');
+    const [url, setUrl] = useState('');
+    const [file, setFile] = useState('');
+    const [body, setBody] = useState('');
 
-        this.state = {
-                highlighted: 'text',
-                title:'',
-                creator:'',
-                timeCreated:'',
-                body:'',
-                file:'',
-                url:'',
-        }
-        this.changePostType = this.changePostType.bind(this)
-        this.updateContentValue = this.updateContentValue.bind(this)
-        this.updateImage = this.updateImage.bind(this)
-    }
-    render() {
         return (
-            <form action="/api/post/submit" method="POST" style={{width: "700px", marginLeft: '30%'}}>
+            <div style={{backgroundColor: 'gainsboro', marginTop: '5%'}}>
                 <h1>Create a Post</h1>
                 <div>
-                    <AutoCompleteDockLookup type='text' placeholder='Choose a destination for this post'></AutoCompleteDockLookup>
-                    <input id = "dockPostTitle" type='text' placeholder='title' name='title' onChange = { (e) => {this.setState({title: e.target.value})}}></input>
+                    <AutoCompleteDockLookup></AutoCompleteDockLookup>
+                    <input className="submitFormInput" id = "dockPostTitle" type='text' placeholder='title' name='title' onChange = { (e) => {setTitle(e.target.value)}}></input>
                 </div>
                 <div>
-                    <button type="button" onClick={ () => {this.changePostType('text')}}>Text</button>
-                    <button type="button" onClick={ () => {this.changePostType('media')}}>Media</button>
-                    <button type="button" onClick={ () => {this.changePostType('link')}}>Link</button>
+                    <button type="button" onClick={ () => {changePostType('text')}}>Text</button>
+                    <button type="button" onClick={ () => {changePostType('media')}}>Media</button>
+                    <button type="button" onClick={ () => {changePostType('link')}}>Link</button>
                 </div>
-                    <PostContentField updateImage = {this.updateImage} updateContentValue = {this.updateContentValue} highlighted = {this.state.highlighted}></PostContentField>
+                    <PostContentField updateImage = {updateImage} updateContentValue = {updateContentValue} highlighted = {highlighted}></PostContentField>
                 <div>
                         <button type="button" onClick={()=>{this.submit()}}>SUBMIT</button>
                 </div>
-            </form>
+            </div>
         )
-    }
-    changePostType = (type) => {
-        if (type == "text")
-            this.setState({ highlighted: 'text', media_url: '', url: ''})
-        else if (type == "media")
-            this.setState({ highlighted: 'media', body: '', url: ''})
-        else if (type == "link")
-            this.setState({highlighted: 'link', body: '', media_url: ''})
+    
+    function changePostType(type){
+        setHighlighted(type);
+        setMediaUrl('');
+        setUrl('');
     }
 
-    updateContentValue(content, value) {
-        if (content == 'text'){
-            this.setState({body: value})   
-        }
-        else if (content == 'media'){
-            this.setState({file: value})
-        }
-        else if (content == 'link'){
-            this.setState({url: value})
-        }
+    function updateContentValue(content, value) {
+        if (content == 'text')
+            setBody(value) 
+        else if (content == 'media')
+            setFile(value)
+        else if (content == 'link')
+            setUrl(value)
     }
-    updateImage(file){
-        this.setState({file: file})
+    function updateImage(file){
+        setFile(file)
     }
 
-    submit(){ /*
-        form = new FormData();
-        form.append(this.state)
-
-        */
+    function submit(){ 
+        
 
         //FIX PNG UPLOADING ERROR?
        let token = document.getElementById('csrf-token').getAttribute('content')
@@ -113,7 +94,11 @@ class PostSubmitForm extends Component {
                     })
     }
 }
+
+
+// switch it so this is implemented without reactDOM.render
 if (document.getElementById('PostFormHolder')) {
    
     ReactDOM.render(<PostSubmitForm/>, document.getElementById('PostFormHolder'));
 }
+export default PostSubmitForm

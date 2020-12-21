@@ -59,7 +59,7 @@ public $successStatus = 200;
     public function logout(Request $request)
     {
     if (Auth::check()) {
-    $request->user()->token()->delete();
+        $request->user()->token()->delete();
     }
     return response()->json(['message' => 'User logged out.'], 200);
 }

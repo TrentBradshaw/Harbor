@@ -26,7 +26,7 @@ class ProfileController extends Controller
 //  /// //  //  /   /   /   /   /   /   /   /   /   /   //      //  /   /   /   /   /   /   /   /   /   //  /
 
         return response()->json([
-            'profileOwnerInfo' => json_encode($profileOwnerInfo)
+            'profileOwnerInfo' => $profileOwnerInfo
         ]);
         
 

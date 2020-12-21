@@ -9,7 +9,7 @@ class Status extends Model
 {
     //use HasFactory;
 
-    protected $table = "statements";
-    public $primaryKey = "statement_id";
+    protected $table = "statuses";
+    public $primaryKey = "status_id";
     
 }

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-function UserPageFeed({pageOwnerId}) {
+function Feed({home, userId, profileOwnerId}) {
     // boolcheck if it's home feed or user feed before fetching
 //
 //
@@ -8,15 +8,25 @@ function UserPageFeed({pageOwnerId}) {
 //
     //pass page owner in
     useEffect(() => {
-        let url = new URL('http://localhost:80/api/feed')
-        let param = {query: pageOwnerId}
-
+        let token = document.getElementById('csrf-token').getAttribute('content')
+    
+        
+    
+        let param, url
+        if(home){
+            url = new URL('http://localhost:80/api/feed/home')
+            param = {query: userId}
+        } else{
+            url = new URL('http://localhost:80/api/feed/')
+            param = {query: profileOwnerId}
+        }
         url.search = new URLSearchParams(param).toString();
         
         fetch(url, {
-            headers:{
-                'Content-Type':'application/json',
-            },
+            headers:{'X-CSRF-TOKEN': token,
+            'Content-Type':'application/json',
+            "Access-Control-Allow-Origin" : "*", 
+            "Access-Control-Allow-Credentials" : true },
             method: 'get',
             mode: "same-origin",
             credentials: "same-origin",
@@ -41,4 +51,4 @@ function UserPageFeed({pageOwnerId}) {
     )
 }  
 
-export default UserPageFeed
+export default Feed

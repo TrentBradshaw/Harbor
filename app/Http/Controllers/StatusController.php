@@ -36,7 +36,20 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $json = json_decode(file_get_contents('php://input'), true); //grab request
+        $status = new Status();
+        
+        $status->body = $json['body'];
+        $status->user_id = $json['userId'];
+        $saved = $status->save();
+        if ($saved){
+            return response()->json([
+                //so i need
+                //127.0.0.1/dock/dockname/postID/posttitle
+                'yee'=>'yeet'
+            ]);
+        }
+        
     }
 
     /**

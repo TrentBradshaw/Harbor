@@ -76,13 +76,15 @@ body > .Container
     padding-left: 50px;
     background-color: #90adc1;
 }
+
 .C2
 {
     margin-top: 32px;
-    width: 40%;
-    margin-left: 30%;
-    margin-right: 30%;
+    width: 44%;
+    margin-left: 28%;
+    margin-right: 28;
     background: #dae0e6;
+    background-color: white;
     height: 100%;
 }
 .C3
@@ -102,12 +104,42 @@ h2 {
 }
 img#header{
     width: 100%;
-    height: 300px;
+    height: 250px;
+    object-fit: cover;
 }
 img#pfp{
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    border: 10px solid gainsboro;
+    line-height: 0;
+    outline: none;
+    position: absolute;
+    top: 240px;
+    left: 570px;
+    cursor: hand;
+    text-align: center;
+    padding: none;
+    vertical-align: top;
+    vertical-align: bottom;
+    border-style: solid;
+    box-sizing: border-box;
 }
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    margin-left: 40%;
+    margin-right: 40%;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
   
   .vertical-menu a {
     background-color: #eee; /* Grey background color */
@@ -128,7 +160,16 @@ img#pfp{
   .NavItem{
       display: inline-flex;
   }
-
+.search-box{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.submitFormInput{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
   .header__logo{
       widows: 100px;
       object-fit: contain;
@@ -169,6 +210,24 @@ img#pfp{
     top: 60px;
     left: 80px;
   }
+  .search{
+      height: 35px;
+  }
+  #dockPostTitle{
+    display: block;
+    border: 1px solid red;
+    height: 35px;
+    margin-top: 20px;
+  }
+  #postTextField{
+    width: 95%;
+
+  }
+  #dockInput{
+    display: block;
+    border: 1px solid red;
+    height: 35px;
+  }
   @import "http://fonts.googleapis.com/css?family=Raleway";
   /*----------------------------------------------
   CSS Settings For HTML Div ExactCenter
@@ -184,7 +243,7 @@ img#pfp{
   input {
   width:100%;
   margin-bottom:20px;
-  padding:5px;
+  padding-top:5px;
   height:150px;
   box-shadow:1px 1px 12px gray;
   border-radius:3px;
@@ -237,7 +296,7 @@ img#pfp{
   }
   #content{
     min-height: 100%;
-    background-color: beige;
+    background-color: white;
   }
   .dropdown-menu {
     position: relative;
@@ -402,5 +461,10 @@ img#pfp{
         border-right: 2px solid green;
         height: 100%;
       
+  }
+  #HomeContainer{
+      width: 60%;
+      margin-right: 20%;
+      margin-left: 20%;
   }
   

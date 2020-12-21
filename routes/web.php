@@ -68,7 +68,7 @@ Route::post('/upload', [App\Http\Controllers\FileUploadController::class, 'store
 
 
 
-Route::post('/userdetails', 'App\Http\Controllers\GetCurrentUserController');
+Route::post('/userdetails', 'App\Http\Controllers\GetCurrentUserController'); // switch this to userController::class getcurrentuser
 Route::get('/status', [App\Http\Controllers\StatusController::class, "ShowStatus"])->name('ShowStatus');
 Route::get('/submit/dock', [App\Http\Controllers\DockController::class, 'SubmitForm'])->name('SubmitForm');
 Route::get('/submit/post', [App\Http\Controllers\SubmitController::class, 'Submit'])->name('Submit');
@@ -86,7 +86,8 @@ Route::get('/{username}', [App\Http\Controllers\ShowUserController::class, 'Show
 //Route::get('/{username}/{id}', [App\Http\Controllers\StatusController::class, 'show'])->name('show');
 
 route::get('/api/profile', 'App\Http\Controllers\ProfileController');
-Route::get('api/feed', [App\Http\Controllers\FeedController::class, 'GetPost'])->name('GetPost');
+Route::get('api/feed/home', [App\Http\Controllers\FeedController::class, 'GetHomeFeed'])->name('GetHomeFeed');
+Route::get('api/feed', [App\Http\Controllers\FeedController::class, 'GetUserFeed'])->name('GetUserFeed');
 Route::get('api/post', [App\Http\Controllers\PostController::class, 'GetPost'])->name('GetPost');
 Route::put('api/comments/engagement', [App\Http\Controllers\ReeController::class, 'VoteOnComment']);
 Route::get('api/comments/engagement', [App\Http\Controllers\ReeController::class, 'GetVoteStatus']);
@@ -98,5 +99,6 @@ Route::get('api/docks', [App\Http\Controllers\DockController::class, 'GetDocks']
 Route::get('/api/dock/{dock}', [App\Http\Controllers\DockController::class, 'GetDockPosts'])->name('GetDockPosts');
 Route::post('/api/posts/submit', [App\Http\Controllers\PostController::class, 'Store']);
 Route::get('/api/post/{post}', [App\Http\Controllers\PostController::class, 'ShowPost']);
+Route::post('/api/statuses/submit', [App\Http\Controllers\StatusController::class, 'Store']);
 
 //Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -18,6 +18,18 @@ class FeedController extends Controller
             'posts' => $user->posts
         ]);
     }
+    public function GetHomeFeed(){
+        $id = request('query');
+        return response()->json([
+            'feedhomeControllerReached' => $id
+        ]);
+    }
+    public function GetUserFeed(){
+        $id = request('query');
+        return response()->json([
+            'feeduserControllerReached' => $id
+        ]);
+    }
     public function __invoke($username) {
         $id = request('query');
 
