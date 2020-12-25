@@ -13,7 +13,7 @@ class CreatePostCommentsEngagementTable extends Migration
      */
     public function up()
     {
-        Schema::create('post_comments_engagement', function (Blueprint $table) {
+        Schema::create('post_comment_engagements', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->foreignId('engager_id')->default(null);
@@ -30,6 +30,6 @@ class CreatePostCommentsEngagementTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('post_comments_engagement');
+        Schema::dropIfExists('post_comment_engagements');
     }
 }

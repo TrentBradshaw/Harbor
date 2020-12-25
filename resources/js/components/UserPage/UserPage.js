@@ -1,7 +1,6 @@
 import { divide, toArray } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import Statement from './Statement';
 import UserCard from './UserCard';
 import Feed from './Feed';
 import Loading from '../Utility/Loading';

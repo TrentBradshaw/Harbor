@@ -20,16 +20,22 @@ class FeedController extends Controller
     }
     public function GetHomeFeed(){
         $id = request('query');
+
+        $statuses = Status::where('user_id', $id)->get()->toArray();
         return response()->json([
-            'feedhomeControllerReached' => $id
+            'feedhomeControllerReached' => $id,
+            'meme' => 'yee',
+            'statuses' => $statuses
         ]);
     }
     public function GetUserFeed(){
         $id = request('query');
         return response()->json([
-            'feeduserControllerReached' => $id
+            'feeduserControllerReached' => $id,
+            'statuses' => ['memes']
         ]);
     }
+    /*
     public function __invoke($username) {
         $id = request('query');
 
@@ -58,4 +64,5 @@ class FeedController extends Controller
             'feedhomeControllerReached' => $followingArray
         ]);
     }
+    */
 }

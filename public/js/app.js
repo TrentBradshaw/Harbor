@@ -99784,7 +99784,9 @@ __webpack_require__(/*! ./components/UserPage/Feed */ "./resources/js/components
 
 __webpack_require__(/*! ./components/UserPage/Profile */ "./resources/js/components/UserPage/Profile.js");
 
-__webpack_require__(/*! ./components/UserPage/Statement */ "./resources/js/components/UserPage/Statement.js");
+__webpack_require__(/*! ./components/Status/Status */ "./resources/js/components/Status/Status.js");
+
+__webpack_require__(/*! ./components/Status/StatusContainer */ "./resources/js/components/Status/StatusContainer.js");
 
 __webpack_require__(/*! ./components/UserPage/UserPage */ "./resources/js/components/UserPage/UserPage.js");
 
@@ -101575,6 +101577,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _HomeInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./HomeInput */ "./resources/js/components/Home/HomeInput.js");
 /* harmony import */ var _Utility_Loading__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Utility/Loading */ "./resources/js/components/Utility/Loading.js");
 /* harmony import */ var _UserPage_Feed__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../UserPage/Feed */ "./resources/js/components/UserPage/Feed.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -101602,29 +101612,59 @@ function Home(_ref) {
       profileOwnerInfo = _useState2[0],
       setProfileOwnerInfo = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      loading = _useState4[0],
-      setLoading = _useState4[1]; //return(<div>memes</div>)
+      statusArray = _useState4[0],
+      setStatusArray = _useState4[1];
 
+  function appendNewStatus(statusObject, isReply, parentCommentId) {
+    var tempCommentsArray = _toConsumableArray(statusArray);
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_HomeInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    var index;
+
+    for (var i = 0; i < tempCommentsArray.length; i++) {
+      if (tempCommentsArray[i]['id'] === parentCommentId) {
+        console.log('i: ' + i);
+        index = i + 1;
+        console.log('index: ' + index);
+      }
+
+      tempCommentsArray.unshift(statusObject);
+      console.log(tempCommentsArray);
+      changeCommentsArray(tempCommentsArray);
+    }
+  }
+
+  function deleteStatus(id) {
+    //if the comment is deleted and a parrent then just update the properties to say deleted comment
+    var token = document.getElementById('csrf-token').getAttribute('content'); //ADD THE FETCH
+
+    fetch('/api/comments/delete', {
+      headers: {
+        'X-CSRF-TOKEN': token,
+        'Content-Type': 'application/json'
+      },
+      method: 'put',
+      mode: "same-origin",
+      credentials: "same-origin",
+      body: JSON.stringify({
+        id: id
+      })
+    }).then(function (data) {
+      console.log('data from commentinput----------------------' + JSON.stringify(data));
+    });
+  }
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_HomeInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
     currentUserId: userId,
     profileOwnerInfo: profileOwnerInfo
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_UserPage_Feed__WEBPACK_IMPORTED_MODULE_5__["default"], {
     home: true,
     userId: userId,
-    pageOwnerId: null
+    pageOwnerId: null,
+    appendNewStatus: appendNewStatus,
+    deleteStatus: deleteStatus
   }));
-
-  if (loading) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Utility_Loading__WEBPACK_IMPORTED_MODULE_4__["default"], null);
-  } else {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_HomeInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      currentUserId: userId,
-      profileOwnerInfo: profileOwnerInfo
-    }));
-  }
 }
 
 if (document.getElementById('HomeContainer')) {
@@ -102033,160 +102073,208 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _material_ui_icons_ArrowDropDown__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/icons/ArrowDropDown */ "./node_modules/@material-ui/icons/ArrowDropDown.js");
 /* harmony import */ var _material_ui_icons_ArrowDropDown__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_ArrowDropDown__WEBPACK_IMPORTED_MODULE_2__);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
 
 
-var VotingSystem = /*#__PURE__*/function (_Component) {
-  _inherits(VotingSystem, _Component);
+function VotingSystem(_ref) {
+  var userId = _ref.userId,
+      id = _ref.id,
+      type = _ref.type;
 
-  var _super = _createSuper(VotingSystem);
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      upvoted = _useState2[0],
+      setUpvoted = _useState2[1];
 
-  function VotingSystem(props) {
-    var _this;
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      downvoted = _useState4[0],
+      setDownvoted = _useState4[1];
 
-    _classCallCheck(this, VotingSystem);
+  console.log(upvoted);
 
-    _this = _super.call(this, props);
-    console.log('props' + _this.props);
-    _this.state = {
-      upvoted: false,
-      downvoted: false
-    };
-    _this.vote = _this.vote.bind(_assertThisInitialized(_this));
-    return _this;
+  function vote(targetId, upvoted, downvoted) {
+    //make this call once and pass the userID probably from a higher-order component
+    var token = document.getElementById('csrf-token').getAttribute('content');
+    var url = new URL('http://localhost:80/api/engagement');
+    fetch(url, {
+      headers: {
+        'X-CSRF-TOKEN': token,
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true
+      },
+      method: 'put',
+      mode: "cors",
+      credentials: "same-origin",
+      body: JSON.stringify(_defineProperty({
+        userId: userId,
+        targetId: targetId,
+        upvoted: upvoted,
+        downvoted: downvoted,
+        type: type
+      }, "type", type))
+    }).then(function (response) {
+      response.json().then(function (data) {
+        setUpvoted(data['upvoted']);
+        setDownvoted(data['downvoted']);
+      });
+    });
   }
 
-  _createClass(VotingSystem, [{
-    key: "vote",
-    value: function vote(id, upvoted, downvoted) {
-      var _this2 = this;
-
-      //make this call once and pass the userID probably from a higher-order component
-      var token = document.getElementById('csrf-token').getAttribute('content');
-      var url = new URL('http://localhost:80/api/comments/engagement');
-      fetch(url, {
-        headers: {
-          'X-CSRF-TOKEN': token,
-          'Content-Type': 'application/json',
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Credentials": true
-        },
-        method: 'put',
-        mode: "cors",
-        credentials: "same-origin",
-        body: JSON.stringify({
-          userID: this.props.userId,
-          targetID: id,
-          upvoted: upvoted,
-          downvoted: downvoted
-        })
-      }).then(function (response) {
-        response.json().then(function (data) {
-          _this2.setState({
-            upvoted: data['upvoted']
-          });
-
-          _this2.setState({
-            downvoted: data['downvoted']
-          });
-        });
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    var token = document.getElementById('csrf-token').getAttribute('content');
+    console.log(upvoted);
+    var url = new URL('http://localhost:80/api/engagement');
+    var param = {
+      userId: userId,
+      targetId: id,
+      type: type
+    };
+    url.search = new URLSearchParams(param).toString();
+    fetch(url, {
+      headers: {
+        'X-CSRF-TOKEN': token,
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true
+      },
+      method: 'get',
+      mode: "cors",
+      credentials: "same-origin"
+    }).then(function (response) {
+      response.json().then(function (data) {
+        setUpvoted(data['upvoted']);
+        setDownvoted(data['downvoted']);
       });
+    });
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    style: {
+      height: '100px'
     }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this3 = this;
-
-      var token = document.getElementById('csrf-token').getAttribute('content'); //change this to get
-
-      var url = new URL('http://localhost:80/api/comments/engagement');
-      var param = {
-        userID: this.props.userId,
-        postID: this.props.id
-      };
-      url.search = new URLSearchParams(param).toString();
-      fetch(url, {
-        headers: {
-          'X-CSRF-TOKEN': token,
-          'Content-Type': 'application/json',
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Credentials": true
-        },
-        method: 'get',
-        mode: "cors",
-        credentials: "same-origin"
-      }).then(function (response) {
-        response.json().then(function (data) {
-          _this3.setState({
-            upvoted: data['upvoted']
-          });
-
-          _this3.setState({
-            downvoted: data['downvoted']
-          });
-        }).then(function (data) {//
-          //here we'll switch state and color of the arrow to reflect 
-        });
-      });
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_ArrowDropUp__WEBPACK_IMPORTED_MODULE_0___default.a, {
+    className: "material-icons",
+    fontSize: "large",
+    style: {
+      color: upvoted ? "orange" : null
+    },
+    onClick: function onClick() {
+      vote(id, true, false);
     }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this4 = this;
-
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        style: {
-          height: '100px'
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_ArrowDropUp__WEBPACK_IMPORTED_MODULE_0___default.a, {
-        className: "material-icons",
-        fontSize: "large",
-        style: {
-          color: this.state.upvoted ? "orange" : null
-        },
-        onClick: function onClick() {
-          _this4.vote(_this4.props.id, true, false);
-        }
-      }), this.props.type === 'post' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "number"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_ArrowDropDown__WEBPACK_IMPORTED_MODULE_2___default.a, {
-        className: "material-icons",
-        fontSize: "large",
-        style: {
-          color: this.state.downvoted ? "blue" : null
-        },
-        onClick: function onClick() {
-          _this4.vote(_this4.props.id, false, true);
-        }
-      })));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "number"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_ArrowDropDown__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    className: "material-icons",
+    fontSize: "large",
+    style: {
+      color: downvoted ? "blue" : null
+    },
+    onClick: function onClick() {
+      vote(id, false, true);
     }
-  }]);
-
-  return VotingSystem;
-}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]);
+  })));
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (VotingSystem);
+
+/***/ }),
+
+/***/ "./resources/js/components/Status/Status.js":
+/*!**************************************************!*\
+  !*** ./resources/js/components/Status/Status.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Posts_VotingSystem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Posts/VotingSystem */ "./resources/js/components/Posts/VotingSystem.js");
+
+ //Feed a statement array into the Statement class as props
+
+function Status(_ref) {
+  var appendNewStatus = _ref.appendNewStatus,
+      deleteStatus = _ref.deleteStatus,
+      status = _ref.status,
+      userId = _ref.userId;
+  console.log(status);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    key: status.id,
+    className: "statement",
+    style: {
+      borderColor: 'rgb(56, 68, 77)',
+      border: '1px solid'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      display: 'flex'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "photo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Posts_VotingSystem__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    userId: userId,
+    id: status.id,
+    type: 'status'
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "bodyAndFooter"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      height: '80%'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, status.body)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      display: 'flex'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "comments"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Like"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Delete"))));
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Status);
+
+/***/ }),
+
+/***/ "./resources/js/components/Status/StatusContainer.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/Status/StatusContainer.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function StatusContainer(_ref) {
+  var appendNewStatus = _ref.appendNewStatus,
+      deleteStatus = _ref.deleteStatus,
+      statusArray = _ref.statusArray;
+  commentsArray.map(function (element) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PostComment, {
+      userId: userId,
+      key: element.id,
+      deleteComment: deleteComment,
+      appendNewComment: appendNewComment,
+      comment: element
+    });
+  });
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (StatusContainer);
 
 /***/ }),
 
@@ -102757,10 +102845,12 @@ function StatusInput(_ref) {
       setText = _useState2[1];
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "backgroundContainer",
     style: {
       display: 'flex',
       flexDirection: 'column',
-      backgroundColor: 'gainsboro'
+      backgroundColor: 'gainsboro',
+      marginTop: '20px'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     onChange: function onChange(e) {
@@ -102770,9 +102860,11 @@ function StatusInput(_ref) {
       height: '100px',
       width: '80%',
       marginLeft: '10%',
-      marginRight: '10%'
+      marginRight: '10%',
+      fontSize: '20px',
+      marginTop: '20px'
     },
-    placeholder: "Text"
+    placeholder: "tell people what's going on..."
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       display: 'flex',
@@ -102837,7 +102929,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Statement__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Statement */ "./resources/js/components/UserPage/Statement.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -102859,7 +102950,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 
 
 
@@ -102898,7 +102988,7 @@ var DockContainer = /*#__PURE__*/function (_Component) {
         for (var i = 0; i < tempData.length; i++) {
           // push the component to elements array
           console.log(tempData[i]);
-          elements.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Statement__WEBPACK_IMPORTED_MODULE_3__["default"], {
+          elements.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(Statement, {
             value: tempData[i],
             key: JSON.stringify(tempData[i].statement_id)
           }));
@@ -102929,64 +103019,9 @@ if (document.getElementById('content')) {
   !*** ./resources/js/components/UserPage/Feed.js ***!
   \**************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function Feed(_ref) {
-  var home = _ref.home,
-      userId = _ref.userId,
-      profileOwnerId = _ref.profileOwnerId;
-  // boolcheck if it's home feed or user feed before fetching
-  //
-  //
-  //
-  //
-  //pass page owner in
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    var token = document.getElementById('csrf-token').getAttribute('content');
-    var param, url;
-
-    if (home) {
-      url = new URL('http://localhost:80/api/feed/home');
-      param = {
-        query: userId
-      };
-    } else {
-      url = new URL('http://localhost:80/api/feed/');
-      param = {
-        query: profileOwnerId
-      };
-    }
-
-    url.search = new URLSearchParams(param).toString();
-    fetch(url, {
-      headers: {
-        'X-CSRF-TOKEN': token,
-        'Content-Type': 'application/json',
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": true
-      },
-      method: 'get',
-      mode: "same-origin",
-      credentials: "same-origin"
-    }).then(function (response) {
-      console.log('response ' + response);
-      response.json().then(function (data) {
-        console.log(data); //if array of activity, show, else don't and load other return statement
-
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "No Content to show currently. Try following some people!"));
-      });
-    });
-  }, []);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "No Content to show currently. Try following some people!"));
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Feed);
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\xampp\\htdocs\\Roller\\resources\\js\\components\\UserPage\\Feed.js: Unterminated regular expression (23:1)\n\n\u001b[0m \u001b[90m 21 | \u001b[39m\u001b[90m////\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 22 | \u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 23 | \u001b[39m\u001b[33m/\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 24 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 25 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 26 | \u001b[39m\u001b[0m\n    at Object._raise (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:766:17)\n    at Object.raiseWithData (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:759:17)\n    at Object.raise (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:753:17)\n    at Object.readRegexp (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:8317:20)\n    at Object.readToken_slash (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:7923:12)\n    at Object.getTokenFromCode (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:8239:14)\n    at Object.getTokenFromCode (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:4750:18)\n    at Object.nextToken (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:7762:12)\n    at Object.next (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:7687:10)\n    at Object.eat (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:7692:12)\n    at Object.isLineTerminator (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:8944:17)\n    at Object.semicolon (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:8948:15)\n    at Object.parseVarStatement (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11907:10)\n    at Object.parseStatementContent (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11498:21)\n    at Object.parseStatement (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11431:17)\n    at Object.parseBlockOrModuleBlockBody (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:12013:25)\n    at Object.parseBlockBody (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11999:10)\n    at Object.parseBlock (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11983:10)\n    at Object.parseFunctionBody (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:10963:24)\n    at Object.parseFunctionBodyAndFinish (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:10946:10)\n    at C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:12153:12\n    at Object.withTopicForbiddingContext (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11272:14)\n    at Object.parseFunction (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:12152:10)\n    at Object.parseFunctionStatement (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11779:17)\n    at Object.parseStatementContent (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11469:21)\n    at Object.parseStatement (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11431:17)\n    at Object.parseBlockOrModuleBlockBody (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:12013:25)\n    at Object.parseBlockBody (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11999:10)\n    at Object.parseTopLevel (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11362:10)\n    at Object.parse (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:13045:10)\n    at parse (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:13098:38)\n    at parser (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\core\\lib\\parser\\index.js:54:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:99:38)\n    at normalizeFile.next (<anonymous>)\n    at run (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\core\\lib\\transformation\\index.js:31:50)");
 
 /***/ }),
 
@@ -103323,127 +103358,6 @@ function ProfileImage(_ref) {
 
 /***/ }),
 
-/***/ "./resources/js/components/UserPage/Statement.js":
-/*!*******************************************************!*\
-  !*** ./resources/js/components/UserPage/Statement.js ***!
-  \*******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
- //Feed a statement array into the Statement class as props
-
-var Statement = /*#__PURE__*/function (_Component) {
-  _inherits(Statement, _Component);
-
-  var _super = _createSuper(Statement);
-
-  function Statement(props) {
-    _classCallCheck(this, Statement);
-
-    return _super.call(this, props);
-  }
-
-  _createClass(Statement, [{
-    key: "render",
-    value: function render() {
-      console.log(this.props.value.body);
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, {
-        key: this.props.value.statement_id
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        style: {
-          backgroundColor: "blue",
-          borderColor: 'rgb(56, 68, 77)',
-          border: '1px solid'
-        }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.props.value.body)));
-    }
-  }]);
-
-  return Statement;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-var StatementContainer = /*#__PURE__*/function (_Component2) {
-  _inherits(StatementContainer, _Component2);
-
-  var _super2 = _createSuper(StatementContainer);
-
-  function StatementContainer(props) {
-    var _this;
-
-    _classCallCheck(this, StatementContainer);
-
-    _this = _super2.call(this, props);
-    console.log('fedt');
-    return _this;
-  }
-
-  _createClass(StatementContainer, [{
-    key: "render",
-    value: function render() {
-      var data = JSON.parse(this.props.data);
-      var arr = data[Object.keys(data)[1]];
-      console.log(arr);
-      console.log('daab');
-      var elements = [];
-
-      for (var i = 0; i < arr.length; i++) {
-        // push the component to elements!
-        elements.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Statement, {
-          value: arr[i],
-          key: JSON.stringify(arr[i][0].statement_id)
-        }));
-        console.log('arr' + i + " : " + JSON.stringify(arr[i]));
-        console.log('id and key' + i + " : " + JSON.stringify(arr[i]).statement_id);
-        console.log('iddd and key' + i + " : " + JSON.stringify(arr[i].statement_id));
-      }
-
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, elements);
-    }
-  }]);
-
-  return StatementContainer;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-if (document.getElementById('statement')) {
-  var data = document.getElementById('dataHolder').getAttribute('data');
-  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(StatementContainer, {
-    data: data
-  }), document.getElementById('statement'));
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Statement);
-
-/***/ }),
-
 /***/ "./resources/js/components/UserPage/UserCard.js":
 /*!******************************************************!*\
   !*** ./resources/js/components/UserPage/UserCard.js ***!
@@ -103539,10 +103453,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Statement__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Statement */ "./resources/js/components/UserPage/Statement.js");
-/* harmony import */ var _UserCard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./UserCard */ "./resources/js/components/UserPage/UserCard.js");
-/* harmony import */ var _Feed__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Feed */ "./resources/js/components/UserPage/Feed.js");
-/* harmony import */ var _Utility_Loading__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Utility/Loading */ "./resources/js/components/Utility/Loading.js");
+/* harmony import */ var _UserCard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./UserCard */ "./resources/js/components/UserPage/UserCard.js");
+/* harmony import */ var _Feed__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Feed */ "./resources/js/components/UserPage/Feed.js");
+/* harmony import */ var _Utility_Loading__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Utility/Loading */ "./resources/js/components/Utility/Loading.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -103554,7 +103467,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -103601,12 +103513,12 @@ function UserPage(_ref) {
   }, []); //return(<div>memes</div>)
 
   if (loading) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Utility_Loading__WEBPACK_IMPORTED_MODULE_6__["default"], null);
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Utility_Loading__WEBPACK_IMPORTED_MODULE_5__["default"], null);
   } else {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_UserCard__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_UserCard__WEBPACK_IMPORTED_MODULE_3__["default"], {
       currentUserId: userId,
       profileOwnerInfo: profileOwnerInfo
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Feed__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Feed__WEBPACK_IMPORTED_MODULE_4__["default"], {
       currentUserId: userId,
       profileOwnerId: profileOwnerInfo.id
     }));

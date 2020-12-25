@@ -89,8 +89,8 @@ route::get('/api/profile', 'App\Http\Controllers\ProfileController');
 Route::get('api/feed/home', [App\Http\Controllers\FeedController::class, 'GetHomeFeed'])->name('GetHomeFeed');
 Route::get('api/feed', [App\Http\Controllers\FeedController::class, 'GetUserFeed'])->name('GetUserFeed');
 Route::get('api/post', [App\Http\Controllers\PostController::class, 'GetPost'])->name('GetPost');
-Route::put('api/comments/engagement', [App\Http\Controllers\ReeController::class, 'VoteOnComment']);
-Route::get('api/comments/engagement', [App\Http\Controllers\ReeController::class, 'GetVoteStatus']);
+Route::put('api/engagement', [App\Http\Controllers\ReeController::class, 'VoteOnContent']);
+Route::get('api/engagement', [App\Http\Controllers\ReeController::class, 'GetCurrentVoteStatus']);
 Route::post('api/comments/submit', [App\Http\Controllers\PostCommentsController::class, 'Store']);
 Route::put('api/comments/delete', [App\Http\Controllers\PostCommentsController::class, 'Delete']);
 Route::get('api/comments', [App\Http\Controllers\PostCommentsController::class, 'GetPostComments']);
@@ -100,5 +100,4 @@ Route::get('/api/dock/{dock}', [App\Http\Controllers\DockController::class, 'Get
 Route::post('/api/posts/submit', [App\Http\Controllers\PostController::class, 'Store']);
 Route::get('/api/post/{post}', [App\Http\Controllers\PostController::class, 'ShowPost']);
 Route::post('/api/statuses/submit', [App\Http\Controllers\StatusController::class, 'Store']);
-
 //Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

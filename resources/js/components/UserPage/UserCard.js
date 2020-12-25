@@ -9,7 +9,6 @@ function UserCard({currentUserId, profileOwnerInfo}) {
     console.log(profileOwnerInfo)
     let home = (window.location.href === 'http://localhost/home')
     let username = window.location.href.substring(window.location.href.lastIndexOf('/') + 1)
-    
         return (
             <div>
                 <div style={{background: 'ghostwhite', display: 'flex'}}>
@@ -34,7 +33,6 @@ function UserCard({currentUserId, profileOwnerInfo}) {
                 </div> 
             </div>
         );
-    
 } 
     
 export default UserCard

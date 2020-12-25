@@ -33,7 +33,6 @@ Route::group(['middleware' => 'auth:api'], function(){
 });
 Route::get('api/user/me', 'App\Http\Controllers\GetCurrentUserController');
 
-Route::apiResource('/status', 'App\Http\Controllers\StatusController');
 Route::apiResource('/followers','App\Http\Controllers\FollowerController');
-Route::get('/feed/{username}', 'App\Http\Controllers\FeedController');
+//Route::get('/feed/{username}', 'App\Http\Controllers\FeedController');
 

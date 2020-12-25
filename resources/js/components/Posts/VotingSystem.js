@@ -1,53 +1,40 @@
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
-    class VotingSystem extends Component{
+    function VotingSystem({userId, id, type}){
 
-        constructor(props){
-            super(props);
-            console.log('props' + this.props)
-            
-            this.state = {
-                upvoted: false,
-                downvoted: false,
-            }   
-            this.vote = this.vote.bind(this)
-        }
-        vote(id, upvoted, downvoted){
+        const [upvoted, setUpvoted] = useState(null)
+        const [downvoted, setDownvoted] = useState(null)
+        console.log(upvoted)
+        function vote(targetId, upvoted, downvoted){
             //make this call once and pass the userID probably from a higher-order component
             let token = document.getElementById('csrf-token').getAttribute('content')
-            
-                        var url = new URL('http://localhost:80/api/comments/engagement')
-         
-                        fetch(url, {
-                            headers:{ 'X-CSRF-TOKEN': token, 'Content-Type':'application/json', "Access-Control-Allow-Origin" : "*", "Access-Control-Allow-Credentials" : true},
-                            method: 'put',
-                            mode: "cors",
-                            credentials: "same-origin",
-                            body: JSON.stringify({
-                                userID : this.props.userId,
-                                targetID: id,
-                                upvoted: upvoted,
-                                downvoted: downvoted,
-                            })
-                            
-                            }).then((response) => {
-                                response.json().then((data) => {
-                                        this.setState({upvoted: data['upvoted']});
-                                        this.setState({downvoted: data['downvoted']})
-                                })
-                            })
-            
+            var url = new URL('http://localhost:80/api/engagement')
+            fetch(url, {
+                headers:{ 'X-CSRF-TOKEN': token, 'Content-Type':'application/json', "Access-Control-Allow-Origin" : "*", "Access-Control-Allow-Credentials" : true},
+                method: 'put',
+                mode: "cors",
+                credentials: "same-origin",
+                body: JSON.stringify({
+                    userId : userId,
+                    targetId: targetId,
+                    upvoted: upvoted,
+                    downvoted: downvoted,
+                    type, type
+                })
+            }).then((response) => {
+                response.json().then((data) => {
+                    setUpvoted(data['upvoted']);
+                    setDownvoted(data['downvoted'])
+                })
+            })
         }
-        
-        componentDidMount(){
+        useEffect(() => {
             let token = document.getElementById('csrf-token').getAttribute('content')
-            //change this to get
-            
-                        
-            var url = new URL('http://localhost:80/api/comments/engagement')
-            let param = {userID: this.props.userId, postID: this.props.id}
+            console.log(upvoted)
+            let url = new URL('http://localhost:80/api/engagement')
+            let param = {userId: userId, targetId:id, type: type}
             url.search = new URLSearchParams(param).toString();
             fetch(url, {
                 headers:{ 'X-CSRF-TOKEN': token, 'Content-Type':'application/json', "Access-Control-Allow-Origin" : "*", "Access-Control-Allow-Credentials" : true},
@@ -56,34 +43,26 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
                 credentials: "same-origin",
                 }).then((response) => {
                     response.json().then((data) => {
-                        
-                        this.setState({upvoted: data['upvoted']});
-                        this.setState({downvoted: data['downvoted']});
-                    }).then(
-                        data => {
-                            
-                            
-                            //
-                            //here we'll switch state and color of the arrow to reflect 
-                        }
-                        )
-                
+                        setUpvoted(data['upvoted']);
+                        setDownvoted(data['downvoted']);
                     })
-        }
+                })
+        },[]);
+        return(
+            <div>
+                <div style= {{height: '100px'}}>
+                    <ArrowDropUpIcon 
+                    className="material-icons" 
+                    fontSize="large" 
+                    style = {{color:  upvoted ? "orange" : null}}
+                    onClick = {() => {vote(id, true, false)}}
 
-        render(){
-           
-            return(
-                <div>
-                    <div style= {{height: '100px'}}>
-                        <ArrowDropUpIcon className="material-icons" fontSize="large" style = {{color: this.state.upvoted ? "orange" : null }} onClick = {() => {this.vote(this.props.id, true, false)}} ></ArrowDropUpIcon>
-                        {this.props.type === 'post' && <p>number</p>}
-                        <ArrowDropDownIcon className="material-icons" fontSize="large" style = {{color: this.state.downvoted ? "blue" : null }} onClick = {() => {this.vote(this.props.id, false, true)}} ></ArrowDropDownIcon>
-                    </div>
+                     ></ArrowDropUpIcon>
+                    <p>number</p>
+                    <ArrowDropDownIcon className="material-icons" fontSize="large" style = {{color: downvoted? "blue" : null }} onClick = {() => {vote(id, false, true)}} ></ArrowDropDownIcon>
                 </div>
-               
-            )
-        }
+            </div>
+        )
     }
 
 export default VotingSystem;

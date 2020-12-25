@@ -1,6 +1,6 @@
 *{
     
-    
+    font-family: BentonSans;
     margin: 0;
     padding: 0;
 }
@@ -9,6 +9,10 @@ html, body, .Container
 {
     height: 100%;
     background-color: #dae0e6;
+}
+.backgroundContainer{
+    background-color: gainsboro;
+    border-radius: 4px;
 }
 
 .Wrapper
@@ -462,9 +466,24 @@ img#pfp{
         height: 100%;
       
   }
-  #HomeContainer{
+  #homeInput{
       width: 60%;
       margin-right: 20%;
       margin-left: 20%;
+  }
+  .statement{
+    background-color: gainsboro;
+    display: flex;
+    border: 1px solid;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 100px;
+  }
+
+  .bodyAndFooter{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
   }
   

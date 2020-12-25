@@ -5,43 +5,52 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PostComment;
 use App\Models\PostCommentEngagement;
+use App\Models\StatusEngagement;
 
 class ReeController extends Controller
 {
-    public function GetVoteStatus(){
-
-        $id = request('userID');
-        $postID = request('postID');
-
-        $engagement =  PostCommentEngagement::where('comment_id', $postID)->where('engager_id', $id)->first();
+    public function GetCurrentVoteStatus(){
+        $user_Id = request('userId');
+        $type = request('type');
+        $engagement;
+        if ($type === 'status'){
+            $statusId = request('targetId');
+            $engagement =  StatusEngagement::where('status_id', $statusId)->where('engager_id', $user_Id)->first();
+        }else if($type === 'postComment'){
+            $postId = request('targetId');
+            $engagement =  PostCommentEngagement::where('comment_id', $postId)->where('engager_id', $user_Id)->first();
+        }
         if ($engagement){
             return response()->json([
-                'upvoted' => $engagement->upvoted,
-                'downvoted' => $engagement->downvoted,
+                'upvoted' => $engagement->upvoted === 1 ? true: false,
+                'downvoted' => $engagement->downvoted === 1 ? true: false,
             ]);
-        }
-        else {
+        }else {
             return response()->json([
                 'upvoted' => false,
                 'downvoted' => false,
+                'engagement' => $engagement
             ]);
-        }
-        
+        }   
     }
 
-
-    public function VoteOnComment(){
+    public function VoteOnContent(){
 
         $json = json_decode(file_get_contents('php://input'), true); //grab request
 
-        $engagement =  PostCommentEngagement::where('comment_id', $json['targetID'])->where('engager_id', $json['userID'])->first();
-        
-
-        if ($engagement === null){
+        if ($json['type'] === 'status')
+        {
+            $engagement =  StatusEngagement::where('status_id', $json['targetId'])->where('engager_id', $json['userId'])->first();
+            $comment = new StatusEngagement();
+            $comment->status_id =  $json['targetId'];
+        }else if ($json['type'] === 'comment'){
+            $engagement =  PostCommentEngagement::where('comment_id', $json['targetId'])->where('engager_id', $json['userId'])->first();
             $comment = new PostCommentEngagement();
+            $comment->comment_id =  $json['targetId'];
+        }
             
-            $comment->engager_id = $json['userID'];
-            $comment->comment_id =  $json['targetID'];
+        if ($engagement === null){
+            $comment->engager_id = $json['userId'];
             $comment->upvoted = $json['upvoted'];
             $comment->downvoted = $json['downvoted'];
             $comment->save();
@@ -53,7 +62,7 @@ class ReeController extends Controller
                 'downvoted' => $comment->downvoted,
             ]);
 
-        }else if  ($engagement){
+        }else{
             if ($json['upvoted']){
                 if ($engagement['upvoted'])
                 {
@@ -78,8 +87,6 @@ class ReeController extends Controller
                     $engagement->downvoted = false;
                     $engagement->delete();
                 }
-                   
-                
             }
             if($engagement){
                 $engagement->refresh();
@@ -93,7 +100,6 @@ class ReeController extends Controller
                 return response()->json([
                     'upvoted' =>false,
                     'downvoted' =>false
-                    
                 ]);
             }   
         }

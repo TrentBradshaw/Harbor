@@ -1,7 +1,6 @@
 import { divide, toArray } from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Statement from './Statement';
 
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
 export default class DockContainer extends Component {
