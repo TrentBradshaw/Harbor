@@ -17,7 +17,7 @@ function Status({appendNewStatus, deleteStatus, status, userId}) {
                 <div style= {{display: 'flex'}}>
                     <h5>comments</h5>
                     <h5>Like</h5>
-                    <button>Delete</button>
+                    <button onClick={ () => deleteStatus(status.id)}>Delete</button>
                 </div>
             </div>
             

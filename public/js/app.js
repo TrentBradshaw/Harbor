@@ -101615,36 +101615,61 @@ function Home(_ref) {
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState4 = _slicedToArray(_useState3, 2),
       statusArray = _useState4[0],
-      setStatusArray = _useState4[1];
+      changeStatusArray = _useState4[1];
 
-  function appendNewStatus(statusObject, isReply, parentCommentId) {
-    var tempCommentsArray = _toConsumableArray(statusArray);
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isLoading = _useState6[0],
+      setLoading = _useState6[1];
 
-    var index;
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    var token = document.getElementById('csrf-token').getAttribute('content');
+    var param, url;
+    url = new URL('http://localhost:80/api/feed/home');
+    param = {
+      query: userId
+    };
+    url.search = new URLSearchParams(param).toString();
+    console.log(url);
+    fetch(url, {
+      headers: {
+        'X-CSRF-TOKEN': token,
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true
+      },
+      method: 'get',
+      mode: "same-origin",
+      credentials: "same-origin"
+    }).then(function (response) {
+      console.log('response ' + response);
+      response.json().then(function (data) {
+        console.log(data);
+        setLoading(false);
+        changeStatusArray(data['statuses']);
+      });
+    });
+  }, []);
 
-    for (var i = 0; i < tempCommentsArray.length; i++) {
-      if (tempCommentsArray[i]['id'] === parentCommentId) {
-        console.log('i: ' + i);
-        index = i + 1;
-        console.log('index: ' + index);
-      }
+  function appendNewStatus(statusObject) {
+    console.log(JSON.stringify(statusObject) + ' sss');
 
-      tempCommentsArray.unshift(statusObject);
-      console.log(tempCommentsArray);
-      changeCommentsArray(tempCommentsArray);
-    }
+    var tempStatusArray = _toConsumableArray(statusArray);
+
+    tempStatusArray.unshift(statusObject);
+    console.log(tempStatusArray);
+    changeStatusArray(tempStatusArray);
+    console.log(statusArray);
   }
 
   function deleteStatus(id) {
-    //if the comment is deleted and a parrent then just update the properties to say deleted comment
-    var token = document.getElementById('csrf-token').getAttribute('content'); //ADD THE FETCH
-
-    fetch('/api/comments/delete', {
+    var token = document.getElementById('csrf-token').getAttribute('content');
+    fetch('/api/status/delete', {
       headers: {
         'X-CSRF-TOKEN': token,
         'Content-Type': 'application/json'
       },
-      method: 'put',
+      method: 'delete',
       mode: "same-origin",
       credentials: "same-origin",
       body: JSON.stringify({
@@ -101652,18 +101677,35 @@ function Home(_ref) {
       })
     }).then(function (data) {
       console.log('data from commentinput----------------------' + JSON.stringify(data));
+
+      var tempStatusArray = _toConsumableArray(statusArray);
+
+      var index;
+
+      for (var i = 0; i < tempStatusArray.length; i++) {
+        if (tempStatusArray[i]['id'] === id) {
+          index = i;
+          console.log('index: ' + index);
+        }
+      }
+
+      tempStatusArray.splice(index, 1);
+      console.log(tempStatusArray);
+      changeStatusArray(tempStatusArray);
     });
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_HomeInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
     currentUserId: userId,
-    profileOwnerInfo: profileOwnerInfo
+    profileOwnerInfo: profileOwnerInfo,
+    appendNewStatus: appendNewStatus
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_UserPage_Feed__WEBPACK_IMPORTED_MODULE_5__["default"], {
     home: true,
     userId: userId,
     pageOwnerId: null,
     appendNewStatus: appendNewStatus,
-    deleteStatus: deleteStatus
+    deleteStatus: deleteStatus,
+    statusArray: statusArray
   }));
 }
 
@@ -101709,7 +101751,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
  //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
 
 function HomeInput(_ref) {
-  var currentUserId = _ref.currentUserId;
+  var currentUserId = _ref.currentUserId,
+      profileOwnerInfo = _ref.profileOwnerInfo,
+      appendNewStatus = _ref.appendNewStatus;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('status'),
       _useState2 = _slicedToArray(_useState, 2),
@@ -101733,7 +101777,8 @@ function HomeInput(_ref) {
       return handleInputSwitch("post");
     }
   }, "Post"), inputType === 'status' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SubmitPage_StatusInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    currentUserId: currentUserId
+    currentUserId: currentUserId,
+    appendNewStatus: appendNewStatus
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SubmitPage_PostSubmitForm__WEBPACK_IMPORTED_MODULE_2__["default"], null)) /// JUST TAKE ME TO THE FULL POST CREATION FORM REEEEEEEEEEE
   ;
 }
@@ -102239,7 +102284,11 @@ function Status(_ref) {
     style: {
       display: 'flex'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "comments"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Like"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, "Delete"))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "comments"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Like"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: function onClick() {
+      return deleteStatus(status.id);
+    }
+  }, "Delete"))));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Status);
@@ -102837,7 +102886,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
  //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
 
 function StatusInput(_ref) {
-  var currentUserId = _ref.currentUserId;
+  var currentUserId = _ref.currentUserId,
+      appendNewStatus = _ref.appendNewStatus;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -102905,6 +102955,7 @@ function StatusInput(_ref) {
       return response.json(console.log(response));
     }).then(function (data) {
       console.log(data);
+      appendNewStatus(data['status']);
     });
   }
 }
@@ -103019,9 +103070,42 @@ if (document.getElementById('content')) {
   !*** ./resources/js/components/UserPage/Feed.js ***!
   \**************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\xampp\\htdocs\\Roller\\resources\\js\\components\\UserPage\\Feed.js: Unterminated regular expression (23:1)\n\n\u001b[0m \u001b[90m 21 | \u001b[39m\u001b[90m////\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 22 | \u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 23 | \u001b[39m\u001b[33m/\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 24 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 25 | \u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 26 | \u001b[39m\u001b[0m\n    at Object._raise (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:766:17)\n    at Object.raiseWithData (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:759:17)\n    at Object.raise (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:753:17)\n    at Object.readRegexp (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:8317:20)\n    at Object.readToken_slash (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:7923:12)\n    at Object.getTokenFromCode (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:8239:14)\n    at Object.getTokenFromCode (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:4750:18)\n    at Object.nextToken (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:7762:12)\n    at Object.next (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:7687:10)\n    at Object.eat (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:7692:12)\n    at Object.isLineTerminator (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:8944:17)\n    at Object.semicolon (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:8948:15)\n    at Object.parseVarStatement (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11907:10)\n    at Object.parseStatementContent (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11498:21)\n    at Object.parseStatement (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11431:17)\n    at Object.parseBlockOrModuleBlockBody (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:12013:25)\n    at Object.parseBlockBody (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11999:10)\n    at Object.parseBlock (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11983:10)\n    at Object.parseFunctionBody (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:10963:24)\n    at Object.parseFunctionBodyAndFinish (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:10946:10)\n    at C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:12153:12\n    at Object.withTopicForbiddingContext (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11272:14)\n    at Object.parseFunction (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:12152:10)\n    at Object.parseFunctionStatement (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11779:17)\n    at Object.parseStatementContent (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11469:21)\n    at Object.parseStatement (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11431:17)\n    at Object.parseBlockOrModuleBlockBody (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:12013:25)\n    at Object.parseBlockBody (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11999:10)\n    at Object.parseTopLevel (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:11362:10)\n    at Object.parse (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:13045:10)\n    at parse (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\parser\\lib\\index.js:13098:38)\n    at parser (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\core\\lib\\parser\\index.js:54:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\core\\lib\\transformation\\normalize-file.js:99:38)\n    at normalizeFile.next (<anonymous>)\n    at run (C:\\xampp\\htdocs\\Roller\\node_modules\\@babel\\core\\lib\\transformation\\index.js:31:50)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Status_Status__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Status/Status */ "./resources/js/components/Status/Status.js");
+
+
+
+function Feed(_ref) {
+  var home = _ref.home,
+      userId = _ref.userId,
+      profileOwnerId = _ref.profileOwnerId,
+      statusArray = _ref.statusArray;
+
+  //figure out why appendNewStatus isn't working//
+  ////
+  ///
+  ////
+  if (statusArray === []) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "No Content to show currently. Try following some people!"));
+  } else {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "commentsholder"
+    }, statusArray.map(function (element) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Status_Status__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        userId: userId,
+        key: element.id,
+        status: element
+      });
+    })));
+  }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Feed);
 
 /***/ }),
 

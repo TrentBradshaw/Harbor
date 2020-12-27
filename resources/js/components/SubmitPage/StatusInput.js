@@ -4,7 +4,7 @@ import ImageIcon from '@material-ui/icons/Image';
 import PostSubmitForm from '../SubmitPage/PostSubmitForm'
 
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
-function StatusInput({currentUserId}) {
+function StatusInput({currentUserId, appendNewStatus}) {
 
     const [text, setText] = useState('');
     return(
@@ -35,6 +35,7 @@ function StatusInput({currentUserId}) {
         ))
         .then(
             data => {console.log(data)
+            appendNewStatus(data['status']);
         })
     }
 } 

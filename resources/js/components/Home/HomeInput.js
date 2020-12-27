@@ -5,7 +5,7 @@ import PostSubmitForm from '../SubmitPage/PostSubmitForm'
 import StatusInput from '../SubmitPage/StatusInput'
 
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
-function HomeInput({currentUserId}) {
+function HomeInput({currentUserId ,profileOwnerInfo,appendNewStatus}) {
     const [inputType, changeInputType] = useState('status');
     
     function handleInputSwitch(inputType){
@@ -16,7 +16,7 @@ function HomeInput({currentUserId}) {
                     <button className="tab" onClick={ () =>handleInputSwitch("status")}>Status</button>
                     <button className="tab" onClick={ () =>handleInputSwitch("post")}>Post</button>
                     {(inputType === 'status')
-                    ? <StatusInput currentUserId = {currentUserId}></StatusInput>
+                    ? <StatusInput currentUserId = {currentUserId} appendNewStatus={appendNewStatus}></StatusInput>
                     : <PostSubmitForm></PostSubmitForm> 
                     }
                 </div>
