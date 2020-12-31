@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import VotingSystem from '../Posts/VotingSystem';
 //Feed a statement array into the Statement class as props
 function Status({appendNewStatus, deleteStatus, status, userId}) {   
-    
-    console.log(status);
+
     return (
         <div key={status.id} className = 'statement' style={{borderColor: 'rgb(56, 68, 77)', border: '1px solid'}}> 
             <div style={{display: 'flex'}}>

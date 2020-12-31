@@ -28,7 +28,6 @@ export default class FileUploadComponent extends Component
    {
       return(
         <input id = 'postFileField' type="file" onChange = { (e) => this.onChange(e)} name="postFile"></input>
-   
       )
    }
 }

@@ -19,6 +19,7 @@ class CreatePostCommentsTable extends Migration
             $table->foreignId('creator_id')->default(null);
             $table->string('username')->default('');
             $table->string('body')->length(2000);
+            $table->integer('parent_post_id');
             $table->boolean('isDeleted')->default(false);
         });
     }

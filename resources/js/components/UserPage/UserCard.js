@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import FollowButton from './FollowButton';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
@@ -6,7 +5,7 @@ import ProfileImage from './ProfileImage'
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
 function UserCard({currentUserId, profileOwnerInfo}) {
     console.log(currentUserId)
-    console.log(profileOwnerInfo)
+    console.log(profileOwnerInfo.username)
     let home = (window.location.href === 'http://localhost/home')
     let username = window.location.href.substring(window.location.href.lastIndexOf('/') + 1)
         return (
@@ -24,7 +23,7 @@ function UserCard({currentUserId, profileOwnerInfo}) {
                 <div>
                     <ProfileImage type= {'header'} url={profileOwnerInfo.headerUrl} ></ProfileImage>
                     <ProfileImage type={'profilePicture'} url = {profileOwnerInfo.pfpUrl}></ProfileImage>
-                    { !home && < FollowButton currentUser={currentUserId} followee={profileOwnerInfo.username}></FollowButton>}
+                    { !home && <FollowButton currentUserId={currentUserId} followeeUsername={profileOwnerInfo.username}></FollowButton>}
                 </div>
                 <div style={{marginTop : '75px', textAlign: 'start' ,marginLeft: '50px'}}>
                     <p>bio: {profileOwnerInfo.description}</p>

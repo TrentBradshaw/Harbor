@@ -6,7 +6,6 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
         const [upvoted, setUpvoted] = useState(null)
         const [downvoted, setDownvoted] = useState(null)
-        console.log(upvoted)
         function vote(targetId, upvoted, downvoted){
             //make this call once and pass the userID probably from a higher-order component
             let token = document.getElementById('csrf-token').getAttribute('content')
@@ -32,7 +31,6 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
         }
         useEffect(() => {
             let token = document.getElementById('csrf-token').getAttribute('content')
-            console.log(upvoted)
             let url = new URL('http://localhost:80/api/engagement')
             let param = {userId: userId, targetId:id, type: type}
             url.search = new URLSearchParams(param).toString();

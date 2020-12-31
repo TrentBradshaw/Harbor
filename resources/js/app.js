@@ -11,7 +11,8 @@ require('./bootstrap');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-require('./components/Constant/Header')
+require('./components/Header/Header')
+require('./components/Header/DropDownMenu')
 
 require('./components/DropdownDockMenu/DockButtonDropDownCmp')
 require('./components/DropdownDockMenu/DockDropDownButton')
@@ -23,8 +24,7 @@ require('./components/DropdownProfileMenu/ProfileDropDownButton')
 require('./components/DropdownProfileMenu/ProfileDropDownCard')
 require('./components/DropdownProfileMenu/ProfileDropDownMenu')
 
-require('./components/SubmitPage/PostSpecificationButtons')
-require('./components/SubmitPage/PostContentField')
+require('./components/SubmitPages/PostContentField')
 
 
 require('./components/UserPage/Profile')
@@ -36,11 +36,11 @@ require('./components/Status/StatusContainer')
 require('./components/UserPage/UserPage')
 require('./components/UserPage/UserCard')
 require('./components/UserPage/FollowButton')
-require('./components/Constant/DropDownMenu')
+
 require('./components/DockSubmitForm')
 
 require('./components/DockPage/DocksContainer')
-require('./components/SubmitPage/PostSubmitForm')
+require('./components/SubmitPages/PostSubmitForm')
 
 require('./components/AutoComplete/AutoCompleteDockLookup')
 require('./components/AutoComplete/Autocomplete')

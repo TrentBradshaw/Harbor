@@ -1,90 +1,68 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 //make this more secure by handling the following/follow more nuanced
 //switch to hooks down the road
-class FollowButton extends Component {
+function FollowButton({followeeUsername}){
     
-    constructor(props){ super(props);}
-    state = {
-        isFollowingText: '',
-        isFollowing: '',
-        stateSet: false,
-    }
+    const [isFollowingText, setIsFollowingText] = useState('')
+    const [isFollowing, setIsFollowing] = useState(false);
+    const [isLoading, setIsLoading] = useState(true)
 
-    figureOutIfFollowingOrNot(){
-        if(this.state.isFollowingText == ''){
-            this.setState({stateSet: false});
+    
+    function figureOutIfFollowingOrNot(){
+        let token = document.getElementById('csrf-token').getAttribute('content')
+        let url = new URL('http://localhost:80/api/followers')
+        let param = {followee: followeeUsername}
+        url.search = new URLSearchParams(param).toString();
+        fetch(url, {
+            headers:{ 'X-CSRF-TOKEN': token, 'Content-Type':'application/json', "Access-Control-Allow-Origin" : "*", "Access-Control-Allow-Credentials" : true},
+            method: 'get',
+            mode: "cors",
+            credentials: "same-origin",
+            }).then((response) => {
+                response.json().then((data) => {
+                    console.log(data['following'])
+                    setIsFollowing(data['following']);
+                    setIsLoading(false)
+                    console.log(isFollowing + ' isfollowing')
+                    data['following'] ? setIsFollowingText('Following'): setIsFollowingText('Follow')
+                })
+            })
+    }
+    useEffect(() => {
+        figureOutIfFollowingOrNot();   
+      }, []);
+      console.log(isFollowingText['isFollowingText'] + ' ift')
+
+    function submit(){
+        let method;
+        if(isFollowing)
+        {
+            method = 'delete'
+            setIsFollowingText('Follow');
+            setIsFollowing(false);
         }
         else{
-            this.setState({stateSet: true});
+            method = 'post'
+            setIsFollowingText('Following');
+            setIsFollowing(true);
         }
-
-        if (!this.state.stateSet){  //if state isn't set then set it 
-            var isFollowing = document.getElementById('dataHolder').getAttribute('isFollowing')
-            var isFollowingText = ''
-            if (isFollowing == '1'){
-                isFollowingText = 'Following'
-            } else{
-                isFollowingText = 'Follow'
-            }
-            this.setState({isFollowingText: isFollowingText }) 
-        }
-    }
-    componentDidMount(){
-        this.figureOutIfFollowingOrNot();
-    }
-
-    //establish state with both fields empty.
-    
-    render(){
-        return(
-            <button  onClick={()=>{this.submit()}} >{this.state.isFollowingText}</button>
-        )
-    }
-    submit(){
-       
-        if (this.state.isFollowingText == 'Follow'){
-            this.setState({ isFollowingText: 'Following' });
-            fetch('/api/followers', {
-            headers:{
-                'Content-Type':'application/json',
-            },
-            method: 'post',
+        let token = document.getElementById('csrf-token').getAttribute('content')
+        fetch('/api/followers', {
+            headers:{'X-CSRF-TOKEN': token, 'Content-Type':'application/json',},
+            method: method,
             mode: "same-origin",
             credentials: "same-origin",
             body: JSON.stringify({
-                    following: this.props.currentUser,
-                    followee: this.props.followee,
+                followee: followeeUsername,
             })
-            }).then((response) => {
-                console.log(response);
-                response.json().then((data) => {
-                    
-                    this.forceUpdate();
-                    console.log(data);
-                });
-            })
-        } else if (this.state.isFollowingText == 'Following'){
-            this.setState({ isFollowingText: 'Follow' });
-            fetch('/api/followers/'  + this.props.followee, {
-            headers:{
-                'Content-Type':'application/json',
-            },
-            method: 'delete',
-            mode: "same-origin",
-            credentials: "same-origin",
-            body: JSON.stringify({
-                    following: this.props.currentUser,
-                    followee: this.props.followee,
-            })
-            }).then((response) => {
-                console.log(response);
-                response.json().then((data) => {
-                   
-                    console.log(data);
-                });
-            })
-        }
-    }  
+        })
+    } 
+    if(isLoading){
+        return(<div>Loading</div>)
+    }
+    return(
+        <button onClick={ () => submit()}>{isFollowingText}</button>
+    )
 }  
 
 export default FollowButton

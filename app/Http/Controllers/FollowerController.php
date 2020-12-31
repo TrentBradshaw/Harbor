@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Follower;
 use App\Models\FollowCount;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class FollowerController extends Controller
 {
@@ -36,25 +37,42 @@ class FollowerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function Grab(){
+        $query = request('followee');
+        $followee_id = User::where('username', $query)->first()['id'];
+        $following = Follower::where('follower_id', Auth::user()->id)->where('followee_id', $followee_id)->first();
+       
+        if ($following === null){
+            return response()->json([
+                'following' => false,
+                'collection' => $following
+            ]);
+        }
+        else{
+            return response()->json([
+                'following' => true
+            ]);
+        }
+       
+    }
+    public function Store(Request $request)
     {
         $json = json_decode(file_get_contents('php://input'), true); //grab request
-    
+        
         //grab follower and followee(target)
-        $follower = $json['following'];
-        $followee = $json['followee'];
+    
 
-        $follower_id = (User::where('username', $follower)->get()->toArray())[0]['id'];  //grab the object, enter it and grab the id
-        $followee_id = (User::where('username', $followee)->get()->toArray())[0]['id'];
+        $followee_id = User::where('username',  $json['followee'])->first()['id'];
+       
         
         //bring in the Follower model
         $following = new Follower();
-        $following->follower_id = $follower_id;
+        $following->follower_id = Auth::user()->id;
         $following->followee_id = $followee_id;
         $following->save();
         
        return response()->json([
-            'redirect' => url('/home')
+            'redirect' => 'WEE'
         ]);
     }
 
@@ -100,19 +118,18 @@ class FollowerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($usernameToUnfollow)
+    public function Destroy()
     {
 
         $json = json_decode(file_get_contents('php://input'), true); //grab request
     
         //grab follower and followee(target)
-        $follower = $json['following'];
-        $followee = $json['followee'];
-
-        $follower_id = (User::where('username', $follower)->get()->toArray())[0]['id'];  //grab the object, enter it and grab the id
-        $followee_id = (User::where('username', $followee)->get()->toArray())[0]['id'];
         
-        Follower::where('follower_id', $follower_id)->where('followee_id', $followee_id)->delete();
+
+         //grab the object, enter it and grab the id
+        $followee_id = User::where('username', $json['followee'])->first()['id'];
+        
+        Follower::where('follower_id', Auth::user()->id)->where('followee_id', $followee_id)->delete();
     
 
        return response()->json([

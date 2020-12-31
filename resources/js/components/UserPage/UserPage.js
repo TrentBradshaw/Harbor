@@ -5,7 +5,7 @@ import UserCard from './UserCard';
 import Feed from './Feed';
 import Loading from '../Utility/Loading';
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
-function UserPage ({userId, pageOwnerUsername}){
+function UserPage ({currentUserId, pageOwnerUsername}){
     const [profileOwnerInfo, setProfileOwnerInfo] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -40,18 +40,16 @@ function UserPage ({userId, pageOwnerUsername}){
             return (
             
                 <div>
-                    <UserCard currentUserId = {userId} profileOwnerInfo={profileOwnerInfo}></UserCard>
-                    <Feed currentUserId = {userId} profileOwnerId={profileOwnerInfo.id}></Feed>
+                    <UserCard currentUserId = {currentUserId} profileOwnerInfo={profileOwnerInfo}></UserCard>
+                    <Feed currentUserId = {currentUserId} profileOwnerId={profileOwnerInfo.id}></Feed>
                 </div>
             ) 
         }
-        
-       
 } 
     
 if (document.getElementById('UserPageContainer')) {
    ReactDOM.render(<UserPage 
-   userId={document.getElementById('dataHolder').getAttribute('userId')}
+   currentUserId={document.getElementById('dataHolder').getAttribute('currentUserId')}
    pageOwnerUsername={document.getElementById('dataHolder').getAttribute('pageOwnerUsername')}
    />, document.getElementById('UserPageContainer'));
 }

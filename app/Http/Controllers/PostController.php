@@ -31,6 +31,7 @@ class PostController extends Controller
         $json = json_decode(file_get_contents('php://input'), true); //grab request
         
         $post = new Post();
+        $post->media_url = '';
         if ($json['file']){
             $base64img = str_replace('data:image/jpeg;base64,', '', $json['file']);
 
@@ -62,7 +63,6 @@ class PostController extends Controller
         $post->type = $json['type'];
         $post->text = $json['text'];
         $post->link = $json['url'];
-        $post->votes = 0;
         $saved = $post->save();
         $post->refresh();
 
@@ -88,11 +88,8 @@ class PostController extends Controller
                         //so i need
                         //127.0.0.1/dock/dockname/postID/posttitle
                         'url' =>$url,
-                        'res' =>$response
                     ]);
             }
-
-           
         }
         else{
             return $json;

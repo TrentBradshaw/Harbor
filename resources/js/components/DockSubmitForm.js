@@ -25,7 +25,7 @@ export default class DockSubmitForm extends Component {
         let token = document.getElementById('csrf-token').getAttribute('content')
         console.log('pickles');
         event.preventDefault();
-        fetch('http://127.0.0.1:8000/api/dock/submit', {
+        fetch('http://localhost:80/api/dock/submit', {
         headers:{
             'X-CSRF-TOKEN': token,
             'Content-Type':'application/json',
@@ -43,7 +43,7 @@ export default class DockSubmitForm extends Component {
                 console.log(data);
                 console.log(data['dock_added'])
                 if (data['dock_added']){
-                    window.location.href = 'http://127.0.0.1:8000/dock/' + data['dock_url_title'];
+                    window.location.href = 'http://localhost:80/dock/' + data['dock_url_title'];
                 }
             });
 

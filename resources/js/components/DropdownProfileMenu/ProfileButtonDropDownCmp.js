@@ -1,16 +1,16 @@
 import React from "react";
 import ProfileDropDownButton from "./ProfileDropDownButton";
 import ProfileDropDownCard from "./ProfileDropDownCard";
-const sampleData = [
+
+//new Array(7).fill("item name");
+const ProfileButtonWithDropDownCmp = ({currentUserUsername}) => {
+  const [open, setOpen] = React.useState(false);
+  const [options, setOptions] = ([
     'Profile',
     'Settings',
     'Log Out',
     'Night Mode',
-]
-
-//new Array(7).fill("item name");
-const ProfileButtonWithDropDownCmp = () => {
-  const [open, setOpen] = React.useState(false);
+  ]);
   const drop = React.useRef(null);
   function handleClick(e) {
     if (!e.target.closest(`.${drop.current.className}`) && open) {
@@ -36,8 +36,8 @@ const ProfileButtonWithDropDownCmp = () => {
         display: "inline-block"
       }}
     >
-      <ProfileDropDownButton onClick={() => setOpen(open => !open)} />
-      {open && <ProfileDropDownCard data={sampleData} setOpen={setOpen} />}
+      <ProfileDropDownButton currentUserUsername={currentUserUsername} onClick={() => setOpen(open => !open)} />
+      {open && <ProfileDropDownCard options={options} setOpen={setOpen} />}
     </div>
   );
 };

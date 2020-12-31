@@ -21,16 +21,12 @@ class ShowUserController extends Controller
         if (Auth::check()) {
             if(User::where('username', $username)->get()->toArray()){
                 $pageOwner = User::where('username', $username)->get()->toArray();
-                
                 return view('showUser',
                 [   'pageOwnerUsername' => $username,
-                    'userId' => $pageOwner[0]['id'],
+                    'pageOwnerId' => $pageOwner[0]['id'],
+                    'currentUserId' => Auth::user()->id
                 ]);
-                return view('showUser',
-                [
-                    'data' => 'yee'
-                    
-                ]);
+                
 
                 $isFollowing = Follower::where('follower_id', $currentUser[0]['id'])->where('followee_id', $pageOwner[0]['id']);
             

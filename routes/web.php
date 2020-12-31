@@ -68,7 +68,7 @@ Route::post('/upload', [App\Http\Controllers\FileUploadController::class, 'store
 
 
 
-Route::post('/userdetails', 'App\Http\Controllers\GetCurrentUserController'); // switch this to userController::class getcurrentuser
+Route::post('/api/userdetails', 'App\Http\Controllers\GetCurrentUserController'); // switch this to userController::class getcurrentuser
 Route::get('/status', [App\Http\Controllers\StatusController::class, "ShowStatus"])->name('ShowStatus');
 Route::get('/submit/dock', [App\Http\Controllers\DockController::class, 'SubmitForm'])->name('SubmitForm');
 Route::get('/submit/post', [App\Http\Controllers\SubmitController::class, 'Submit'])->name('Submit');
@@ -82,9 +82,11 @@ Route::get('/dock/{dockName}/{id}/{PostTitle}', [App\Http\Controllers\PostContro
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Auth::routes();
-Route::get('/{username}', [App\Http\Controllers\ShowUserController::class, 'ShowUser'])->name('showUser');
+Route::get('/user/{username}', [App\Http\Controllers\ShowUserController::class, 'ShowUser'])->name('showUser');
 //Route::get('/{username}/{id}', [App\Http\Controllers\StatusController::class, 'show'])->name('show');
-
+Route::post('/api/followers', [App\Http\Controllers\FollowerController::class, 'Store']);
+Route::delete('/api/followers', [App\Http\Controllers\FollowerController::class, 'Destroy']);
+Route::get('/api/followers', [App\Http\Controllers\FollowerController::class, 'Grab']);
 route::get('/api/profile', 'App\Http\Controllers\ProfileController');
 Route::get('api/feed/home', [App\Http\Controllers\FeedController::class, 'GetHomeFeed'])->name('GetHomeFeed');
 Route::get('api/feed', [App\Http\Controllers\FeedController::class, 'GetUserFeed'])->name('GetUserFeed');

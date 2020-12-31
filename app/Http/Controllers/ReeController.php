@@ -12,26 +12,41 @@ class ReeController extends Controller
     public function GetCurrentVoteStatus(){
         $user_Id = request('userId');
         $type = request('type');
-        $engagement;
+        $engagement = [];
         if ($type === 'status'){
             $statusId = request('targetId');
             $engagement =  StatusEngagement::where('status_id', $statusId)->where('engager_id', $user_Id)->first();
+
+            if ($engagement){
+                return response()->json([
+                    'upvoted' => $engagement->upvoted === 1 ? true: false,
+                    'downvoted' => $engagement->downvoted === 1 ? true: false,
+                ]);
+            }else {
+                return response()->json([
+                    'upvoted' => false,
+                    'downvoted' => false,
+                    'engagement' => $engagement
+                ]);
+            }   
         }else if($type === 'postComment'){
             $postId = request('targetId');
             $engagement =  PostCommentEngagement::where('comment_id', $postId)->where('engager_id', $user_Id)->first();
+
+            if ($engagement){
+                return response()->json([
+                    'upvoted' => $engagement->upvoted === 1 ? true: false,
+                    'downvoted' => $engagement->downvoted === 1 ? true: false,
+                ]);
+            }else {
+                return response()->json([
+                    'upvoted' => false,
+                    'downvoted' => false,
+                    'engagement' => $engagement
+                ]);
+            }   
         }
-        if ($engagement){
-            return response()->json([
-                'upvoted' => $engagement->upvoted === 1 ? true: false,
-                'downvoted' => $engagement->downvoted === 1 ? true: false,
-            ]);
-        }else {
-            return response()->json([
-                'upvoted' => false,
-                'downvoted' => false,
-                'engagement' => $engagement
-            ]);
-        }   
+        
     }
 
     public function VoteOnContent(){

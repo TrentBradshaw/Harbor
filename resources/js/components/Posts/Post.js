@@ -31,7 +31,6 @@ import PostComments from '../Comments/PostComments'
         }, []);
         const fetchData = () => {
             let token = document.getElementById('csrf-token').getAttribute('content')
-
             let url = new URL('http://localhost:80/api/post')
             let param = {query: props.postId}
 
@@ -79,10 +78,8 @@ import PostComments from '../Comments/PostComments'
                         <div>
                             <h1>Sidebar</h1>
                         </div>
+                    </div>
                 </div>
-                    
-                </div>
-                
             </div>
         );
     }

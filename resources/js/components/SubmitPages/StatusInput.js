@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import ImageIcon from '@material-ui/icons/Image';
-import PostSubmitForm from '../SubmitPage/PostSubmitForm'
+import PostSubmitForm from './PostSubmitForm'
 
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
 function StatusInput({currentUserId, appendNewStatus}) {

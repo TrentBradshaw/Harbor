@@ -6,7 +6,6 @@ import AutoCompleteDockLookup from '../AutoComplete/AutoCompleteDockLookup'
 function PostSubmitForm(props){
     const [highlighted, setHighlighted] = useState('text');
     const [title, setTitle] = useState('');
-    const [mediaUrl, setMediaUrl] = useState('');
     const [url, setUrl] = useState('');
     const [file, setFile] = useState('');
     const [body, setBody] = useState('');
@@ -25,7 +24,7 @@ function PostSubmitForm(props){
                 </div>
                     <PostContentField updateImage = {updateImage} updateContentValue = {updateContentValue} highlighted = {highlighted}></PostContentField>
                 <div>
-                        <button type="button" onClick={()=>{this.submit()}}>SUBMIT</button>
+                        <button type="button" onClick={()=>{submit()}}>SUBMIT</button>
                 </div>
             </div>
         )
@@ -49,49 +48,34 @@ function PostSubmitForm(props){
     }
 
     function submit(){ 
-        
-
-        //FIX PNG UPLOADING ERROR?
-       let token = document.getElementById('csrf-token').getAttribute('content')
         fetch('/userdetails', {
-            headers:{
-                'X-CSRF-TOKEN': token,
-                'Content-Type':'application/json',
-            },
+            headers:{ 'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'), 'Content-Type':'application/json'},
             method: 'post',
             mode: "same-origin",
             credentials: "same-origin",
             }).then((response) => {
                 response.json().then((data) => {
-                    console.log(data['username']);
+                    let file = document.getElementById('postFileField') ? document.getElementById('postFileField').files[0]: ''
                     fetch('/api/posts/submit', {
-                        headers:{
-                            'X-CSRF-TOKEN': token,
-                            'Content-Type':'application/json',
-                        },
+                        headers:{'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),'Content-Type':'application/json'},
                         method: 'post',
                         mode: "same-origin",
                         credentials: "same-origin",
                         body: JSON.stringify({
                                 community: document.getElementById("dockInput").value,
-                                type: this.state.highlighted,
-                                title: this.state.title,
+                                type: highlighted,
+                                title: title,
                                 creatorID: data['id'],
-                                text: this.state.body,
-                                file: this.state.file,
-                                url: this.state.url,
-                                imageFile: document.getElementById('postFileField').files[0],
-                                ree: 'pickles'
+                                text: body,
+                                file: file,
+                                url: url,
+                                imageFile: file,
                         })
-                    }).then(response => response.json(
-                        console.log(response)
-                    ))
-                    .then(
-                        data => {window.location.replace(data['url'])
-                    })
-                        });
+                    }).then(response => response.json(console.log(response)))
+                    .then(data => {window.location.replace(data['url'])})
+                });
                         
-                    })
+            })
     }
 }
 

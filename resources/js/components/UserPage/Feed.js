@@ -2,40 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Status from '../Status/Status'
 
 function Feed({home, userId, profileOwnerId, statusArray}) {
-   
-    
-
-
-
-
-
-
-
-//figure out why appendNewStatus isn't working//
-
-
-////
-///
-
-////
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
-    if (statusArray === []){
+    console.log(statusArray + 'statusarray')
+    if (!statusArray){
         return(
             <div>
-                <h1>No Content to show currently. Try following some people!</h1>
+                <h1>No Content to show currently.</h1>
             </div>
         );
     } else{
