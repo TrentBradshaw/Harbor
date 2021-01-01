@@ -3,19 +3,19 @@ import React, { useState } from 'react';
 
 //don't forget to pass the votes into the voting system component
 
-    function CommentInput({isReply, userId, parentComment, appendNewComment, parentPostId, hideInputChange}) {
+    function CommentInput({isReply, parentComment, appendNewComment, parentPostId, hideInputChange}) {
         const [text, updateText] = useState('')
         return (
             <div>
                 <div style={{ marginLeft: '5%', marginRight: '11%', minHeight: '100%' }}>
                     <input onChange = { e => updateText(e.target.value)} type="text"></input>
-                    <button onClick = { () => submit(isReply, userId, parentComment, appendNewComment, parentPostId, text, hideInputChange)}>Save</button>
+                    <button onClick = { () => submit(isReply, parentComment, appendNewComment, parentPostId, text, hideInputChange)}>Save</button>
                 </div>
             </div>
         );
     }
     
-    function submit(isReply, userId, parentComment, appendNewComment, parentPostId, text, hideInputChange){ 
+    function submit(isReply, parentComment, appendNewComment, parentPostId, text, hideInputChange){ 
         console.log(text)
         let parentCommentId = 0;
         let nestLevel = 0;
@@ -33,7 +33,6 @@ import React, { useState } from 'react';
             mode: "same-origin",
             credentials: "same-origin",
             body: JSON.stringify({
-                creator_id: userId,
                 parentPostId: parentPostId,
                 parentCommentId: parentCommentId,
                 body: text,

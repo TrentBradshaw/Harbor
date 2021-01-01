@@ -5,9 +5,10 @@ import React, { useState, useEffect } from 'react';
 
 function LinkedPost(props) {
     console.log('dabbie')
+    console.log(props + ' from linkedpost')
     return (
         <div id = '1' style ={{ display: 'flex', }}>
-            <VotingSystem type={'post'}></VotingSystem>
+            <VotingSystem id = {props.state.id} type={'post'}></VotingSystem>
             {props.state.grabbedData.imageAndTitleFound ? (
                 <div id= '2' style ={{ display: 'flex', }}>
                     <img style = {{ height: '100px', width: '150px' }}src= {props.state.grabbedData.img}></img>

@@ -48,13 +48,7 @@ function PostSubmitForm(props){
     }
 
     function submit(){ 
-        fetch('/userdetails', {
-            headers:{ 'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'), 'Content-Type':'application/json'},
-            method: 'post',
-            mode: "same-origin",
-            credentials: "same-origin",
-            }).then((response) => {
-                response.json().then((data) => {
+        
                     let file = document.getElementById('postFileField') ? document.getElementById('postFileField').files[0]: ''
                     fetch('/api/posts/submit', {
                         headers:{'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),'Content-Type':'application/json'},
@@ -65,7 +59,6 @@ function PostSubmitForm(props){
                                 community: document.getElementById("dockInput").value,
                                 type: highlighted,
                                 title: title,
-                                creatorID: data['id'],
                                 text: body,
                                 file: file,
                                 url: url,
@@ -73,9 +66,8 @@ function PostSubmitForm(props){
                         })
                     }).then(response => response.json(console.log(response)))
                     .then(data => {window.location.replace(data['url'])})
-                });
+              
                         
-            })
     }
 }
 

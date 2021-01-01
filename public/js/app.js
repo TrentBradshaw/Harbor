@@ -100208,7 +100208,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function CommentInput(_ref) {
   var isReply = _ref.isReply,
-      userId = _ref.userId,
       parentComment = _ref.parentComment,
       appendNewComment = _ref.appendNewComment,
       parentPostId = _ref.parentPostId,
@@ -100232,12 +100231,12 @@ function CommentInput(_ref) {
     type: "text"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: function onClick() {
-      return submit(isReply, userId, parentComment, appendNewComment, parentPostId, text, hideInputChange);
+      return submit(isReply, parentComment, appendNewComment, parentPostId, text, hideInputChange);
     }
   }, "Save")));
 }
 
-function submit(isReply, userId, parentComment, appendNewComment, parentPostId, text, hideInputChange) {
+function submit(isReply, parentComment, appendNewComment, parentPostId, text, hideInputChange) {
   console.log(text);
   var parentCommentId = 0;
   var nestLevel = 0;
@@ -100258,7 +100257,6 @@ function submit(isReply, userId, parentComment, appendNewComment, parentPostId, 
     mode: "same-origin",
     credentials: "same-origin",
     body: JSON.stringify({
-      creator_id: userId,
       parentPostId: parentPostId,
       parentCommentId: parentCommentId,
       body: text,
@@ -100328,12 +100326,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
  //don't forget to pass the votes into the voting system component
 
 function PostComment(_ref) {
-  var userId = _ref.userId,
-      deleteComment = _ref.deleteComment,
+  var deleteComment = _ref.deleteComment,
       appendNewComment = _ref.appendNewComment,
       comment = _ref.comment;
+  console.log(comment); //console.log('PROPPPUSSS FROM POSTCOMMENT' + JSON.stringify())
 
-  //console.log('PROPPPUSSS FROM POSTCOMMENT' + JSON.stringify())
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(comment.nestLevel),
       _useState2 = _slicedToArray(_useState, 2),
       nestLevel = _useState2[0],
@@ -100475,9 +100472,8 @@ function PostComment(_ref) {
       height: '70%'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Posts_VotingSystem__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    userId: userId,
     id: comment.id,
-    type: 'comment'
+    type: 'postComment'
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       width: '100%'
@@ -100542,7 +100538,6 @@ function PostComment(_ref) {
     }
   })))), replyClicked && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CommentInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
     isReply: true,
-    userId: userId,
     parentComment: comment,
     appendNewComment: appendNewComment,
     parentPostId: comment.parent_post_id,
@@ -100607,31 +100602,11 @@ var PostComments = function PostComments(_ref) {
       commentsArray = _useState4[0],
       changeCommentsArray = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(0),
-      _useState6 = _slicedToArray(_useState5, 2),
-      userId = _useState6[0],
-      changeUserId = _useState6[1];
-
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     fetchData();
   }, []);
 
   var fetchData = function fetchData() {
-    var token = document.getElementById('csrf-token').getAttribute('content');
-    fetch('/userdetails', {
-      headers: {
-        'X-CSRF-TOKEN': token,
-        'Content-Type': 'application/json'
-      },
-      method: 'post',
-      mode: "same-origin",
-      credentials: "same-origin"
-    }).then(function (response) {
-      response.json().then(function (data) {
-        console.log(data['username']);
-        changeUserId(data['id']);
-      });
-    });
     var url = new URL('http://localhost:80/api/comments');
     var param = {
       query: parentPostId
@@ -100639,7 +100614,7 @@ var PostComments = function PostComments(_ref) {
     url.search = new URLSearchParams(param).toString();
     fetch(url, {
       headers: {
-        'X-CSRF-TOKEN': token,
+        'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),
         'Content-Type': 'application/json',
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Credentials": true
@@ -100660,7 +100635,6 @@ var PostComments = function PostComments(_ref) {
     var tempCommentsArray = _toConsumableArray(commentsArray);
 
     var index;
-    var newArray;
 
     if (isReply) {
       for (var i = 0; i < tempCommentsArray.length; i++) {
@@ -100729,7 +100703,6 @@ var PostComments = function PostComments(_ref) {
       height: '120px'
     },
     isReply: false,
-    userId: userId,
     parentComment: null,
     appendNewComment: appendNewComment,
     parentPostId: parentPostId
@@ -100737,7 +100710,6 @@ var PostComments = function PostComments(_ref) {
     id: "commentsholder"
   }, commentsArray.map(function (element) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PostComment__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      userId: userId,
       key: element.id,
       deleteComment: deleteComment,
       appendNewComment: appendNewComment,
@@ -101797,12 +101769,14 @@ __webpack_require__.r(__webpack_exports__);
 
 function LinkedPost(props) {
   console.log('dabbie');
+  console.log(props + ' from linkedpost');
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     id: "1",
     style: {
       display: 'flex'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_VotingSystem__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    id: props.state.id,
     type: 'post'
   }), props.state.grabbedData.imageAndTitleFound ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     id: "2",
@@ -101853,12 +101827,14 @@ __webpack_require__.r(__webpack_exports__);
 
 function MediaPost(props) {
   console.log('dabbie');
+  console.log(props + ' from mediapost');
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     id: "1",
     style: {
       display: 'flex'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_VotingSystem__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    id: props.state.id,
     type: 'post'
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h4", null, "d/" + props.state.communityTitle), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "Posted by u/" + props.state.creatorUsername), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
     src: props.state.media_url
@@ -102049,6 +102025,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function TextPost(props) {
   console.log('dabbie');
+  console.log(JSON.stringify(props) + ' from Textpost');
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     style: {
       width: '100%'
@@ -102060,6 +102037,7 @@ function TextPost(props) {
       width: '100%'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_VotingSystem__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    id: props.state.id,
     type: 'post'
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
     id: "2",
@@ -102128,9 +102106,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function VotingSystem(_ref) {
-  var userId = _ref.userId,
-      id = _ref.id,
+  var id = _ref.id,
       type = _ref.type;
+  console.log('id: ' + id);
+  console.log('type:  ' + type);
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
       _useState2 = _slicedToArray(_useState, 2),
@@ -102142,7 +102121,12 @@ function VotingSystem(_ref) {
       downvoted = _useState4[0],
       setDownvoted = _useState4[1];
 
-  function vote(targetId, upvoted, downvoted) {
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+      _useState6 = _slicedToArray(_useState5, 2),
+      score = _useState6[0],
+      setScore = _useState6[1];
+
+  function vote(targetId, choseUpvoted, choseDownvoted) {
     //make this call once and pass the userID probably from a higher-order component
     var token = document.getElementById('csrf-token').getAttribute('content');
     var url = new URL('http://localhost:80/api/engagement');
@@ -102157,32 +102141,50 @@ function VotingSystem(_ref) {
       mode: "cors",
       credentials: "same-origin",
       body: JSON.stringify(_defineProperty({
-        userId: userId,
         targetId: targetId,
-        upvoted: upvoted,
-        downvoted: downvoted,
+        choseUpvoted: choseUpvoted,
+        choseDownvoted: choseDownvoted,
         type: type
       }, "type", type))
-    }).then(function (response) {
-      response.json().then(function (data) {
-        setUpvoted(data['upvoted']);
-        setDownvoted(data['downvoted']);
-      });
+    }).then(function (data) {
+      console.log(data);
+
+      if (upvoted) {
+        if (choseUpvoted) {
+          setUpvoted(false);
+          setScore(score - 1);
+        } else {
+          setUpvoted(false);
+          setDownvoted(true);
+          setScore(score - 2);
+        }
+      } else if (downvoted) {
+        if (choseDownvoted) {
+          setDownvoted(false);
+          setScore(score + 1);
+        } else {
+          setDownvoted(false);
+          setUpvoted(true);
+          setScore(score + 2);
+        }
+      } else {
+        setUpvoted(choseUpvoted);
+        setDownvoted(choseDownvoted);
+        if (choseDownvoted) setScore(score - 1);else setScore(score + 1);
+      }
     });
   }
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    var token = document.getElementById('csrf-token').getAttribute('content');
     var url = new URL('http://localhost:80/api/engagement');
     var param = {
-      userId: userId,
       targetId: id,
       type: type
     };
     url.search = new URLSearchParams(param).toString();
     fetch(url, {
       headers: {
-        'X-CSRF-TOKEN': token,
+        'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),
         'Content-Type': 'application/json',
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Credentials": true
@@ -102191,10 +102193,13 @@ function VotingSystem(_ref) {
       mode: "cors",
       credentials: "same-origin"
     }).then(function (response) {
-      response.json().then(function (data) {
-        setUpvoted(data['upvoted']);
-        setDownvoted(data['downvoted']);
-      });
+      return response.json();
+    }).then(function (data) {
+      console.log(data);
+      console.log('yaya');
+      setUpvoted(data['upvoted']);
+      setDownvoted(data['downvoted']);
+      setScore(data['score']);
     });
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
@@ -102210,7 +102215,7 @@ function VotingSystem(_ref) {
     onClick: function onClick() {
       vote(id, true, false);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "number"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_ArrowDropDown__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, score), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_ArrowDropDown__WEBPACK_IMPORTED_MODULE_2___default.a, {
     className: "material-icons",
     fontSize: "large",
     style: {
@@ -102258,7 +102263,6 @@ function Status(_ref) {
       display: 'flex'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "photo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Posts_VotingSystem__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    userId: userId,
     id: status.id,
     type: 'status'
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -102615,41 +102619,28 @@ function PostSubmitForm(props) {
   }
 
   function submit() {
-    fetch('/userdetails', {
+    var file = document.getElementById('postFileField') ? document.getElementById('postFileField').files[0] : '';
+    fetch('/api/posts/submit', {
       headers: {
         'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),
         'Content-Type': 'application/json'
       },
       method: 'post',
       mode: "same-origin",
-      credentials: "same-origin"
+      credentials: "same-origin",
+      body: JSON.stringify({
+        community: document.getElementById("dockInput").value,
+        type: highlighted,
+        title: title,
+        text: body,
+        file: file,
+        url: url,
+        imageFile: file
+      })
     }).then(function (response) {
-      response.json().then(function (data) {
-        var file = document.getElementById('postFileField') ? document.getElementById('postFileField').files[0] : '';
-        fetch('/api/posts/submit', {
-          headers: {
-            'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),
-            'Content-Type': 'application/json'
-          },
-          method: 'post',
-          mode: "same-origin",
-          credentials: "same-origin",
-          body: JSON.stringify({
-            community: document.getElementById("dockInput").value,
-            type: highlighted,
-            title: title,
-            creatorID: data['id'],
-            text: body,
-            file: file,
-            url: url,
-            imageFile: file
-          })
-        }).then(function (response) {
-          return response.json(console.log(response));
-        }).then(function (data) {
-          window.location.replace(data['url']);
-        });
-      });
+      return response.json(console.log(response));
+    }).then(function (data) {
+      window.location.replace(data['url']);
     });
   }
 } // switch it so this is implemented without reactDOM.render

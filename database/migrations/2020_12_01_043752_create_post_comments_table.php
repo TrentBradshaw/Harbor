@@ -20,6 +20,8 @@ class CreatePostCommentsTable extends Migration
             $table->string('username')->default('');
             $table->string('body')->length(2000);
             $table->integer('parent_post_id');
+            $table->integer('parent_comment_id');
+            $table->integer('nest_level');
             $table->boolean('isDeleted')->default(false);
         });
     }

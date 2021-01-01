@@ -4,9 +4,10 @@ import React, { useState, useEffect } from 'react';
 
 function MediaPost(props) {
     console.log('dabbie')
+    console.log(props + ' from mediapost')
     return (
         <div id = '1' style ={{ display: 'flex', }}>
-            <VotingSystem type={'post'}></VotingSystem>
+            <VotingSystem id= {props.state.id} type={'post'}></VotingSystem>
             <img></img>
             <h4>{ "d/" + props.state.communityTitle}</h4>
             <p>{"Posted by u/" + props.state.creatorUsername}</p>

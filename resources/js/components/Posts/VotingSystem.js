@@ -2,11 +2,15 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import React, {useState, useEffect} from 'react';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
-    function VotingSystem({userId, id, type}){
-
+    function VotingSystem({id, type}){
+        console.log('id: '   +  id)
+        console.log('type:  ' + type)
         const [upvoted, setUpvoted] = useState(null)
         const [downvoted, setDownvoted] = useState(null)
-        function vote(targetId, upvoted, downvoted){
+        const [score, setScore] = useState(0)
+
+        function vote(targetId, choseUpvoted, choseDownvoted){
+    
             //make this call once and pass the userID probably from a higher-order component
             let token = document.getElementById('csrf-token').getAttribute('content')
             var url = new URL('http://localhost:80/api/engagement')
@@ -16,35 +20,64 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
                 mode: "cors",
                 credentials: "same-origin",
                 body: JSON.stringify({
-                    userId : userId,
                     targetId: targetId,
-                    upvoted: upvoted,
-                    downvoted: downvoted,
+                    choseUpvoted: choseUpvoted,
+                    choseDownvoted: choseDownvoted,
                     type, type
                 })
-            }).then((response) => {
-                response.json().then((data) => {
-                    setUpvoted(data['upvoted']);
-                    setDownvoted(data['downvoted'])
+            }).then((data) => {
+                console.log(data)
+                    if(upvoted){
+                        if (choseUpvoted){
+                            setUpvoted(false);
+                            setScore(score - 1)
+                        }
+                        else{
+                            setUpvoted(false)
+                            setDownvoted(true)
+                            setScore(score -2)
+                        } 
+                    }
+                    else if (downvoted){
+                        if(choseDownvoted){
+                            setDownvoted(false)
+                            setScore(score +1)
+                        }       
+                        else{
+                            setDownvoted(false)
+                            setUpvoted(true)
+                            setScore(score +2)
+                        }
+                    }
+                    else{
+                        setUpvoted(choseUpvoted)
+                        setDownvoted(choseDownvoted)
+                        if (choseDownvoted)
+                            setScore(score -1)
+                        else
+                            setScore(score + 1)
+                    }    
                 })
-            })
+        
         }
         useEffect(() => {
-            let token = document.getElementById('csrf-token').getAttribute('content')
             let url = new URL('http://localhost:80/api/engagement')
-            let param = {userId: userId, targetId:id, type: type}
+            let param = {targetId:id, type: type}
             url.search = new URLSearchParams(param).toString();
             fetch(url, {
-                headers:{ 'X-CSRF-TOKEN': token, 'Content-Type':'application/json', "Access-Control-Allow-Origin" : "*", "Access-Control-Allow-Credentials" : true},
+                headers:{ 'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'), 'Content-Type':'application/json', "Access-Control-Allow-Origin" : "*", "Access-Control-Allow-Credentials" : true},
                 method: 'get',
                 mode: "cors",
                 credentials: "same-origin",
-                }).then((response) => {
-                    response.json().then((data) => {
+            }).then(response => response.json()).then((data) => {
+                        console.log(data)
+                        console.log('yaya')
+                        
                         setUpvoted(data['upvoted']);
                         setDownvoted(data['downvoted']);
+                        setScore(data['score']);
                     })
-                })
+                
         },[]);
         return(
             <div>
@@ -56,7 +89,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
                     onClick = {() => {vote(id, true, false)}}
 
                      ></ArrowDropUpIcon>
-                    <p>number</p>
+                    <p>{score}</p>
                     <ArrowDropDownIcon className="material-icons" fontSize="large" style = {{color: downvoted? "blue" : null }} onClick = {() => {vote(id, false, true)}} ></ArrowDropDownIcon>
                 </div>
             </div>

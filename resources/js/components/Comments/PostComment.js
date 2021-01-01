@@ -11,8 +11,8 @@ import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 //don't forget to pass the votes into the voting system component
 
-    function PostComment({userId, deleteComment, appendNewComment, comment})  {
-
+    function PostComment({deleteComment, appendNewComment, comment})  {
+        console.log(comment)
         //console.log('PROPPPUSSS FROM POSTCOMMENT' + JSON.stringify())
         const [nestLevel, changeNestLevel] = useState(comment.nestLevel)
         const [additionalLines, changeAdditionalLines] = useState([])
@@ -86,7 +86,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
                     
                     <div style= {{display: 'flex', flexDirection: 'column', width: '3%',}}>
                         <div style= {{height: '70%'}}>
-                            <VotingSystem userId = {userId} id = {comment.id} type= {'comment'} ></VotingSystem>
+                            <VotingSystem id = {comment.id} type= {'postComment'} ></VotingSystem>
                         </div>
                     </div>
                     
@@ -114,7 +114,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
                 </div>
                 {replyClicked && <CommentInput 
                     isReply = {true} 
-                    userId = {userId} 
                     parentComment = {comment} 
                     appendNewComment = {appendNewComment} 
                     parentPostId = {comment.parent_post_id}

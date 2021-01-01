@@ -4,10 +4,11 @@ import React, { useState, useEffect } from 'react';
 
 function TextPost(props) {
     console.log('dabbie')
+    console.log(JSON.stringify(props) + ' from Textpost')
     return (
         <div style={{width: '100%'}} >
             <div id = '1' style ={{ display: 'flex', width: '100%'}}>
-                <VotingSystem type={'post'}></VotingSystem>
+                <VotingSystem id={props.state.id} type={'post'}></VotingSystem>
                 <div id= '2' style ={{width: '100%'}}>
                     <h2 style = {{height: '45%'}}>{props.state.title}</h2>
                     <div style = {{display: 'flex', marginTop: '15px'}}>

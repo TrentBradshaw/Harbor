@@ -8,31 +8,17 @@ const  PostComments = ({parentPostId}) => {
     
     const [isLoading, changeLoading] = useState(true);
     const [commentsArray, changeCommentsArray] = useState([]);
-    const [userId, changeUserId] = useState(0);
 
     useEffect(() => {
         fetchData();
     }, []);
     const fetchData =() =>{
-        let token = document.getElementById('csrf-token').getAttribute('content')
-       fetch('/userdetails', 
-           {
-               headers:{ 'X-CSRF-TOKEN': token, 'Content-Type':'application/json',},
-               method: 'post',
-               mode: "same-origin",
-               credentials: "same-origin",
-           }).then((response) => {
-                response.json().then((data) => {
-                console.log(data['username']);
-                changeUserId(data['id'])
-               })
-            })
         let url = new URL('http://localhost:80/api/comments')
         let param = {query: parentPostId}
 
         url.search = new URLSearchParams(param).toString();
         fetch(url, {
-            headers:{'X-CSRF-TOKEN': token,'Content-Type':'application/json',"Access-Control-Allow-Origin" : "*", "Access-Control-Allow-Credentials" : true },
+            headers:{'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),'Content-Type':'application/json',"Access-Control-Allow-Origin" : "*", "Access-Control-Allow-Credentials" : true },
             method: 'get',
             mode: "cors",
             credentials: "same-origin",
@@ -47,7 +33,6 @@ const  PostComments = ({parentPostId}) => {
     function appendNewComment(commentObject, isReply, parentCommentId){
         let tempCommentsArray = [...commentsArray]; 
         let index;
-        let newArray;
         if (isReply){
             for (let i = 0; i < tempCommentsArray.length; i++) {
                 if(tempCommentsArray[i]['id'] === parentCommentId){
@@ -102,8 +87,7 @@ const  PostComments = ({parentPostId}) => {
     return (
         <div>
             <CommentInput style={{height: '120px'}} 
-            isReply={false} 
-            userId={userId} 
+            isReply={false}
             parentComment={null}   
             appendNewComment = {appendNewComment} 
             parentPostId={parentPostId}>
@@ -112,7 +96,7 @@ const  PostComments = ({parentPostId}) => {
             <div id = "commentsholder">
             {
                 commentsArray.map((element)=>(
-                    <PostComment userId = {userId} key = {element.id} deleteComment = {deleteComment} appendNewComment = {appendNewComment} comment = {element}></PostComment>
+                    <PostComment key = {element.id} deleteComment = {deleteComment} appendNewComment = {appendNewComment} comment = {element}></PostComment>
             ))}
             </div>
         </div>

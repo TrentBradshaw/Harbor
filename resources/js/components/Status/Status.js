@@ -7,7 +7,7 @@ function Status({appendNewStatus, deleteStatus, status, userId}) {
         <div key={status.id} className = 'statement' style={{borderColor: 'rgb(56, 68, 77)', border: '1px solid'}}> 
             <div style={{display: 'flex'}}>
                 <div>photo</div>
-                <VotingSystem userId = {userId} id={status.id} type={'status'}></VotingSystem>
+                <VotingSystem id={status.id} type={'status'}></VotingSystem>
             </div>
             <div className= "bodyAndFooter">
                 <div style= {{    height: '80%'}}>

@@ -7,6 +7,7 @@ use App\Models\PostComment;
 use App\Models\CommentEngagement;
 use App\Models\DeletedComment;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class PostCommentsController extends Controller
@@ -59,7 +60,7 @@ class PostCommentsController extends Controller
         
         $comment = new PostComment();
 
-        $comment->creator_id = $json['creator_id'];
+        $comment->creator_id = Auth::user()->id;
         $comment->body = $json['body'];
         $comment->parent_post_id = $json['parentPostId'];
         $comment->nest_level = $json['nestLevel'];
