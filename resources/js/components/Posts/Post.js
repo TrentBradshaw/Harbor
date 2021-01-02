@@ -2,6 +2,8 @@ import ReactDOM from 'react-dom';
 import React, { useState, useEffect } from 'react';
 import LinkedPost from './LinkedPost';
 import TextPost from './TextPost';
+import VotingSystem from './VotingSystem';
+import Moment from '../Utility/Moment';
 import MediaPost from './MediaPost';
 import PostComments from '../Comments/PostComments'
 
@@ -24,6 +26,7 @@ import PostComments from '../Comments/PostComments'
             link: "",
             type: "",
             currentUTCTime: "",
+            
         });
 
         useEffect(() => {
@@ -50,7 +53,7 @@ import PostComments from '../Comments/PostComments'
                         console.log(data.postInfo)
                         setNewState(data.postInfo)
                     setLoading(false);
-                    console.log(state);
+                    console.log(state + ' state');
                     });
                 })
         }
@@ -61,7 +64,24 @@ import PostComments from '../Comments/PostComments'
             <div>
                 <div className="App" style={{ marginLeft: '2%', marginRight: '2%', minHeight: '100%', display: 'flex', justifyContent: 'space-between' }}>
                     <div id="PostHeader" style={{ width: '70%', backgroundColor: 'white'}}>
-                        <div>
+                        <VotingSystem id={props.postId} type={'post'}></VotingSystem>
+                        <div id= '2' style ={{width: '100%'}}>
+                        <h2 style = {{height: '45%'}}>{state.title}</h2>
+                        <div style = {{display: 'flex', marginTop: '15px'}}>
+                            <Moment creator = {state.creatorUsername} timePosted = {state.formattedStamp}></Moment>
+                            <p>{state.commentCount + ' comments'}</p>
+                            <p onClick= {() =>{
+                                var Url = 'http://localhost/dock/' + state.communityTitle + '/' + state.id + '/' + state.title;
+                                var dummy = document.createElement("textarea");
+                                dummy.style.display = 'none'
+                                document.body.appendChild(dummy);
+                                dummy.value = Url;
+                                dummy.select();
+                                document.execCommand("copy");
+                                document.body.removeChild(dummy);
+                                }}
+                                >share</p>
+                        </div>
                             <div id="RealPostHeader" style= {{display: 'flex'}}>
                                 {GetPostType(state.type, state)}
                             </div>    

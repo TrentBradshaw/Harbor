@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PostComment;
-use App\Models\CommentEngagement;
+use App\Models\PostCommentEngagement;
 use App\Models\DeletedComment;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -43,6 +43,10 @@ class PostCommentsController extends Controller
         for ($i=0; $i < count($postComments); $i++) {
             $user =  User::where('id', $postComments[$i]['creator_id'])->get()->toArray();
             $dateAltered = Carbon::parse($postComments[$i]['created_at']);
+            $upvotedAmount = Count( PostCommentEngagement::where('comment_id',$postComments[$i]['id'])->where('upvoted', true)->get()->toArray());
+            $downvotedAmount = Count( PostCommentEngagement::where('comment_id', $postComments[$i]['id'])->where('downvoted', true)->get()->toArray());
+            $voteCount =  $upvotedAmount  -=$downvotedAmount;
+            $postComments[$i]['score'] = $voteCount;
             //$postComments[$i]['created_at']->format('d/m/Y h:i:s');
             $postComments[$i]['formattedStamp'] = $dateAltered->format('M/d/Y h:i');
             //$postComments[$i]['username'] =  $user[0]['username'];
@@ -64,6 +68,7 @@ class PostCommentsController extends Controller
         $comment->body = $json['body'];
         $comment->parent_post_id = $json['parentPostId'];
         $comment->nest_level = $json['nestLevel'];
+        $comment->username = (User::where('id',  Auth::user()->id)->first())['username'];
         $comment->parent_comment_id = $json['parentCommentId'];
        // $comment->parent_comment_id = $json['parentCommentId'];
         //$comment->parent_post_id = $json['parentPostId'];

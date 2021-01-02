@@ -11,6 +11,7 @@ use GuzzleHttp\Client;
 use Carbon\Carbon;
 use App\Models\Status;
 use App\Models\Dock;
+use App\Models\PostComment;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 
@@ -127,7 +128,7 @@ class PostController extends Controller
         $dateAltered = Carbon::parse($postInfo->created_at);
         $postInfo['created_at'] ->format('d/m/Y h:i:s');
         $postInfo['formattedStamp'] = $dateAltered->format('M/d/Y h:i');
-       
+        $postInfo['commentCount'] = Count(PostComment::where('parent_post_id', $id)->get()->toArray());
 
         if ($postInfo['type'] == "link"){
             //include(app_path() . '\Includes\GetUrlMetaData.php');

@@ -93,8 +93,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
                     <div style= {{width: '100%'}}>
                         <div style = {{display: 'flex'}}>
                             <RemoveIcon onClick = {(e) => toggleComment(comment.id)}></RemoveIcon>
-                            <p className = "commentHeaderText">{comment.username}</p>
-                            <p className = "commentHeaderText"> x points</p>
+                            <a href= {"http://localhost:80/user/" + comment.username} className = "commentHeaderText">{comment.username}</a>
+                            <p className = "commentHeaderText">{comment.score + ' points'}</p>
                             <Moment className="commentHeaderText" creator = {comment.username} timePosted = {comment.formattedStamp} type ={'time'}></Moment>
                         </div>
                         <div>

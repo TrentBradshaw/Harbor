@@ -100486,11 +100486,12 @@ function PostComment(_ref) {
     onClick: function onClick(e) {
       return toggleComment(comment.id);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "http://localhost:80/user/" + comment.username,
     className: "commentHeaderText"
   }, comment.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     className: "commentHeaderText"
-  }, " x points"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Utility_Moment__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, comment.score + ' points'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Utility_Moment__WEBPACK_IMPORTED_MODULE_1__["default"], {
     className: "commentHeaderText",
     creator: comment.username,
     timePosted: comment.formattedStamp,
@@ -101872,8 +101873,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _LinkedPost__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LinkedPost */ "./resources/js/components/Posts/LinkedPost.js");
 /* harmony import */ var _TextPost__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TextPost */ "./resources/js/components/Posts/TextPost.js");
-/* harmony import */ var _MediaPost__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MediaPost */ "./resources/js/components/Posts/MediaPost.js");
-/* harmony import */ var _Comments_PostComments__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Comments/PostComments */ "./resources/js/components/Comments/PostComments.js");
+/* harmony import */ var _VotingSystem__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./VotingSystem */ "./resources/js/components/Posts/VotingSystem.js");
+/* harmony import */ var _Utility_Moment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Utility/Moment */ "./resources/js/components/Utility/Moment.js");
+/* harmony import */ var _MediaPost__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./MediaPost */ "./resources/js/components/Posts/MediaPost.js");
+/* harmony import */ var _Comments_PostComments__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Comments/PostComments */ "./resources/js/components/Comments/PostComments.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -101893,6 +101896,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 var GetPostType = function GetPostType(type, state) {
   if (type == "link") {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_LinkedPost__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -101903,7 +101908,7 @@ var GetPostType = function GetPostType(type, state) {
       state: state
     });
   } else if (type === "media") {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_MediaPost__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_MediaPost__WEBPACK_IMPORTED_MODULE_6__["default"], {
       state: state
     });
   }
@@ -101956,7 +101961,7 @@ function Post(props) {
         console.log(data.postInfo);
         setNewState(data.postInfo);
         setLoading(false);
-        console.log(state);
+        console.log(state + ' state');
       });
     });
   };
@@ -101982,12 +101987,43 @@ function Post(props) {
       width: '70%',
       backgroundColor: 'white'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_VotingSystem__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: props.postId,
+    type: 'post'
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    id: "2",
+    style: {
+      width: '100%'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
+    style: {
+      height: '45%'
+    }
+  }, state.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    style: {
+      display: 'flex',
+      marginTop: '15px'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Utility_Moment__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    creator: state.creatorUsername,
+    timePosted: state.formattedStamp
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, state.commentCount + ' comments'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+    onClick: function onClick() {
+      var Url = 'http://localhost/dock/' + state.communityTitle + '/' + state.id + '/' + state.title;
+      var dummy = document.createElement("textarea");
+      dummy.style.display = 'none';
+      document.body.appendChild(dummy);
+      dummy.value = Url;
+      dummy.select();
+      document.execCommand("copy");
+      document.body.removeChild(dummy);
+    }
+  }, "share")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     id: "RealPostHeader",
     style: {
       display: 'flex'
     }
-  }, GetPostType(state.type, state))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Comments_PostComments__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, GetPostType(state.type, state))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Comments_PostComments__WEBPACK_IMPORTED_MODULE_7__["default"], {
     parentPostId: state.id
   }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     style: {
@@ -102015,48 +102051,18 @@ if (document.getElementById('PostContainer')) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _VotingSystem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VotingSystem */ "./resources/js/components/Posts/VotingSystem.js");
-/* harmony import */ var _Utility_Moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Utility/Moment */ "./resources/js/components/Utility/Moment.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-
-
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 
 function TextPost(props) {
   console.log('dabbie');
   console.log(JSON.stringify(props) + ' from Textpost');
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       width: '100%'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    id: "1",
-    style: {
-      display: 'flex',
-      width: '100%'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_VotingSystem__WEBPACK_IMPORTED_MODULE_0__["default"], {
-    id: props.state.id,
-    type: 'post'
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    id: "2",
-    style: {
-      width: '100%'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h2", {
-    style: {
-      height: '45%'
-    }
-  }, props.state.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    style: {
-      display: 'flex',
-      marginTop: '15px'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Utility_Moment__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    creator: props.state.creatorUsername,
-    timePosted: props.state.formattedStamp
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "x commments"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "share")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     style: {
       marginLeft: '10px',
       marginTop: '10px',
