@@ -7,7 +7,6 @@ function PostSubmitForm(props){
     const [highlighted, setHighlighted] = useState('text');
     const [title, setTitle] = useState('');
     const [url, setUrl] = useState('');
-    const [file, setFile] = useState('');
     const [body, setBody] = useState('');
 
         return (
@@ -22,7 +21,7 @@ function PostSubmitForm(props){
                     <button type="button" onClick={ () => {changePostType('media')}}>Media</button>
                     <button type="button" onClick={ () => {changePostType('link')}}>Link</button>
                 </div>
-                    <PostContentField updateImage = {updateImage} updateContentValue = {updateContentValue} highlighted = {highlighted}></PostContentField>
+                    <PostContentField setUrl = {setUrl} updateContentValue = {updateContentValue} highlighted = {highlighted}></PostContentField>
                 <div>
                         <button type="button" onClick={()=>{submit()}}>SUBMIT</button>
                 </div>
@@ -31,7 +30,6 @@ function PostSubmitForm(props){
     
     function changePostType(type){
         setHighlighted(type);
-        setMediaUrl('');
         setUrl('');
     }
 
@@ -39,17 +37,13 @@ function PostSubmitForm(props){
         if (content == 'text')
             setBody(value) 
         else if (content == 'media')
-            setFile(value)
+            setUrl(value)
         else if (content == 'link')
             setUrl(value)
     }
-    function updateImage(file){
-        setFile(file)
-    }
 
     function submit(){ 
-        
-                    let file = document.getElementById('postFileField') ? document.getElementById('postFileField').files[0]: ''
+                    //let file = document.getElementById('postFileField') ? document.getElementById('postFileField').files[0]: ''
                     fetch('/api/posts/submit', {
                         headers:{'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),'Content-Type':'application/json'},
                         method: 'post',
@@ -60,12 +54,14 @@ function PostSubmitForm(props){
                                 type: highlighted,
                                 title: title,
                                 text: body,
-                                file: file,
                                 url: url,
-                                imageFile: file,
                         })
                     }).then(response => response.json(console.log(response)))
-                    .then(data => {window.location.replace(data['url'])})
+                    .then(data => {
+                        console.log(JSON.stringify(data['post']))
+                        console.log(data['data'])
+                        window.location.replace(data['url'])
+                    })
               
                         
     }

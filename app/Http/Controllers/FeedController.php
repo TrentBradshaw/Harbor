@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Status;
+use App\Models\Profile;
 use App\Models\User;
 use App\Models\Dock;
 use App\Models\Post;
 use App\Models\Follower;
+
 
 class FeedController extends Controller
 {
@@ -18,14 +20,39 @@ class FeedController extends Controller
             'posts' => $user->posts
         ]);
     }
+    public function GetFeed(){
+        //grab the user with Auth->user()->id
+        //see who they follow with Follower::where('follower_id', Auth->user()->id)
+        //take that group of followers and grab all of their posts and statements
+        //dig into their timestamps, modify them to a maleable format, then get the time between then and now
+        //sort them chronologically
+        //add the new needed information like a new field "x time ago"
+        //pump them all into an array
+        //send them back with a return response json
+    }
     public function GetHomeFeed(){
+        
         $id = request('query');
-
+        $secondaryMeme = array();
         $statuses = Status::where('user_id', $id)->get()->toArray();
+        /*
+        $secondaryMeme = array_map(function($value){
+            $statuses[$value]->pfp_url = Profile::where('user_id', $value['user_id'])->get()->first()['pfp_url'];
+        }, $statuses);
+        */
+        
+       foreach ($statuses as $key => $value) {
+        $statuses[$key]['pfp_url'] = Profile::where('user_id', $value['user_id'])->get()->first()['pfp_url'];           
+       }
+
+
+
+
         return response()->json([
             'feedhomeControllerReached' => $id,
             'meme' => 'yee',
-            'statuses' => $statuses
+            'statuses' => $statuses,
+            'secondaryMeme' =>$secondaryMeme
         ]);
     }
     public function GetUserFeed(){

@@ -20,9 +20,6 @@ export default class DockContainer extends Component {
             console.log('tempdata from UserPageContentLoad')
             console.log(tempData)
         
-        
-
-
             //for each statement in the tempData array(rename to statements array), push a statement object into it with the data for the current statement
             var elements=[];
 

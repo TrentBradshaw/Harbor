@@ -7,7 +7,8 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
         console.log('type:  ' + type)
         const [upvoted, setUpvoted] = useState(null)
         const [downvoted, setDownvoted] = useState(null)
-        const [score, setScore] = useState(0)
+        const [score, setScore] = useState()
+        const [isLoading, setLoading] = useState(true)
 
         function vote(targetId, choseUpvoted, choseDownvoted){
     
@@ -56,7 +57,8 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
                             setScore(score -1)
                         else
                             setScore(score + 1)
-                    }    
+                    }
+                    setIsLoading(false)    
                 })
         
         }
@@ -79,18 +81,19 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
                     })
                 
         },[]);
+        if(!isLoading)
+            return(<React.Fragment></React.Fragment>)
         return(
             <div>
                 <div style= {{height: '100px'}}>
                     <ArrowDropUpIcon 
                     className="material-icons" 
-                    fontSize="large" 
                     style = {{color:  upvoted ? "orange" : null}}
                     onClick = {() => {vote(id, true, false)}}
 
                      ></ArrowDropUpIcon>
                     <p>{score}</p>
-                    <ArrowDropDownIcon className="material-icons" fontSize="large" style = {{color: downvoted? "blue" : null }} onClick = {() => {vote(id, false, true)}} ></ArrowDropDownIcon>
+                    <ArrowDropDownIcon className="material-icons" style = {{color: downvoted? "blue" : null }} onClick = {() => {vote(id, false, true)}} ></ArrowDropDownIcon>
                 </div>
             </div>
         )

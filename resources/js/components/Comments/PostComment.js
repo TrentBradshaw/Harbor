@@ -11,7 +11,7 @@ import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
 //don't forget to pass the votes into the voting system component
 
-    function PostComment({deleteComment, appendNewComment, comment})  {
+    function PostComment({userId, deleteComment, appendNewComment, comment})  {
         console.log(comment)
         //console.log('PROPPPUSSS FROM POSTCOMMENT' + JSON.stringify())
         const [nestLevel, changeNestLevel] = useState(comment.nestLevel)
@@ -19,6 +19,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
         const [minimized, toggleMinimized] = useState(false)
         const [deleted, updateDeleted] = useState(false)
         const [replyClicked, updateReplyClicked] = useState(false)
+        
         function handleInputChange(value){
             updateReplyClicked(value)
         }
@@ -61,7 +62,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
         if(deleted){
             return(
                 <div className = {'indent' + comment.nest_level} data={[comment.id]} parentid={comment.parent_comment_id} style={{minHeight: '100px', borderRadius: '0.5px', borderTop: '2px solid #dae0e6'}}>
-                    <p className = "commentDeletedHeader"> comment deleted</p>
+                    <p className = "commentDeletedHeader" style ={{textAlign:"start"}}> comment deleted</p>
                 </div>
                 
             )
@@ -72,27 +73,30 @@ import DeleteIcon from '@material-ui/icons/Delete';
                         <div className = {'indent' + comment.nest_level} data={[comment.id]} parentid={comment.parent_comment_id} style = {{display: 'flex', flexGrow: comment.nest_level, marginRight: '5%'}}>
                             <AddIcon onClick = {(e) => toggleComment(comment.id)}></AddIcon>
                             <p className = "commentHeaderText">{comment.username}</p>
-                            <p className = "commentHeaderText"> x points</p>
+                            <p className = "commentHeaderText"> {comment.score + ' points'}</p>
                             <Moment className="commentHeaderText" creator = {comment.username} timePosted = {comment.formattedStamp} type ={'time'}></Moment>
-                            <p>x children</p>
                         </div>
                     </div>
             )
         }
         return (
-            <div style={{display:'flex', borderRadius: '0.5px', borderTop: '2px solid #dae0e6', minHeight: '100px'}}>
+            <div style={{ borderRadius: '0.5px', borderTop: '2px solid #dae0e6', minHeight: '100px'}}>
             {additionalLines}
-                <div className = {'indent' + comment.nest_level} data={[comment.id]} parentid={comment.parent_comment_id} style = {{display: 'flex', flexGrow: comment.nest_level, marginRight: '5%',}}>
+                <div className = {'indent' + comment.nest_level} data={[comment.id]} parentid={comment.parent_comment_id} style = {{display: 'flex', flexGrow: comment.nest_level, marginRight: '5%', width:'100%'}}>
                     
-                    <div style= {{display: 'flex', flexDirection: 'column', width: '3%',}}>
+                    <div style= {{display: 'flex', flexDirection: 'column',}}>
                         <div style= {{height: '70%'}}>
                             <VotingSystem id = {comment.id} type= {'postComment'} ></VotingSystem>
                         </div>
                     </div>
-                    
+                    <img style= {{height: '64px',width : '64px',overflow: 'hidden',objectFit: 'cover'}} src={comment.posterPfpUrl}></img>
                     <div style= {{width: '100%'}}>
                         <div style = {{display: 'flex'}}>
-                            <RemoveIcon onClick = {(e) => toggleComment(comment.id)}></RemoveIcon>
+                            <div style = {{display: 'flex'}}>
+                                <RemoveIcon onClick = {() => toggleComment(comment.id)}></RemoveIcon>
+                                <p>minimize</p>
+                            </div>
+                            
                             <a href= {"http://localhost:80/user/" + comment.username} className = "commentHeaderText">{comment.username}</a>
                             <p className = "commentHeaderText">{comment.score + ' points'}</p>
                             <Moment className="commentHeaderText" creator = {comment.username} timePosted = {comment.formattedStamp} type ={'time'}></Moment>
@@ -103,16 +107,14 @@ import DeleteIcon from '@material-ui/icons/Delete';
                         <div style ={{ display: 'flex', marginTop: '10px',marginLeft: '20px',}}>
                             
                             <ReplyIcon onClick = {(e) => updateReplyClicked(true)} style= {{marginLeft: '10px', fill: 'slategrey'}}></ReplyIcon>
-                            <div style = {{display: 'flex', marginLeft: '20px'}}>
-                                <p>{0}</p>
-                                <QuestionAnswerIcon style={{fill: 'slategrey'}}></QuestionAnswerIcon>
-                            </div>
+                            
                             <ShareIcon style= {{marginLeft: '20px', textAlign: 'start', fill: 'slategrey'}}></ShareIcon>
                             {userId === comment.creator_id && <DeleteIcon onClick = {(e) => handleDeleteComment(comment.id)}></DeleteIcon>}
                         </div>
                     </div>
                 </div>
-                {replyClicked && <CommentInput 
+                {replyClicked && 
+                    <CommentInput 
                     isReply = {true} 
                     parentComment = {comment} 
                     appendNewComment = {appendNewComment} 

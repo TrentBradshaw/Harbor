@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import FileUpload from './FileUpload'
-
 
 export default class PostContentField extends Component {
     constructor(props){
@@ -15,7 +13,7 @@ export default class PostContentField extends Component {
             name="postBody"placeholder='Text(optional)'></input>)
         }
         else if(this.props.highlighted == "media")
-            return(<FileUpload updateImage = {this.props.updateImage}></FileUpload>)
+            return(<input placeholder='Enter image url...' onChange={(e) => this.props.setUrl(e.target.value)}></input>)
         else if (this.props.highlighted == "link"){
             return(
                 <div>

@@ -9,13 +9,27 @@ function Home ({userId}){
     const [profileOwnerInfo, setProfileOwnerInfo] = useState([]);
     const [statusArray, changeStatusArray] = useState([]);
     const [isLoading, setLoading] = useState(true);
+    const [pfpUrl, setPfpUrl] = useState();
+    const [secondaryMeme, setSecondaryMeme] = useState();
     useEffect(() => {
         let token = document.getElementById('csrf-token').getAttribute('content')
+        fetch('http://localhost:80/api/userdetails', {
+        headers:{
+            'X-CSRF-TOKEN': token,
+            'Content-Type':'application/json',
+        },
+        method: 'get',
+        mode: "same-origin",
+        credentials: "same-origin",
+        }).then((response) => {
+            console.log(response)
+            response.json().then((data) => {
+                setPfpUrl(data['pfpUrl'])
+            });
+        })
         let param, url
-        
-            url = new URL('http://localhost:80/api/feed/home')
-            param = {query: userId}
-        
+        url = new URL('http://localhost:80/api/feed/home')
+        param = {query: userId}
         url.search = new URLSearchParams(param).toString();
         console.log(url)
         fetch(url, {headers:{'X-CSRF-TOKEN': token, 'Content-Type':'application/json', "Access-Control-Allow-Origin" : "*", "Access-Control-Allow-Credentials" : true },
@@ -26,7 +40,10 @@ function Home ({userId}){
             console.log('response ' + response);
             response.json().then((data) => {
                 setLoading(false)
+                console.log(JSON.stringify(data['secondaryMeme']))
+                setSecondaryMeme(data['secondaryMeme'])
                 changeStatusArray(data['statuses'])
+                
             });
         });
     },[]);
@@ -41,12 +58,12 @@ function Home ({userId}){
     }
     function deleteStatus(id){
         let token = document.getElementById('csrf-token').getAttribute('content')
-        fetch('/api/status/delete', {
+        fetch('/api/statuses/delete', {
             headers:{'X-CSRF-TOKEN': token, 'Content-Type':'application/json',},
             method: 'delete',
             mode: "same-origin",
             credentials: "same-origin",
-            body: JSON.stringify({id: id})
+            body: JSON.stringify({statusId: id})
         }).then(
             data => { 
                 console.log('data from commentinput----------------------' + JSON.stringify(data))
@@ -68,7 +85,11 @@ function Home ({userId}){
         
     return (
         <div>
-            <HomeInput currentUserId = {userId} profileOwnerInfo={profileOwnerInfo} appendNewStatus={appendNewStatus}></HomeInput>
+            <div style= {{display:'flex', flexDirection: 'column'}}>
+                { pfpUrl && <img style={{height: '64px', width:'64px', objectFit: 'cover', alignSelf: 'center'}} src={pfpUrl}></img>}
+                <HomeInput currentUserId = {userId} profileOwnerInfo={profileOwnerInfo} appendNewStatus={appendNewStatus}></HomeInput>
+            </div>
+            
             <Feed home={true} userId={userId} pageOwnerId={null} appendNewStatus={appendNewStatus} deleteStatus={deleteStatus} statusArray={statusArray}></Feed>
         </div>
     )

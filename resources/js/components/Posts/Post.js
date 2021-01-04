@@ -6,6 +6,7 @@ import VotingSystem from './VotingSystem';
 import Moment from '../Utility/Moment';
 import MediaPost from './MediaPost';
 import PostComments from '../Comments/PostComments'
+import DeleteIcon from '@material-ui/icons/Delete';
 
     const GetPostType = (type, state) => {
         
@@ -16,6 +17,7 @@ import PostComments from '../Comments/PostComments'
 
     function Post(props){
         const [isLoading, setLoading] = useState(true);
+        const [userId, setUserId] = useState(null);
         const [state, setNewState] = useState({
             communityTitle: '',
             created_at: "",
@@ -34,6 +36,24 @@ import PostComments from '../Comments/PostComments'
         }, []);
         const fetchData = () => {
             let token = document.getElementById('csrf-token').getAttribute('content')
+            fetch('http://localhost:80/api/userdetails', {
+                headers:{
+                    'X-CSRF-TOKEN': token,
+                    'Content-Type':'application/json',
+                    "Access-Control-Allow-Origin" : "*", 
+                    "Access-Control-Allow-Credentials" : true 
+                },
+                method: 'get',
+                mode: "cors",
+                credentials: "same-origin",
+                }).then((response) => {
+                    response.json().then((data) => {
+                       
+    
+                        setUserId(data['id']);
+                        console.log(data + 'sffwfgsdgwswsw')
+                    });
+                })
             let url = new URL('http://localhost:80/api/post')
             let param = {query: props.postId}
 
@@ -57,47 +77,70 @@ import PostComments from '../Comments/PostComments'
                     });
                 })
         }
-
+        function handleDeletePost(){
+            
+            fetch('http://localhost:80/api/post', {
+                headers:{
+                    'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),
+                    'Content-Type':'application/json',
+                    "Access-Control-Allow-Origin" : "*", 
+                    "Access-Control-Allow-Credentials" : true 
+                },
+                method: 'delete',
+                mode: "cors",
+                credentials: "same-origin",
+                body: JSON.stringify({
+                    postId: state.id
+                })
+                }).then((response) => {
+                    response.json().then((data) => {
+                        console.log(data)
+                        window.location.replace("http://localhost:80/dock/" + state.communityTitle)
+                    });
+                })
+        }
         if (isLoading) { return <div className="App">Loading...</div> }
         
         return (
             <div>
                 <div className="App" style={{ marginLeft: '2%', marginRight: '2%', minHeight: '100%', display: 'flex', justifyContent: 'space-between' }}>
                     <div id="PostHeader" style={{ width: '70%', backgroundColor: 'white'}}>
-                        <VotingSystem id={props.postId} type={'post'}></VotingSystem>
-                        <div id= '2' style ={{width: '100%'}}>
-                        <h2 style = {{height: '45%'}}>{state.title}</h2>
-                        <div style = {{display: 'flex', marginTop: '15px'}}>
-                            <Moment creator = {state.creatorUsername} timePosted = {state.formattedStamp}></Moment>
-                            <p>{state.commentCount + ' comments'}</p>
-                            <p onClick= {() =>{
-                                var Url = 'http://localhost/dock/' + state.communityTitle + '/' + state.id + '/' + state.title;
-                                var dummy = document.createElement("textarea");
-                                dummy.style.display = 'none'
-                                document.body.appendChild(dummy);
-                                dummy.value = Url;
-                                dummy.select();
-                                document.execCommand("copy");
-                                document.body.removeChild(dummy);
-                                }}
-                                >share</p>
+                        <div style = {{display: 'flex'}} id="RealPostHeader">
+                            <VotingSystem id={props.postId} type={'post'}></VotingSystem>
+                                <img style= {{height: '64px',width : '64px',overflow: 'hidden',objectFit: 'cover'}} src={state.posterPfpUrl}></img>
+                                <div id= '2' style ={{width: '100%'}}>
+                                    <h2>{state.title}</h2>
+                                    <div style = {{display: 'flex'}}>
+                                        <Moment creator = {state.creatorUsername} timePosted = {state.formattedStamp}></Moment>
+                                        <p>{state.commentCount + ' comments'}</p>
+                                        <p onClick= {() =>{
+                                            var Url = 'http://localhost/dock/' + state.communityTitle + '/' + state.id + '/' + state.title;
+                                            var dummy = document.createElement("textarea");
+                                            dummy.style.display = 'none'
+                                            document.body.appendChild(dummy);
+                                            dummy.value = Url;
+                                            dummy.select();
+                                            document.execCommand("copy");
+                                            document.body.removeChild(dummy);
+                                            }}
+                                            >share
+                                        </p>
+                                        {userId === state.creator_id && <DeleteIcon onClick = {(e) => handleDeletePost()}></DeleteIcon>}
+                                    </div>
+                                </div>
                         </div>
-                            <div id="RealPostHeader" style= {{display: 'flex'}}>
+                        <div style= {{display: 'flex'}}>
                                 {GetPostType(state.type, state)}
-                            </div>    
-                        </div> 
-                        <div>
+                        </div>
+                        
                         <div>
                             <div>
-                                <PostComments parentPostId = {state.id}></PostComments>
+                                <PostComments userId= {userId} parentPostId = {state.id}></PostComments>
                             </div>
                         </div>
                     </div>
-                    </div>
                     <div style={{ width: '20%', minHeight: '100%',}}>
-                        <div>
-                            <h1>Sidebar</h1>
-                        </div>
+                        <div><h1>Sidebar</h1></div>
                     </div>
                 </div>
             </div>

@@ -6,7 +6,7 @@ function Status({appendNewStatus, deleteStatus, status, userId}) {
     return (
         <div key={status.id} className = 'statement' style={{borderColor: 'rgb(56, 68, 77)', border: '1px solid'}}> 
             <div style={{display: 'flex'}}>
-                <div>photo</div>
+            <img style={{height: '64px', width:'64px', objectFit: 'cover', alignSelf: 'center', borderRadius: '50%'}} src={status.pfp_url}></img>
                 <VotingSystem id={status.id} type={'status'}></VotingSystem>
             </div>
             <div className= "bodyAndFooter">

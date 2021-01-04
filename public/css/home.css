@@ -11,7 +11,7 @@ html, body, .Container
     background-color: #dae0e6;
 }
 .backgroundContainer{
-    background-color: gainsboro;
+    background-color: #dae0e6;
     border-radius: 4px;
 }
 
@@ -70,7 +70,14 @@ p
     background-color: white;
     width: 100%;
 }
-
+.tab{
+    width: 50%;
+    height: 50px;
+    outline-style: none;
+    outline: none;
+    border: none;
+    background-color: #dae0e6;
+}
 .C1
 {
     width: 15%;
@@ -86,7 +93,6 @@ p
     margin-right: 28;
     background: #dae0e6;
     background-color: white;
-    height: 100%;
 }
 .C3
 {
@@ -469,7 +475,7 @@ img#pfp{
       margin-left: 20%;
   }
   .statement{
-    background-color: gainsboro;
+    background-color: #dae0e6;
     display: flex;
     border: 1px solid;
     width: 90%;

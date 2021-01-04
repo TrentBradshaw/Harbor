@@ -28,6 +28,28 @@ import React, { useState } from 'react';
         //console.log('props from commentinput submit ' + JSON.stringify(props))
         let token = document.getElementById('csrf-token').getAttribute('content')
         fetch('/api/comments/submit', {
+
+            //this is where you do it, check database for pfp url and also upvote the comment yourself
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
             headers:{'X-CSRF-TOKEN': token, 'Content-Type':'application/json',},
             method: 'post',
             mode: "same-origin",

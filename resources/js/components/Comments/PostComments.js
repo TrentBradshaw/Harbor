@@ -4,7 +4,7 @@ import CommentInput from './CommentInput';
 import PostComment from './PostComment'
 //don't forget to pass the votes into the voting system component
 
-const  PostComments = ({parentPostId}) => {
+const  PostComments = ({userId, parentPostId}) => {
     
     const [isLoading, changeLoading] = useState(true);
     const [commentsArray, changeCommentsArray] = useState([]);
@@ -31,6 +31,20 @@ const  PostComments = ({parentPostId}) => {
             })
     }
     function appendNewComment(commentObject, isReply, parentCommentId){
+        // modify the comment object so i grab the pfp url and set the vote to 1 and upvote it
+        //
+
+        //also ensure that each time you comment you automatically upvote it
+        //commentObject['score'] = 1
+
+
+
+
+
+
+
+
+
         let tempCommentsArray = [...commentsArray]; 
         let index;
         if (isReply){
@@ -85,18 +99,22 @@ const  PostComments = ({parentPostId}) => {
     } 
     if (isLoading) { return <div className="App">Loading...</div> }
     return (
-        <div>
-            <CommentInput style={{height: '120px'}} 
-            isReply={false}
-            parentComment={null}   
-            appendNewComment = {appendNewComment} 
-            parentPostId={parentPostId}>
-            hideInput={null}
-            </CommentInput>
+        <div style = {{marginTop: '20px'}}>
+            <hr style={{marginBottom: '20px'}}></hr>
+            <div style = {{    marginTop: '20px', marginLeft:' 6.5%', width: '80%'}}>
+                <CommentInput style={{height: '120px'}} 
+                isReply={false}
+                parentComment={null}   
+                appendNewComment = {appendNewComment} 
+                parentPostId={parentPostId}>
+                hideInput={null}
+                </CommentInput>
+            </div>
+            
             <div id = "commentsholder">
             {
                 commentsArray.map((element)=>(
-                    <PostComment key = {element.id} deleteComment = {deleteComment} appendNewComment = {appendNewComment} comment = {element}></PostComment>
+                    <PostComment key = {element.id} userId={userId} deleteComment = {deleteComment} appendNewComment = {appendNewComment} comment = {element}></PostComment>
             ))}
             </div>
         </div>

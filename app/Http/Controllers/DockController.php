@@ -116,8 +116,6 @@ class DockController extends Controller
    }
    public function GetDocks(){
        $dock = new Dock();
-
-       
        $query = request('query');
        $queryList = Dock::where('title', 'LIKE', '%' . $query . '%')->get()->toArray();
        if ($queryList != null){

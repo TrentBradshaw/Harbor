@@ -65,7 +65,7 @@ import moment, { months } from 'moment';
             if(daysDiff > 1 )
             getTimeOnly ? timeSince = daysDiff + " days ago" : timeSince = submitString + daysDiff + " days ago by " + creator;
             else if (daysDiff == 1)
-            getTimeOnly ? timeSince = daysDiff + " day ago" : timeSince = submiString + daysDiff + " day ago by " + creator;
+            getTimeOnly ? timeSince = daysDiff + " day ago" : timeSince = submitString + daysDiff + " day ago by " + creator;
             return timeSince;
         }
         if(hoursDiff >=1){

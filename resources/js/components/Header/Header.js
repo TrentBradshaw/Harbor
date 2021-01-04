@@ -21,7 +21,7 @@ function Header() {
             'X-CSRF-TOKEN': token,
             'Content-Type':'application/json',
         },
-        method: 'post',
+        method: 'get',
         mode: "same-origin",
         credentials: "same-origin",
         }).then((response) => {

@@ -96,8 +96,12 @@ class StatusController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function DeleteStatus(Request $request)
     {
-        //
+        $json = json_decode(file_get_contents('php://input'), true); //grab request
+        Status::where('id', $json['statusId'])->first()->delete();
+        return response()->json([
+            'State' => 'deleted',
+        ]);
     }
 }

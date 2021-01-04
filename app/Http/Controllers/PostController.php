@@ -12,8 +12,10 @@ use Carbon\Carbon;
 use App\Models\Status;
 use App\Models\Dock;
 use App\Models\PostComment;
+use App\Models\Profile;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+
 
 use App\Includes\GetUrlMetaData;
 
@@ -29,30 +31,15 @@ class PostController extends Controller
         return view ('PostSubmitForm');
     }
     public function Store(){
+        
+
         $json = json_decode(file_get_contents('php://input'), true); //grab request
         
         $post = new Post();
-        $post->media_url = '';
-        if ($json['file']){
-            $base64img = str_replace('data:image/jpeg;base64,', '', $json['file']);
-
-        $client = new Client();
-        $imgurKey = env('IMGUR_API_KEY');
-        $response = $client->request('POST', 'https://api.imgur.com/3/image', [
-            'headers' => [
-                'authorization' => 'Client-ID ' . $imgurKey ,
-                                                                     
-                'content-type' => 'application/x-www-form-urlencoded',
-            ],
-            'form_params' => [
-                'image' => $base64img
-            ],
-        ]);
-
-        $image = json_decode($response->getBody(), true);
-        $data = $image['data']['link'];
-        $post->media_url = $data;
-        }
+        
+        $post->media_url = $json['url'];
+        //set BACK TO MEDIA_URL = $DATA
+        
         
 
         $community = Dock::where('title', $json['community'])->get()->first();
@@ -88,6 +75,7 @@ class PostController extends Controller
                     return response()->json([
                         //so i need
                         //127.0.0.1/dock/dockname/postID/posttitle
+                        'post' =>$post,
                         'url' =>$url,
                     ]);
             }
@@ -110,6 +98,13 @@ class PostController extends Controller
                 ]);
         return view ('ShowPost');
     }
+    public function DeletePost(){
+        $json = json_decode(file_get_contents('php://input'), true); //grab request
+        Post::where('id', $json['postId'])->first()->delete();
+        return response()->json([
+            'State' => 'deleted',
+        ]);
+    }
     public function GetPost(){
 
         $id = request('query');
@@ -128,6 +123,7 @@ class PostController extends Controller
         $dateAltered = Carbon::parse($postInfo->created_at);
         $postInfo['created_at'] ->format('d/m/Y h:i:s');
         $postInfo['formattedStamp'] = $dateAltered->format('M/d/Y h:i');
+        $postInfo['posterPfpUrl'] = Profile::where('user_id', $user->id)->get()->first()['pfp_url'];
         $postInfo['commentCount'] = Count(PostComment::where('parent_post_id', $id)->get()->toArray());
 
         if ($postInfo['type'] == "link"){

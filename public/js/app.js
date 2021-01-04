@@ -100249,6 +100249,7 @@ function submit(isReply, parentComment, appendNewComment, parentPostId, text, hi
 
   var token = document.getElementById('csrf-token').getAttribute('content');
   fetch('/api/comments/submit', {
+    //this is where you do it, check database for pfp url and also upvote the comment yourself
     headers: {
       'X-CSRF-TOKEN': token,
       'Content-Type': 'application/json'
@@ -100326,7 +100327,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
  //don't forget to pass the votes into the voting system component
 
 function PostComment(_ref) {
-  var deleteComment = _ref.deleteComment,
+  var userId = _ref.userId,
+      deleteComment = _ref.deleteComment,
       appendNewComment = _ref.appendNewComment,
       comment = _ref.comment;
   console.log(comment); //console.log('PROPPPUSSS FROM POSTCOMMENT' + JSON.stringify())
@@ -100408,7 +100410,10 @@ function PostComment(_ref) {
         borderTop: '2px solid #dae0e6'
       }
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-      className: "commentDeletedHeader"
+      className: "commentDeletedHeader",
+      style: {
+        textAlign: "start"
+      }
     }, " comment deleted"));
   }
 
@@ -100437,17 +100442,16 @@ function PostComment(_ref) {
       className: "commentHeaderText"
     }, comment.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
       className: "commentHeaderText"
-    }, " x points"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Utility_Moment__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    }, " ", comment.score + ' points'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Utility_Moment__WEBPACK_IMPORTED_MODULE_1__["default"], {
       className: "commentHeaderText",
       creator: comment.username,
       timePosted: comment.formattedStamp,
       type: 'time'
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "x children")));
+    })));
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
-      display: 'flex',
       borderRadius: '0.5px',
       borderTop: '2px solid #dae0e6',
       minHeight: '100px'
@@ -100459,13 +100463,13 @@ function PostComment(_ref) {
     style: {
       display: 'flex',
       flexGrow: comment.nest_level,
-      marginRight: '5%'
+      marginRight: '5%',
+      width: '100%'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       display: 'flex',
-      flexDirection: 'column',
-      width: '3%'
+      flexDirection: 'column'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
@@ -100474,7 +100478,15 @@ function PostComment(_ref) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Posts_VotingSystem__WEBPACK_IMPORTED_MODULE_2__["default"], {
     id: comment.id,
     type: 'postComment'
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    style: {
+      height: '64px',
+      width: '64px',
+      overflow: 'hidden',
+      objectFit: 'cover'
+    },
+    src: comment.posterPfpUrl
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       width: '100%'
     }
@@ -100482,11 +100494,15 @@ function PostComment(_ref) {
     style: {
       display: 'flex'
     }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      display: 'flex'
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Remove__WEBPACK_IMPORTED_MODULE_7___default.a, {
-    onClick: function onClick(e) {
+    onClick: function onClick() {
       return toggleComment(comment.id);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "minimize")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     href: "http://localhost:80/user/" + comment.username,
     className: "commentHeaderText"
   }, comment.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
@@ -100518,16 +100534,7 @@ function PostComment(_ref) {
       marginLeft: '10px',
       fill: 'slategrey'
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: {
-      display: 'flex',
-      marginLeft: '20px'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, 0), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_QuestionAnswer__WEBPACK_IMPORTED_MODULE_4___default.a, {
-    style: {
-      fill: 'slategrey'
-    }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Share__WEBPACK_IMPORTED_MODULE_6___default.a, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Share__WEBPACK_IMPORTED_MODULE_6___default.a, {
     style: {
       marginLeft: '20px',
       textAlign: 'start',
@@ -100591,7 +100598,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
  //don't forget to pass the votes into the voting system component
 
 var PostComments = function PostComments(_ref) {
-  var parentPostId = _ref.parentPostId;
+  var userId = _ref.userId,
+      parentPostId = _ref.parentPostId;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(true),
       _useState2 = _slicedToArray(_useState, 2),
@@ -100633,6 +100641,10 @@ var PostComments = function PostComments(_ref) {
   };
 
   function appendNewComment(commentObject, isReply, parentCommentId) {
+    // modify the comment object so i grab the pfp url and set the vote to 1 and upvote it
+    //
+    //also ensure that each time you comment you automatically upvote it
+    //commentObject['score'] = 1
     var tempCommentsArray = _toConsumableArray(commentsArray);
 
     var index;
@@ -100699,7 +100711,21 @@ var PostComments = function PostComments(_ref) {
     }, "Loading...");
   }
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CommentInput__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      marginTop: '20px'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+    style: {
+      marginBottom: '20px'
+    }
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      marginTop: '20px',
+      marginLeft: ' 6.5%',
+      width: '80%'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CommentInput__WEBPACK_IMPORTED_MODULE_1__["default"], {
     style: {
       height: '120px'
     },
@@ -100707,11 +100733,12 @@ var PostComments = function PostComments(_ref) {
     parentComment: null,
     appendNewComment: appendNewComment,
     parentPostId: parentPostId
-  }, "hideInput=", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "hideInput=", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "commentsholder"
   }, commentsArray.map(function (element) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PostComment__WEBPACK_IMPORTED_MODULE_2__["default"], {
       key: element.id,
+      userId: userId,
       deleteComment: deleteComment,
       appendNewComment: appendNewComment,
       comment: element
@@ -101448,7 +101475,7 @@ function Header() {
         'X-CSRF-TOKEN': token,
         'Content-Type': 'application/json'
       },
-      method: 'post',
+      method: 'get',
       mode: "same-origin",
       credentials: "same-origin"
     }).then(function (response) {
@@ -101587,8 +101614,32 @@ function Home(_ref) {
       isLoading = _useState6[0],
       setLoading = _useState6[1];
 
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+      _useState8 = _slicedToArray(_useState7, 2),
+      pfpUrl = _useState8[0],
+      setPfpUrl = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+      _useState10 = _slicedToArray(_useState9, 2),
+      secondaryMeme = _useState10[0],
+      setSecondaryMeme = _useState10[1];
+
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     var token = document.getElementById('csrf-token').getAttribute('content');
+    fetch('http://localhost:80/api/userdetails', {
+      headers: {
+        'X-CSRF-TOKEN': token,
+        'Content-Type': 'application/json'
+      },
+      method: 'get',
+      mode: "same-origin",
+      credentials: "same-origin"
+    }).then(function (response) {
+      console.log(response);
+      response.json().then(function (data) {
+        setPfpUrl(data['pfpUrl']);
+      });
+    });
     var param, url;
     url = new URL('http://localhost:80/api/feed/home');
     param = {
@@ -101610,6 +101661,8 @@ function Home(_ref) {
       console.log('response ' + response);
       response.json().then(function (data) {
         setLoading(false);
+        console.log(JSON.stringify(data['secondaryMeme']));
+        setSecondaryMeme(data['secondaryMeme']);
         changeStatusArray(data['statuses']);
       });
     });
@@ -101628,7 +101681,7 @@ function Home(_ref) {
 
   function deleteStatus(id) {
     var token = document.getElementById('csrf-token').getAttribute('content');
-    fetch('/api/status/delete', {
+    fetch('/api/statuses/delete', {
       headers: {
         'X-CSRF-TOKEN': token,
         'Content-Type': 'application/json'
@@ -101637,7 +101690,7 @@ function Home(_ref) {
       mode: "same-origin",
       credentials: "same-origin",
       body: JSON.stringify({
-        id: id
+        statusId: id
       })
     }).then(function (data) {
       console.log('data from commentinput----------------------' + JSON.stringify(data));
@@ -101659,11 +101712,24 @@ function Home(_ref) {
     });
   }
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_HomeInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column'
+    }
+  }, pfpUrl && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+    style: {
+      height: '64px',
+      width: '64px',
+      objectFit: 'cover',
+      alignSelf: 'center'
+    },
+    src: pfpUrl
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_HomeInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
     currentUserId: userId,
     profileOwnerInfo: profileOwnerInfo,
     appendNewStatus: appendNewStatus
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_UserPage_Feed__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_UserPage_Feed__WEBPACK_IMPORTED_MODULE_5__["default"], {
     home: true,
     userId: userId,
     pageOwnerId: null,
@@ -101730,17 +101796,24 @@ function HomeInput(_ref) {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "homeInput"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      display: 'flex'
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     className: "tab",
     onClick: function onClick() {
       return handleInputSwitch("status");
     }
   }, "Status"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    style: {
+      borderLeft: ' 1px solid white'
+    },
     className: "tab",
     onClick: function onClick() {
       return handleInputSwitch("post");
     }
-  }, "Post"), inputType === 'status' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SubmitPages_StatusInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, "Post")), inputType === 'status' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SubmitPages_StatusInput__WEBPACK_IMPORTED_MODULE_3__["default"], {
     currentUserId: currentUserId,
     appendNewStatus: appendNewStatus
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SubmitPages_PostSubmitForm__WEBPACK_IMPORTED_MODULE_2__["default"], null)) /// JUST TAKE ME TO THE FULL POST CREATION FORM REEEEEEEEEEE
@@ -101834,24 +101907,9 @@ function MediaPost(props) {
     style: {
       display: 'flex'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_VotingSystem__WEBPACK_IMPORTED_MODULE_0__["default"], {
-    id: props.state.id,
-    type: 'post'
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h4", null, "d/" + props.state.communityTitle), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "Posted by u/" + props.state.creatorUsername), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("img", {
     src: props.state.media_url
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("h2", {
-    style: {
-      height: '45%'
-    }
-  }, props.state.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
-    style: {
-      display: 'flex',
-      marginTop: '15px'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Utility_Moment__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    creator: props.state.creatorUsername,
-    timePosted: props.state.formattedStamp
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "x commments"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("p", null, "share")));
+  })));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (MediaPost);
@@ -101877,6 +101935,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Utility_Moment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Utility/Moment */ "./resources/js/components/Utility/Moment.js");
 /* harmony import */ var _MediaPost__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./MediaPost */ "./resources/js/components/Posts/MediaPost.js");
 /* harmony import */ var _Comments_PostComments__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Comments/PostComments */ "./resources/js/components/Comments/PostComments.js");
+/* harmony import */ var _material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @material-ui/icons/Delete */ "./node_modules/@material-ui/icons/Delete.js");
+/* harmony import */ var _material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_8__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -101888,6 +101948,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -101920,7 +101981,12 @@ function Post(props) {
       isLoading = _useState2[0],
       setLoading = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(null),
+      _useState4 = _slicedToArray(_useState3, 2),
+      userId = _useState4[0],
+      setUserId = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])({
     communityTitle: '',
     created_at: "",
     creatorUsername: "",
@@ -101931,9 +101997,9 @@ function Post(props) {
     type: "",
     currentUTCTime: ""
   }),
-      _useState4 = _slicedToArray(_useState3, 2),
-      state = _useState4[0],
-      setNewState = _useState4[1];
+      _useState6 = _slicedToArray(_useState5, 2),
+      state = _useState6[0],
+      setNewState = _useState6[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     fetchData();
@@ -101941,6 +102007,22 @@ function Post(props) {
 
   var fetchData = function fetchData() {
     var token = document.getElementById('csrf-token').getAttribute('content');
+    fetch('http://localhost:80/api/userdetails', {
+      headers: {
+        'X-CSRF-TOKEN': token,
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true
+      },
+      method: 'get',
+      mode: "cors",
+      credentials: "same-origin"
+    }).then(function (response) {
+      response.json().then(function (data) {
+        setUserId(data['id']);
+        console.log(data + 'sffwfgsdgwswsw');
+      });
+    });
     var url = new URL('http://localhost:80/api/post');
     var param = {
       query: props.postId
@@ -101966,6 +102048,28 @@ function Post(props) {
     });
   };
 
+  function handleDeletePost() {
+    fetch('http://localhost:80/api/post', {
+      headers: {
+        'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true
+      },
+      method: 'delete',
+      mode: "cors",
+      credentials: "same-origin",
+      body: JSON.stringify({
+        postId: state.id
+      })
+    }).then(function (response) {
+      response.json().then(function (data) {
+        console.log(data);
+        window.location.replace("http://localhost:80/dock/" + state.communityTitle);
+      });
+    });
+  }
+
   if (isLoading) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: "App"
@@ -101987,22 +102091,30 @@ function Post(props) {
       width: '70%',
       backgroundColor: 'white'
     }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    style: {
+      display: 'flex'
+    },
+    id: "RealPostHeader"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_VotingSystem__WEBPACK_IMPORTED_MODULE_4__["default"], {
     id: props.postId,
     type: 'post'
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("img", {
+    style: {
+      height: '64px',
+      width: '64px',
+      overflow: 'hidden',
+      objectFit: 'cover'
+    },
+    src: state.posterPfpUrl
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     id: "2",
     style: {
       width: '100%'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, state.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     style: {
-      height: '45%'
-    }
-  }, state.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    style: {
-      display: 'flex',
-      marginTop: '15px'
+      display: 'flex'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Utility_Moment__WEBPACK_IMPORTED_MODULE_5__["default"], {
     creator: state.creatorUsername,
@@ -102018,14 +102130,18 @@ function Post(props) {
       document.execCommand("copy");
       document.body.removeChild(dummy);
     }
-  }, "share")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    id: "RealPostHeader",
+  }, "share"), userId === state.creator_id && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_8___default.a, {
+    onClick: function onClick(e) {
+      return handleDeletePost();
+    }
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     style: {
       display: 'flex'
     }
-  }, GetPostType(state.type, state))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Comments_PostComments__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  }, GetPostType(state.type, state)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Comments_PostComments__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    userId: userId,
     parentPostId: state.id
-  }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     style: {
       width: '20%',
       minHeight: '100%'
@@ -102060,7 +102176,10 @@ function TextPost(props) {
   console.log(JSON.stringify(props) + ' from Textpost');
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
-      width: '100%'
+      width: '60%',
+      border: '1px solid #369',
+      borderRadius: '7px',
+      marginLeft: '6.5%'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
     style: {
@@ -102069,6 +102188,7 @@ function TextPost(props) {
       alignContent: 'start',
       minHeight: '100px',
       display: "inline-block",
+      textAlign: "start",
       width: '100%'
     }
   }, props.state.text)));
@@ -102127,10 +102247,15 @@ function VotingSystem(_ref) {
       downvoted = _useState4[0],
       setDownvoted = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(0),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
       _useState6 = _slicedToArray(_useState5, 2),
       score = _useState6[0],
       setScore = _useState6[1];
+
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState8 = _slicedToArray(_useState7, 2),
+      isLoading = _useState8[0],
+      setLoading = _useState8[1];
 
   function vote(targetId, choseUpvoted, choseDownvoted) {
     //make this call once and pass the userID probably from a higher-order component
@@ -102178,6 +102303,8 @@ function VotingSystem(_ref) {
         setDownvoted(choseDownvoted);
         if (choseDownvoted) setScore(score - 1);else setScore(score + 1);
       }
+
+      setIsLoading(false);
     });
   }
 
@@ -102208,13 +102335,13 @@ function VotingSystem(_ref) {
       setScore(data['score']);
     });
   }, []);
+  if (!isLoading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     style: {
       height: '100px'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_ArrowDropUp__WEBPACK_IMPORTED_MODULE_0___default.a, {
     className: "material-icons",
-    fontSize: "large",
     style: {
       color: upvoted ? "orange" : null
     },
@@ -102223,7 +102350,6 @@ function VotingSystem(_ref) {
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, score), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_ArrowDropDown__WEBPACK_IMPORTED_MODULE_2___default.a, {
     className: "material-icons",
-    fontSize: "large",
     style: {
       color: downvoted ? "blue" : null
     },
@@ -102268,7 +102394,16 @@ function Status(_ref) {
     style: {
       display: 'flex'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "photo"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Posts_VotingSystem__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    style: {
+      height: '64px',
+      width: '64px',
+      objectFit: 'cover',
+      alignSelf: 'center',
+      borderRadius: '50%'
+    },
+    src: status.pfp_url
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Posts_VotingSystem__WEBPACK_IMPORTED_MODULE_1__["default"], {
     id: status.id,
     type: 'status'
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -102324,103 +102459,6 @@ function StatusContainer(_ref) {
 
 /***/ }),
 
-/***/ "./resources/js/components/SubmitPages/FileUpload.js":
-/*!***********************************************************!*\
-  !*** ./resources/js/components/SubmitPages/FileUpload.js ***!
-  \***********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FileUploadComponent; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-
-
-var FileUploadComponent = /*#__PURE__*/function (_Component) {
-  _inherits(FileUploadComponent, _Component);
-
-  var _super = _createSuper(FileUploadComponent);
-
-  function FileUploadComponent(props) {
-    var _this;
-
-    _classCallCheck(this, FileUploadComponent);
-
-    _this = _super.call(this, props);
-    _this.state = {
-      image: ''
-    };
-    _this.onChange = _this.onChange.bind(_assertThisInitialized(_this));
-    return _this;
-  }
-
-  _createClass(FileUploadComponent, [{
-    key: "onChange",
-    value: function onChange(e) {
-      var files = e.target.files || e.dataTransfer.files;
-      if (!files.length) return;
-      this.createImage(files[0]);
-    }
-  }, {
-    key: "createImage",
-    value: function createImage(file) {
-      var _this2 = this;
-
-      var reader = new FileReader();
-
-      reader.onload = function (e) {
-        _this2.props.updateImage(e.target.result);
-      };
-
-      reader.readAsDataURL(file);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this3 = this;
-
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        id: "postFileField",
-        type: "file",
-        onChange: function onChange(e) {
-          return _this3.onChange(e);
-        },
-        name: "postFile"
-      });
-    }
-  }]);
-
-  return FileUploadComponent;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-
-
-/***/ }),
-
 /***/ "./resources/js/components/SubmitPages/PostContentField.js":
 /*!*****************************************************************!*\
   !*** ./resources/js/components/SubmitPages/PostContentField.js ***!
@@ -102433,7 +102471,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PostContentField; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _FileUpload__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FileUpload */ "./resources/js/components/SubmitPages/FileUpload.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -102455,7 +102492,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 
 
 
@@ -102489,8 +102525,11 @@ var PostContentField = /*#__PURE__*/function (_Component) {
           name: "postBody",
           placeholder: "Text(optional)"
         });
-      } else if (this.props.highlighted == "media") return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FileUpload__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        updateImage: this.props.updateImage
+      } else if (this.props.highlighted == "media") return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        placeholder: "Enter image url...",
+        onChange: function onChange(e) {
+          return _this2.props.setUrl(e.target.value);
+        }
       });else if (this.props.highlighted == "link") {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           id: "postLinkField",
@@ -102562,13 +102601,8 @@ function PostSubmitForm(props) {
 
   var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      file = _useState8[0],
-      setFile = _useState8[1];
-
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
-      _useState10 = _slicedToArray(_useState9, 2),
-      body = _useState10[0],
-      setBody = _useState10[1];
+      body = _useState8[0],
+      setBody = _useState8[1];
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
@@ -102600,7 +102634,7 @@ function PostSubmitForm(props) {
       changePostType('link');
     }
   }, "Link")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PostContentField__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    updateImage: updateImage,
+    setUrl: setUrl,
     updateContentValue: updateContentValue,
     highlighted: highlighted
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -102612,20 +102646,15 @@ function PostSubmitForm(props) {
 
   function changePostType(type) {
     setHighlighted(type);
-    setMediaUrl('');
     setUrl('');
   }
 
   function updateContentValue(content, value) {
-    if (content == 'text') setBody(value);else if (content == 'media') setFile(value);else if (content == 'link') setUrl(value);
-  }
-
-  function updateImage(file) {
-    setFile(file);
+    if (content == 'text') setBody(value);else if (content == 'media') setUrl(value);else if (content == 'link') setUrl(value);
   }
 
   function submit() {
-    var file = document.getElementById('postFileField') ? document.getElementById('postFileField').files[0] : '';
+    //let file = document.getElementById('postFileField') ? document.getElementById('postFileField').files[0]: ''
     fetch('/api/posts/submit', {
       headers: {
         'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),
@@ -102639,13 +102668,13 @@ function PostSubmitForm(props) {
         type: highlighted,
         title: title,
         text: body,
-        file: file,
-        url: url,
-        imageFile: file
+        url: url
       })
     }).then(function (response) {
       return response.json(console.log(response));
     }).then(function (data) {
+      console.log(JSON.stringify(data['post']));
+      console.log(data['data']);
       window.location.replace(data['url']);
     });
   }
@@ -102703,9 +102732,7 @@ function StatusInput(_ref) {
     className: "backgroundContainer",
     style: {
       display: 'flex',
-      flexDirection: 'column',
-      backgroundColor: 'gainsboro',
-      marginTop: '20px'
+      flexDirection: 'column'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     onChange: function onChange(e) {
@@ -102727,11 +102754,7 @@ function StatusInput(_ref) {
       flexWrap: 'wrap',
       justifyContent: 'center'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Image__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    style: {
-      fontSize: '40px'
-    }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: function onClick(e) {
       return submit(text, currentUserId);
     },
@@ -102889,18 +102912,38 @@ function Feed(_ref) {
   var home = _ref.home,
       userId = _ref.userId,
       profileOwnerId = _ref.profileOwnerId,
-      statusArray = _ref.statusArray;
+      appendNewStatus = _ref.appendNewStatus,
+      deleteStatus = _ref.deleteStatus,
+      feedArray = _ref.feedArray;
   console.log(statusArray + 'statusarray');
 
-  if (!statusArray) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "No Content to show currently."));
+  if (home) {
+    if (!feedArray) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "No Content to show currently."));
+    } else {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "commentsholder"
+      }, //feed this an array of posts as well, then mix them, then sort them in chronilogical order
+      feedArray.map(function (element) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Status_Status__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          key: element.id,
+          userId: userId,
+          deleteStatus: deleteStatus,
+          appendNewStatus: appendNewStatus,
+          status: element
+        });
+      })));
+    }
   } else {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       id: "commentsholder"
-    }, statusArray.map(function (element) {
+    }, //feed this an array of posts as well, then mix them, then sort them in chronilogical order
+    feedArray.map(function (element) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Status_Status__WEBPACK_IMPORTED_MODULE_1__["default"], {
-        userId: userId,
         key: element.id,
+        userId: userId,
+        deleteStatus: deleteStatus,
+        appendNewStatus: appendNewStatus,
         status: element
       });
     })));
@@ -103466,7 +103509,7 @@ var Moment = function Moment(props) {
   }
 
   if (daysDiff >= 1) {
-    if (daysDiff > 1) getTimeOnly ? timeSince = daysDiff + " days ago" : timeSince = submitString + daysDiff + " days ago by " + creator;else if (daysDiff == 1) getTimeOnly ? timeSince = daysDiff + " day ago" : timeSince = submiString + daysDiff + " day ago by " + creator;
+    if (daysDiff > 1) getTimeOnly ? timeSince = daysDiff + " days ago" : timeSince = submitString + daysDiff + " days ago by " + creator;else if (daysDiff == 1) getTimeOnly ? timeSince = daysDiff + " day ago" : timeSince = submitString + daysDiff + " day ago by " + creator;
     return timeSince;
   }
 

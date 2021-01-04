@@ -13,13 +13,16 @@ function HomeInput({currentUserId ,profileOwnerInfo,appendNewStatus}) {
     }
             return (
                 <div id="homeInput">
-                    <button className="tab" onClick={ () =>handleInputSwitch("status")}>Status</button>
-                    <button className="tab" onClick={ () =>handleInputSwitch("post")}>Post</button>
-                    {(inputType === 'status')
-                    ? <StatusInput currentUserId = {currentUserId} appendNewStatus={appendNewStatus}></StatusInput>
-                    : <PostSubmitForm></PostSubmitForm> 
-                    }
-                </div>
+                    <div style={{display:'flex'}}>
+                        <button className="tab" onClick={ () =>handleInputSwitch("status")}>Status</button>
+                        <button style= {{borderLeft: ' 1px solid white'}} className="tab" onClick={ () =>handleInputSwitch("post")}>Post</button>
+                    </div>
+                        
+                        {(inputType === 'status')
+                        ? <StatusInput currentUserId = {currentUserId} appendNewStatus={appendNewStatus}></StatusInput>
+                        : <PostSubmitForm></PostSubmitForm> 
+                        }
+                    </div>
     
                 /// JUST TAKE ME TO THE FULL POST CREATION FORM REEEEEEEEEEE
             );

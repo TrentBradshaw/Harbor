@@ -68,7 +68,7 @@ Route::post('/upload', [App\Http\Controllers\FileUploadController::class, 'store
 
 
 
-Route::post('/api/userdetails', 'App\Http\Controllers\GetCurrentUserController'); // switch this to userController::class getcurrentuser
+Route::get('/api/userdetails', 'App\Http\Controllers\GetCurrentUserController'); // switch this to userController::class getcurrentuser
 Route::get('/status', [App\Http\Controllers\StatusController::class, "ShowStatus"])->name('ShowStatus');
 Route::get('/submit/dock', [App\Http\Controllers\DockController::class, 'SubmitForm'])->name('SubmitForm');
 Route::get('/submit/post', [App\Http\Controllers\SubmitController::class, 'Submit'])->name('Submit');
@@ -91,6 +91,7 @@ route::get('/api/profile', 'App\Http\Controllers\ProfileController');
 Route::get('api/feed/home', [App\Http\Controllers\FeedController::class, 'GetHomeFeed'])->name('GetHomeFeed');
 Route::get('api/feed', [App\Http\Controllers\FeedController::class, 'GetUserFeed'])->name('GetUserFeed');
 Route::get('api/post', [App\Http\Controllers\PostController::class, 'GetPost'])->name('GetPost');
+Route::delete('api/post', [App\Http\Controllers\PostController::class, 'DeletePost'])->name('DeletePost');
 Route::put('api/engagement', [App\Http\Controllers\ReeController::class, 'VoteOnContent']);
 Route::get('api/engagement', [App\Http\Controllers\ReeController::class, 'GetCurrentVoteStatus']);
 Route::post('api/comments/submit', [App\Http\Controllers\PostCommentsController::class, 'Store']);
@@ -102,4 +103,5 @@ Route::get('/api/dock/{dock}', [App\Http\Controllers\DockController::class, 'Get
 Route::post('/api/posts/submit', [App\Http\Controllers\PostController::class, 'Store']);
 Route::get('/api/post/{post}', [App\Http\Controllers\PostController::class, 'ShowPost']);
 Route::post('/api/statuses/submit', [App\Http\Controllers\StatusController::class, 'Store']);
+Route::delete('/api/statuses/delete', [App\Http\Controllers\StatusController::class, 'DeleteStatus']);
 //Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

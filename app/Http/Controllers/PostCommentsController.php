@@ -7,6 +7,7 @@ use App\Models\PostComment;
 use App\Models\PostCommentEngagement;
 use App\Models\DeletedComment;
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
@@ -14,9 +15,7 @@ class PostCommentsController extends Controller
 {
     public function Delete(){
         // PostId can be acquired through 
-        
-
-        $post = PostComment::find(1)->post;
+        //$post = PostComment::find(1)->post;
 
         $json = json_decode(file_get_contents('php://input'), true); //grab request
 
@@ -27,7 +26,6 @@ class PostCommentsController extends Controller
             $comment->username ='';
             $comment->updated_at = date('Y-m-d H:i:s');
             $comment->body = '';
-            $comment->score = 0;
             $comment->isDeleted = true;
             $comment->save();
             response()->json(['success' => 'success'], 200);
@@ -47,6 +45,8 @@ class PostCommentsController extends Controller
             $downvotedAmount = Count( PostCommentEngagement::where('comment_id', $postComments[$i]['id'])->where('downvoted', true)->get()->toArray());
             $voteCount =  $upvotedAmount  -=$downvotedAmount;
             $postComments[$i]['score'] = $voteCount;
+            if (Profile::where('user_id', $postComments[$i]['creator_id'])->exists())
+                $postComments[$i]['posterPfpUrl'] = Profile::where('user_id', $postComments[$i]['creator_id'])->get()->first()['pfp_url'];
             //$postComments[$i]['created_at']->format('d/m/Y h:i:s');
             $postComments[$i]['formattedStamp'] = $dateAltered->format('M/d/Y h:i');
             //$postComments[$i]['username'] =  $user[0]['username'];
@@ -69,6 +69,8 @@ class PostCommentsController extends Controller
         $comment->parent_post_id = $json['parentPostId'];
         $comment->nest_level = $json['nestLevel'];
         $comment->username = (User::where('id',  Auth::user()->id)->first())['username'];
+        
+        
         $comment->parent_comment_id = $json['parentCommentId'];
        // $comment->parent_comment_id = $json['parentCommentId'];
         //$comment->parent_post_id = $json['parentPostId'];
@@ -78,12 +80,23 @@ class PostCommentsController extends Controller
 
         
         if ($saved){
-            $commentGrabbed = PostComment::where('id', $comment->id)->get();
-            return response()->json([
-                //so i need
-                //127.0.0.1/dock/dockname/postID/posttitle
-                'comment' =>$commentGrabbed->first(),
-            ]);
+            $commentGrabbed = PostComment::where('id', $comment->id)->get()->first();
+            $commentGrabbed['posterPfpUrl'] = Profile::where('user_id', $comment->creator_id)->get()->first()['pfp_url'];
+            $commentGrabbed['score'] = 1;
+            $engagement = new PostCommentEngagement();
+            $engagement->engager_id = $comment->creator_id;
+            $engagement->comment_id = $comment->id;
+            $engagement->upvoted = true;
+            $engagement->downvoted = false;
+            $engagementSaved = $engagement->save();
+            if($engagementSaved){
+                return response()->json([
+                    //so i need
+                    //127.0.0.1/dock/dockname/postID/posttitle
+                    'comment' =>$commentGrabbed,
+                ]);
+            }
+            
         }
     }
 }
