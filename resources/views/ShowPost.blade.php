@@ -21,9 +21,11 @@
         <link href="{{ asset('css/home.css') }}" rel="stylesheet">
     </head>
     <body>
-        <div class="Container" id = "dataHolder" postID = "{{$postID}}" data="{{$data ?? ''}}">
-            <div class="Header" id="Header"></div>
-            <div id='PostContainer'></div></div>
+        <div class="Container" id = "dataHolder" postID = "{{$postID}}" data="{{$data ?? ''}}"></div>
+        <div id="react-root" style="display: flex" style="flex-direction: column">
+            <div class="Header" id="Header" style="flex-basis: 20%"></div>
+            <div id="PostContainer" class="main" style="flex-basis: 60%"></div>
+            <div  id="Column C2" class="C2" style="flex-basis: 20%"></div>        
         </div>
         <script src="{{ asset('js/app.js') }}" ></script>
     </body>

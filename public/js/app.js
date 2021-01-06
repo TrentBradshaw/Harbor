@@ -99820,6 +99820,8 @@ __webpack_require__(/*! ./components/Home/Home */ "./resources/js/components/Hom
 
 __webpack_require__(/*! ./components/Home/HomeInput */ "./resources/js/components/Home/HomeInput.js");
 
+__webpack_require__(/*! ./components/Status/StatusContainer */ "./resources/js/components/Status/StatusContainer.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -100641,10 +100643,6 @@ var PostComments = function PostComments(_ref) {
   };
 
   function appendNewComment(commentObject, isReply, parentCommentId) {
-    // modify the comment object so i grab the pfp url and set the vote to 1 and upvote it
-    //
-    //also ensure that each time you comment you automatically upvote it
-    //commentObject['score'] = 1
     var tempCommentsArray = _toConsumableArray(commentsArray);
 
     var index;
@@ -101466,7 +101464,13 @@ function Header() {
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
       _useState4 = _slicedToArray(_useState3, 2),
       isLoading = _useState4[0],
-      setLoading = _useState4[1];
+      setLoading = _useState4[1]; // Home
+  // Explore
+  // Notifications
+  // Following
+  // Profile
+  // Settings
+
 
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
     var token = document.getElementById('csrf-token').getAttribute('content');
@@ -101487,7 +101491,40 @@ function Header() {
       });
     });
   }, []);
-  if (isLoading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Utility_Loading__WEBPACK_IMPORTED_MODULE_8__["default"], null);
+  if (isLoading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Utility_Loading__WEBPACK_IMPORTED_MODULE_8__["default"], null); //<a className= 'headerItem' href='http://localhost/explore' >Explore</a>
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      flexBasis: '20'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Harbor"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("nav", {
+    id: "headerNav",
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'start'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+    className: "headerItem",
+    href: "http://localhost/home"
+  }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+    className: "headerItem",
+    href: "http://localhost/notification"
+  }, "Notifications"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+    className: "headerItem",
+    href: "http://localhost/following"
+  }, "Following"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+    className: "headerItem",
+    href: "http://localhost/following"
+  }, "Messages coming soon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+    className: "headerItem",
+    href: "http://localhost/settings"
+  }, "Settings coming soon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
+    className: "headerItem",
+    href: 'http://localhost/user/' + userData.username
+  }, "Profile")));
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     style: {
       flex: '1 0 auto',
@@ -101606,8 +101643,8 @@ function Home(_ref) {
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])([]),
       _useState4 = _slicedToArray(_useState3, 2),
-      statusArray = _useState4[0],
-      changeStatusArray = _useState4[1];
+      feedArray = _useState4[0],
+      changeFeedArray = _useState4[1];
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
       _useState6 = _slicedToArray(_useState5, 2),
@@ -101663,7 +101700,7 @@ function Home(_ref) {
         setLoading(false);
         console.log(JSON.stringify(data['secondaryMeme']));
         setSecondaryMeme(data['secondaryMeme']);
-        changeStatusArray(data['statuses']);
+        changeFeedArray(data['statuses']);
       });
     });
   }, []);
@@ -101671,12 +101708,12 @@ function Home(_ref) {
   function appendNewStatus(statusObject) {
     console.log(JSON.stringify(statusObject) + ' sss');
 
-    var tempStatusArray = _toConsumableArray(statusArray);
+    var tempFeedArray = _toConsumableArray(feedArray);
 
-    tempStatusArray.unshift(statusObject);
-    console.log(tempStatusArray);
-    changeStatusArray(tempStatusArray);
-    console.log(statusArray);
+    tempFeedArray.unshift(statusObject);
+    console.log(tempFeedArray);
+    changeFeedArray(tempFeedArray);
+    console.log(feedArray);
   }
 
   function deleteStatus(id) {
@@ -101695,20 +101732,20 @@ function Home(_ref) {
     }).then(function (data) {
       console.log('data from commentinput----------------------' + JSON.stringify(data));
 
-      var tempStatusArray = _toConsumableArray(statusArray);
+      var tempFeedArray = _toConsumableArray(feedArray);
 
       var index;
 
-      for (var i = 0; i < tempStatusArray.length; i++) {
-        if (tempStatusArray[i]['id'] === id) {
+      for (var i = 0; i < tempFeedArray.length; i++) {
+        if (tempFeedArray[i]['id'] === id) {
           index = i;
           console.log('index: ' + index);
         }
       }
 
-      tempStatusArray.splice(index, 1);
-      console.log(tempStatusArray);
-      changeStatusArray(tempStatusArray);
+      tempFeedArray.splice(index, 1);
+      console.log(tempFeedArray);
+      changeFeedArray(tempFeedArray);
     });
   }
 
@@ -101735,7 +101772,7 @@ function Home(_ref) {
     pageOwnerId: null,
     appendNewStatus: appendNewStatus,
     deleteStatus: deleteStatus,
-    statusArray: statusArray
+    feedArray: feedArray
   }));
 }
 
@@ -102336,11 +102373,7 @@ function VotingSystem(_ref) {
     });
   }, []);
   if (!isLoading) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_1___default.a.Fragment, null);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    style: {
-      height: '100px'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_ArrowDropUp__WEBPACK_IMPORTED_MODULE_0___default.a, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_ArrowDropUp__WEBPACK_IMPORTED_MODULE_0___default.a, {
     className: "material-icons",
     style: {
       color: upvoted ? "orange" : null
@@ -102375,6 +102408,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Posts_VotingSystem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Posts/VotingSystem */ "./resources/js/components/Posts/VotingSystem.js");
+/* harmony import */ var _SubmitPages_StatusInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../SubmitPages/StatusInput */ "./resources/js/components/SubmitPages/StatusInput.js");
+/* harmony import */ var _material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/icons/Delete */ "./node_modules/@material-ui/icons/Delete.js");
+/* harmony import */ var _material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_3__);
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
 
  //Feed a statement array into the Statement class as props
 
@@ -102382,45 +102432,179 @@ function Status(_ref) {
   var appendNewStatus = _ref.appendNewStatus,
       deleteStatus = _ref.deleteStatus,
       status = _ref.status,
-      userId = _ref.userId;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    key: status.id,
-    className: "statement",
-    style: {
-      borderColor: 'rgb(56, 68, 77)',
-      border: '1px solid'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: {
-      display: 'flex'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    style: {
-      height: '64px',
-      width: '64px',
-      objectFit: 'cover',
-      alignSelf: 'center',
-      borderRadius: '50%'
-    },
-    src: status.pfp_url
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Posts_VotingSystem__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    id: status.id,
-    type: 'status'
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "bodyAndFooter"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: {
-      height: '80%'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, status.body)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: {
-      display: 'flex'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "comments"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, "Like"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    onClick: function onClick() {
-      return deleteStatus(status.id);
-    }
-  }, "Delete"))));
+      userId = _ref.userId,
+      form = _ref.form;
+  console.log(form);
+  console.log(userId);
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(),
+      _useState2 = _slicedToArray(_useState, 2),
+      replyClicked = _useState2[0],
+      setReplyClicked = _useState2[1];
+
+  if (form == 'feed') {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      onClick: function onClick() {
+        window.location.replace('http://localhost:80/user/' + status.username + '/status/' + status.id);
+      },
+      key: status.id,
+      className: "statement",
+      style: {
+        borderColor: 'rgb(56, 68, 77)',
+        border: '1px solid'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Posts_VotingSystem__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      id: status.id,
+      type: 'status'
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      style: {
+        height: '32px',
+        width: '32px',
+        objectFit: 'cover',
+        alignSelf: 'center',
+        borderRadius: '50%'
+      },
+      src: status.pfp_url
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        display: 'flex',
+        flexDirection: 'column'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, status.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "@" + status.username))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "bodyAndFooter"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        height: '80%'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      style: {
+        textAlign: 'start',
+        marginLeft: '9%'
+      }
+    }, status.body)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        display: 'flex',
+        marginTop: '20px',
+        marginLeft: '9%'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, status.repliesCount + ' replies'), replyClicked && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SubmitPages_StatusInput__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      currentUserId: userId,
+      appendNewStatus: appendNewStatus,
+      isReply: true,
+      parentStatusId: status.id
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Share"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      onClick: function onClick() {
+        return setReplyClicked(!replyClicked);
+      }
+    }, "Reply"))));
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      onClick: function onClick() {
+        window.location.replace('http://localhost:80/user/' + status.username + '/status/' + status.id);
+      },
+      key: status.id,
+      className: "statement",
+      style: {
+        borderColor: 'rgb(56, 68, 77)',
+        border: '1px solid'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      style: {
+        height: '64px',
+        width: '64px',
+        objectFit: 'cover',
+        alignSelf: 'center',
+        borderRadius: '50%'
+      },
+      src: status.pfp_url
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Posts_VotingSystem__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      id: status.id,
+      type: 'status'
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "bodyAndFooter"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        height: '80%'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, status.body)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        display: 'flex'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, status.repliesCount + ' replies'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      onClick: function onClick() {
+        return deleteStatus(status.id);
+      }
+    }, "Delete"))));
+  } else if (form == 'focus') {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "focusedStatus",
+      style: {
+        background: 'white'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        display: 'flex',
+        alignItems: 'center'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Posts_VotingSystem__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      id: status.id,
+      type: 'status'
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      style: {
+        height: '64px',
+        width: '64px',
+        objectFit: 'cover',
+        alignSelf: 'center',
+        borderRadius: '50%'
+      },
+      src: status.pfp_url
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        display: 'flex',
+        flexDirection: 'column'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, status.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "@" + status.username))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "bodyAndFooter"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        height: '80%'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      style: {
+        textAlign: 'start',
+        marginLeft: '9%'
+      }
+    }, status.body)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      style: {
+        display: 'flex',
+        marginTop: '20px',
+        marginLeft: '9%'
+      }
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, status.repliesCount + ' replies'), userId == status.user_id && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_3___default.a, {
+      onClick: function onClick() {
+        return deleteStatus(status.id);
+      }
+    }), replyClicked && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SubmitPages_StatusInput__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      currentUserId: userId,
+      appendNewStatus: appendNewStatus,
+      isReply: true,
+      parentStatusId: status.id
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Share"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      onClick: function onClick() {
+        return setReplyClicked(!replyClicked);
+      }
+    }, "Reply"))));
+  } else {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, form);
+  }
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Status);
@@ -102431,31 +102615,178 @@ function Status(_ref) {
 /*!***********************************************************!*\
   !*** ./resources/js/components/Status/StatusContainer.js ***!
   \***********************************************************/
-/*! exports provided: default */
+/*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Status__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Status */ "./resources/js/components/Status/Status.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+ //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
 
 function StatusContainer(_ref) {
-  var appendNewStatus = _ref.appendNewStatus,
-      deleteStatus = _ref.deleteStatus,
-      statusArray = _ref.statusArray;
-  commentsArray.map(function (element) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(PostComment, {
-      userId: userId,
-      key: element.id,
-      deleteComment: deleteComment,
-      appendNewComment: appendNewComment,
-      comment: element
+  var statusId = _ref.statusId;
+
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(true),
+      _useState2 = _slicedToArray(_useState, 2),
+      isLoading = _useState2[0],
+      setLoading = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+      _useState4 = _slicedToArray(_useState3, 2),
+      repliesArray = _useState4[0],
+      setRepliesArray = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+      _useState6 = _slicedToArray(_useState5, 2),
+      mainStatus = _useState6[0],
+      setMainStatus = _useState6[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
+    var url = new URL('http://localhost:80/api/statuses');
+    var param = {
+      query: statusId
+    };
+    url.search = new URLSearchParams(param).toString();
+    fetch(url, {
+      headers: {
+        'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Credentials": true
+      },
+      method: 'get',
+      mode: "cors",
+      credentials: "same-origin"
+    }).then(function (response) {
+      response.json().then(function (data) {
+        console.log(data);
+        setRepliesArray(data['replies']);
+        setMainStatus(data['status']);
+        setLoading(false);
+      });
     });
-  });
+  }, []);
+
+  function appendNewStatus(commentObject, isReply, parentStatusId) {
+    var tempCommentsArray = _toConsumableArray(repliesArray);
+
+    var index;
+
+    if (isReply) {
+      for (var i = 0; i < tempCommentsArray.length; i++) {
+        if (tempCommentsArray[i]['id'] === parentStatusId) {
+          console.log('i: ' + i);
+          index = i + 1;
+          console.log('index: ' + index);
+        }
+      }
+
+      tempCommentsArray.splice(index, 0, commentObject);
+      console.log(tempCommentsArray);
+      setRepliesArray(tempCommentsArray);
+    } else {
+      tempCommentsArray.unshift(commentObject);
+      console.log(tempCommentsArray);
+      setRepliesArray(tempCommentsArray);
+    }
+  }
+
+  function deleteStatus() {
+    //if the comment is deleted and a parrent then just update the properties to say deleted comment
+    var token = document.getElementById('csrf-token').getAttribute('content'); //ADD THE FETCH
+
+    fetch('/api/comments/delete', {
+      headers: {
+        'X-CSRF-TOKEN': token,
+        'Content-Type': 'application/json'
+      },
+      method: 'put',
+      mode: "same-origin",
+      credentials: "same-origin",
+      body: JSON.stringify({
+        id: id
+      })
+    }).then(function (data) {
+      console.log('data from commentinput----------------------' + JSON.stringify(data));
+      /*
+      let tempCommentsArray = [...commentsArray]; 
+      let index;
+      for (let i = 0; i < tempCommentsArray.length; i++) {
+          if(tempCommentsArray[i]['id'] === id){
+              console.log('id: '+ id)
+              console.log('commentId: ' + tempCommentsArray[i]['id'])
+              console.log('i: ' + i)
+          index = i;
+          console.log('index: ' + index)
+          }
+      
+      tempCommentsArray.splice(index,1)
+      console.log(tempCommentsArray)
+      changeCommentsArray(tempCommentsArray)
+      
+      } */
+    });
+  }
+
+  if (!isLoading) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      id: "statusShowcase"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Status__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      appendNewStatus: appendNewStatus,
+      deleteStatus: deleteStatus,
+      status: mainStatus,
+      userId: mainStatus.user_id,
+      form: 'focus'
+    }), repliesArray.map(function (element) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Status__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        key: element.id,
+        userId: userId,
+        deleteStatus: deleteStatus,
+        appendNewStatus: appendNewStatus,
+        status: element,
+        form: 'feed'
+      });
+    }));
+  } else {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, "meme");
+  }
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (StatusContainer);
+if (document.getElementById('statusContainer')) {
+  var statusId = document.getElementById('dataHolder').getAttribute('statusId');
+  react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(StatusContainer, {
+    statusId: statusId
+  }), document.getElementById('statusContainer')); //figure out what this data will be
+}
 
 /***/ }),
 
@@ -102703,6 +103034,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_icons_Image__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/icons/Image */ "./node_modules/@material-ui/icons/Image.js");
 /* harmony import */ var _material_ui_icons_Image__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Image__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _PostSubmitForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PostSubmitForm */ "./resources/js/components/SubmitPages/PostSubmitForm.js");
+/* harmony import */ var _Status_Status__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Status/Status */ "./resources/js/components/Status/Status.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -102717,11 +103049,13 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
  //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
 
 function StatusInput(_ref) {
-  var currentUserId = _ref.currentUserId,
-      appendNewStatus = _ref.appendNewStatus;
+  var appendNewStatus = _ref.appendNewStatus,
+      isReply = _ref.isReply,
+      parentStatusId = _ref.parentStatusId;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -102756,7 +103090,7 @@ function StatusInput(_ref) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: function onClick(e) {
-      return submit(text, currentUserId);
+      return submit(text, isReply, parentStatusId);
     },
     style: {
       height: '30px',
@@ -102764,7 +103098,7 @@ function StatusInput(_ref) {
     }
   }, "Send")));
 
-  function submit(value, userId) {
+  function submit(value, isReply, parentStatusId) {
     //FIX PNG UPLOADING ERROR?
     var token = document.getElementById('csrf-token').getAttribute('content');
     fetch('/api/statuses/submit', {
@@ -102776,14 +103110,15 @@ function StatusInput(_ref) {
       mode: "same-origin",
       credentials: "same-origin",
       body: JSON.stringify({
-        userId: userId,
-        body: value
+        body: value,
+        isReply: isReply,
+        parentStatusId: parentStatusId
       })
     }).then(function (response) {
       return response.json(console.log(response));
     }).then(function (data) {
       console.log(data);
-      appendNewStatus(data['status']);
+      appendNewStatus(data['status'], true, parentStatusId);
     });
   }
 }
@@ -102915,26 +103250,9 @@ function Feed(_ref) {
       appendNewStatus = _ref.appendNewStatus,
       deleteStatus = _ref.deleteStatus,
       feedArray = _ref.feedArray;
-  console.log(statusArray + 'statusarray');
+  console.log(feedArray + 'feedarray');
 
-  if (home) {
-    if (!feedArray) {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "No Content to show currently."));
-    } else {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "commentsholder"
-      }, //feed this an array of posts as well, then mix them, then sort them in chronilogical order
-      feedArray.map(function (element) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Status_Status__WEBPACK_IMPORTED_MODULE_1__["default"], {
-          key: element.id,
-          userId: userId,
-          deleteStatus: deleteStatus,
-          appendNewStatus: appendNewStatus,
-          status: element
-        });
-      })));
-    }
-  } else {
+  if (feedArray) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       id: "commentsholder"
     }, //feed this an array of posts as well, then mix them, then sort them in chronilogical order
@@ -102944,9 +103262,12 @@ function Feed(_ref) {
         userId: userId,
         deleteStatus: deleteStatus,
         appendNewStatus: appendNewStatus,
-        status: element
+        status: element,
+        form: "feed"
       });
     })));
+  } else {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
   }
 }
 
@@ -103064,6 +103385,7 @@ function FollowButton(_ref) {
   }
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    id: "followBtn",
     onClick: function onClick() {
       return submit();
     }
@@ -103300,13 +103622,19 @@ function UserCard(_ref) {
     style: {
       textAlign: 'left'
     }
-  }, profileOwnerInfo.docks_count + profileOwnerInfo.statements_count, " contributions"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProfileImage__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, profileOwnerInfo.docks_count + profileOwnerInfo.statements_count, " contributions"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      flexDirection: 'column'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProfileImage__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: 'header',
     url: profileOwnerInfo.headerUrl
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProfileImage__WEBPACK_IMPORTED_MODULE_3__["default"], {
     type: 'profilePicture',
     url: profileOwnerInfo.pfpUrl
-  }), !home && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FollowButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }), !currentUserId == profileOwnerInfo.id && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_FollowButton__WEBPACK_IMPORTED_MODULE_1__["default"], {
     currentUserId: currentUserId,
     followeeUsername: profileOwnerInfo.username
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -103315,7 +103643,7 @@ function UserCard(_ref) {
       textAlign: 'start',
       marginLeft: '50px'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "bio: ", profileOwnerInfo.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "when joined"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " ", profileOwnerInfo.followed_count, " Following ", profileOwnerInfo.followers_count, " Followers ")));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, profileOwnerInfo.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, 'joined ' + profileOwnerInfo.joinedAgo), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " ", profileOwnerInfo.followingCount, " Following ", profileOwnerInfo.followersCount, " Followers ")));
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (UserCard);
@@ -103373,9 +103701,35 @@ function UserPage(_ref) {
       loading = _useState4[0],
       setLoading = _useState4[1];
 
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_1__["useState"])(),
+      _useState6 = _slicedToArray(_useState5, 2),
+      feedArray = _useState6[0],
+      setFeedArray = _useState6[1];
+
   Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    var url = new URL('http://localhost:80/api/profile');
+    console.log(pageOwnerUsername); //TIME TO GRAB THE FEED FROM HERE AND THEN PASS IT INTO FEED AS THE NEW ARRAY OF CONTENT
+
+    var url = new URL('http://localhost:80/api/feed');
     var param = {
+      query: pageOwnerUsername
+    };
+    url.search = new URLSearchParams(param).toString();
+    fetch(url, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'get',
+      mode: "same-origin",
+      credentials: "same-origin"
+    }).then(function (response) {
+      console.log('response ' + response);
+      response.json().then(function (data) {
+        console.log(data);
+        setFeedArray(data['feed']); //if array of activity, show, else don't and load other return statement
+      });
+    });
+    url = new URL('http://localhost:80/api/profile');
+    param = {
       query: pageOwnerUsername
     };
     url.search = new URLSearchParams(param).toString();
@@ -103403,8 +103757,10 @@ function UserPage(_ref) {
       currentUserId: currentUserId,
       profileOwnerInfo: profileOwnerInfo
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Feed__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      currentUserId: currentUserId,
-      profileOwnerId: profileOwnerInfo.id
+      home: false,
+      userId: currentUserId,
+      profileOwnerId: profileOwnerInfo.id,
+      feedArray: feedArray
     }));
   }
 }

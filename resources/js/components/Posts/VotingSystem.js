@@ -85,7 +85,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
             return(<React.Fragment></React.Fragment>)
         return(
             <div>
-                <div style= {{height: '100px'}}>
+                <div>
                     <ArrowDropUpIcon 
                     className="material-icons" 
                     style = {{color:  upvoted ? "orange" : null}}

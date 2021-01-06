@@ -12,7 +12,12 @@ import Loading from '../Utility/Loading';
 function Header() {
     const [userData, setUserData] = useState([]);
     const [isLoading, setLoading] = useState(true);
-  
+  // Home
+  // Explore
+  // Notifications
+  // Following
+  // Profile
+  // Settings
     useEffect(() => {
 
         let token = document.getElementById('csrf-token').getAttribute('content')
@@ -36,6 +41,26 @@ function Header() {
       }, []);
     if(isLoading)
         return(<Loading></Loading>)
+
+    //<a className= 'headerItem' href='http://localhost/explore' >Explore</a>
+    return(
+        <div style={{display:'flex', flexDirection: 'column', flexBasis: '20',}}>
+            
+                <h1>Harbor</h1>
+                <nav id='headerNav' style={{display:'flex', flexDirection: 'column', alignItems:'start'}}>
+                    <a className= 'headerItem' href='http://localhost/home'>Home</a>
+                    
+                    <a className= 'headerItem' href='http://localhost/notification' >Notifications</a>
+                    <a className= 'headerItem' href='http://localhost/following' >Following</a>
+                    <a className= 'headerItem' href='http://localhost/following' >Messages coming soon</a>
+                    <a className= 'headerItem' href='http://localhost/settings' >Settings coming soon</a>
+                    <a className= 'headerItem' href={'http://localhost/user/' + userData.username }>Profile</a>
+                    
+                </nav>
+            
+            
+        </div>
+    )
     return (
         <div style={{  flex: '1 0 auto' , padding: '1px 0px', display: "inline-flex", width: '100%', height: '100%'}}>
             <div id='userId' data={userData.id}></div>

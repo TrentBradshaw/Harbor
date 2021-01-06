@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Status;
+use App\Models\Profile;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class StatusController extends Controller
 {
@@ -17,7 +20,30 @@ class StatusController extends Controller
         $statements = Statement::all();
         return view('statements.index')->with('statements', $statements);
     }
-
+    public function ShowStatus($username, $statusId){
+        return view('ShowStatus',[
+            'statusId'=> $statusId,
+        ]);
+    }
+    public function GetStatus(){
+        $post_id = request('query');
+        $status = Status::where('id', $post_id)->get()->first();
+        $status['pfp_url'] = Profile::where('user_id', $status['user_id'])->get()->first()['pfp_url'];
+        $status['username'] = User::where('id', $status['user_id'])->get()->first()['username'];
+        $replies = Status::where('parent_status_id', $post_id)->get()->toArray();
+        
+        
+       foreach ($replies as $key => $value) {
+        $replies[$key]['username'] = User::where('id', $value['user_id'])->get()->first()['username'];
+        $replies[$key]['pfp_url'] = Profile::where('user_id', $value['user_id'])->get()->first()['pfp_url'];           
+       }
+        return response()->json([
+            //so i need
+            //127.0.0.1/dock/dockname/postID/posttitle
+            'status'=> $status,
+            'replies' => $replies,
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -40,11 +66,16 @@ class StatusController extends Controller
 
         $status = new Status();
         $status->body = $json['body'];
-        $status->user_id = $json['userId'];
+        $status->user_id = Auth::user()->id;
+        $status->is_reply = $json['isReply'];
+        $status->parent_status_id = $json['parentStatusId'];
         
         $saved = $status->save();
         $status->refresh();
         if ($saved){
+            $status->username = User::where('id', Auth::user()->id)->get()->first()['username'];
+            //$statuses[$key]['numberOfReplies'] = Status::where('parent_status_id', );
+            $status->pfp_url = Profile::where('user_id', Auth::user()->id)->get()->first()['pfp_url']; 
             return response()->json([
                 //so i need
                 //127.0.0.1/dock/dockname/postID/posttitle

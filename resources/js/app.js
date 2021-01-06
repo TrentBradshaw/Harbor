@@ -55,3 +55,4 @@ require('./components/Comments/PostComments')
 
 require('./components/Home/Home')
 require('./components/Home/HomeInput')
+require('./components/Status/StatusContainer')

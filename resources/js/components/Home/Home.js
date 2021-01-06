@@ -7,7 +7,7 @@ import Feed from '../UserPage/Feed';
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
 function Home ({userId}){
     const [profileOwnerInfo, setProfileOwnerInfo] = useState([]);
-    const [statusArray, changeStatusArray] = useState([]);
+    const [feedArray, changeFeedArray] = useState([]);
     const [isLoading, setLoading] = useState(true);
     const [pfpUrl, setPfpUrl] = useState();
     const [secondaryMeme, setSecondaryMeme] = useState();
@@ -42,7 +42,7 @@ function Home ({userId}){
                 setLoading(false)
                 console.log(JSON.stringify(data['secondaryMeme']))
                 setSecondaryMeme(data['secondaryMeme'])
-                changeStatusArray(data['statuses'])
+                changeFeedArray(data['statuses'])
                 
             });
         });
@@ -50,11 +50,11 @@ function Home ({userId}){
 
     function appendNewStatus(statusObject){
         console.log(JSON.stringify(statusObject) + ' sss')
-        let tempStatusArray = [...statusArray]; 
-        tempStatusArray.unshift(statusObject)
-        console.log(tempStatusArray)
-        changeStatusArray(tempStatusArray)
-        console.log(statusArray)
+        let tempFeedArray = [...feedArray]; 
+        tempFeedArray.unshift(statusObject)
+        console.log(tempFeedArray)
+        changeFeedArray(tempFeedArray)
+        console.log(feedArray)
     }
     function deleteStatus(id){
         let token = document.getElementById('csrf-token').getAttribute('content')
@@ -67,17 +67,17 @@ function Home ({userId}){
         }).then(
             data => { 
                 console.log('data from commentinput----------------------' + JSON.stringify(data))
-                let tempStatusArray = [...statusArray]; 
+                let tempFeedArray = [...feedArray]; 
                 let index;
-                for (let i = 0; i < tempStatusArray.length; i++) {
-                    if(tempStatusArray[i]['id'] === id){
+                for (let i = 0; i < tempFeedArray.length; i++) {
+                    if(tempFeedArray[i]['id'] === id){
                     index = i
                     console.log('index: ' + index)
                     }
                 }
-                tempStatusArray.splice(index,1)
-                console.log(tempStatusArray)
-                changeStatusArray(tempStatusArray)
+                tempFeedArray.splice(index,1)
+                console.log(tempFeedArray)
+                changeFeedArray(tempFeedArray)
             }
         )
     }
@@ -90,7 +90,7 @@ function Home ({userId}){
                 <HomeInput currentUserId = {userId} profileOwnerInfo={profileOwnerInfo} appendNewStatus={appendNewStatus}></HomeInput>
             </div>
             
-            <Feed home={true} userId={userId} pageOwnerId={null} appendNewStatus={appendNewStatus} deleteStatus={deleteStatus} statusArray={statusArray}></Feed>
+            <Feed home={true} userId={userId} pageOwnerId={null} appendNewStatus={appendNewStatus} deleteStatus={deleteStatus} feedArray={feedArray}></Feed>
         </div>
     )
 

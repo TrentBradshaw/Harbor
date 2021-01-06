@@ -61,7 +61,7 @@ function FollowButton({followeeUsername}){
         return(<div>Loading</div>)
     }
     return(
-        <button onClick={ () => submit()}>{isFollowingText}</button>
+        <button id="followBtn" onClick={ () => submit()}>{isFollowingText}</button>
     )
 }  
 

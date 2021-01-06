@@ -42,6 +42,8 @@ class FeedController extends Controller
         */
         
        foreach ($statuses as $key => $value) {
+        $statuses[$key]['username'] = User::where('id', $value['user_id'])->get()->first()['username'];
+        //$statuses[$key]['numberOfReplies'] = Status::where('parent_status_id', );
         $statuses[$key]['pfp_url'] = Profile::where('user_id', $value['user_id'])->get()->first()['pfp_url'];           
        }
 
@@ -57,9 +59,17 @@ class FeedController extends Controller
     }
     public function GetUserFeed(){
         $id = request('query');
+        $userId = User::where('username', $id)->get()->first()['id'];
+        $statuses = Status::where('user_id', $userId)->get()->toArray();
+
+        foreach ($statuses as $key => $value) {
+            $statuses[$key]['username'] = User::where('id', $value['user_id'])->get()->first()['username'];
+            //$statuses[$key]['numberOfReplies'] = Status::where('parent_status_id', );
+            $statuses[$key]['pfp_url'] = Profile::where('user_id', $value['user_id'])->get()->first()['pfp_url']; 
+        }  
         return response()->json([
             'feeduserControllerReached' => $id,
-            'statuses' => ['memes']
+            'feed' => $statuses
         ]);
     }
     /*

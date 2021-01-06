@@ -3,9 +3,24 @@
     font-family: BentonSans;
     margin: 0;
     padding: 0;
+    border: 1px solid red;
 }
 
-html, body, .Container
+.headerItem{
+    flex-grow: 1;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1c1c1c;
+}
+
+
+#headerNav{
+    height: 300px;
+    
+}
+
+html, body
 {
     height: 100%;
     background-color: #dae0e6;
@@ -14,7 +29,10 @@ html, body, .Container
     background-color: #dae0e6;
     border-radius: 4px;
 }
-
+#react-root{
+    margin-right: 15%;
+    margin-left: 15%;
+}
 .Wrapper
 {
     position: absolute;
@@ -55,13 +73,28 @@ p
 }
 
 
-
+.rightBorder{
+    border-right: 1px solid rgb(56, 68, 77);
+}
+.leftBorder{
+    border-left: 1px solid rgb(56, 68, 77);
+}
+.bottomBorder{
+    border-bottom: 1px solid rgb(56, 68, 77);
+}
+.topBorder{
+    border-top: 1px solid rgb(56, 68, 77);
+}
+.fullBorder{
+    border: 1px solid rgb(56, 68, 77);
+}
+/*
 .Header, .Footer
 {
     
     height: 32px;
-    /* display: flex; */
-    /* flex-direction: row; */
+    /* display: flex; 
+    /* flex-direction: row; 
     z-index: 100;
     position: fixed;
     left: 0;
@@ -70,6 +103,7 @@ p
     background-color: white;
     width: 100%;
 }
+*/
 .tab{
     width: 50%;
     height: 50px;
@@ -85,6 +119,7 @@ p
     background-color: #90adc1;
 }
 
+/*
 .C2
 {
     margin-top: 32px;
@@ -94,6 +129,7 @@ p
     background: #dae0e6;
     background-color: white;
 }
+*/
 .C3
 {
     width: 15%;
@@ -114,6 +150,16 @@ img#header{
     height: 250px;
     object-fit: cover;
 }
+#followBtn{
+    margin-top: 20px;
+    height: 50px;
+    width: 100px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 20px;
+    font-family: emoji;
+}
+
 img#pfp{
     height: 150px;
     width: 150px;
@@ -121,9 +167,6 @@ img#pfp{
     border: 10px solid gainsboro;
     line-height: 0;
     outline: none;
-    position: absolute;
-    top: 240px;
-    left: 570px;
     cursor: hand;
     text-align: center;
     padding: none;
@@ -132,6 +175,7 @@ img#pfp{
     border-style: solid;
     box-sizing: border-box;
 }
+
 .loader {
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid #3498db; /* Blue */
@@ -211,12 +255,7 @@ img#pfp{
     top: 0;
     left: 0;
   }
-  .LayoverImage
-  {
-    position: absolute;
-    top: 60px;
-    left: 80px;
-  }
+
   .search{
       height: 35px;
   }
@@ -246,6 +285,16 @@ img#pfp{
   }
   h2 {
   font-family:'Raleway',sans-serif
+  }
+  #statusShowcase{
+    margin-top: 100px;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+  }
+  a{
+      text-decoration: none;
+      color: white;
   }
   input {
   width:100%;
@@ -301,10 +350,12 @@ img#pfp{
   #submitCategory{
     display: flex;
   }
+  /*
   #content{
     min-height: 100%;
     background-color: white;
   }
+  */
   .dropdown-menu {
     position: relative;
     

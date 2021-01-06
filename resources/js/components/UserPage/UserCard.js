@@ -20,15 +20,15 @@ function UserCard({currentUserId, profileOwnerInfo}) {
                         <span style= {{textAlign: 'left'}}>{profileOwnerInfo.docks_count + profileOwnerInfo.statements_count} contributions</span>
                     </div>
                 </div>
-                <div>
+                <div style={{display:'flex', alignItems: 'center', flexDirection:'column'}}>
                     <ProfileImage type= {'header'} url={profileOwnerInfo.headerUrl} ></ProfileImage>
                     <ProfileImage type={'profilePicture'} url = {profileOwnerInfo.pfpUrl}></ProfileImage>
-                    { !home && <FollowButton currentUserId={currentUserId} followeeUsername={profileOwnerInfo.username}></FollowButton>}
+                    { !currentUserId == profileOwnerInfo.id && <FollowButton currentUserId={currentUserId} followeeUsername={profileOwnerInfo.username}></FollowButton>}
                 </div>
                 <div style={{marginTop : '75px', textAlign: 'start' ,marginLeft: '50px'}}>
-                    <p>bio: {profileOwnerInfo.description}</p>
-                    <p>when joined</p>
-                    <p> {profileOwnerInfo.followed_count} Following {profileOwnerInfo.followers_count} Followers </p>
+                    <p>{profileOwnerInfo.description}</p>
+                    <p>{'joined ' + profileOwnerInfo.joinedAgo}</p>
+                    <p> {profileOwnerInfo.followingCount} Following {profileOwnerInfo.followersCount} Followers </p>
                 </div> 
             </div>
         );

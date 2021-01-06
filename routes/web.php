@@ -82,6 +82,7 @@ Route::get('/dock/{dockName}/{id}/{PostTitle}', [App\Http\Controllers\PostContro
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Auth::routes();
+Route::get('/user/{username}/status/{statusId}', [App\Http\Controllers\StatusController::class, 'ShowStatus']);
 Route::get('/user/{username}', [App\Http\Controllers\ShowUserController::class, 'ShowUser'])->name('showUser');
 //Route::get('/{username}/{id}', [App\Http\Controllers\StatusController::class, 'show'])->name('show');
 Route::post('/api/followers', [App\Http\Controllers\FollowerController::class, 'Store']);
@@ -103,5 +104,6 @@ Route::get('/api/dock/{dock}', [App\Http\Controllers\DockController::class, 'Get
 Route::post('/api/posts/submit', [App\Http\Controllers\PostController::class, 'Store']);
 Route::get('/api/post/{post}', [App\Http\Controllers\PostController::class, 'ShowPost']);
 Route::post('/api/statuses/submit', [App\Http\Controllers\StatusController::class, 'Store']);
+Route::get('/api/statuses', [App\Http\Controllers\StatusController::class, 'GetStatus']);
 Route::delete('/api/statuses/delete', [App\Http\Controllers\StatusController::class, 'DeleteStatus']);
 //Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

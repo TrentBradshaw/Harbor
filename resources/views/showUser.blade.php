@@ -21,13 +21,13 @@
         <link href="{{ asset('css/home.css') }}" rel="stylesheet">
     </head>
     <body>
-        <div class="Container" id = "dataHolder" currentUserId = "{{$currentUserId}}" pageOwnerId = "{{$pageOwnerId}}" pageOwnerUsername = "{{$pageOwnerUsername}}">
-            <div class="Header" id="Header"></div>
-            <div  id="Column C2" class="C2">
-                <div id='UserPageContainer'></div>
-                <div id='content'></div>
-            </div>
+        <div class="Container" id = "dataHolder" currentUserId = "{{$currentUserId}}" pageOwnerId = "{{$pageOwnerId}}" pageOwnerUsername = "{{$pageOwnerUsername}}"></div>
+        <div id="react-root" style="display: flex" style="flex-direction: column">
+            <div class="Header" id="Header" style="flex-basis: 20%"></div>
+            <div id="UserPageContainer" class="main" style="flex-basis: 60%"></div>
+            <div  id="Column C2" class="C2" style="flex-basis: 20%"></div>        
         </div>
+        
         <script src="{{ asset('js/app.js') }}" ></script>
     </body>
 </html>

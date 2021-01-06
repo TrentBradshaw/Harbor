@@ -31,20 +31,7 @@ const  PostComments = ({userId, parentPostId}) => {
             })
     }
     function appendNewComment(commentObject, isReply, parentCommentId){
-        // modify the comment object so i grab the pfp url and set the vote to 1 and upvote it
-        //
-
-        //also ensure that each time you comment you automatically upvote it
-        //commentObject['score'] = 1
-
-
-
-
-
-
-
-
-
+        
         let tempCommentsArray = [...commentsArray]; 
         let index;
         if (isReply){

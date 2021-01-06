@@ -18,6 +18,8 @@ class CreateStatusesTable extends Migration
             $table->timestamps();
             $table->string('body');
             $table->foreignId('user_id');
+            $table->integer('parent_status_id');
+            $table->boolean('is_reply');
         });
     }
 
