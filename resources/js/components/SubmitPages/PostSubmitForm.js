@@ -3,14 +3,14 @@ import ReactDOM from 'react-dom';
 import PostContentField from './PostContentField' 
 import AutoCompleteDockLookup from '../AutoComplete/AutoCompleteDockLookup'
 
-function PostSubmitForm(props){
+function PostSubmitForm(){
     const [highlighted, setHighlighted] = useState('text');
     const [title, setTitle] = useState('');
     const [url, setUrl] = useState('');
     const [body, setBody] = useState('');
 
         return (
-            <div style={{backgroundColor: 'gainsboro', marginTop: '5%'}}>
+            <div className = 'headerSubmitForm'>
                 <h1>Create a Post</h1>
                 <div>
                     <AutoCompleteDockLookup></AutoCompleteDockLookup>
@@ -43,34 +43,25 @@ function PostSubmitForm(props){
     }
 
     function submit(){ 
-                    //let file = document.getElementById('postFileField') ? document.getElementById('postFileField').files[0]: ''
-                    fetch('/api/posts/submit', {
-                        headers:{'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),'Content-Type':'application/json'},
-                        method: 'post',
-                        mode: "same-origin",
-                        credentials: "same-origin",
-                        body: JSON.stringify({
-                                community: document.getElementById("dockInput").value,
-                                type: highlighted,
-                                title: title,
-                                text: body,
-                                url: url,
-                        })
-                    }).then(response => response.json(console.log(response)))
-                    .then(data => {
-                        console.log(JSON.stringify(data['post']))
-                        console.log(data['data'])
-                        window.location.replace(data['url'])
-                    })
-              
-                        
+        fetch('/api/posts/submit', {
+            headers:{'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),'Content-Type':'application/json'},
+            method: 'post',
+            mode: "same-origin",
+            credentials: "same-origin",
+            body: JSON.stringify({
+                    community: document.getElementById("dockInput").value,
+                    type: highlighted,
+                    title: title,
+                    text: body,
+                    url: url,
+            })
+        }).then(response => response.json(console.log(response)))
+        .then(data => {
+            console.log(JSON.stringify(data['post']))
+            console.log(data['data'])
+            //window.location.replace(data['url'])
+        })           
     }
 }
 
-
-// switch it so this is implemented without reactDOM.render
-if (document.getElementById('PostFormHolder')) {
-   
-    ReactDOM.render(<PostSubmitForm/>, document.getElementById('PostFormHolder'));
-}
 export default PostSubmitForm

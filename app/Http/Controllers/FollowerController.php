@@ -20,7 +20,11 @@ class FollowerController extends Controller
         $statements = Statement::all();
         return view('statements.index')->with('statements', $statements);
     }
-
+    public function ShowFollowingPage($username){
+        return view('Following',[
+            'username'=> $username,
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *

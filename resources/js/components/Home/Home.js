@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import HomeInput from './HomeInput'
 import Loading from '../Utility/Loading'
 import Feed from '../UserPage/Feed';
+import Usercard from '../UserPage/UserCard'
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
 function Home ({userId}){
     const [profileOwnerInfo, setProfileOwnerInfo] = useState([]);
@@ -25,6 +26,27 @@ function Home ({userId}){
             console.log(response)
             response.json().then((data) => {
                 setPfpUrl(data['pfpUrl'])
+
+                url = new URL('http://localhost:80/api/profile')
+                param = {query: data['username']}
+
+                url.search = new URLSearchParams(param).toString();
+                
+                fetch(url, {
+                    headers:{'Content-Type':'application/json',},
+                    method: 'get',
+                    mode: "same-origin",
+                    credentials: "same-origin",
+                }).then((response) => {
+                    console.log('response ' + response);
+                    response.json().then((data) => {
+                        console.log(data);
+                        console.log('CLOWNSHOE');
+                        setProfileOwnerInfo(data['profileOwnerInfo']);
+                        
+                        //if array of activity, show, else don't and load other return statement
+                    });
+                });
             });
         })
         let param, url
@@ -39,13 +61,16 @@ function Home ({userId}){
         }).then((response) => {
             console.log('response ' + response);
             response.json().then((data) => {
-                setLoading(false)
-                console.log(JSON.stringify(data['secondaryMeme']))
+                
+                console.log(data['username'] + ' username')
                 setSecondaryMeme(data['secondaryMeme'])
                 changeFeedArray(data['statuses'])
                 
+                
             });
         });
+        
+        setLoading(false);
     },[]);
 
     function appendNewStatus(statusObject){
@@ -82,7 +107,19 @@ function Home ({userId}){
         )
     }
 
-        
+    if(isLoading)
+        return(<div></div>)
+    return (
+        <div>
+            <div style= {{display:'flex', flexDirection: 'column'}}>
+                <Usercard currentUserId={userId} profileOwnerInfo={profileOwnerInfo}></Usercard>
+                { pfpUrl && <img style={{height: '64px', width:'64px', objectFit: 'cover', alignSelf: 'center'}} src={pfpUrl}></img>}
+                {/*<HomeInput currentUserId = {userId} profileOwnerInfo={profileOwnerInfo} appendNewStatus={appendNewStatus}></HomeInput>*/}
+            </div>
+            
+            <Feed home={true} userId={userId} pageOwnerId={null} appendNewStatus={appendNewStatus} deleteStatus={deleteStatus} feedArray={feedArray}></Feed>
+        </div>
+    )
     return (
         <div>
             <div style= {{display:'flex', flexDirection: 'column'}}>

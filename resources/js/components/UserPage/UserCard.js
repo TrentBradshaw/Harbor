@@ -17,11 +17,11 @@ function UserCard({currentUserId, profileOwnerInfo}) {
                     
                     <div style={{flex: '8', alignItems: 'stretch', display: 'flex', flexDirection: 'column'}}>
                         <span style= {{textAlign: 'left'}}>{profileOwnerInfo.username}</span>
-                        <span style= {{textAlign: 'left'}}>{profileOwnerInfo.docks_count + profileOwnerInfo.statements_count} contributions</span>
+                        <span style= {{textAlign: 'left'}}>{profileOwnerInfo.contributionsCount} contributions</span>
                     </div>
                 </div>
                 <div style={{display:'flex', alignItems: 'center', flexDirection:'column'}}>
-                    <ProfileImage type= {'header'} url={profileOwnerInfo.headerUrl} ></ProfileImage>
+                    {/*<ProfileImage type= {'header'} url={profileOwnerInfo.headerUrl} ></ProfileImage>*/}
                     <ProfileImage type={'profilePicture'} url = {profileOwnerInfo.pfpUrl}></ProfileImage>
                     { !currentUserId == profileOwnerInfo.id && <FollowButton currentUserId={currentUserId} followeeUsername={profileOwnerInfo.username}></FollowButton>}
                 </div>

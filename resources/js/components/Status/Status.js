@@ -4,8 +4,7 @@ import StatusInput from '../SubmitPages/StatusInput';
 import DeleteIcon from '@material-ui/icons/Delete';
 //Feed a statement array into the Statement class as props
 function Status({appendNewStatus, deleteStatus, status, userId, form}) {   
-    console.log(form)
-    console.log(userId)
+    
     const [replyClicked, setReplyClicked] = useState();
     
     if(form == 'feed'){

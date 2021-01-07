@@ -3,8 +3,7 @@ import React, {useState, useEffect} from 'react';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
     function VotingSystem({id, type}){
-        console.log('id: '   +  id)
-        console.log('type:  ' + type)
+        
         const [upvoted, setUpvoted] = useState(null)
         const [downvoted, setDownvoted] = useState(null)
         const [score, setScore] = useState()
@@ -27,7 +26,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
                     type, type
                 })
             }).then((data) => {
-                console.log(data)
+                
                     if(upvoted){
                         if (choseUpvoted){
                             setUpvoted(false);
@@ -72,9 +71,6 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
                 mode: "cors",
                 credentials: "same-origin",
             }).then(response => response.json()).then((data) => {
-                        console.log(data)
-                        console.log('yaya')
-                        
                         setUpvoted(data['upvoted']);
                         setDownvoted(data['downvoted']);
                         setScore(data['score']);

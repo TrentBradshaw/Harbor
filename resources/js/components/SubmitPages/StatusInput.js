@@ -11,7 +11,7 @@ function StatusInput({appendNewStatus, isReply, parentStatusId}) {
     
     return(
         
-        <div className='backgroundContainer' style={{display: 'flex', flexDirection: 'column',}}>
+        <div className = 'headerSubmitForm' style={{display: 'flex', flexDirection: 'column',}}>
             <input onChange = {(e) => setText(e.target.value)} style = {{    height: '100px', width: '80%', marginLeft: '10%', marginRight: '10%', fontSize: '20px', marginTop: '20px'}} placeholder="tell people what's going on..."></input>
             <div style={{display: 'flex', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center'}}>
                 <button onClick = {(e) => submit(text, isReply, parentStatusId)} style={{height: '30px', width: '100px'}}>Send</button>

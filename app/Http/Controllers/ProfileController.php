@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\PostComment;
+use App\Models\Status;
 use App\Models\Follower;
 use App\Models\Profile;
 
@@ -26,7 +27,12 @@ class ProfileController extends Controller
         date_default_timezone_set('America/Los_Angeles');
         $profileOwnerInfo['now'] = date("Y-m-d H:i:s", time());
         $profileOwnerInfo['diffy'] = date_diff(date_create($profileOwnerInfo['meme']),date_create($profileOwnerInfo['now']));
-       
+
+        $postCount = Count(Post::where('creator_id', $profileOwnerInfo['id'])->get()->toArray());
+        $commentCount = Count(PostComment::where('creator_id', $profileOwnerInfo['id'])->get()->toArray());
+        $statusCount = Count(Status::where('user_id', $profileOwnerInfo['id'])->get()->toArray());
+        $profileOwnerInfo['contributionsCount'] = $postCount + $commentCount + $statusCount;
+
         $diffy = date_diff(date_create($profileOwnerInfo['meme']),date_create($profileOwnerInfo['now']));
         $timeAgoString = '';
         if($diffy->y > 0){
