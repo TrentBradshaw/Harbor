@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Dock;
 use App\Models\Post;
 use App\Models\Follower;
+use Illuminate\Support\Facades\Auth;
 
 
 class FeedController extends Controller
@@ -32,7 +33,7 @@ class FeedController extends Controller
     }
     public function GetHomeFeed(){
         
-        $id = request('query');
+        $id = Auth()->user()->id;
         $secondaryMeme = array();
         $statuses = Status::where('user_id', $id)->get()->toArray();
         /*

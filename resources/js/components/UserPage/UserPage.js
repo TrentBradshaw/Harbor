@@ -4,26 +4,27 @@ import ReactDOM from 'react-dom';
 import UserCard from './UserCard';
 import Feed from './Feed';
 import Loading from '../Utility/Loading';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useParams
+  } from "react-router-dom";
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
-function UserPage ({currentUserId, pageOwnerUsername}){
+function UserPage ({currentUserId}){
+    //currentUserId, pageOwnerUsername
     const [profileOwnerInfo, setProfileOwnerInfo] = useState([]);
     const [loading, setLoading] = useState(true);
     const [feedArray, setFeedArray] = useState();
+    //const [currentUserId, setCurrentUserId] = useState();
+    
+    let { username } = useParams()
+
     useEffect(() => {
-
-        console.log(pageOwnerUsername)
-
-
-
-
-
-//TIME TO GRAB THE FEED FROM HERE AND THEN PASS IT INTO FEED AS THE NEW ARRAY OF CONTENT
-
-
-
+        
         let url = new URL('http://localhost:80/api/feed')
-        let param = {query: pageOwnerUsername}
-
+        let param = {query: username}
         url.search = new URLSearchParams(param).toString();
         
         fetch(url, {
@@ -44,11 +45,8 @@ function UserPage ({currentUserId, pageOwnerUsername}){
         });
 
 
-
-
-
         url = new URL('http://localhost:80/api/profile')
-        param = {query: pageOwnerUsername}
+        param = {query: username}
 
         url.search = new URLSearchParams(param).toString();
         
@@ -79,7 +77,7 @@ function UserPage ({currentUserId, pageOwnerUsername}){
             
                 <div>
                     <UserCard currentUserId = {currentUserId} profileOwnerInfo={profileOwnerInfo}></UserCard>
-                    <Feed home={false} userId= {currentUserId} profileOwnerId={profileOwnerInfo.id} feedArray={feedArray}></Feed>
+                    <Feed home={false} currentUserId= {currentUserId} profileOwnerId={profileOwnerInfo.id} feedArray={feedArray}></Feed>
                 </div>
             ) 
         }
@@ -87,7 +85,8 @@ function UserPage ({currentUserId, pageOwnerUsername}){
     
 if (document.getElementById('UserPageContainer')) {
    ReactDOM.render(<UserPage 
-   currentUserId={document.getElementById('dataHolder').getAttribute('currentUserId')}
-   pageOwnerUsername={document.getElementById('dataHolder').getAttribute('pageOwnerUsername')}
+   //currentUserId={document.getElementById('dataHolder').getAttribute('currentUserId')}
+   //pageOwnerUsername={document.getElementById('dataHolder').getAttribute('pageOwnerUsername')}
    />, document.getElementById('UserPageContainer'));
 }
+export default UserPage;

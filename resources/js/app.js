@@ -28,7 +28,6 @@ require('./components/SubmitPages/PostContentField')
 
 
 require('./components/UserPage/Profile')
-require('./components/UserPage/DockContainer')
 require('./components/UserPage/Feed')
 require('./components/UserPage/Profile')
 require('./components/Status/Status')
@@ -39,7 +38,7 @@ require('./components/UserPage/FollowButton')
 
 require('./components/DockSubmitForm')
 
-require('./components/DockPage/DocksContainer')
+require('./components/DockPage/DockContainer')
 require('./components/SubmitPages/PostSubmitForm')
 
 require('./components/AutoComplete/AutoCompleteDockLookup')
@@ -56,3 +55,4 @@ require('./components/Comments/PostComments')
 require('./components/Home/Home')
 require('./components/Home/HomeInput')
 require('./components/Status/StatusContainer')
+require('./components/App');

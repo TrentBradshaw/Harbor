@@ -6,19 +6,16 @@ import Loading from '../Utility/Loading'
 import Feed from '../UserPage/Feed';
 import Usercard from '../UserPage/UserCard'
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
-function Home ({userId}){
+function Home ({currentUserId}){
     const [profileOwnerInfo, setProfileOwnerInfo] = useState([]);
     const [feedArray, changeFeedArray] = useState([]);
     const [isLoading, setLoading] = useState(true);
     const [pfpUrl, setPfpUrl] = useState();
-    const [secondaryMeme, setSecondaryMeme] = useState();
+    
     useEffect(() => {
-        let token = document.getElementById('csrf-token').getAttribute('content')
+        let param, url
         fetch('http://localhost:80/api/userdetails', {
-        headers:{
-            'X-CSRF-TOKEN': token,
-            'Content-Type':'application/json',
-        },
+        headers:{'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'), 'Content-Type':'application/json',},
         method: 'get',
         mode: "same-origin",
         credentials: "same-origin",
@@ -26,10 +23,8 @@ function Home ({userId}){
             console.log(response)
             response.json().then((data) => {
                 setPfpUrl(data['pfpUrl'])
-
                 url = new URL('http://localhost:80/api/profile')
                 param = {query: data['username']}
-
                 url.search = new URLSearchParams(param).toString();
                 
                 fetch(url, {
@@ -47,26 +42,20 @@ function Home ({userId}){
                         //if array of activity, show, else don't and load other return statement
                     });
                 });
+                
             });
         })
-        let param, url
-        url = new URL('http://localhost:80/api/feed/home')
-        param = {query: userId}
-        url.search = new URLSearchParams(param).toString();
-        console.log(url)
-        fetch(url, {headers:{'X-CSRF-TOKEN': token, 'Content-Type':'application/json', "Access-Control-Allow-Origin" : "*", "Access-Control-Allow-Credentials" : true },
+       
+        fetch('http://localhost:80/api/feed/home', 
+        {headers:{'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'), 'Content-Type':'application/json', "Access-Control-Allow-Origin" : "*", "Access-Control-Allow-Credentials" : true },
             method: 'get',
             mode: "same-origin",
             credentials: "same-origin",
         }).then((response) => {
             console.log('response ' + response);
             response.json().then((data) => {
-                
                 console.log(data['username'] + ' username')
-                setSecondaryMeme(data['secondaryMeme'])
                 changeFeedArray(data['statuses'])
-                
-                
             });
         });
         
@@ -112,12 +101,12 @@ function Home ({userId}){
     return (
         <div>
             <div style= {{display:'flex', flexDirection: 'column'}}>
-                <Usercard currentUserId={userId} profileOwnerInfo={profileOwnerInfo}></Usercard>
+                <Usercard currentUserId={currentUserId} profileOwnerInfo={profileOwnerInfo}></Usercard>
                 { pfpUrl && <img style={{height: '64px', width:'64px', objectFit: 'cover', alignSelf: 'center'}} src={pfpUrl}></img>}
                 {/*<HomeInput currentUserId = {userId} profileOwnerInfo={profileOwnerInfo} appendNewStatus={appendNewStatus}></HomeInput>*/}
             </div>
             
-            <Feed home={true} userId={userId} pageOwnerId={null} appendNewStatus={appendNewStatus} deleteStatus={deleteStatus} feedArray={feedArray}></Feed>
+            <Feed home={true} currentUserId={currentUserId} pageOwnerId={null} appendNewStatus={appendNewStatus} deleteStatus={deleteStatus} feedArray={feedArray}></Feed>
         </div>
     )
     return (
@@ -132,10 +121,13 @@ function Home ({userId}){
     )
 
 } 
-    
+export default Home;
+
+/*
 if (document.getElementById('HomeContainer')) {
    ReactDOM.render(<Home 
    userId={document.getElementById('dataHolder').getAttribute('userId')}
    pageOwnerUsername={document.getElementById('dataHolder').getAttribute('pageOwnerUsername')}
    />, document.getElementById('HomeContainer'));
 }
+*/

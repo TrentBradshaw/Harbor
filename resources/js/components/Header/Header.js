@@ -10,6 +10,13 @@ import Loading from '../Utility/Loading';
 import PostSubmitForm from '../SubmitPages/PostSubmitForm'
 import StatusInput from '../SubmitPages/StatusInput'
 import DockSubmitForm from '../DockSubmitForm'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useParams
+  } from "react-router-dom";
 
 
 function Header() {
@@ -19,18 +26,11 @@ function Header() {
     const [communityPopUpActive, setCommunityPopUpActive] = useState(false)
     const [postPopUpActive, setPostPopUpActive] = useState(false)
     const [statusPopUpActive, setStatusPopUpActive] = useState(false)
-  // Home
-  // Explore
-  // Notifications
-  // Following
-  // Profile
-  // Settings
+ 
     useEffect(() => {
-
-        let token = document.getElementById('csrf-token').getAttribute('content')
         fetch('http://localhost:80/api/userdetails', {
         headers:{
-            'X-CSRF-TOKEN': token,
+            'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),
             'Content-Type':'application/json',
         },
         method: 'get',
@@ -44,7 +44,6 @@ function Header() {
                 setLoading(false);
             });
         })
-            
       }, []);
 
     function activateSubMenu(menu){
@@ -82,6 +81,9 @@ function Header() {
                 {statusPopUpActive && <StatusInput appendNewStatus={null} isReply = {false} parentStatusId = {null}></StatusInput>}
                 <h1>Harbor</h1>
                 <nav id='headerNav' style={{display:'flex', flexDirection: 'column', alignItems:'start'}}>
+                    <Link to="/home">Home</Link>
+                    <Link to="/subscriptions">Subscriptions</Link>
+                    
                     <a className= 'headerItem' href='http://localhost/home'>Home</a>
                     <a className= 'headerItem' href='http://localhost/notification' >Notifications</a>
                      { /*<a className= 'headerItem' href={'http://localhost/following/' + userData.username}>Following</a>*/}
@@ -117,3 +119,4 @@ if (document.getElementById('Header')) {
    var currentUser = document.getElementById('dataHolder').getAttribute('currentUser')
    ReactDOM.render(<Header data={data}/>, document.getElementById('Header'));
 }
+export default Header;

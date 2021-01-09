@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Status from '../Status/Status'
 
-function Feed({home, userId, profileOwnerId, appendNewStatus, deleteStatus, feedArray}) {
+function Feed({home, currentUserId, profileOwnerId, appendNewStatus, deleteStatus, feedArray}) {
     console.log(feedArray + 'feedarray')
     if(feedArray){
         return (
@@ -11,7 +11,7 @@ function Feed({home, userId, profileOwnerId, appendNewStatus, deleteStatus, feed
                     feedArray.map((element)=>(
                         <Status 
                         key = {element.id} 
-                        userId = {userId} 
+                        userId = {currentUserId} 
                         deleteStatus ={deleteStatus} 
                         appendNewStatus ={appendNewStatus} 
                         status = {element}

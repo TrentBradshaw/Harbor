@@ -2,14 +2,22 @@ import { divide, toArray } from 'lodash';
 import React, { Component, useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Status from './Status'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useParams
+  } from "react-router-dom";
 
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
-function StatusContainer({statusId}) {
+function StatusContainer({currentUserId}) {
   
     const [isLoading, setLoading] = useState(true);
     const [repliesArray, setRepliesArray] = useState();
     const [mainStatus, setMainStatus] = useState();
  
+    let { statusId } = useParams()
     useEffect(() => {
         
         let url = new URL('http://localhost:80/api/statuses')
@@ -87,9 +95,9 @@ function StatusContainer({statusId}) {
         if(!isLoading){
             return(
                 <div id='statusShowcase'>
-                    <Status appendNewStatus = {appendNewStatus} deleteStatus={deleteStatus} status ={mainStatus} userId={mainStatus.user_id} form={'focus'}></Status>
+                    <Status appendNewStatus = {appendNewStatus} deleteStatus={deleteStatus} status ={mainStatus} currentUserId={mainStatus.user_id} form={'focus'}></Status>
                     {repliesArray.map((element)=>(
-                    <Status key = {element.id} userId = {userId} deleteStatus ={deleteStatus} appendNewStatus ={appendNewStatus} status = {element} form={'feed'}></Status>
+                    <Status key = {element.id} currentUserId = {currentUserId} deleteStatus ={deleteStatus} appendNewStatus ={appendNewStatus} status = {element} form={'feed'}></Status>
                     
                     ))}
                 </div>
@@ -108,3 +116,4 @@ if (document.getElementById('statusContainer')) {
     let statusId = document.getElementById('dataHolder').getAttribute('statusId');
    ReactDOM.render(<StatusContainer statusId={statusId} />, document.getElementById('statusContainer')); //figure out what this data will be
 }
+export default StatusContainer;

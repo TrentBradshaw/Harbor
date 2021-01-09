@@ -42,7 +42,7 @@ class FollowerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function Grab(){
-        $query = request('followee');
+        $query = request('query');
         $followee_id = User::where('username', $query)->first()['id'];
         $following = Follower::where('follower_id', Auth::user()->id)->where('followee_id', $followee_id)->first();
        
@@ -66,7 +66,7 @@ class FollowerController extends Controller
         //grab follower and followee(target)
     
 
-        $followee_id = User::where('username',  $json['followee'])->first()['id'];
+        $followee_id = User::where('username',  $json['target'])->first()['id'];
        
         
         //bring in the Follower model
@@ -131,7 +131,7 @@ class FollowerController extends Controller
         
 
          //grab the object, enter it and grab the id
-        $followee_id = User::where('username', $json['followee'])->first()['id'];
+        $followee_id = User::where('username', $json['target'])->first()['id'];
         
         Follower::where('follower_id', Auth::user()->id)->where('followee_id', $followee_id)->delete();
     

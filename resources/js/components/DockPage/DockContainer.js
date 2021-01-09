@@ -1,45 +1,48 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useParams
+  } from "react-router-dom";
+import FollowButton from '../UserPage/FollowButton';
 
 //SPLIT THIS UP LATER. SPLIT USER PROFILE LOAD INTO ONE COMPONENT, THEN SWITCH USER CONTENT LOAD INTO ANOTHER
-export default class DockSubmitForm extends Component {
-  constructor(props){
-      super(props)
-      this.state = {
-          name: '',
-          description: ''
-      }
-      this.HandleClick = this.HandleClick.bind(this);
-   }
- 
-   componentDidMount(){
-    let token = document.getElementById('csrf-token').getAttribute('content')
-    console.log('pickles');
-    console.log(window.location.pathname)
-    console.log('http://localhost:80/api' + window.location.pathname)
-    fetch( 'http://localhost:80/api' + window.location.pathname, {
-    headers:{
-        'X-CSRF-TOKEN': token,
-        'Content-Type':'application/json',
-    },
-    method: 'GET',
-    mode: "same-origin",
-    credentials: "same-origin",
-    }).then((response) => {
-        console.log(response)
-        response.json().then((data) => {
-            //get the dock name by grabbing the window.location.pathname or href then trimming off the first part
-            console.log(data);
-        });
-    })
-   }
-   HandleClick(){
+function DockContainer() {
+    const [name, setName] = useState();
+    const [description, setDescription] = useState();
+    let { dockname } = useParams()
+    
+    useEffect(() => {
+        console.log('pickles');
+        console.log(window.location.pathname)
+        console.log('http://localhost:80/api/' + dockname)
+        fetch( 'http://localhost:80/api/' + dockname, {
+        headers:{
+            'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),
+            'Content-Type':'application/json',
+        },
+        method: 'GET',
+        mode: "same-origin",
+        credentials: "same-origin",
+        }).then((response) => {
+            console.log(response)
+            response.json().then((data) => {
+                //get the dock name by grabbing the window.location.pathname or href then trimming off the first part
+                console.log(data);
+            });
+        })
+        
+    }, []);
+   
+
+   function HandleClick(){
     window.location.href = '/post/submit'
 
        
    }
-  
-    render(){
         
         return(
             <div style= {{ height: '100%'}} id='DockPageContainer'>
@@ -53,8 +56,7 @@ export default class DockSubmitForm extends Component {
 
                                 </img>
                                 <h1 id="dockTitle">Clowns</h1>
-                                <button>JOIN</button>
-
+                                <FollowButton targetName = {dockname} type={'dock'}></FollowButton>
                             </div>
                             <h3 id="dockPath">dock/Clowns</h3>
                         </div>
@@ -68,7 +70,7 @@ export default class DockSubmitForm extends Component {
                                 <p>Members</p>
                             </div>
                             <p>Created mmm/dd/yyyy</p>
-                            <button onClick={(e) => this.HandleClick(e)}>Create Post</button>
+                            <button onClick={(e) => HandleClick(e)}>Create Post</button>
                         </div>
                         <div>
                         <h2>Moderators</h2>
@@ -80,9 +82,7 @@ export default class DockSubmitForm extends Component {
             </div>
             
         )
-    }
+    
 }  
 
-if (document.getElementById('DocksContainer')) {
-   ReactDOM.render(<DockSubmitForm/>, document.getElementById('DocksContainer')); //figure out what this data will be
-}
+export default DockContainer;

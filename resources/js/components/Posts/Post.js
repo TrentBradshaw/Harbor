@@ -8,6 +8,14 @@ import MediaPost from './MediaPost';
 import PostComments from '../Comments/PostComments'
 import DeleteIcon from '@material-ui/icons/Delete';
 
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useParams
+  } from "react-router-dom";
+
     const GetPostType = (type, state) => {
         
         if (type == "link"){return(<LinkedPost state = {state} ></LinkedPost>)}
@@ -15,7 +23,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
         else if(type === "media"){return(<MediaPost state = {state}></MediaPost>)}
     }
 
-    function Post(props){
+    function Post(){
         const [isLoading, setLoading] = useState(true);
         const [userId, setUserId] = useState(null);
         const [state, setNewState] = useState({
@@ -30,6 +38,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
             currentUTCTime: "",
             
         });
+        let { postId } = useParams()
 
         useEffect(() => {
             fetchData();
@@ -55,7 +64,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
                     });
                 })
             let url = new URL('http://localhost:80/api/post')
-            let param = {query: props.postId}
+            let param = {query: postId}
 
             url.search = new URLSearchParams(param).toString();
             fetch(url, {
@@ -106,7 +115,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
                 <div className="App" style={{ marginLeft: '2%', marginRight: '2%', minHeight: '100%', display: 'flex', justifyContent: 'space-between' }}>
                     <div id="PostHeader" style={{ width: '70%', backgroundColor: 'white'}}>
                         <div style = {{display: 'flex'}} id="RealPostHeader">
-                            <VotingSystem id={props.postId} type={'post'}></VotingSystem>
+                            <VotingSystem id={postId} type={'post'}></VotingSystem>
                                 <img style= {{height: '64px',width : '64px',overflow: 'hidden',objectFit: 'cover'}} src={state.posterPfpUrl}></img>
                                 <div id= '2' style ={{width: '100%'}}>
                                     <h2>{state.title}</h2>
@@ -151,3 +160,4 @@ if (document.getElementById('PostContainer')) {
     let postId = document.getElementById('dataHolder').getAttribute('postID');
     ReactDOM.render(<Post postId = {postId} />, document.getElementById('PostContainer'));
 }
+export default Post

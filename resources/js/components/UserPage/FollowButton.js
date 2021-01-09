@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 //make this more secure by handling the following/follow more nuanced
 //switch to hooks down the road
-function FollowButton({followeeUsername}){
+function FollowButton({targetName, type}){
     
     const [isFollowingText, setIsFollowingText] = useState('')
     const [isFollowing, setIsFollowing] = useState(false);
@@ -9,9 +9,15 @@ function FollowButton({followeeUsername}){
 
     
     function figureOutIfFollowingOrNot(){
+        console.log('type: ' + type)
+        let url 
+        if (type == 'dock')
+            url = new URL('http://localhost:80/api/dockSubscriptionStatus')
+        else if (type =='user')
+            url = new URL('http://localhost:80/api/followers')
         let token = document.getElementById('csrf-token').getAttribute('content')
-        let url = new URL('http://localhost:80/api/followers')
-        let param = {followee: followeeUsername}
+        
+        let param = {query: targetName}
         url.search = new URLSearchParams(param).toString();
         fetch(url, {
             headers:{ 'X-CSRF-TOKEN': token, 'Content-Type':'application/json', "Access-Control-Allow-Origin" : "*", "Access-Control-Allow-Credentials" : true},
@@ -20,41 +26,64 @@ function FollowButton({followeeUsername}){
             credentials: "same-origin",
             }).then((response) => {
                 response.json().then((data) => {
-                    console.log(data['following'])
-                    setIsFollowing(data['following']);
+                    if(type=='dock')
+                        setIsFollowing(data['subscribed']);
+                    else if(type=='user')
+                        setIsFollowing(data['following'])
+                    
+                    
+                    if(type=='user')
+                        data['following'] ? setIsFollowingText('Following'): setIsFollowingText('Follow')
+                    if(type=='dock'){
+                        data['subscribed'] ? setIsFollowingText('Joined'): setIsFollowingText('Join')
+                    }
                     setIsLoading(false)
-                    console.log(isFollowing + ' isfollowing')
-                    data['following'] ? setIsFollowingText('Following'): setIsFollowingText('Follow')
                 })
             })
     }
     useEffect(() => {
         figureOutIfFollowingOrNot();   
       }, []);
-      console.log(isFollowingText['isFollowingText'] + ' ift')
 
     function submit(){
-        let method;
-        if(isFollowing)
-        {
-            method = 'delete'
-            setIsFollowingText('Follow');
-            setIsFollowing(false);
+        let url, method
+
+        if (type == 'dock'){
+            url = new URL('http://localhost:80/api/dockSubscription')
+                if(isFollowing)
+            {
+                method = 'delete'
+                setIsFollowingText('Join');
+                setIsFollowing(false);
+            }
+            else{
+                method = 'post'
+                setIsFollowingText('Joined');
+                setIsFollowing(true);
+            }
         }
-        else{
-            method = 'post'
-            setIsFollowingText('Following');
-            setIsFollowing(true);
+            
+        else if (type =='user'){
+            url = new URL('http://localhost:80/api/followers')
+            if(isFollowing)
+            {
+                method = 'delete'
+                setIsFollowingText('Follow');
+                setIsFollowing(false);
+            }
+            else{
+                method = 'post'
+                setIsFollowingText('Following');
+                setIsFollowing(true);
+            }
         }
-        let token = document.getElementById('csrf-token').getAttribute('content')
-        fetch('/api/followers', {
-            headers:{'X-CSRF-TOKEN': token, 'Content-Type':'application/json',},
+            
+        fetch(url, {
+            headers:{'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'), 'Content-Type':'application/json',},
             method: method,
             mode: "same-origin",
             credentials: "same-origin",
-            body: JSON.stringify({
-                followee: followeeUsername,
-            })
+            body: JSON.stringify({target: targetName,})
         })
     } 
     if(isLoading){
