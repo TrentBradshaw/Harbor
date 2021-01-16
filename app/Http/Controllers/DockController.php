@@ -150,4 +150,7 @@ class DockController extends Controller
         'GetDockPosts' => 'HELLO',
     ]);
    }
+   public function CheckVoteStatus(){
+
+   }
 }

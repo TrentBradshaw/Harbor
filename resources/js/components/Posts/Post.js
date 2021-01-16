@@ -111,7 +111,7 @@ import {
         if (isLoading) { return <div className="App">Loading...</div> }
         
         return (
-            <div>
+            <div className={['leftBorder', 'rightBorder', 'baseMainContainer'].join(" ")}>
                 <div className="App" style={{ marginLeft: '2%', marginRight: '2%', minHeight: '100%', display: 'flex', justifyContent: 'space-between' }}>
                     <div id="PostHeader" style={{ width: '70%', backgroundColor: 'white'}}>
                         <div style = {{display: 'flex'}} id="RealPostHeader">

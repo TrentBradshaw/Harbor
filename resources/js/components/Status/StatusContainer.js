@@ -94,7 +94,12 @@ function StatusContainer({currentUserId}) {
     }
         if(!isLoading){
             return(
-                <div id='statusShowcase'>
+                <div id='statusShowcase' className={['bordered', 'baseMainContainer', 'divBackground'].join(" ")}>
+                    <h1 className='divHeader'>
+                    <span>
+                        Status
+                    </span>
+                    </h1>
                     <Status appendNewStatus = {appendNewStatus} deleteStatus={deleteStatus} status ={mainStatus} currentUserId={mainStatus.user_id} form={'focus'}></Status>
                     {repliesArray.map((element)=>(
                     <Status key = {element.id} currentUserId = {currentUserId} deleteStatus ={deleteStatus} appendNewStatus ={appendNewStatus} status = {element} form={'feed'}></Status>

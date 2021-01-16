@@ -42,12 +42,13 @@ class ReeController extends Controller
                 return response()->json([
                     'upvoted' => $engagement->upvoted === 1 ? true: false,
                     'downvoted' => $engagement->downvoted === 1 ? true: false,
-                    'count' => $voteCount
+                    'score' => $voteCount
                 ]);
             }else {
                 return response()->json([
                     'upvoted' => false,
                     'downvoted' => false,
+                    'score' => 0
                 ]);
             }   
         }else if($type === 'postComment'){

@@ -7,26 +7,25 @@ function UserCard({currentUserId, profileOwnerInfo}) {
     let home = (window.location.href === 'http://localhost/home')
     let username = window.location.href.substring(window.location.href.lastIndexOf('/') + 1)
         return (
-            <div>
-                <div style={{background: 'ghostwhite', display: 'flex'}}>
-                    <div id = 'backButtonHolder' style={{flex: '1'}}>
-                        { !home && <KeyboardBackspaceIcon style={{height: '100%'}} role="button" id="backButton" />}
-                    </div>
-                    
-                    <div style={{flex: '8', alignItems: 'stretch', display: 'flex', flexDirection: 'column'}}>
-                        <span style= {{textAlign: 'left'}}>{profileOwnerInfo.username}</span>
-                        <span style= {{textAlign: 'left'}}>{profileOwnerInfo.contributionsCount} contributions</span>
+            <div style={{marginBottom: '3%'}} id= 'userCard' className={['bordered', 'divBackground'].join(" ")}>
+                <div className = 'divHeader' style={{ display: 'flex'}}>
+                    <div className= 'headerText' style={{flex: '8', alignItems: 'stretch', display: 'flex', flexDirection: 'column'}}>
+                        <h1 className= 'headerText' style= {{textAlign: 'left'}}>{profileOwnerInfo.username}</h1>
+                        
                     </div>
                 </div>
-                <div style={{display:'flex', alignItems: 'center', flexDirection:'column'}}>
+                <div style={{display:'flex', alignItems: 'center', flexDirection:'column', marginTop: '5%', marginBottom: '5%'}}>
                     {/*<ProfileImage type= {'header'} url={profileOwnerInfo.headerUrl} ></ProfileImage>*/}
                     <ProfileImage type={'profilePicture'} url = {profileOwnerInfo.pfpUrl}></ProfileImage>
                     { currentUserId != profileOwnerInfo.id && <FollowButton targetName={profileOwnerInfo.username} type={'user'}></FollowButton>}
                 </div>
-                <div style={{marginTop : '75px', textAlign: 'start' ,marginLeft: '50px'}}>
+                <div style={{textAlign: 'center'}}>
                     <p>{profileOwnerInfo.description}</p>
                     <p>{'joined ' + profileOwnerInfo.joinedAgo}</p>
-                    <p> {profileOwnerInfo.followingCount} Following {profileOwnerInfo.followersCount} Followers </p>
+                    <p style={{marginLeft: '10px'}}> {profileOwnerInfo.followingCount + ' Following'}  
+                    {profileOwnerInfo.followersCount == 1 ?
+                    profileOwnerInfo.followersCount + ' Follower': profileOwnerInfo.followersCount + ' Followers' } </p>
+                    <p style= {{textAlign: 'middle'}}>{profileOwnerInfo.contributionsCount + ' contributions'} </p>
                 </div> 
             </div>
         );

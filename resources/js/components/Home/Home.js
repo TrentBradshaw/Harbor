@@ -99,13 +99,17 @@ function Home ({currentUserId}){
     if(isLoading)
         return(<div></div>)
     return (
-        <div>
-            <div style= {{display:'flex', flexDirection: 'column'}}>
+        
+        <div id = 'home' style= {{display:'flex', flexDirection: 'column'}} className={['baseMainContainer',].join(" ")}>
+                {
+                    /* <div className={['headerText', 'divHeader'].join(" ")}>
+                    <h1 className='headerText' >Home</h1>
+                </div>*/
+                }
+                
                 <Usercard currentUserId={currentUserId} profileOwnerInfo={profileOwnerInfo}></Usercard>
-                { pfpUrl && <img style={{height: '64px', width:'64px', objectFit: 'cover', alignSelf: 'center'}} src={pfpUrl}></img>}
+                { /*pfpUrl && <img style={{height: '64px', width:'64px', objectFit: 'cover', alignSelf: 'center'}} src={pfpUrl}></img>*/}
                 {/*<HomeInput currentUserId = {userId} profileOwnerInfo={profileOwnerInfo} appendNewStatus={appendNewStatus}></HomeInput>*/}
-            </div>
-            
             <Feed home={true} currentUserId={currentUserId} pageOwnerId={null} appendNewStatus={appendNewStatus} deleteStatus={deleteStatus} feedArray={feedArray}></Feed>
         </div>
     )

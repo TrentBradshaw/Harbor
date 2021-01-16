@@ -75,7 +75,7 @@ function UserPage ({currentUserId}){
         else {
             return (
             
-                <div>
+                <div className={['bordered', 'baseMainContainer', 'divBackground'].join(" ")}>
                     <UserCard currentUserId = {currentUserId} profileOwnerInfo={profileOwnerInfo}></UserCard>
                     <Feed home={false} currentUserId= {currentUserId} profileOwnerId={profileOwnerInfo.id} feedArray={feedArray}></Feed>
                 </div>

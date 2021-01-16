@@ -56,3 +56,4 @@ require('./components/Home/Home')
 require('./components/Home/HomeInput')
 require('./components/Status/StatusContainer')
 require('./components/App');
+require('./components/Trending');

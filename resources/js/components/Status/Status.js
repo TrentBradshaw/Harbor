@@ -9,30 +9,25 @@ function Status({appendNewStatus, deleteStatus, status, userId, form}) {
     
     if(form == 'feed'){
         return(
-            <div onClick={()=>{window.location.replace('http://localhost:80/user/' + status.username + '/status/' + status.id)}} 
+            <div  
             key={status.id} 
-            className = 'statement' 
-            style={{borderColor: 'rgb(56, 68, 77)', border: '1px solid'}}>
+            className={['bordered', 'statement'].join(" ")}
+            >
                 <div style={{display: 'flex', alignItems:'center'}}>
-                    <VotingSystem id={status.id} type={'status'}></VotingSystem>
-                    <img style={{height: '32px', width:'32px', objectFit: 'cover', alignSelf: 'center', borderRadius: '50%'}} src={status.pfp_url}></img>
-                    <div style={{display: 'flex', flexDirection: 'column'}}>
-                        <span>{status.username}</span>
-                        <span>{"@" + status.username}</span>
-                    </div>
+                    <VotingSystem classVariable='statusFeed' id={status.id} type={'status'}></VotingSystem>
+                    <img style={{height: '64px', width:'64px', objectFit: 'cover', alignSelf: 'center', borderRadius: '50%'}} src={status.pfp_url}></img>
                 </div>
-                <div className= "bodyAndFooter">
+                <div onClick={()=>{window.location.replace('http://localhost:80/user/' + status.username + '/status/' + status.id)}} 
+                className= "bodyAndFooter" style={{overflowWrap: 'anywhere'}}>
+                    <div style={{display: 'flex', marginLeft: '2%', marginTop: '1%'}}>
+                        <span style={{fontFamily: 'BentonSans', fontSize: '20px', color: '#63727e'}}>{status.username}</span>
+                        <span style={{fontFamily: 'BentonSans', marginLeft: '20px', fontSize: '20px', color: '#63727e'}}>{"@" + status.username}</span>
+                    </div>
                     <div style= {{    height: '80%'}}>
-                        <p style={{textAlign:'start', marginLeft:'9%'}}>{status.body}</p> 
+                        <p style={{textAlign:'start', marginTop: '1%', marginLeft: '2%', overflowWrap: 'anywhere'}}>{status.body}</p> 
                     </div>
                     <div style= {{display: 'flex', marginTop: '20px', marginLeft: '9%'}}>
-                        <h5>{status.repliesCount + ' replies'}</h5>
-                        {replyClicked && <StatusInput currentUserId = { userId} appendNewStatus={appendNewStatus} 
-                        isReply={true}
-                        parentStatusId = {status.id}
-                        ></StatusInput>}
-                        <span>Share</span>
-                        <span onClick={()=> setReplyClicked(!replyClicked)}>Reply</span>
+                        <h5>{status.replyCount > 1? status.replyCount + ' replies' : status.replyCount + ' reply' }</h5>
                     </div>
                 </div>
             </div>
@@ -62,7 +57,7 @@ function Status({appendNewStatus, deleteStatus, status, userId, form}) {
         return(
             <div id='focusedStatus' style ={{background: 'white'}}>
                 <div style={{display: 'flex', alignItems:'center'}}>
-                    <VotingSystem id={status.id} type={'status'}></VotingSystem>
+                    <VotingSystem classVariable='statusFocus' id={status.id} type={'status'}></VotingSystem>
                     <img style={{height: '64px', width:'64px', objectFit: 'cover', alignSelf: 'center', borderRadius: '50%'}} src={status.pfp_url}></img>
                     <div style={{display: 'flex', flexDirection: 'column'}}>
                         <span>{status.username}</span>

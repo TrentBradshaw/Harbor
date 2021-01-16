@@ -19,6 +19,18 @@ import {
   } from "react-router-dom";
 
 
+  import HomeSharpIcon from '@material-ui/icons/HomeSharp';
+  import ListSharpIcon from '@material-ui/icons/ListSharp';
+  import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp';
+  import ExploreSharpIcon from '@material-ui/icons/ExploreSharp';
+  import AddBoxSharpIcon from '@material-ui/icons/AddBoxSharp';
+  import AddCircleOutlineSharpIcon from '@material-ui/icons/AddCircleOutlineSharp';
+  import CreateSharpIcon from '@material-ui/icons/CreateSharp';
+  import SettingsSharpIcon from '@material-ui/icons/SettingsSharp';
+  import PersonSharpIcon from '@material-ui/icons/PersonSharp';
+
+
+
 function Header() {
     const [userData, setUserData] = useState([]);
     const [isLoading, setLoading] = useState(true);
@@ -74,30 +86,63 @@ function Header() {
         return(<Loading></Loading>)
 
     return(
-        <div style={{display:'flex', flexDirection: 'column', flexBasis: '20',}}>
+        <div style={{width: '15%'}}>
+<div id = 'header' className={['bordered', 'divBackground'].join(" ")} style={{display:'flex', flexDirection: 'column', width:'300px', height: '500px'
+        ,position: 'fixed', left: '9%'}}>
                 {popUpclicked && <div onClick = {() =>popUpBackdropClicked()} id='popUpBackdrop'></div>}
                 {communityPopUpActive && <DockSubmitForm></DockSubmitForm>}
                 {postPopUpActive && <PostSubmitForm></PostSubmitForm>}
                 {statusPopUpActive && <StatusInput appendNewStatus={null} isReply = {false} parentStatusId = {null}></StatusInput>}
-                <h1>Harbor</h1>
-                <nav id='headerNav' style={{display:'flex', flexDirection: 'column', alignItems:'start'}}>
-                    <Link to="/home">Home</Link>
-                    <Link to="/subscriptions">Subscriptions</Link>
-                    
-                    <a className= 'headerItem' href='http://localhost/home'>Home</a>
-                    <a className= 'headerItem' href='http://localhost/notification' >Notifications</a>
-                     { /*<a className= 'headerItem' href={'http://localhost/following/' + userData.username}>Following</a>*/}
-                    <a className= 'headerItem' href='http://localhost/explore'>Explore</a>
-                </nav>
-                <div>
-                    <div onClick ={()=>activateSubMenu('community')} className= 'headerItem' href={'http://localhost/submit/dock'}>Create Community</div>
-                    <div onClick ={()=>activateSubMenu('post')} className= 'headerItem' href={'http://localhost/submit/post'}>Create Post</div>
-                    <div onClick ={()=>activateSubMenu('status')} className= 'headerItem' href={'http://localhost/submit/status'}>Create Status</div>
+                <div className={['divHeader'].join(" ")}>
+                    <h1 className='headerText' >Harbor</h1>
                 </div>
-                <nav>
-                    <a className= 'headerItem' href='http://localhost/settings' >Settings</a>
-                    <a className= 'headerItem' href={'http://localhost/user/' + userData.username }>Profile</a>
+                <nav className ='divBackground' id='headerNav' style={{display:'flex', flexDirection: 'column', alignItems:'start'}}>
+                    <Link className = 'headerItem' to="/home">
+                        <HomeSharpIcon></HomeSharpIcon>
+                        <span className='inherentFont'>Home</span>
+                    </Link>
+                    <Link className = 'headerItem' to="/subscriptions">
+                        <ListSharpIcon></ListSharpIcon>
+                        <span className='inherentFont'>Subscriptions</span>
+                        
+                    </Link>
+                    <Link className= 'headerItem' to='/notifications' >
+                        <NotificationsNoneSharpIcon></NotificationsNoneSharpIcon>
+                        <span className='inherentFont'>Notifications</span>
+                        
+                    </Link>
+                    <Link className= 'headerItem' to='http://localhost/explore'>
+                        <ExploreSharpIcon></ExploreSharpIcon>
+                        <span className='inherentFont'>Explore</span>
+                        
+                    </Link>
+                    <div onClick ={()=>activateSubMenu('community')} className= 'headerItem' href={'http://localhost/submit/dock'}>
+                        <AddBoxSharpIcon></AddBoxSharpIcon>
+                        <span className='inherentFont'>Create Community</span>
+                        
+                    </div>
+                    <div onClick ={()=>activateSubMenu('post')} className= 'headerItem' href={'http://localhost/submit/post'}>
+                        <AddCircleOutlineSharpIcon></AddCircleOutlineSharpIcon>
+                        <span className='inherentFont'>Create Post</span>
+                        
+                    </div>
+                    <div onClick ={()=>activateSubMenu('status')} className= 'headerItem' href={'http://localhost/submit/status'}>
+                        <CreateSharpIcon></CreateSharpIcon>
+                        <span className='inherentFont'>Create Status</span>
+                        
+                    </div>
+                    <Link className= 'headerItem' to='/settings' >
+                        <SettingsSharpIcon></SettingsSharpIcon>
+                        <span className='inherentFont'>Settings</span>
+                        
+                    </Link>
+                    <Link className= 'headerItem' to={'/user/' + userData.username }>
+                        <PersonSharpIcon></PersonSharpIcon>
+                        <span className='inherentFont'>Profile</span>
+                        
+                    </Link>
                 </nav>
+               
                 {/*
                     <nav id='headerNav' style={{display:'flex', flexDirection: 'column', alignItems:'start'}}>
                     <a className= 'headerItem' href='http://localhost/home'>Home</a>
@@ -111,6 +156,8 @@ function Header() {
                     </nav>
                 */}
         </div>
+        </div>
+        
     )
 }  
 

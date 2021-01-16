@@ -2,7 +2,7 @@ import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import React, {useState, useEffect} from 'react';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
-    function VotingSystem({id, type}){
+    function VotingSystem({classVariable, id, type}){
         
         const [upvoted, setUpvoted] = useState(null)
         const [downvoted, setDownvoted] = useState(null)
@@ -57,7 +57,7 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
                         else
                             setScore(score + 1)
                     }
-                    setIsLoading(false)    
+                    setLoading(false)    
                 })
         
         }
@@ -74,22 +74,23 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
                         setUpvoted(data['upvoted']);
                         setDownvoted(data['downvoted']);
                         setScore(data['score']);
+                        setLoading(false) 
                     })
                 
         },[]);
-        if(!isLoading)
+        if(isLoading)
             return(<React.Fragment></React.Fragment>)
         return(
             <div>
                 <div>
                     <ArrowDropUpIcon 
-                    className="material-icons" 
-                    style = {{color:  upvoted ? "orange" : null}}
+                    className={classVariable}
+                    style = {{fontSize: '50px', color:  upvoted ? "orange" : null}}
                     onClick = {() => {vote(id, true, false)}}
 
                      ></ArrowDropUpIcon>
-                    <p>{score}</p>
-                    <ArrowDropDownIcon className="material-icons" style = {{color: downvoted? "blue" : null }} onClick = {() => {vote(id, false, true)}} ></ArrowDropDownIcon>
+                    <p style= {{textAlign: 'center'}}>{score}</p>
+                    <ArrowDropDownIcon className={classVariable} style = {{fontSize: '50px', color: downvoted? "blue" : null }} onClick = {() => {vote(id, false, true)}} ></ArrowDropDownIcon>
                 </div>
             </div>
         )

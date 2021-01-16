@@ -3,7 +3,10 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    useHistory,
+    useLocation,
+    useParams
   } from "react-router-dom";
 import Home from '../components/Home/Home'
 import Status from '../components/Status/Status'
@@ -14,6 +17,20 @@ import UserPage from '../components/UserPage/UserPage'
 import DockContainer from './DockPage/DockContainer';
 import Subscriptions from '../components/Subscriptions';
 import Post from '../components/Posts/Post';
+import Trending from '../components/Trending';
+
+
+
+
+
+
+
+
+// ADD A TRENDING PAGE USING A NEWS SITE API
+
+
+
+
 
 
 function App(){
@@ -34,9 +51,10 @@ function App(){
     return(
         <Router>
             <div className="App">
-                <h1>CLAM</h1>
+                
             </div>
-                <Route path="/"component={Header}/>
+                <Route path="/" component={Header}/>
+                
             <Switch>
                 
                 <Route path="/home" render= {() => (<Home currentUserId={userInfo.id}></Home>)}/>
@@ -49,8 +67,8 @@ function App(){
                 
                 
                 <Route exact path="/user/:username" render={() =>(<UserPage currentUserId={userInfo.id}></UserPage>)}/>
-                <Route path= "/" component={Header}/>
             </Switch>
+           {/*<Route path="/" component={Trending}/> */} 
         </Router>
        
     )

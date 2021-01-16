@@ -5,8 +5,7 @@ function Feed({home, currentUserId, profileOwnerId, appendNewStatus, deleteStatu
     console.log(feedArray + 'feedarray')
     if(feedArray){
         return (
-            <div>
-                <div id = "commentsholder">
+            <div id = "commentsholder">
                 {   //feed this an array of posts as well, then mix them, then sort them in chronilogical order
                     feedArray.map((element)=>(
                         <Status 
@@ -19,7 +18,6 @@ function Feed({home, currentUserId, profileOwnerId, appendNewStatus, deleteStatu
                         ></Status>
                     ))
                 }
-                </div>
             </div>
         ); 
     }

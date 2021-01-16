@@ -6,22 +6,58 @@ use Illuminate\Http\Request;
 use App\Models\DockEngagement;
 use App\Models\Follower;
 use App\Models\Profile;
+use App\Models\User;
 use App\Models\Dock;
 use Illuminate\Support\Facades\Auth;
 
 class EngagementController extends Controller
 {   public function DockSubscriptions(){
+    /*
         $docksArray = Dock::where('id', DockEngagement::where('subscriber_id', Auth::user()->id)['dock_id'])->get()->toArray();
         return response()->json([
             'feed'=> $dockEngagement,
         ]);
+        */
+        $docksProfilesArray = array();
+        $docksIdArray =DockEngagement::where('subscriber_id', Auth::user()->id)->get()->toArray();
+        for ($i=0; $i < count($docksIdArray); $i++) { 
+            $profile =  Dock::where('id',$docksIdArray[$i]['dock_id'])->get()->first();
+            $profile['url'] = "http://localhost/dock/" . $profile->title;
+           
+            array_push($docksProfilesArray,$profile);
+        }
+        if (count($docksProfilesArray) > 0){
+            return response()->json([
+                'feed'=> $docksProfilesArray
+            ]);
+        }else{
+            return response()->json([
+                'feed'=> []
+            ]);
+        }
         //id	created_at	updated_at	subscriber_id	subscribed	dock_id
     }
     public function Followers(){
-        $arrayName = array();
-        $followersIdArray = Follower::where('followee_id', Auth::user()->id)->get()->toArray();
-        for ($i=0; $i < count($followersIdArray); $i++) { 
-            $arrayName.push($followersIdArray[$i]);
+        $followersProfilesArray = array();
+        if(Follower::where('followee_id', Auth::user()->id)->exists()){
+            $followersIdArray = Follower::where('followee_id', Auth::user()->id)->get()->toArray();
+            for ($i=0; $i < count($followersIdArray); $i++) { 
+                $profile = Profile::where('user_id',$followersIdArray[$i]['follower_id'])->get()->first();
+                $profile['username'] = User::where('id', $profile->user_id)->first()['username'];
+                $profile['url'] = "http://localhost/user/" . $profile->username;
+           
+                array_push($followersProfilesArray,$profile);
+            }
+        }
+        
+        if (count($followersProfilesArray) > 0){
+            return response()->json([
+                'feed'=> $followersProfilesArray
+            ]);
+        }else{
+            return response()->json([
+                'feed'=> []
+            ]);
         }
         return response()->json([
             'feed'=> $arrayName
@@ -32,19 +68,31 @@ class EngagementController extends Controller
         ]);
     }
     public function Following(){
-        $arrayName = array();
+        
         $followingProfilesArray = array();
         $followingIdArray = Follower::where('follower_id', Auth::user()->id)->get()->toArray();
         for ($i=0; $i < count($followingIdArray); $i++) { 
-           array_push($followingProfilesArray, Profile::where('user_id',$followingIdArray[$i]['followee_id'])->get()->first());
+            $profile = Profile::where('user_id',$followingIdArray[$i]['followee_id'])->get()->first();
+            $profile['username'] = User::where('id', $profile->user_id)->first()['username'];
+            $profile['url'] = "http://localhost/user/" . $profile->username;
+           array_push($followingProfilesArray, $profile);
         }
-        return response()->json([
-            'feed'=> $followingProfilesArray
-        ]);
+        if (count($followingProfilesArray) > 0){
+            return response()->json([
+                'feed'=> $followingProfilesArray
+            ]);
+        }else{
+            return response()->json([
+                'feed'=> []
+            ]);
+        }
+       
+        /*
         $followingArray = Profile::where('user_id', Follower::where('follower_id', Auth::user()->id)['followee_id'])->get()->toArray();
         return response()->json([
             'feed'=> $followingArray,
         ]);
+        */
     }
     
     public function AddDockSubscription(){

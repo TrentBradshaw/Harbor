@@ -45,7 +45,7 @@ function DockContainer() {
    }
         
         return(
-            <div style= {{ height: '100%'}} id='DockPageContainer'>
+            <div style= {{ height: '100%'}} className={['leftBorder', 'rightBorder', 'baseMainContainer'].join(" ")}>
                 <div style={{backgroundColor : 'red', height: '200px'}}></div>
                 <div  style= {{ display: 'flex', height: '100%'}}>
                     <div style= {{backgroundColor: 'grey', Height: '100%', width: '650px', height: '100%', marginLeft: '20%'}} id="mainContent">

@@ -18,6 +18,7 @@ class CreateDocksTable extends Migration
             $table->integer('creator_id')->length(25);
             $table->string('title')->length(200);
             $table->string('description');
+            $table->string('img_url');
             $table->timestamps();
             /*
             CREATE TABLE reddit_post

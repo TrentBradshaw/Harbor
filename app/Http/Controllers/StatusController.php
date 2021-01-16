@@ -12,7 +12,7 @@ class StatusController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     *app
      * @return \Illuminate\Http\Response
      */
     public function index()
@@ -30,6 +30,7 @@ class StatusController extends Controller
         $status = Status::where('id', $post_id)->get()->first();
         $status['pfp_url'] = Profile::where('user_id', $status['user_id'])->get()->first()['pfp_url'];
         $status['username'] = User::where('id', $status['user_id'])->get()->first()['username'];
+        $status['replyCount'] = Count(Status::where('parent_status_id', $post_id)->get()->toArray());
         $replies = Status::where('parent_status_id', $post_id)->get()->toArray();
         
         
