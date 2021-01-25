@@ -8,13 +8,12 @@
     font-family: inherit;
 }
 .headerItem{
-    flex-grow: 1;
-    width: 100%;
+    /*flex-grow: 1;*/
+    /*width: 100%;*/
     font-size: 20px;
     font-weight: 700;
-    color: rgb(16, 33, 47);
+    color: rgb(0 39 72);
     font-family:'tahoma',sans-serif;
-    margin-bottom: 10%;
     display: flex;
 }
 
@@ -24,11 +23,10 @@
     font-weight: 700;
     color: white;
 }
-
-
-#headerNav{
-    height: 300px;
-    
+.navHover:hover {
+    text-decoration: none;
+    cursor: pointer;
+    color: grey;
 }
 
 html, body
@@ -40,10 +38,20 @@ html, body
     background-color: #dae0e6;
     border-radius: 4px;
 }
-#react-root{
-    margin-right: 15%;
-    margin-left: 15%;
+.headerH2{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    font-weight: 700;
+    text-transform: none;
 }
+@media only screen and (min-width: 1000px) {
+    #react-root{
+        margin-right: 15%;
+        margin-left: 15%;
+    }
+  }
+
 .Wrapper
 {
     position: absolute;
@@ -154,7 +162,24 @@ p
     background-color: black;
 }
 h2 {
-    margin-top: -0.20%;  
+    margin-top: -0.20%;
+    font-family: tahoma;  
+}
+.createTab{
+    background-color: rgb(92, 139, 196);
+    border-radius: 5px 5px 0px 0px;
+    width: 40%;
+}
+
+.createTitle{
+    background-color: rgb(92, 139, 196);
+    color: white;
+    /* height: 30px; */
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+h3{
+    font-family: tahoma;
 }
 img#header{
     width: 100%;
@@ -169,15 +194,56 @@ img#header{
     left: 0;
     top: 0;
 }
-.headerSubmitForm{
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    width: 500px;
-    height: 400px;
-    margin-top: -200px;
-    margin-left: -250px;
+.popUpSubmitButton{
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 32px;
+    cursor: pointer;
+    outline: none;
+    border-color: #edeff1;
+    border-style: solid;
+    border-width: 0 3px 1px 0;
+    border-radius: 1px;
+    flex: 1;
+    height: 70px;
+    background: transparent;
+    color: #878a8c;
 }
+
+.submitButton{
+    height: 30px;
+    width: 70px;
+    border-radius: 25px;
+    outline: none;
+    border-style: none;
+    background-color: lightblue;
+    color: white;
+    margin: 10px;
+    cursor: pointer;
+}
+@media only screen and (min-width: 730px) {
+    .headerSubmitForm{
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        width: 700px;
+        /* height: 700px; */
+        margin-left: -350px;
+        border-radius: 5px;
+        margin-top: -200px;
+    }
+  }
+  @media only screen and (max-width: 730px) {
+    .headerSubmitForm{
+        position: fixed;
+        top: 50%;
+        width: 100%;
+        /* height: 700px; */
+        border-radius: 5px;
+        margin-top: -200px;
+    }
+  }
+
 #followBtn{
     margin-top: 20px;
     height: 50px;
@@ -241,9 +307,16 @@ img#pfp{
       display: inline-flex;
   }
 .search-box{
-    width: 80%;
-    margin-left: 10%;
-    margin-right: 10%;
+    width: 100%;
+    width: 96%;
+    /* padding-top: 5px; */
+    /* height: 150px; */
+    /* border: none; */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 2%;
+    margin-right: 2%;
+    border: 1px solid #c2c6ca;
 }
 .submitFormInput{
     width: 80%;
@@ -284,24 +357,45 @@ img#pfp{
     top: 0;
     left: 0;
   }
-
+  input, textarea{
+      font-family: tahoma;
+      font-size: 14px;
+        font-weight: 400;
+        line-height: 21px;
+        box-shadow: none;
+        border: 1px solid #c2c6ca;
+        border-radius: 5px;
+        
+        
+    }
+    .textArea{
+        resize: none;
+        box-sizing: border-box;
+        overflow: hidden;    
+        width: 100%;
+        outline: none;
+        border-radius: 4px;
+        border: 1px solid #878a8c;
+    }
   .search{
       height: 35px;
   }
   #dockPostTitle{
     display: block;
-    border: 1px solid red;
     height: 35px;
     margin-top: 20px;
   }
   #postTextField{
-    width: 95%;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    min-height: 120px;
 
   }
   #dockInput{
-    display: block;
-    border: 1px solid red;
-    height: 35px;
+    
+    
+    border-radius: 3px;
   }
   @import "http://fonts.googleapis.com/css?family=Raleway";
   /*----------------------------------------------
@@ -315,11 +409,26 @@ img#pfp{
       color: white;
   }
   .thinInput{
-    width:100%;
-    padding-top:5px;
-    height:50px;
-    border-radius:3px;
-    border:none
+    width: 96%;
+    padding-top: 5px;
+    height: 150px;
+    /* border: none; */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  .creationButton{
+    height: 30px;
+    width: 100px;
+    font-family: tahoma;
+    font-weight: 700;
+    color: white;
+    background-color: #5c8bc4;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    margin-right: 1%;
   }
   /*
   .statusFeed{
@@ -329,17 +438,40 @@ img#pfp{
     transform: scale(1.2);
     }*/
   .mediumInput{
-    width:100%;
-    padding-top:5px;
-    height:150px;
-    border-radius:3px;
-    border:none
+    width: 96%;
+    padding-top: 5px;
+    height: 150px;
+    /* border: none; */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 2%;
+    margin-right: 2%;
   }
+  .labelDiv{
+    color: white;
+    border-radius: 5px 5px 5px 5px;
+    width: 50%;
+    height: 50px;
+    /* padding-top: 35px; */
+    /* margin-left: 2%; */
+    background-color: blue;
+    margin-top: 20px;
+    margin-left: 2%;
+    justify-content: center;
+  }
+  @media only screen and (max-width: 1000px) {
+      .baseMainContainer{
+        width: 100%;
+      }
+}
+
+  @media only screen and (min-width: 1000px) {
   .baseMainContainer{
     width: 60%;
-    margin-right: 5%;
-    margin-left: 5%;
-  }
+    margin-right: 20%;
+    margin-left: 20%;
+    margin-top: 60px;
+  }}
   .headerText{
       color: white;
   }
@@ -348,7 +480,7 @@ img#pfp{
   height:80px;
   margin-top:10px;
   padding:5px;
-  box-shadow:1px 1px 12px gray;
+  /*box-shadow:1px 1px 12px gray;*/
   border-radius:3px
   }
   #send {
@@ -441,6 +573,10 @@ img#pfp{
   .dropdown-menu > span:focus ~ ul {
     visibility: visible;
     opacity: 1;
+  }
+
+  #focusedStatus{
+    margin-bottom: 4%;
   }
   
   /* The .sample-menu-style below is for illustration purpose.
@@ -564,7 +700,6 @@ img#pfp{
   @media only screen and (max-width: 1000px) {
     #header {
       background-color: lightblue;
-      max-width: 100px;
     }
   }
   .divHeader{
@@ -581,13 +716,15 @@ img#pfp{
     display: block;
     /* width: 100%; */
     /* text-align: center; */
-    padding-top: 5px;
-    margin-left: 1%;
+    
   }
   #homeInput{
       width: 60%;
       margin-right: 20%;
       margin-left: 20%;
+  }
+  .MuiSvgIcon-root{
+    fill: #5f7b98;
   }
   .statement{
     display: flex;
@@ -597,6 +734,7 @@ img#pfp{
     /* margin-right: 5%; */
     margin-top: 1%;
     background-color: white;
+    border-radius: 6px;
   }
 
   .bodyAndFooter{

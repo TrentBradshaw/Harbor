@@ -139,7 +139,8 @@ export class Autocomplete extends Component {
       <React.Fragment>
         <div className="search">
           <input
-            className="submitFormInput"
+            style={{borderStyle: 'none'}}
+            className="thinInput"
             placeholder='Choose a destination dock for this post'
             id="dockInput"
             type="text"

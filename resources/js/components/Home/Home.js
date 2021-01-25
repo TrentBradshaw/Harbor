@@ -99,14 +99,12 @@ function Home ({currentUserId}){
     if(isLoading)
         return(<div></div>)
     return (
-        
         <div id = 'home' style= {{display:'flex', flexDirection: 'column'}} className={['baseMainContainer',].join(" ")}>
                 {
                     /* <div className={['headerText', 'divHeader'].join(" ")}>
                     <h1 className='headerText' >Home</h1>
                 </div>*/
                 }
-                
                 <Usercard currentUserId={currentUserId} profileOwnerInfo={profileOwnerInfo}></Usercard>
                 { /*pfpUrl && <img style={{height: '64px', width:'64px', objectFit: 'cover', alignSelf: 'center'}} src={pfpUrl}></img>*/}
                 {/*<HomeInput currentUserId = {userId} profileOwnerInfo={profileOwnerInfo} appendNewStatus={appendNewStatus}></HomeInput>*/}

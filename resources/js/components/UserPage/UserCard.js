@@ -10,7 +10,7 @@ function UserCard({currentUserId, profileOwnerInfo}) {
             <div style={{marginBottom: '3%'}} id= 'userCard' className={['bordered', 'divBackground'].join(" ")}>
                 <div className = 'divHeader' style={{ display: 'flex'}}>
                     <div className= 'headerText' style={{flex: '8', alignItems: 'stretch', display: 'flex', flexDirection: 'column'}}>
-                        <h1 className= 'headerText' style= {{textAlign: 'left'}}>{profileOwnerInfo.username}</h1>
+                        <h1 className= 'headerText' style= {{textAlign: 'left', paddingTop: '7px', paddingLeft: '3px'}}>{profileOwnerInfo.username}</h1>
                         
                     </div>
                 </div>

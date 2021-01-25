@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import VotingSystem from '../Posts/VotingSystem';
 import StatusInput from '../SubmitPages/StatusInput';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CommentIcon from '@material-ui/icons/Comment';
+import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
 //Feed a statement array into the Statement class as props
 function Status({appendNewStatus, deleteStatus, status, userId, form}) {   
     
@@ -24,53 +26,49 @@ function Status({appendNewStatus, deleteStatus, status, userId, form}) {
                         <span style={{fontFamily: 'BentonSans', marginLeft: '20px', fontSize: '20px', color: '#63727e'}}>{"@" + status.username}</span>
                     </div>
                     <div style= {{    height: '80%'}}>
-                        <p style={{textAlign:'start', marginTop: '1%', marginLeft: '2%', overflowWrap: 'anywhere'}}>{status.body}</p> 
+                        <p style={{textAlign:'start', marginTop: '1%', marginLeft: '2%', overflowWrap: 'anywhere', fontWeight: '550px', color: 'rbg(0 39 72)'}}>{status.body}</p> 
                     </div>
-                    <div style= {{display: 'flex', marginTop: '20px', marginLeft: '9%'}}>
-                        <h5>{status.replyCount > 1? status.replyCount + ' replies' : status.replyCount + ' reply' }</h5>
+                    <div style= {{display: 'flex', marginTop: '20px', marginLeft: '2%'}}>
+                        <h5 style= {{fontSize: '15px', fontFamily: 'tahoma', color: 'rgb(0 39 72)'}}>{status.replyCount == 1? status.replyCount + ' reply' : status.replyCount + ' replies' }</h5>
+                        <ChatBubbleOutlineRoundedIcon></ChatBubbleOutlineRoundedIcon>
                     </div>
                 </div>
             </div>
         )
-        return (
-        
-            <div onClick={()=>{window.location.replace('http://localhost:80/user/' + status.username + '/status/' + status.id)}} key={status.id} className = 'statement' style={{borderColor: 'rgb(56, 68, 77)', border: '1px solid'}}> 
-                <div style={{display: 'flex'}}>
-                <img style={{height: '64px', width:'64px', objectFit: 'cover', alignSelf: 'center', borderRadius: '50%'}} src={status.pfp_url}></img>
-                    <VotingSystem id={status.id} type={'status'}></VotingSystem>
-                </div>
-                <div className= "bodyAndFooter">
-                    <div style= {{    height: '80%'}}>
-                        <p>{status.body}</p> 
-                    </div>
-                    <div style= {{display: 'flex'}}>
-                        <h5>{status.repliesCount + ' replies'}</h5>
-                        <button onClick={ () => deleteStatus(status.id)}>Delete</button>
-                    </div>
-                </div>
-            </div>
-        
-       
-        );
     }
     else if (form == 'focus'){
         return(
-            <div id='focusedStatus' style ={{background: 'white'}}>
-                <div style={{display: 'flex', alignItems:'center'}}>
-                    <VotingSystem classVariable='statusFocus' id={status.id} type={'status'}></VotingSystem>
-                    <img style={{height: '64px', width:'64px', objectFit: 'cover', alignSelf: 'center', borderRadius: '50%'}} src={status.pfp_url}></img>
+            <div id='focusedStatus' className='divBackground'>
+                <div style= {{display: 'flex'}}>
+                    <div style={{display: 'flex', alignItems:'center', flexDirection: 'column'}}>
+                        <img style={{height: '64px', width:'64px', objectFit: 'cover', alignSelf: 'center', borderRadius: '50%'}} src={status.pfp_url}></img>
+                        <VotingSystem classVariable='statusFocus' id={status.id} type={'status'}></VotingSystem>
+                        
+                    </div>
                     <div style={{display: 'flex', flexDirection: 'column'}}>
-                        <span>{status.username}</span>
-                        <span>{"@" + status.username}</span>
+                        <div style={{marginTop: '20px', marginLeft: '20px'}}>
+                            <span>{status.username}</span>
+                            <span>{"@" + status.username}</span>
+                        </div>
+                        <div style= {{    marginTop: '40px', marginLeft: '20px'}}>
+                            <p style={{textAlign:'start'}}>{status.body}</p> 
+                        </div>
                     </div>
+                    
                 </div>
+                
                 <div className= "bodyAndFooter">
-                    <div style= {{    height: '80%'}}>
-                        <p style={{textAlign:'start', marginLeft:'9%'}}>{status.body}</p> 
-                    </div>
+                    
                     <div style= {{display: 'flex', marginTop: '20px', marginLeft: '9%'}}>
-                        <h5>{status.repliesCount + ' replies'}</h5>
-                        {userId == status.user_id && <DeleteIcon onClick={ () => deleteStatus(status.id)}></DeleteIcon>}
+                        {userId == status.user_id && <DeleteIcon onClick={ () => deleteStatus(status.id)}></DeleteIcon> /* see why there's no delete icon */
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        } 
                         {replyClicked && <StatusInput currentUserId = { userId} appendNewStatus={appendNewStatus} 
                         isReply={true}
                         parentStatusId = {status.id}

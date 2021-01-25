@@ -94,6 +94,50 @@ class EngagementController extends Controller
         ]);
         */
     }
+    public function GetNotifications(){
+        $followers = Follower::where('follower_id', Auth::user()->id)->get()->toArray();
+        $userposts = Post::where('creator_id', Auth::user()->id)->get()->toArray();
+        $userComments = PostComments::where('creator_id', Auth::user()->id)->get()->toArray();
+        $userStatuses = Status::where('user_id', Auth::user()->id)->get()->toArray();
+        
+        $notificationArray = array();
+        foreach ($userposts as $key => $value) {
+            
+            $likes = PostEngagement::where('post_id', $userposts['key']['id'])->get()->toArray();
+
+
+            // find the likes
+            // find the comments
+            // make an object
+            // append it to the 
+            // $userposts[$key][]
+            $posts = Post::where('creator_id',Auth::user()->id)->get()->toArray();
+
+        }  
+
+        return response()->json([
+            'deleted'=> 'wee',
+            'json'=>$json
+        ]);
+
+        
+
+        foreach ($followers as $key => $value) {
+            $posts = Post::where('creator_id',Auth::user()->id)->get()->toArray();
+        }  
+        $postComments = PostComments::where();
+        $statuses = Status::where();
+        $followers = Follower::where() ;
+        $statusUpvotes = StatusEngagement::where();
+        $postUpvotes = PostEngagement::where();
+        // next package stuff up and detail the notification.
+        //examples  x person liked/comented y target z amount of time ago
+
+        return response()->json([
+            'deleted'=> 'wee',
+            'json'=>$json
+        ]);
+    }
     
     public function AddDockSubscription(){
         $json = json_decode(file_get_contents('php://input'), true); //grab request

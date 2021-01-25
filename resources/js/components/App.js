@@ -18,6 +18,7 @@ import DockContainer from './DockPage/DockContainer';
 import Subscriptions from '../components/Subscriptions';
 import Post from '../components/Posts/Post';
 import Trending from '../components/Trending';
+import NotificationContainer from '../components/Notification Page/NotificationContainer'
 
 
 
@@ -59,6 +60,7 @@ function App(){
                 
                 <Route path="/home" render= {() => (<Home currentUserId={userInfo.id}></Home>)}/>
                 <Route path="/subscriptions" render={() => (<Subscriptions></Subscriptions>)} />
+                <Route path="/notifications" component = {NotificationContainer}/>
                 <Route path="/user/:username/status/:statusId" render= {() => (<StatusContainer currentUserId={userInfo.id}></StatusContainer>)}/>
                 <Route exact path="/dock/:dockname/post/:postId/:postTitle" render ={() => (<Post currentUserId={userInfo.id}></Post>)}/>
                 <Route exact path="/dock/:dockname" render ={() => (<DockContainer currentUserId={userInfo.id}></DockContainer>)}/>

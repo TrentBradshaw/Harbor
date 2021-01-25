@@ -36,7 +36,8 @@ class StatusController extends Controller
         
        foreach ($replies as $key => $value) {
         $replies[$key]['username'] = User::where('id', $value['user_id'])->get()->first()['username'];
-        $replies[$key]['pfp_url'] = Profile::where('user_id', $value['user_id'])->get()->first()['pfp_url'];           
+        $replies[$key]['pfp_url'] = Profile::where('user_id', $value['user_id'])->get()->first()['pfp_url'];
+        $replies[$key]['replyCount'] = Count(Status::where('parent_status_id', $value['id'])->get()->toArray());
        }
         return response()->json([
             //so i need

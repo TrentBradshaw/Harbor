@@ -26,6 +26,7 @@ Route::get('api/post', [App\Http\Controllers\PostController::class, 'GetPost'])-
 Route::delete('api/post', [App\Http\Controllers\PostController::class, 'DeletePost'])->name('DeletePost');
 Route::put('api/engagement', [App\Http\Controllers\ReeController::class, 'VoteOnContent']);
 Route::get('api/engagement', [App\Http\Controllers\ReeController::class, 'GetCurrentVoteStatus']);
+Route::get('api/notifications', [App\Http\Controllers\EngagementController::class, 'GetNotifications']);
 Route::post('api/comments/submit', [App\Http\Controllers\PostCommentsController::class, 'Store']);
 Route::put('api/comments/delete', [App\Http\Controllers\PostCommentsController::class, 'Delete']);
 Route::get('api/comments', [App\Http\Controllers\PostCommentsController::class, 'GetPostComments']);
@@ -53,74 +54,3 @@ Route::view('/{path?}', 'app')
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
-|
-
-
-//Route::get('/', [HomeController::class, 'index']);
-
-
-//DON'T FORGET TO ADD TAGS TO GO WITH YOUR STATEMENTS. HASHTAGS AND REGULAR TAGS.
-
-
-Route::get('/', function () {
-
-    if (Auth::check()) {
-        // Test database connection
-        return redirect('/home');
-    } else{
-        try {
-            DB::connection()->getPdo();
-            echo "Connected successfully to: " . DB::connection()->getDatabaseName();
-            $results = DB::table('users')->get();
-            echo $results;
-        } catch (\Exception $e) {
-            die("Could not connect to the database. Please check your configuration. error:" . $e );
-        }
-
-        return view('welcome');
-    }
-});
-
-Route::get('/{user_id}/{statement_id}', function($statement_id){
-    return view('statements.show')->with('statement_id', $statement_id);
-})
-
-
-
-//Route::get('user/{id}/customEdit', 'UserController@customEdit');
-
-
-Route::get('/{user_id}/{statement_id}', function($statement_id){
-    StatementsController->show($statement_id);
-});
-
-
-//FIX THIS ABOSLUTE MESS OF UNORGANIZED ROUTING 
-
-Route::get('/upload', [App\Http\Controllers\FileUploadController::class, 'showUploadForm'])->name('showUploadForm');
-        
-
-Route::post('/upload', [App\Http\Controllers\FileUploadController::class, 'storeUploads'])->name('storeUploads');
-
-
-
-
-Route::get('/status', [App\Http\Controllers\StatusController::class, "ShowStatus"])->name('ShowStatus');
-Route::get('/submit/dock', [App\Http\Controllers\DockController::class, 'SubmitForm'])->name('SubmitForm');
-Route::get('/submit/post', [App\Http\Controllers\SubmitController::class, 'Submit'])->name('Submit');
-
-
-//Route::get('/GetDockPosts', [App\Http\Controllers\DockController::class, 'GetDockPosts'])->name('GetDockPosts');
-
-Route::get('/dock/{dock}', [App\Http\Controllers\ShowDockController::class, 'ShowDock'])->name('ShowDock');
-Route::get('/post/submit', [App\Http\Controllers\PostController::class, 'PostForm'])->name('PostForm');
-Route::get('/dock/{dockName}/{id}/{PostTitle}', [App\Http\Controllers\PostController::class, "ShowPost"])->name("ShowPost");
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-Auth::routes();
-Route::get('/user/{username}/status/{statusId}', [App\Http\Controllers\StatusController::class, 'ShowStatus']);
-Route::get('/user/{username}', [App\Http\Controllers\ShowUserController::class, 'ShowUser'])->name('showUser');
-//Route::get('/{username}/{id}', [App\Http\Controllers\StatusController::class, 'show'])->name('show');
-
-//Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-*/

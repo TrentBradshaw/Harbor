@@ -45,7 +45,8 @@ class FeedController extends Controller
        foreach ($statuses as $key => $value) {
         $statuses[$key]['username'] = User::where('id', $value['user_id'])->get()->first()['username'];
         //$statuses[$key]['numberOfReplies'] = Status::where('parent_status_id', );
-        $statuses[$key]['pfp_url'] = Profile::where('user_id', $value['user_id'])->get()->first()['pfp_url'];           
+        $statuses[$key]['pfp_url'] = Profile::where('user_id', $value['user_id'])->get()->first()['pfp_url'];     
+        $statuses[$key]['replyCount'] = Count(Status::where('parent_status_id', $value['id'])->get()->toArray());
        }
 
 
@@ -66,7 +67,8 @@ class FeedController extends Controller
         foreach ($statuses as $key => $value) {
             $statuses[$key]['username'] = User::where('id', $value['user_id'])->get()->first()['username'];
             //$statuses[$key]['numberOfReplies'] = Status::where('parent_status_id', );
-            $statuses[$key]['pfp_url'] = Profile::where('user_id', $value['user_id'])->get()->first()['pfp_url']; 
+            $statuses[$key]['pfp_url'] = Profile::where('user_id', $value['user_id'])->get()->first()['pfp_url'];
+            $statuses[$key]['replyCount'] = Count(Status::where('parent_status_id', $value['id'])->get()->toArray());
         }  
         return response()->json([
             'feeduserControllerReached' => $id,

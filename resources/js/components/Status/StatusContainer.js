@@ -94,7 +94,7 @@ function StatusContainer({currentUserId}) {
     }
         if(!isLoading){
             return(
-                <div id='statusShowcase' className={['bordered', 'baseMainContainer', 'divBackground'].join(" ")}>
+                <div id='statusShowcase' className='baseMainContainer'>
                     <h1 className='divHeader'>
                     <span>
                         Status

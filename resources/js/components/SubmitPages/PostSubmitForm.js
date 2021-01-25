@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom';
 import PostContentField from './PostContentField' 
 import AutoCompleteDockLookup from '../AutoComplete/AutoCompleteDockLookup'
+import LinkIcon from '@material-ui/icons/Link';
+import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
+import TextFieldsOutlinedIcon from '@material-ui/icons/TextFieldsOutlined';
 
 function PostSubmitForm(){
     const [highlighted, setHighlighted] = useState('text');
@@ -10,20 +13,45 @@ function PostSubmitForm(){
     const [body, setBody] = useState('');
 
         return (
-            <div className = 'headerSubmitForm'>
-                <h1>Create a Post</h1>
+            <div style={{backgroundColor: 'white'}} className = 'headerSubmitForm'>
+                <h1 style={{backgroundColor: '#5c8bc4', color: 'white', borderRadius:  '5px 5px 0px 0px', marginBottom: '40px'}} >Create a Post</h1>
                 <div>
                     <AutoCompleteDockLookup></AutoCompleteDockLookup>
-                    <input className="submitFormInput" id = "dockPostTitle" type='text' placeholder='title' name='title' onChange = { (e) => {setTitle(e.target.value)}}></input>
+                    <textarea className={['thinInput', 'textArea'].join(" ")} id = "dockPostTitle" type='text' maxlength = "50" placeholder='title' name='title' onChange = { (e) => {setTitle(e.target.value)}}></textarea>
                 </div>
-                <div>
-                    <button type="button" onClick={ () => {changePostType('text')}}>Text</button>
-                    <button type="button" onClick={ () => {changePostType('media')}}>Media</button>
-                    <button type="button" onClick={ () => {changePostType('link')}}>Link</button>
+                <div style={{display: 'flex', flexDirection: 'row'}}>
+                    <button 
+                        style={{display:'flex', flexDirection:'row',
+                        alignItems: 'center', justifyContent: 'center'}}                         
+                        className = 'popUpSubmitButton' 
+                        type="button" 
+                        onClick={ () => {changePostType('text')}}>
+                        <TextFieldsOutlinedIcon></TextFieldsOutlinedIcon>
+                        Text
+                    </button>
+                    <button
+                        style={{display:'flex', flexDirection:'row',
+                        alignItems: 'center', justifyContent: 'center'}} 
+                        className = 'popUpSubmitButton' 
+                        type="button" onClick={ () => {changePostType('media')}}>
+                        <LinkIcon></LinkIcon>
+                        Media
+                    </button>
+                    <button
+                        style={{display:'flex', flexDirection:'row',
+                        alignItems: 'center', justifyContent: 'center'}} 
+                        className = 'popUpSubmitButton'  
+                        type="button" onClick={ () => {changePostType('link')}}>
+                        <ImageOutlinedIcon></ImageOutlinedIcon>
+                        Link
+                    </button>
                 </div>
                     <PostContentField setUrl = {setUrl} updateContentValue = {updateContentValue} highlighted = {highlighted}></PostContentField>
-                <div>
-                        <button type="button" onClick={()=>{submit()}}>SUBMIT</button>
+                <div style={{
+                    display: 'flex',
+                    justifyContent: 'flex-end'
+                }}>
+                        <button className = 'submitButton' type="button" onClick={()=>{submit()}}>SUBMIT</button>
                 </div>
             </div>
         )

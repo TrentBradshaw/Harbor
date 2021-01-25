@@ -28,14 +28,47 @@ function DockSubmitForm() {
     }
     return(
         <div style= {{display:'flex', flexDirection: 'column', backgroundColor: 'white'}} className = 'headerSubmitForm'>
-            <h2 style={{backgroundColor: '#5c8bc4'}}>Create a Dock</h2>
-            <hr></hr>
-            <h2 style={{backgroundColor: '#5c8bc4'}}>Name of Dock</h2>
+            <div className='labelDiv'
+            style={{
+                display: 'flex',
+                backgroundColor: 'rgb(92, 139, 196)',
+                
+                height: '50px',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}>
+                <h3 style={{
+                    color: 'white', borderRadius:'5px 5px 0px 0px',
+                    width: '50%',
+                    height: '50px',
+                    paddingTop: '35px',
+                    marginLeft: '2%',
+                }}>Dock Title</h3>
+                <div style={{width: '50%', height: '50px'}}></div>
+            </div>
+            
             <input className='thinInput' value= {name} onChange={ (e)=>handleInputChange(e,'name')}></input>
-            <h2 style={{backgroundColor: '#5c8bc4'}}>Description</h2>
+            <div
+            className='labelDiv'
+            style={{
+                display: 'flex',
+                backgroundColor: 'rgb(92, 139, 196)',
+                
+                height: '50px',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}>
+                <h3 style={{
+                    color: 'white', borderRadius:'5px 5px 0px 0px',
+                    width: '50%',
+                    height: '50px',
+                    paddingTop: '35px',
+                    marginLeft: '2%',
+                }}>Description</h3>
+                <div style={{width: '50%', height: '50px'}}></div>
+            </div>
             <input className='mediumInput' value= {description} onChange={(e)=> handleInputChange(e,'description')}></input>
-            <hr></hr>
-            <button style={{alignSelf: 'flex-end', height:'50px'}} onClick={(e) => handleClick(e)}>Create Dock</button>
+            <button className = 'creationButton' style={{alignSelf: 'flex-end'}} onClick={(e) => handleClick(e)}>Create Dock</button>
         </div>
     )
 }  

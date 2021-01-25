@@ -10,6 +10,11 @@ import Loading from '../Utility/Loading';
 import PostSubmitForm from '../SubmitPages/PostSubmitForm'
 import StatusInput from '../SubmitPages/StatusInput'
 import DockSubmitForm from '../DockSubmitForm'
+import { makeStyles } from '@material-ui/core/styles'
+import Fab from '@material-ui/core/Fab';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 import {
     BrowserRouter as Router,
     Switch,
@@ -19,15 +24,16 @@ import {
   } from "react-router-dom";
 
 
-  import HomeSharpIcon from '@material-ui/icons/HomeSharp';
-  import ListSharpIcon from '@material-ui/icons/ListSharp';
-  import NotificationsNoneSharpIcon from '@material-ui/icons/NotificationsNoneSharp';
-  import ExploreSharpIcon from '@material-ui/icons/ExploreSharp';
-  import AddBoxSharpIcon from '@material-ui/icons/AddBoxSharp';
-  import AddCircleOutlineSharpIcon from '@material-ui/icons/AddCircleOutlineSharp';
-  import CreateSharpIcon from '@material-ui/icons/CreateSharp';
-  import SettingsSharpIcon from '@material-ui/icons/SettingsSharp';
-  import PersonSharpIcon from '@material-ui/icons/PersonSharp';
+
+  import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
+  import ListRoundedIcon from '@material-ui/icons/ListRounded';
+  import NotificationsNoneRoundedIcon from '@material-ui/icons/NotificationsNoneRounded';
+  import ExploreRoundedIcon from '@material-ui/icons/ExploreRounded';
+  import AddBoxRoundedIcon from '@material-ui/icons/AddBoxRounded';
+  import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
+  import CreateRoundedIcon from '@material-ui/icons/CreateRounded';
+  import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
+  import AccountCircleRoundedIcon from '@material-ui/icons/AccountCircleRounded';
 
 
 
@@ -39,6 +45,17 @@ function Header() {
     const [postPopUpActive, setPostPopUpActive] = useState(false)
     const [statusPopUpActive, setStatusPopUpActive] = useState(false)
  
+    const useStyles = makeStyles((theme) => ({
+        fab: {
+          margin: theme.spacing(2),
+        },
+        absolute: {
+          position: 'absolute',
+          bottom: theme.spacing(2),
+          right: theme.spacing(3),
+        },
+      }));
+      const classes = useStyles();
     useEffect(() => {
         fetch('http://localhost:80/api/userdetails', {
         headers:{
@@ -86,78 +103,93 @@ function Header() {
         return(<Loading></Loading>)
 
     return(
-        <div style={{width: '15%'}}>
-<div id = 'header' className={['bordered', 'divBackground'].join(" ")} style={{display:'flex', flexDirection: 'column', width:'300px', height: '500px'
-        ,position: 'fixed', left: '9%'}}>
+        <div>
+
+        
+        
+<div id = 'header'
+    style={{display:'flex', width:'100%',position: 'fixed', left: '0px', top: '0px',height :'40px'}}>
                 {popUpclicked && <div onClick = {() =>popUpBackdropClicked()} id='popUpBackdrop'></div>}
                 {communityPopUpActive && <DockSubmitForm></DockSubmitForm>}
                 {postPopUpActive && <PostSubmitForm></PostSubmitForm>}
                 {statusPopUpActive && <StatusInput appendNewStatus={null} isReply = {false} parentStatusId = {null}></StatusInput>}
-                <div className={['divHeader'].join(" ")}>
-                    <h1 className='headerText' >Harbor</h1>
+                <div style ={{display: 'flex', width: '100%'}}>
+                <div style={{backgroundColor: 'white'}}>
+                    <h1 className='headerText'  style={{paddingTop: '6px',paddingLeft: '2px', color: '#2762a9'}}>Harbor</h1>
                 </div>
-                <nav className ='divBackground' id='headerNav' style={{display:'flex', flexDirection: 'column', alignItems:'start'}}>
-                    <Link className = 'headerItem' to="/home">
-                        <HomeSharpIcon></HomeSharpIcon>
-                        <span className='inherentFont'>Home</span>
-                    </Link>
-                    <Link className = 'headerItem' to="/subscriptions">
-                        <ListSharpIcon></ListSharpIcon>
-                        <span className='inherentFont'>Subscriptions</span>
-                        
-                    </Link>
+                <nav className ='divBackground' id='headerNav' style={{display: 'flex', width: '100%', paddingTop:'7px', flexDirection: 'row',
+                justifyContent: 'space-evenly'}}>
+                   {/*} <div id='buffer' style={{flexBasis: '100px'}}></div>*/}
+                    <Tooltip title="Home">
+                        <Link className = 'headerItem' to="/home">
+                            <HomeRoundedIcon style={{fill: " #5f7b98"}}></HomeRoundedIcon>
+                            {/*<span className={['navHover', 'inherentFont'].join(" ")}>Home</span>*/}
+                        </Link>
+                    </Tooltip>
+                    <Tooltip title="Subscriptions">
+                        <Link className = 'headerItem' to="/subscriptions">
+                            <ListRoundedIcon style={{fill: " #5f7b98"}}></ListRoundedIcon>
+                            {/*<span className={['navHover', 'inherentFont'].join(" ")}>Subscriptions</span>*/}
+                            
+                        </Link>
+                    </Tooltip>
+                    <Tooltip title="Notifications">
                     <Link className= 'headerItem' to='/notifications' >
-                        <NotificationsNoneSharpIcon></NotificationsNoneSharpIcon>
-                        <span className='inherentFont'>Notifications</span>
-                        
-                    </Link>
+                        <NotificationsNoneRoundedIcon style={{fill: " #5f7b98"}}></NotificationsNoneRoundedIcon>
+                        {/*<span className='inherentFont'>Notifications</span>  */}
+                    </Link></Tooltip>
+                    <Tooltip title="Search">
+                        <div style={{display: 'flex', width:'20%'}}>
+                            <input style={{width: '100%'}}></input>
+                            <div style={{backgroundColor: 'orange'}}>
+                                <SearchIcon></SearchIcon>
+                            </div>
+                        </div>
+                    </Tooltip>
+                    {/*
                     <Link className= 'headerItem' to='http://localhost/explore'>
-                        <ExploreSharpIcon></ExploreSharpIcon>
-                        <span className='inherentFont'>Explore</span>
-                        
+                        <ExploreRoundedIcon style={{fill: " #5f7b98"}}></ExploreRoundedIcon>
+                        {/*<span className='inherentFont'>Explore</span>
                     </Link>
-                    <div onClick ={()=>activateSubMenu('community')} className= 'headerItem' href={'http://localhost/submit/dock'}>
-                        <AddBoxSharpIcon></AddBoxSharpIcon>
-                        <span className='inherentFont'>Create Community</span>
-                        
-                    </div>
-                    <div onClick ={()=>activateSubMenu('post')} className= 'headerItem' href={'http://localhost/submit/post'}>
-                        <AddCircleOutlineSharpIcon></AddCircleOutlineSharpIcon>
-                        <span className='inherentFont'>Create Post</span>
-                        
-                    </div>
-                    <div onClick ={()=>activateSubMenu('status')} className= 'headerItem' href={'http://localhost/submit/status'}>
-                        <CreateSharpIcon></CreateSharpIcon>
-                        <span className='inherentFont'>Create Status</span>
-                        
-                    </div>
-                    <Link className= 'headerItem' to='/settings' >
-                        <SettingsSharpIcon></SettingsSharpIcon>
-                        <span className='inherentFont'>Settings</span>
-                        
-                    </Link>
+                    */}
+                    <Tooltip title="Create Dock">
+                        <div onClick ={()=>activateSubMenu('community')} className= 'headerItem' href={'http://localhost/submit/dock'}>
+                            <AddBoxRoundedIcon style={{fill: " #5f7b98"}}></AddBoxRoundedIcon>
+                            {/*<span className={['navHover', 'inherentFont'].join(" ")}>Create Community</span>*/}
+                        </div>
+                    </Tooltip>
+                    <Tooltip title="Create Post">
+                        <div onClick ={()=>activateSubMenu('post')} className= 'headerItem' href={'http://localhost/submit/post'}>
+                            <AddCircleOutlineRoundedIcon style={{fill: " #5f7b98"}}></AddCircleOutlineRoundedIcon>
+                            {/*<span className={['navHover', 'inherentFont'].join(" ")}>Create Post</span>  */}
+                        </div>
+                    </Tooltip>
+                    <Tooltip title="Create status">
+                        <div onClick ={()=>activateSubMenu('status')} className= 'headerItem' href={'http://localhost/submit/status'}>
+                            <CreateRoundedIcon style={{fill: " #5f7b98"}}></CreateRoundedIcon>
+                            {/*<span className={['navHover', 'inherentFont'].join(" ")}>Create Status</span>*/}
+                        </div>
+                    </Tooltip>
+                    <Tooltip title="Settings">
+                        <Link className= 'headerItem' to='/settings' >
+                            <SettingsRoundedIcon style={{fill: " #5f7b98"}}></SettingsRoundedIcon>
+                            {/*<span className='inherentFont'>Settings</span>    */}
+                        </Link>
+                    </Tooltip>
+                    <Tooltip title="Notifications">
                     <Link className= 'headerItem' to={'/user/' + userData.username }>
-                        <PersonSharpIcon></PersonSharpIcon>
-                        <span className='inherentFont'>Profile</span>
+                        <AccountCircleRoundedIcon style={{fill: " #5f7b98"}}></AccountCircleRoundedIcon>
+                       {/* <span className={['navHover', 'inherentFont'].join(" ")}>Profile</span> */}
                         
                     </Link>
+                    </Tooltip>
                 </nav>
+                </div>
+                
                
-                {/*
-                    <nav id='headerNav' style={{display:'flex', flexDirection: 'column', alignItems:'start'}}>
-                    <a className= 'headerItem' href='http://localhost/home'>Home</a>
-                    <a className= 'headerItem' href='http://localhost/notification' >Notifications</a>
-                    <a className= 'headerItem' href={'http://localhost/following/' + userData.username}>Following</a>
-                    <a className= 'headerItem' href={'http://localhost/submit/dock'}>Create Community</a>
-                    <a className= 'headerItem' href={'http://localhost/submit/post'}>Create Post</a>
-                    <a className= 'headerItem' href={'http://localhost/submit/status'}>Create Status</a>
-                    <a className= 'headerItem' href='http://localhost/settings' >Settings</a>
-                    <a className= 'headerItem' href={'http://localhost/user/' + userData.username }>Profile</a>
-                    </nav>
-                */}
+                
         </div>
         </div>
-        
     )
 }  
 

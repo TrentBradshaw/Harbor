@@ -16,6 +16,7 @@ function DockContainer() {
     let { dockname } = useParams()
     
     useEffect(() => {
+        console.log('docktime')
         console.log('pickles');
         console.log(window.location.pathname)
         console.log('http://localhost:80/api/' + dockname)
