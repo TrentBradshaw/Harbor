@@ -23,8 +23,6 @@ import {
     useParams
   } from "react-router-dom";
 
-
-
   import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
   import ListRoundedIcon from '@material-ui/icons/ListRounded';
   import NotificationsNoneRoundedIcon from '@material-ui/icons/NotificationsNoneRounded';
