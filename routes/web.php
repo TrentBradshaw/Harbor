@@ -42,8 +42,8 @@ Route::get('/api/userdetails', 'App\Http\Controllers\GetCurrentUserController');
 
 Route::view('/{path?}', 'app')
      ->where('path', '.*')
-     ->name('react');
-
+     ->name('react'); 
+    //
 
 
 /*
