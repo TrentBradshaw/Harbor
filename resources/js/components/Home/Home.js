@@ -14,7 +14,7 @@ function Home ({currentUserId}){
     
     useEffect(() => {
         let param, url
-        fetch('http://localhost:80/api/userdetails', {
+        fetch('https://harborsms.herokuapp.com/api/userdetails', {
         headers:{'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'), 'Content-Type':'application/json',},
         method: 'get',
         mode: "same-origin",
@@ -23,7 +23,7 @@ function Home ({currentUserId}){
             console.log(response)
             response.json().then((data) => {
                 setPfpUrl(data['pfpUrl'])
-                url = new URL('http://localhost:80/api/profile')
+                url = new URL('https://harborsms.herokuapp.com/api/profile')
                 param = {query: data['username']}
                 url.search = new URLSearchParams(param).toString();
                 
@@ -46,7 +46,7 @@ function Home ({currentUserId}){
             });
         })
        
-        fetch('http://localhost:80/api/feed/home', 
+        fetch('https://harborsms.herokuapp.com/api/feed/home', 
         {headers:{'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'), 'Content-Type':'application/json', "Access-Control-Allow-Origin" : "*", "Access-Control-Allow-Credentials" : true },
             method: 'get',
             mode: "same-origin",
