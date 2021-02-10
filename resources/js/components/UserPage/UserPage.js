@@ -23,7 +23,7 @@ function UserPage ({currentUserId}){
 
     useEffect(() => {
         
-        let url = new URL('http://localhost:80/api/feed')
+        let url = new URL('https://harborsms.herokuapp.com/api/feed')
         let param = {query: username}
         url.search = new URLSearchParams(param).toString();
         
@@ -45,7 +45,7 @@ function UserPage ({currentUserId}){
         });
 
 
-        url = new URL('http://localhost:80/api/profile')
+        url = new URL('https://harborsms.herokuapp.com/api/profile')
         param = {query: username}
 
         url.search = new URLSearchParams(param).toString();

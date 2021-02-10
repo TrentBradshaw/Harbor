@@ -45,7 +45,7 @@ import {
         }, []);
         const fetchData = () => {
             let token = document.getElementById('csrf-token').getAttribute('content')
-            fetch('http://localhost:80/api/userdetails', {
+            fetch('https://harborsms.herokuapp.com/userdetails', {
                 headers:{
                     'X-CSRF-TOKEN': token,
                     'Content-Type':'application/json',
@@ -63,7 +63,7 @@ import {
                         console.log(data + 'sffwfgsdgwswsw')
                     });
                 })
-            let url = new URL('http://localhost:80/api/post')
+            let url = new URL('https://harborsms.herokuapp.com/api/post')
             let param = {query: postId}
 
             url.search = new URLSearchParams(param).toString();
@@ -88,7 +88,7 @@ import {
         }
         function handleDeletePost(){
             
-            fetch('http://localhost:80/api/post', {
+            fetch('https://harborsms.herokuapp.com/api/post', {
                 headers:{
                     'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),
                     'Content-Type':'application/json',
@@ -104,7 +104,7 @@ import {
                 }).then((response) => {
                     response.json().then((data) => {
                         console.log(data)
-                        window.location.replace("http://localhost:80/dock/" + state.communityTitle)
+                        window.location.replace("https://harborsms.herokuapp.com/dock/" + state.communityTitle)
                     });
                 })
         }
@@ -123,7 +123,7 @@ import {
                                         <Moment creator = {state.creatorUsername} timePosted = {state.formattedStamp}></Moment>
                                         <p>{state.commentCount + ' comments'}</p>
                                         <p onClick= {() =>{
-                                            var Url = 'http://localhost/dock/' + state.communityTitle + '/' + state.id + '/' + state.title;
+                                            var Url = 'https://harborsms.herokuapp.com/dock/' + state.communityTitle + '/' + state.id + '/' + state.title;
                                             var dummy = document.createElement("textarea");
                                             dummy.style.display = 'none'
                                             document.body.appendChild(dummy);
