@@ -1,1 +1,1 @@
-mynamejeff
+Social Media site that aims to combine Reddit and Twitter's core functionality for a more complete social media experience.

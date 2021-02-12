@@ -1,0 +1,39 @@
+{
+    "extends": [
+        "airbnb",
+        "prettier",
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "prettier/react"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react",
+        "prettier"
+    ],
+    "rules": {
+        "prettier/prettier":  ["error", {
+           "endOfLine":"auto"
+         }],
+        "no-unused-vars": "warn",
+        "no-console": "off",
+        "func-names": "off",
+        "object-shorthand": "off",
+        "react/react-in-jsx-scope": 0,
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "import/no-named-as-default": 0,
+        "react/prop-types": "off" /* eslint-disable react/prop-types */ // TODO: upgrade to latest eslint tooling
+    },
+    "env": {
+        "browser": true,
+        "node": true
+    }
+}
