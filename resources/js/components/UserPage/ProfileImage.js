@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-function ProfileImage({type, url}) {
-    console.log('dabbie')
-    if (type === 'profilePicture'){
-        return(
-            <img src={url} alt="" id="pfp" className="overlayedImage"></img>
-        )
+function ProfileImage({ type, url }) {
+    console.log('dabbie');
+    if (type === 'profilePicture') {
+        return <img src={url} alt="" id="pfp" className="overlayedImage" />;
     }
-    else if (type === 'header'){
-        return (
-            <img src={url} alt="" id="header" className="ImageLayedOver"></img>
-        );
+    if (type === 'header') {
+        return <img src={url} alt="" id="header" className="ImageLayedOver" />;
     }
-   
 }
 export default ProfileImage;

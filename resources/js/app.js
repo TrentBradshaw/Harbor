@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes React and other helpers. It's a great starting point while
@@ -11,49 +12,35 @@ require('./bootstrap');
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-require('./components/Header/Header')
-require('./components/Header/DropDownMenu')
+require('./components/Header/Header');
 
-require('./components/DropdownDockMenu/DockButtonDropDownCmp')
-require('./components/DropdownDockMenu/DockDropDownButton')
-require('./components/DropdownDockMenu/DockDropDownCard')
-require('./components/DropdownDockMenu/DockDropDownMenu')
+require('./components/SubmitPages/PostContentField');
 
-require('./components/DropdownProfileMenu/ProfileButtonDropDownCmp')
-require('./components/DropdownProfileMenu/ProfileDropDownButton')
-require('./components/DropdownProfileMenu/ProfileDropDownCard')
-require('./components/DropdownProfileMenu/ProfileDropDownMenu')
+require('./components/UserPage/Feed');
+require('./components/Status/Status');
+require('./components/Status/StatusContainer');
+require('./components/UserPage/UserPage');
+require('./components/UserPage/UserCard');
+require('./components/UserPage/FollowButton');
 
-require('./components/SubmitPages/PostContentField')
+require('./components/DockSubmitForm');
 
+require('./components/DockPage/DockContainer');
+require('./components/SubmitPages/PostSubmitForm');
 
-require('./components/UserPage/Profile')
-require('./components/UserPage/Feed')
-require('./components/UserPage/Profile')
-require('./components/Status/Status')
-require('./components/Status/StatusContainer')
-require('./components/UserPage/UserPage')
-require('./components/UserPage/UserCard')
-require('./components/UserPage/FollowButton')
+require('./components/AutoComplete/AutoCompleteDockLookup');
+require('./components/AutoComplete/Autocomplete');
 
-require('./components/DockSubmitForm')
+require('./components/Posts/Post');
+require('./components/Posts/LinkedPost');
+require('./components/Posts/TextPost');
+require('./components/Posts/MediaPost');
 
-require('./components/DockPage/DockContainer')
-require('./components/SubmitPages/PostSubmitForm')
+require('./components/Comments/PostComment');
+require('./components/Comments/PostComments');
 
-require('./components/AutoComplete/AutoCompleteDockLookup')
-require('./components/AutoComplete/Autocomplete')
-
-require('./components/Posts/Post')
-require('./components/Posts/LinkedPost')
-require('./components/Posts/TextPost')
-require('./components/Posts/MediaPost')
-
-require('./components/Comments/PostComment')
-require('./components/Comments/PostComments')
-
-require('./components/Home/Home')
-require('./components/Home/HomeInput')
-require('./components/Status/StatusContainer')
+require('./components/Home/Home');
+require('./components/Home/HomeInput');
+require('./components/Status/StatusContainer');
 require('./components/App');
 require('./components/Trending');

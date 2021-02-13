@@ -1,33 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class FileUploadComponent extends Component
-{
-   constructor(props) {
-      super(props);
-      this.state ={
-        image: ''
-      }
-      this.onChange = this.onChange.bind(this)
+function FileUploadComponent({ updateImage }) {
+    function createImage(file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            updateImage(e.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+    function onChange(e) {
+        const files = e.target.files || e.dataTransfer.files;
+        if (!files.length) return;
+        createImage(files[0]);
     }
 
-    onChange(e) {
-      let files = e.target.files || e.dataTransfer.files;
-      if (!files.length)
-            return;
-      this.createImage(files[0]);
-    }
-    createImage(file) {
-      let reader = new FileReader();
-      reader.onload = (e) => {
-        this.props.updateImage(e.target.result)
-      };
-      reader.readAsDataURL(file);
-    }
-  
-   render()
-   {
-      return(
-        <input id = 'postFileField' type="file" onChange = { (e) => this.onChange(e)} name="postFile"></input>
-      )
-   }
+    return (
+        <input
+            id="postFileField"
+            type="file"
+            onChange={(e) => onChange(e)}
+            name="postFile"
+        />
+    );
 }
+
+export default FileUploadComponent;

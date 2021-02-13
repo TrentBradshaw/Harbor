@@ -38,10 +38,6 @@ function PostComment({ userId, deleteComment, appendNewComment, comment }) {
         toggleMinimized(!minimized);
     }
     function initialize() {
-        console.log(JSON.stringify(comment));
-
-        console.log('reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
-        console.log(`${comment.isDeleted}cmdel`);
         updateDeleted(comment.isDeleted);
     }
     useEffect(() => {

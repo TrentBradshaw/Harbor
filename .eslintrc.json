@@ -30,7 +30,14 @@
         "react/react-in-jsx-scope": 0,
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "import/no-named-as-default": 0,
-        "react/prop-types": "off" /* eslint-disable react/prop-types */ // TODO: upgrade to latest eslint tooling
+        "react/prop-types": "off", /* eslint-disable react/prop-types */ // TODO: upgrade to latest eslint tooling
+        "jsx-a11y/label-has-associated-control": [ 2, {
+            "labelComponents": ["CustomLabel"],
+            "labelAttributes": ["inputLabel"],
+            "controlComponents": ["CustomInput"],
+            "assert": "both",
+            "depth": 3
+          }]
     },
     "env": {
         "browser": true,

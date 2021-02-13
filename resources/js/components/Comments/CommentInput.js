@@ -1,6 +1,5 @@
+/* eslint-disable no-unused-expressions */
 import React, { useState } from 'react';
-
-// don't forget to pass the votes into the voting system component
 
 function CommentInput({
     isReply,
@@ -11,27 +10,24 @@ function CommentInput({
 }) {
     const [text, updateText] = useState('');
     function submit(
-        isReplyT,
-        parentCommentT,
-        appendNewCommentT,
-        parentPostIdT,
-        textT,
-        hideInputChangeT
+        isReplyTemp,
+        parentCommentTemp,
+        appendNewCommentTemp,
+        parentPostIdTemp,
+        textTemp
     ) {
         let parentCommentId = 0;
         let nestLevel = 0;
 
-        if (parentComment) {
-            parentCommentId = parentComment.id;
-            nestLevel = parentComment.nest_level + 1;
+        if (parentCommentTemp) {
+            parentCommentId = parentCommentTemp.id;
+            nestLevel = parentCommentTemp.nest_level + 1;
         }
-        // console.log('props from commentinput submit ' + JSON.stringify(props))
+
         const token = document
             .getElementById('csrf-token')
             .getAttribute('content');
         fetch('/api/comments/submit', {
-            // this is where you do it, check database for pfp url and also upvote the comment yourself
-
             headers: {
                 'X-CSRF-TOKEN': token,
                 'Content-Type': 'application/json',
@@ -42,20 +38,19 @@ function CommentInput({
             body: JSON.stringify({
                 parentPostId: parentPostId,
                 parentCommentId: parentCommentId,
-                body: text,
+                body: textTemp,
                 nestLevel: nestLevel,
             }),
-        })
-            .then((response) => response.json(console.log(response)))
-        data => { 
+        }).then((response) => response.json(console.log(response)));
+        (data) => {
             if (parentComment)
-                appendNewComment(data['comment'], isReply, parentComment.id)
-            else
-                appendNewComment(data['comment'], false, 0)
-            
-            if(isReply)
+                appendNewComment(data.comment, isReply, parentComment.id);
+            else appendNewComment(data.comment, false, 0);
+
+            if (isReplyTemp) {
                 hideInputChange();
-        })
+            }
+        };
     }
     return (
         <div>

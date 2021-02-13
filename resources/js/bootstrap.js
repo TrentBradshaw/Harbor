@@ -1,3 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable global-require */
+/* eslint-disable no-multi-assign */
+/* eslint-disable no-empty */
 window._ = require('lodash');
 
 /**
