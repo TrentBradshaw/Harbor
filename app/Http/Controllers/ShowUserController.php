@@ -38,14 +38,6 @@ class ShowUserController extends Controller
     
     
                 array_push($statements_array, Status::where('username', $username)->get()->toArray());
-                //print_r($statements_array);
-                /*
-                $pageOwnerInfo  =  array(
-                        //make all of this the profile info object
-                        //"user" = User::where('id', Auth::user()->id)->get()->toArray();
-                         'userId' = $userId
-                );
-                */
                 $feedInfo = array(
                     //PUMP THE DATA INTO HERE WITH A FOR LOOP!
                 );
@@ -66,9 +58,7 @@ class ShowUserController extends Controller
                     
                 }
                 
-                //print_r($currentUser[0]['username']);
                 $currentUserUsername = $currentUser[0]['username'];
-               // print_r($currentUserUsername);
                 return view('showUser',[
                     'pageOwnerInfo'=> json_encode($pageOwnerInfo),
                     //IF FOLLOWING ADD THIS AS DATA TO CHANGE THE FOLLOW BUTTON
@@ -80,12 +70,9 @@ class ShowUserController extends Controller
             }
             else{
                 $currentUser = User::where('id', Auth::user()->id)->get()->toArray();
-                    //print_r($currentUser[0]['username']);
-                    $currentUserUsername = $currentUser[0]['username'];
+                $currentUserUsername = $currentUser[0]['username'];
                 $data = array();
                     $pageOwnerInfo  =  array(
-                            //make all of this the profile info object
-                            //"user" = User::where('id', Auth::user()->id)->get()->toArray();
                             "username" => $username,
                             "pfp_url" => 'ded', // later add blacked out pfp
                             "description" =>  'This user does not exist, please try again',
