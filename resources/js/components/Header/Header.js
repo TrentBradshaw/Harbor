@@ -25,7 +25,7 @@ function Header() {
     const [statusPopUpActive, setStatusPopUpActive] = useState(false);
 
     useEffect(() => {
-        fetch('https://harborsms.herokuapp.com/api/userdetails', {
+        fetch('http://localhost/api/userdetails', {
             headers: {
                 'X-CSRF-TOKEN': document
                     .getElementById('csrf-token')

@@ -21,11 +21,7 @@ use App\Includes\GetUrlMetaData;
 
 
 class PostController extends Controller
-{
-
-    //$comments = Post::find(1)->comments; //but find all
-
-    
+{    
     protected $dates = ['name_field'];
     public function PostForm(){
         return view ('PostSubmitForm');
@@ -33,15 +29,9 @@ class PostController extends Controller
     public function Store(){
         
 
-        $json = json_decode(file_get_contents('php://input'), true); //grab request
-        
+        $json = json_decode(file_get_contents('php://input'), true);
         $post = new Post();
-        
         $post->media_url = $json['url'];
-        //set BACK TO MEDIA_URL = $DATA
-        
-        
-
         $community = Dock::where('title', $json['community'])->get()->first();
         $community_id = $community->id;
 
@@ -73,8 +63,6 @@ class PostController extends Controller
                 $url = '/' . 'dock/' . $dockName . '/' . $postID . '/' . $postTitle;
                 
                     return response()->json([
-                        //so i need
-                        //127.0.0.1/dock/dockname/postID/posttitle
                         'post' =>$post,
                         'url' =>$url,
                     ]);
@@ -83,13 +71,7 @@ class PostController extends Controller
         else{
             return $json;
         }
-        
-
-
-        /*
-        $json = json_decode(file_get_contents('php://input'), true); //grab request
-        return $json;
-    */}
+    }
     public function ShowPost($community, $id, $title){
         return view('ShowPost',
                 [
@@ -116,10 +98,6 @@ class PostController extends Controller
         $postInfo["communityTitle"] = $community['title'];
         $postInfo["creatorUsername"] = $user['username'];
         $date = date('Y-m-d h:i:s', strtotime($postInfo['created_at']));
-        //$postInfo['created_at'] =    
-       // $created_at = new Carbon($value)->toDateTimeString();
-        //$postInfo->created_at = new Carbon($postInfo->created_at)->toDateTimeString();
-        //$postInfo->created_at->format('Y-m-d H-m-s');
         $dateAltered = Carbon::parse($postInfo->created_at);
         $postInfo['created_at'] ->format('d/m/Y h:i:s');
         $postInfo['formattedStamp'] = $dateAltered->format('M/d/Y h:i');
@@ -127,10 +105,8 @@ class PostController extends Controller
         $postInfo['commentCount'] = Count(PostComment::where('parent_post_id', $id)->get()->toArray());
 
         if ($postInfo['type'] == "link"){
-            //include(app_path() . '\Includes\GetUrlMetaData.php');
             $UrlMetaDataGetter = new GetUrlMetaData();
-            
-            $test = $UrlMetaDataGetter->getCurrentUrlMetaData($postInfo['link']);  //Replace  with your URL here
+            $test = $UrlMetaDataGetter->getCurrentUrlMetaData($postInfo['link']);
             $postInfo['grabbedData'] = $test;
         }
         

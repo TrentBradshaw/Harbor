@@ -14,12 +14,7 @@ use Carbon\Carbon;
 class PostCommentsController extends Controller
 {
     public function Delete(){
-        // PostId can be acquired through 
-        //$post = PostComment::find(1)->post;
-
-        $json = json_decode(file_get_contents('php://input'), true); //grab request
-
-        // see if this comment has children comments. if it does, then just edit the content to be a deleted comment, remove all information except for the comment ID
+        $json = json_decode(file_get_contents('php://input'), true);
         $comment = PostComment::where('id', $json['id'])->first();
         if(PostComment::where('parent_comment_id', $json['id'])->exists()){
             $comment->creator_id = 0;
@@ -47,10 +42,8 @@ class PostCommentsController extends Controller
             $postComments[$i]['score'] = $voteCount;
             if (Profile::where('user_id', $postComments[$i]['creator_id'])->exists())
                 $postComments[$i]['posterPfpUrl'] = Profile::where('user_id', $postComments[$i]['creator_id'])->get()->first()['pfp_url'];
-            //$postComments[$i]['created_at']->format('d/m/Y h:i:s');
-            $postComments[$i]['formattedStamp'] = $dateAltered->format('M/d/Y h:i');
-            //$postComments[$i]['username'] =  $user[0]['username'];
-        }
+                $postComments[$i]['formattedStamp'] = $dateAltered->format('M/d/Y h:i');
+            }
 
         return response()->json([
             //so i need
@@ -69,15 +62,9 @@ class PostCommentsController extends Controller
         $comment->parent_post_id = $json['parentPostId'];
         $comment->nest_level = $json['nestLevel'];
         $comment->username = (User::where('id',  Auth::user()->id)->first())['username'];
-        
-        
         $comment->parent_comment_id = $json['parentCommentId'];
-       // $comment->parent_comment_id = $json['parentCommentId'];
-        //$comment->parent_post_id = $json['parentPostId'];
-
         $saved = $comment->save();
         $comment->refresh();
-
         
         if ($saved){
             $commentGrabbed = PostComment::where('id', $comment->id)->get()->first();
@@ -90,11 +77,7 @@ class PostCommentsController extends Controller
             $engagement->downvoted = false;
             $engagementSaved = $engagement->save();
             if($engagementSaved){
-                return response()->json([
-                    //so i need
-                    //127.0.0.1/dock/dockname/postID/posttitle
-                    'comment' =>$commentGrabbed,
-                ]);
+                return response()->json(['comment' =>$commentGrabbed]);
             }
             
         }

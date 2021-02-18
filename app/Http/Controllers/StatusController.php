@@ -40,8 +40,6 @@ class StatusController extends Controller
         $replies[$key]['replyCount'] = Count(Status::where('parent_status_id', $value['id'])->get()->toArray());
        }
         return response()->json([
-            //so i need
-            //127.0.0.1/dock/dockname/postID/posttitle
             'status'=> $status,
             'replies' => $replies,
         ]);
@@ -76,11 +74,8 @@ class StatusController extends Controller
         $status->refresh();
         if ($saved){
             $status->username = User::where('id', Auth::user()->id)->get()->first()['username'];
-            //$statuses[$key]['numberOfReplies'] = Status::where('parent_status_id', );
             $status->pfp_url = Profile::where('user_id', Auth::user()->id)->get()->first()['pfp_url']; 
             return response()->json([
-                //so i need
-                //127.0.0.1/dock/dockname/postID/posttitle
                 'status'=> $status
             ]);
         }
@@ -97,7 +92,6 @@ class StatusController extends Controller
     public function show($username, $id)
     {
         return  Statement::find($id);
-        //return view ('statements.show')->with('statement', $statement);
     }
 
     /**

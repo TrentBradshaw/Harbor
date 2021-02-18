@@ -10,20 +10,13 @@ use App\Models\User;
 use App\Models\Dock;
 use Illuminate\Support\Facades\Auth;
 
-class EngagementController extends Controller
-{   public function DockSubscriptions(){
-    /*
-        $docksArray = Dock::where('id', DockEngagement::where('subscriber_id', Auth::user()->id)['dock_id'])->get()->toArray();
-        return response()->json([
-            'feed'=> $dockEngagement,
-        ]);
-        */
+class EngagementController extends Controller{   
+    public function DockSubscriptions(){
         $docksProfilesArray = array();
         $docksIdArray =DockEngagement::where('subscriber_id', Auth::user()->id)->get()->toArray();
         for ($i=0; $i < count($docksIdArray); $i++) { 
             $profile =  Dock::where('id',$docksIdArray[$i]['dock_id'])->get()->first();
             $profile['url'] = "http://localhost/dock/" . $profile->title;
-           
             array_push($docksProfilesArray,$profile);
         }
         if (count($docksProfilesArray) > 0){
@@ -35,8 +28,8 @@ class EngagementController extends Controller
                 'feed'=> []
             ]);
         }
-        //id	created_at	updated_at	subscriber_id	subscribed	dock_id
     }
+
     public function Followers(){
         $followersProfilesArray = array();
         if(Follower::where('followee_id', Auth::user()->id)->exists()){
@@ -45,7 +38,6 @@ class EngagementController extends Controller
                 $profile = Profile::where('user_id',$followersIdArray[$i]['follower_id'])->get()->first();
                 $profile['username'] = User::where('id', $profile->user_id)->first()['username'];
                 $profile['url'] = "http://localhost/user/" . $profile->username;
-           
                 array_push($followersProfilesArray,$profile);
             }
         }
@@ -67,6 +59,7 @@ class EngagementController extends Controller
             'feed'=> $followersArray
         ]);
     }
+
     public function Following(){
         
         $followingProfilesArray = array();
@@ -86,13 +79,6 @@ class EngagementController extends Controller
                 'feed'=> []
             ]);
         }
-       
-        /*
-        $followingArray = Profile::where('user_id', Follower::where('follower_id', Auth::user()->id)['followee_id'])->get()->toArray();
-        return response()->json([
-            'feed'=> $followingArray,
-        ]);
-        */
     }
     public function GetNotifications(){
         $followers = Follower::where('follower_id', Auth::user()->id)->get()->toArray();
@@ -102,25 +88,14 @@ class EngagementController extends Controller
         
         $notificationArray = array();
         foreach ($userposts as $key => $value) {
-            
             $likes = PostEngagement::where('post_id', $userposts['key']['id'])->get()->toArray();
-
-
-            // find the likes
-            // find the comments
-            // make an object
-            // append it to the 
-            // $userposts[$key][]
             $posts = Post::where('creator_id',Auth::user()->id)->get()->toArray();
-
         }  
 
         return response()->json([
             'deleted'=> 'wee',
             'json'=>$json
         ]);
-
-        
 
         foreach ($followers as $key => $value) {
             $posts = Post::where('creator_id',Auth::user()->id)->get()->toArray();
@@ -130,9 +105,6 @@ class EngagementController extends Controller
         $followers = Follower::where() ;
         $statusUpvotes = StatusEngagement::where();
         $postUpvotes = PostEngagement::where();
-        // next package stuff up and detail the notification.
-        //examples  x person liked/comented y target z amount of time ago
-
         return response()->json([
             'deleted'=> 'wee',
             'json'=>$json

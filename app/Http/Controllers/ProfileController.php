@@ -21,8 +21,6 @@ class ProfileController extends Controller
         $profileOwnerInfo['description'] = $profile['description'];
         $profileOwnerInfo['followingCount'] = Count(Follower::where('follower_id', $profileOwnerInfo['id'])->get()->toArray());
         $profileOwnerInfo['followersCount'] = Count(Follower::where('followee_id', $profileOwnerInfo['id'])->get()->toArray());
-        //also feed in the followers/following and contributions
-        //$profileOwnerInfo['created_at'] = date($profileOwnerInfo['created_at'])->format('Y-m-d H:i:s');
         $profileOwnerInfo['meme'] = date('Y-m-d H:i:s', strtotime( $profileOwnerInfo['created_at']." GMT-8"));
         date_default_timezone_set('America/Los_Angeles');
         $profileOwnerInfo['now'] = date("Y-m-d H:i:s", time());
@@ -71,19 +69,8 @@ class ProfileController extends Controller
                 $timeAgoString = $diffy->s  . ' '. 'second ago';
         }
         $profileOwnerInfo['joinedAgo'] = $timeAgoString;
-       // $interval = date_diff($date,$ndf);
-        //$profileOwnerInfo['joinedAgo'] = $interval->format('%h:%i:%s');
-//  /// //  //  /   /   /   /   /   /   /   /   /   /   //      //  /   /   /   /   /   /   /   /   /   //  /
-
         return response()->json([
             'profileOwnerInfo' => $profileOwnerInfo
         ]);
-        
-
-
-        //get their profile pictures
-        //count their followers and following
-        //count their contribution via counting posts AND comments
-        
     }
 }

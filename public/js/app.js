@@ -109813,7 +109813,7 @@ function App() {
       setUserInfo = _useState2[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    fetch('https://harborsms.herokuapp.com/api/userdetails', {
+    fetch('http://localhost/api/userdetails', {
       headers: {
         'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),
         'Content-Type': 'application/json'
@@ -111058,7 +111058,7 @@ function Header() {
       setStatusPopUpActive = _useState12[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    fetch('https://harborsms.herokuapp.com/api/userdetails', {
+    fetch('http://localhost/api/userdetails', {
       headers: {
         'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),
         'Content-Type': 'application/json'
@@ -111321,7 +111321,7 @@ function Home(_ref) {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     var param;
     var url;
-    fetch('https://harborsms.herokuapp.com/api/userdetails', {
+    fetch('http://localhost/api/userdetails', {
       headers: {
         'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),
         'Content-Type': 'application/json'
@@ -111333,7 +111333,7 @@ function Home(_ref) {
       console.log(response);
       response.json().then(function (data) {
         setPfpUrl(data.pfpUrl);
-        url = new URL('https://harborsms.herokuapp.com/api/profile');
+        url = new URL('http://localhost/api/profile');
         param = {
           query: data.username
         };
@@ -111347,13 +111347,13 @@ function Home(_ref) {
           credentials: 'same-origin'
         }).then(function (secondResponse) {
           console.log("response ".concat(secondResponse));
-          response.json().then(function (secondData) {
-            setProfileOwnerInfo(secondData.profileOwnerInfo); // if array of activity, show, else don't and load other return statement
+          secondResponse.json().then(function (secondData) {
+            setProfileOwnerInfo(secondData.profileOwnerInfo);
           });
         });
       });
     });
-    fetch('https://harborsms.herokuapp.com/api/feed/home', {
+    fetch('http://localhost/api/feed/home', {
       headers: {
         'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),
         'Content-Type': 'application/json',
@@ -111782,7 +111782,7 @@ function Post() {
 
   var fetchData = function fetchData() {
     var token = document.getElementById('csrf-token').getAttribute('content');
-    fetch('https://harborsms.herokuapp.com/userdetails', {
+    fetch('http://localhost/userdetails', {
       headers: {
         'X-CSRF-TOKEN': token,
         'Content-Type': 'application/json',
@@ -111798,7 +111798,7 @@ function Post() {
         console.log("".concat(data, "sffwfgsdgwswsw"));
       });
     });
-    var url = new URL('https://harborsms.herokuapp.com/api/post');
+    var url = new URL('http://localhost/api/post');
     var param = {
       query: postId
     };
@@ -111828,7 +111828,7 @@ function Post() {
   }, []);
 
   function handleDeletePost() {
-    fetch('https://harborsms.herokuapp.com/api/post', {
+    fetch('http://localhost/api/post', {
       headers: {
         'X-CSRF-TOKEN': document.getElementById('csrf-token').getAttribute('content'),
         'Content-Type': 'application/json',
@@ -111844,7 +111844,7 @@ function Post() {
     }).then(function (response) {
       response.json().then(function (data) {
         console.log(data);
-        window.location.replace("https://harborsms.herokuapp.com/dock/".concat(state.communityTitle));
+        window.location.replace("http://localhost/dock/".concat(state.communityTitle));
       });
     });
   }
@@ -111904,7 +111904,7 @@ function Post() {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "".concat(state.commentCount, " comments")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "button",
     onClick: function onClick() {
-      var Url = "https://harborsms.herokuapp.com/dock/".concat(state.communityTitle, "/").concat(state.id, "/").concat(state.title);
+      var Url = "http://localhost/dock/".concat(state.communityTitle, "/").concat(state.id, "/").concat(state.title);
       var dummy = document.createElement('textarea');
       dummy.style.display = 'none';
       document.body.appendChild(dummy);
@@ -113504,7 +113504,7 @@ function UserPage(_ref) {
       username = _useParams.username;
 
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
-    var url = new URL('https://harborsms.herokuapp.com/api/feed');
+    var url = new URL('http://localhost/api/feed');
     var param = {
       query: username
     };
@@ -113523,7 +113523,7 @@ function UserPage(_ref) {
         setFeedArray(data.feed); // if array of activity, show, else don't and load other return statement
       });
     });
-    url = new URL('https://harborsms.herokuapp.com/api/profile');
+    url = new URL('http://localhost/api/profile');
     param = {
       query: username
     };

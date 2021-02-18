@@ -20,20 +20,12 @@ class DockController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-    
-    }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -43,8 +35,7 @@ class DockController extends Controller
      */
     public function store(Request $request)
     {
-
-        $json = json_decode(file_get_contents('php://input'), true); //grab request
+        $json = json_decode(file_get_contents('php://input'), true);
         error_log(json_encode($json));
         $title = $json['dockTitle'];
         $dock = new Dock();
@@ -56,7 +47,6 @@ class DockController extends Controller
                 'dock_added' => true,
                 'dock_url_title' => $title,
             ]);
-
         }
     }
 
@@ -67,11 +57,6 @@ class DockController extends Controller
      * @param string $username
      * @return \Illuminate\Http\Response
      */
-    public function show($username, $id)
-    {
-       
-        //return view ('statements.show')->with('statement', $statement);
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -79,10 +64,6 @@ class DockController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -91,10 +72,6 @@ class DockController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -102,18 +79,7 @@ class DockController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($usernameToUnfollow)
-    {
 
-    }
-
-   public function SubmitForm(){
-    return view('DockSubmitForm',
-    [
-       
-        
-    ]);
-   }
    public function GetDocks(){
        $dock = new Dock();
        $query = request('query');
@@ -140,17 +106,11 @@ class DockController extends Controller
             'newArray' => [],
         ]);
        }
-       
-    
-    
-
    }
+
    public function GetDockPosts(){
     return response()->json([
         'GetDockPosts' => 'HELLO',
     ]);
-   }
-   public function CheckVoteStatus(){
-
    }
 }

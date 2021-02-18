@@ -15,7 +15,7 @@ import NotificationContainer from './Notification Page/NotificationContainer';
 function App() {
     const [userInfo, setUserInfo] = useState('MEME');
     useEffect(() => {
-        fetch('https://harborsms.herokuapp.com/api/userdetails', {
+        fetch('http://localhost/api/userdetails', {
             headers: {
                 'X-CSRF-TOKEN': document
                     .getElementById('csrf-token')

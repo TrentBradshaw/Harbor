@@ -39,7 +39,7 @@ function Post() {
         const token = document
             .getElementById('csrf-token')
             .getAttribute('content');
-        fetch('https://harborsms.herokuapp.com/userdetails', {
+        fetch('http://localhost/userdetails', {
             headers: {
                 'X-CSRF-TOKEN': token,
                 'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ function Post() {
                 console.log(`${data}sffwfgsdgwswsw`);
             });
         });
-        const url = new URL('https://harborsms.herokuapp.com/api/post');
+        const url = new URL('http://localhost/api/post');
         const param = { query: postId };
 
         url.search = new URLSearchParams(param).toString();
@@ -83,7 +83,7 @@ function Post() {
     }, []);
 
     function handleDeletePost() {
-        fetch('https://harborsms.herokuapp.com/api/post', {
+        fetch('http://localhost/api/post', {
             headers: {
                 'X-CSRF-TOKEN': document
                     .getElementById('csrf-token')
@@ -102,7 +102,7 @@ function Post() {
             response.json().then((data) => {
                 console.log(data);
                 window.location.replace(
-                    `https://harborsms.herokuapp.com/dock/${state.communityTitle}`
+                    `http://localhost/dock/${state.communityTitle}`
                 );
             });
         });
@@ -154,7 +154,7 @@ function Post() {
                                 <button
                                     type="button"
                                     onClick={() => {
-                                        const Url = `https://harborsms.herokuapp.com/dock/${state.communityTitle}/${state.id}/${state.title}`;
+                                        const Url = `http://localhost/dock/${state.communityTitle}/${state.id}/${state.title}`;
                                         const dummy = document.createElement(
                                             'textarea'
                                         );

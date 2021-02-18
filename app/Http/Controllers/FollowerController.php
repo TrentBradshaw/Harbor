@@ -122,21 +122,11 @@ class FollowerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function Destroy()
-    {
-
+    public function Destroy() {
         $json = json_decode(file_get_contents('php://input'), true); //grab request
-    
-        //grab follower and followee(target)
-        
-
-         //grab the object, enter it and grab the id
         $followee_id = User::where('username', $json['target'])->first()['id'];
-        
         Follower::where('follower_id', Auth::user()->id)->where('followee_id', $followee_id)->delete();
-    
-
-       return response()->json([
+        return response()->json([
             'redirect' => url('/home')
         ]);
     }

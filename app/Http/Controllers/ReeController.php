@@ -14,23 +14,6 @@ class ReeController extends Controller
     public function GetCurrentVoteStatus(){
         
         $type = request('type');
-        /*
-        $postId = request('targetId');
-        $engagement =  PostCommentEngagement::where('comment_id', $postId)->where('engager_id',  Auth::user()->id)->first();
-        if ($engagement){
-            return response()->json([
-                'upvoted' => 'ee',
-                'downvoted' =>'wf',
-                'score' =>  0
-            ]);
-        }else{
-            return response()->json([
-                'upvoted' => 'no',
-                'downvoted' =>'also  no',
-                'score' =>  1000
-            ]);
-        }
-        */
         
         if ($type === 'status'){
             $statusId = request('targetId');
@@ -96,13 +79,7 @@ class ReeController extends Controller
 
     public function VoteOnContent(){
 
-        $json = json_decode(file_get_contents('php://input'), true); //grab request
-        /*
-        return response()->json([
-            'type'=>$json['type'],
-            'upvoted'=>$json['choseUpvoted'],
-            'downvoted'=>$json['choseDownvoted']
-        ]);*/
+        $json = json_decode(file_get_contents('php://input'), true);
         if ($json['type'] === 'status')
         {
             $engagement =  StatusEngagement::where('status_id', $json['targetId'])->where('engager_id',  Auth::user()->id)->first();
@@ -150,8 +127,6 @@ class ReeController extends Controller
                     $engagement->save();
                     $engagement->refresh();
                 return response()->json([
-                    //so i need
-                    //127.0.0.1/dock/dockname/postID/posttitle
                     'upvoted' =>$engagement->upvoted,
                     'downvoted' =>$engagement->downvoted,
                     'engagement' =>$engagement
@@ -166,8 +141,6 @@ class ReeController extends Controller
                     $engagement->save();
                     $engagement->refresh();
                 return response()->json([
-                    //so i need
-                    //127.0.0.1/dock/dockname/postID/posttitle
                     'upvoted' =>$engagement->upvoted,
                     'downvoted' =>$engagement->downvoted,
                     'engagement' =>$engagement

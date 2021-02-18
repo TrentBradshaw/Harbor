@@ -11,7 +11,7 @@ function Home({ currentUserId }) {
     useEffect(() => {
         let param;
         let url;
-        fetch('https://harborsms.herokuapp.com/api/userdetails', {
+        fetch('http://localhost/api/userdetails', {
             headers: {
                 'X-CSRF-TOKEN': document
                     .getElementById('csrf-token')
@@ -25,7 +25,7 @@ function Home({ currentUserId }) {
             console.log(response);
             response.json().then((data) => {
                 setPfpUrl(data.pfpUrl);
-                url = new URL('https://harborsms.herokuapp.com/api/profile');
+                url = new URL('http://localhost/api/profile');
                 param = { query: data.username };
                 url.search = new URLSearchParams(param).toString();
 
@@ -36,15 +36,14 @@ function Home({ currentUserId }) {
                     credentials: 'same-origin',
                 }).then((secondResponse) => {
                     console.log(`response ${secondResponse}`);
-                    response.json().then((secondData) => {
+                    secondResponse.json().then((secondData) => {
                         setProfileOwnerInfo(secondData.profileOwnerInfo);
-                        // if array of activity, show, else don't and load other return statement
                     });
                 });
             });
         });
 
-        fetch('https://harborsms.herokuapp.com/api/feed/home', {
+        fetch('http://localhost/api/feed/home', {
             headers: {
                 'X-CSRF-TOKEN': document
                     .getElementById('csrf-token')
